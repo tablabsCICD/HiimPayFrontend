@@ -1,0 +1,220 @@
+<div class="container my-2">
+  <div class="row mb-3">
+    <div class="col-lg col-md col-sm-12">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3 style="margin: 0;color: #103a7f;font-weight: bolder;">Upcoming activities</h3>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-lg-9 col-md-12 col-sm-12">
+
+      <div class="row d-flex align-items-center">
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mb-3">
+          <div class="card" (click)="getAdminMeetingsByStatus('schedule')">
+            <div class="card-content">
+              <div [ngClass]="{activeTab: selectedCard == 'schedule'}">
+                <div class="card-body">
+                  <div class="media d-flex align-items-center">
+                    <div class="media-body">
+                      <h3 class="card-scheduletitle">Schedule</h3>
+                      <span class="font-weight-bold fs-5">{{schedulecount}}</span>
+                    </div>
+                    <div class="align-self-center me-2 text-right">
+                      <img src="assets/images/schedule.png" alt="" height="50" width="50">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mb-3">
+          <div class="card" (click)="getAdminMeetingsByStatus('reschedule')">
+            <div class="card-content">
+              <div [ngClass]="{activeTab: selectedCard == 'reschedule'}">
+                <div class="card-body">
+                  <div class="media d-flex align-items-center">
+                    <div class="media-body">
+                      <h3 class="card-title">Reschedule</h3>
+                      <span class="font-weight-bold fs-5">{{reschedulecount}}</span>
+                    </div>
+                    <div class="align-self-center me-2 text-right">
+                      <img src="assets/images/reschedule.png" alt="" height="50" width="50">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 mb-3">
+          <div class="card" (click)="getAdminMeetingsByStatus('cancel')">
+            <div class="card-content">
+              <div [ngClass]="{activeTab: selectedCard == 'cancel'}">
+                <div class="card-body">
+                  <div class="media d-flex align-items-center">
+                    <div class="media-body">
+                      <h3 class="card-title">Cancel</h3>
+                      <span class="font-weight-bold fs-5">{{cancelcount}}</span>
+                    </div>
+                    <div class="align-self-center me-2 text-right">
+                      <img src="assets/images/cancel.png" alt="" height="50" width="50">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="row mt-2 d-flex align-items-center justify-content-between"> -->
+      <section class="">
+        <div class="row table-row row-head gx-0">
+          <div class="col">Date</div>
+          <div class="col">Title</div>
+          <div class="col">Time</div>
+          <div class="col">Attendee</div>
+          <div class="col">Location</div>
+          <div class="col">Record owner</div>
+          <div class="col">Join</div>
+          <div class="col">Status</div>
+          <div class="col">Action</div>
+        </div>
+        <div class="tableCointainer" *ngIf="!isLoading">
+          <ng-container *ngIf="cardsCircle2?.length > 0; else noReminders">
+            <div class="row gx-0 table-row row-body px-0 " *ngFor="let item of cardsCircle2">
+              <div class="col">
+                <!-- <div class="d-flex justify-content-center"> -->
+                  <div class="timeline">
+                    <div class="timeline-date text-center rounded " style="background-color: #103a7f;">
+                      <p class="text-white mb-0">{{item?.meetingDate | date:"MMM dd"}}</p>
+                      <p class="text-white mb-0">{{item?.meetingDate | date:"YYYY"}}</p>
+                    </div>
+                  </div>
+                <!-- </div> -->
+              </div>
+              <div class="col">
+                <div class="material">
+                  <div class="col">
+                    <p class="fw-bold mb-1">{{item.title}}</p>
+                    <p class="text-muted mb-0">{{item.email}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col">
+                <p class="text-muted mb-0">{{item?.startTime}} To {{item?.endTime}}</p>
+                <p class="text-muted mb-0">{{item?.description}}</p>
+              </div>
+              <div class="col">
+                <p class="mb-1 ms-1">
+                  {{item?.attendee}}
+                </p>
+              </div>
+              <div class="col">
+                <p class="mb-1 ms-1">
+                  {{item?.location || '-'}}
+                </p>
+              </div>
+              <div class="col">
+                <p>
+                  {{item?.loggedUserName || '-'}}
+                </p>
+              </div>
+              <div class="col">
+                <button class="btn background-color" type="button"
+                  (click)="openMeeting(item?.meetingLink)">Join</button>
+              </div>
+              <div class="col d-flex flex-column align-items-center" style="overflow: hidden;">
+                <span *ngIf="item.status=='schedule'" class="badge rounded-pill d-inline" style="background-color: #069de0;">{{item?.status
+                  | titlecase}}</span>
+                <span *ngIf="item.status==='reschedule'" class="badge rounded-pill d-inline" style="background-color: #2980b9;">{{item?.status
+                  | titlecase}}</span>
+                  <span *ngIf="item.status==='cancel'" class="badge rounded-pill d-inline" style="background-color: #103a7f;">{{item?.status
+                    | titlecase}}</span>
+              </div>
+              <div class="col" *ngIf="selectedCard!=='cancel'">
+                <button class="border-0 m-2 " style="font-size:20px" (click)="editMetting(item.id,item.tableType)"> <i
+                    class="fa fa-pencil" style="color: #103a7f;"></i></button>
+                <button class="border-0 m-2 " style="font-size:20px" (click)="onDeleteInterview(item)"> <i
+                    class="fa fa-trash" style="color: #103a7f;"></i></button>
+              </div>
+            </div>
+          </ng-container>
+          <ng-template #noReminders>
+            <div class="text-center mt-4 unavailability">
+              <p>No events found</p>
+            </div>
+          </ng-template>
+        </div>
+        <div class="text-center my-5">
+          <i *ngIf="isLoading" class="fa fa-spinner fa-spin" style="font-size:64px;color: #103a7f;"></i>
+        </div>
+      </section>
+      <!-- </div> -->
+    </div>
+    <div class="col-lg-3 col-md-12 col-sm-12">
+      <div class="card">
+        <mat-card class="demo-inline-calendar-card">
+          <ng-container *ngIf="allDates; else loadingCalender">
+            <mat-calendar [(selected)]="selected!" (selectedChange)="onDateSelected($event)"
+              (monthSelected)="onMonthSelected($event)" [dateClass]="dateClass" [minDate]="minDate"></mat-calendar>
+          </ng-container>
+          <ng-template #loadingCalender>
+            <div class="text-center mt-4">
+              <p>Fetching data ...</p>
+            </div>
+          </ng-template>
+        </mat-card>
+      </div>
+      <div class="d-flex align-items-center justify-content-between mt-1">
+        <span class="blue-color font-weight-bold">Reminders</span>
+        <span class="blue-color font-weight-bold ms-4">
+          <!-- <i class="fa fa-bell"></i> -->
+        </span>
+      </div>
+
+      <div class="row">
+        <div class="col-lg col-md col-sm">
+          <div class="d-flex flex-column">
+            <div class="reminder-list">
+              <div *ngIf="!isLoadingReminder">
+                <ng-container *ngIf="reminders?.length > 0; else noReminders">
+                  <div *ngFor="let reminder of reminders" class="card m-2 reminder-card">
+                    <div class="row g-0 d-flex align-items-center">
+                      <div class="col-md-3 col-lg-3">
+                        <img src="assets/images/schedule.png" alt="avatar" class="img-fluid me-3 mx-3 py-2" width="45">
+                      </div>
+                      <div class="col-12 col-md-9 col-lg-9">
+                        <div class="card-body d-flex justify-content-between align-items-center">
+                          <div class="flex-grow-1">
+                            <h4 class="card-title mb-2">{{ reminder?.title }}</h4>
+                            <h5 class="card-text">{{ reminder?.meetingDate | date }}</h5>
+                          </div>
+                          <button class="btn background-color px-3 py-1 rounded border-0"
+                            (click)="openMeeting(reminder?.meetingLink)">Join</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-container>
+                <ng-template #noReminders>
+                  <div class="text-center mt-4">
+                    <p>No events found</p>
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+  </div>
+</div>

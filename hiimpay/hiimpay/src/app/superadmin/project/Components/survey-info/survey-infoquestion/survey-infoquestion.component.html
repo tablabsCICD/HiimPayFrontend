@@ -1,0 +1,193 @@
+<div class="container my-2" *ngIf="!isLoading">
+  <!-- <div class="row  bg-light py-2 px-0 mb-2">
+    <div class="col-lg col-md col-sm-12">
+      <div class="d-flex align-items-center">
+        <div>
+          <button class="btn btn-light rounded-circle me-1" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i>
+          </button>  
+        </div>
+        <h3 style="margin: 0; color: #103a7f; font-weight: bolder">
+          Survey Name : {{ resData?.surveyWithDetailResponseDto?.surveyName }}
+        </h3>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="row mt-2 px-2 mb-2">
+    <div class="col-lg col-md col-sm-12">
+      <div class="d-flex align-items-center justify-content-between">
+          <h3 style="margin: 0; color: #103a7f; font-weight: bolder">
+            <button class="btn btn-light rounded-circle me-1" (click)="goBack()">
+              <i class="fas fa-arrow-left"></i>
+            </button>
+            Survey Name : {{ resData?.surveyWithDetailResponseDto?.surveyName }}
+          </h3>
+        <span class="blue-color font-weight-bold" style="font-weight: 700">
+          Project name : {{ displayClientData?.clientName }}</span>
+        <span class="blue-color font-weight-bold ms-4" style="font-weight: 700">
+          EXwise consultant : {{ displayClientData?.consultantName }}</span>
+        <span class="blue-color font-weight-bold" (click)="editUser(displayClientData?.copcId)"
+          style="font-weight: 700; cursor: pointer;">
+          CPOC name : {{ displayClientData?.contactPerson }}</span>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="row my-3">
+    <div class="col-lg col-md col-sm-12">
+      <div class="d-flex align-items-center">
+        <div>
+          <button class="btn btn-light rounded-circle me-1" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i>
+          </button>  
+        </div>
+        <h3 style="margin: 0; color: #103a7f; font-weight: bolder">
+          Survey Name : {{ resData?.surveyWithDetailResponseDto?.surveyName }}
+        </h3>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="row">
+    <div class="col-xl-8 col-md-8 col-sm-12">
+      <ul class="list-unstyled">
+        <li class="text-muted">
+          Survey stage name:
+          <span style="color: #103a7f">{{
+            surveyDetailsData[0]?.stageName
+            }}</span>
+        </li>
+        <li class="text-muted">
+          Employee experience phase :
+          <span style="color: #103a7f">{{
+            surveyDetailsData[0]?.subphaseName
+            }}</span>
+        </li>
+        <li class="text-muted">
+          Total Responses :
+          <span style="color: #103a7f">{{ resData?.totalResponses }}</span>
+        </li>
+        <li class="text-muted">
+          Total Assigned :
+          <span style="color: #103a7f">{{ resData?.totalAssigned }}</span>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xl-4 col-md-4 col-sm-12 text-right mt-3 d-flex justify-content-end align-items-center">
+      <select name="" id="" class="form-select form-select-sm me-2" style="width: auto;"
+        (change)="onChangeActiveDeactiveAssignment(resData.assignmentToCLient?.id, $event)">
+        <option value="true" [selected]="resData.assignmentToCLient?.active">Active</option>
+        <option value="false" [selected]="!resData.assignmentToCLient?.active">Deactivate</option>
+      </select>
+      <button class="px-2 py-2 border-0 rounded text-white me-2" style="background-color: #103a7f;"
+        (click)="onWhoHasAssigned()">Who has been assigned</button>
+      <button class="px-2 py-2 border-0 rounded text-white" style="background-color: #103a7f;" *ngIf="!isCpoc"
+        (click)="onViewResponses(resData?.surveyWithDetailResponseDto?.surveyName)">View responses</button>
+    </div>
+
+  </div>
+  <!-- <div class="row mt-3">
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item" class="example-list">
+        @for (item of questionList; track item;let i = $index) {
+
+        <h2 class="accordion-header" id="headingOne">
+          <button
+            class="accordion-button btn button"
+            data-bs-toggle="collapse"
+            [attr.data-bs-target]="'#collapseOne' + i"
+            aria-expanded="true"
+            aria-controls="collapseOne"
+          >
+            {{ item.question }}
+          </button>
+        </h2>
+        <div
+          [id]="'collapseOne' + i"
+          class="accordion-collapse collapse show"
+          aria-labelledby="headingOne"
+          data-bs-parent="#accordionExample"
+        >
+          <div class="accordion-body">
+            <div class="text-center" style="vertical-align: middle">
+              <div
+                class="row d-inline-flex"
+                *ngFor="let opt of questionList[i]?.options"
+              >
+                <div class="col col-md-12">
+                  <ul style="color: #103a7f">
+                    <li>{{ opt }}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        }
+      </div>
+    </div>
+  </div> -->
+  <div class="row mt-3">
+    <div class="accordion" id="accordionExample">
+      <div class="accordion-item" class="example-list">
+        <ng-container *ngFor="let item of questionList; let i = index; trackBy: trackByFn">
+          <h2 class="accordion-header" [id]="'headingOne' + i">
+            <button class="accordion-button btn button" data-bs-toggle="collapse"
+              [attr.data-bs-target]="'#collapseOne' + i" aria-expanded="true" [attr.aria-controls]="'collapseOne' + i">
+              {{ item.question }}
+            </button>
+          </h2>
+          <div [id]="'collapseOne' + i" class="accordion-collapse collapse show"
+            [attr.aria-labelledby]="'headingOne' + i" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+              <div *ngIf="item.questionType === 'mcq' || item.questionType === 'both'">
+                <div class="text-center" style="vertical-align: middle">
+                  <div class="row d-inline-flex" *ngFor="let opt of item.options">
+                    <div class="col col-md-12">
+                      <ul style="color: #103a7f">
+                        <li>{{ opt }}</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <!-- <div *ngIf="item.questionType === 'both' && !hasDescriptive(item)">
+                    <p class="text-center blue-color">This is also a descriptive question, but no descriptive answer is available.</p>
+                  </div> -->
+
+                  <p *ngIf="item?.questionType === 'both'" class="ms-4 mt-2"> {{ item?.answer}}</p>
+                  <p *ngIf="item?.questionType === 'both'  && !hasDescriptive(item)" class="text-center blue-color">This
+                    is also a descriptive question, but no descriptive answer is available.</p>
+                </div>
+              </div>
+
+              <div *ngIf="item.questionType === 'reasonForEXIT'">
+                <div class="text-center" style="vertical-align: middle">
+                  <div class="row d-inline-flex" *ngFor="let opt of exitSurveyList">
+                    <div class="col col-md-12">
+                      <ul style="color: #103a7f">
+                        <li>{{ opt }}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div *ngIf="item.questionType === 'descriptive' || item.questionType === 'both'">
+                <div *ngIf="item.answer; else noAnswer">
+                  <p>{{ item.answer }}</p>
+                </div>
+                <ng-template #noAnswer>
+                  <p class="text-center blue-color">This is a descriptive question but no answer is provided.</p>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="text-center my-5">
+  <i *ngIf="isLoading" class="fa fa-spinner fa-spin" style="font-size:64px;color: #103a7f;"></i>
+</div>

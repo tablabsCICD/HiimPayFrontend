@@ -1,0 +1,19 @@
+.blue-color{
+    color: #103a7f;
+    font-family: Times New Roman;
+  }
+
+  .button-color{
+    background-color: #103a7f;
+  }
+
+  .button-sky-color{
+    background-color: #069DE0;
+  }
+
+  .table td,
+  .table th {
+    text-align: center;
+    vertical-align: middle;
+    font-family: Times New Roman;
+  }

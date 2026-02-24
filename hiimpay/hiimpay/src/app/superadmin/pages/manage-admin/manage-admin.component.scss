@@ -1,0 +1,62 @@
+.button-color {
+  background-color: #103a7f;
+}
+
+.col {
+  line-height: 22.5px;
+}
+
+.disabled-row {
+  pointer-events: none;
+  opacity: 0.6;
+  background-color: #f5f5f5;
+}
+
+.disabled-row .col {
+  cursor: not-allowed;
+}
+
+.table-row {
+  background-color: #ffffff;
+  padding: 5px;
+  margin-bottom: 5px;
+  align-items: center;
+  font-size: 14px;
+  border: solid .3px rgb(148, 148, 148);
+}
+
+.table-row:hover {
+  border: 2px solid #103a7f;
+}
+
+.row-head {
+  height: 54px;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: #103a7f;
+}
+
+.row-body {
+  text-align: center;
+}
+
+.boldColmn {
+  font-weight: 400;
+}
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-box {
+  background: #fff;
+  width: 500px;
+  padding: 20px;
+  border-radius: 6px;
+  border-top: 4px solid #103a7f;
+}

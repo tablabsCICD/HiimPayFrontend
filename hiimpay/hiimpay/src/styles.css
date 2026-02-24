@@ -1,0 +1,65 @@
+/* You can add global styles to this file, and also import other style files */
+@import '../node_modules/bootstrap/dist/css/bootstrap-grid.css'; 
+@import '../node_modules/ngx-toastr/toastr-old.css';
+/* @import url('https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&display=swap'); */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+html, body { height: 100%; 
+font-family:Arial;
+}
+
+#toast-container > div {
+    opacity:1;
+}
+
+/* .mat-mdc-slide-toggle.mat-mdc-slide-toggle-checked:not(.mat-mdc-slide-toggle-disabled) .mdc-switch__shadow {
+    background-color: rgb(221, 17, 17) !important;
+  }
+  
+  .mat-mdc-slide-toggle.mat-mdc-slide-toggle-checked:not(.mat-mdc-slide-toggle-disabled) .mdc-switch__track::after {
+    background-color: rgb(221, 17, 17) !important;
+  } */
+
+
+  /* ===============================
+   GLOBAL TOP SEARCH BAR STYLING
+   =============================== */
+
+
+.search-wrapper {
+  width: 50%;          /* 👈 HALF WIDTH */
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.search-bar {
+  border: 1.5px solid #103a7f;
+  border-radius: 999px;
+  background-color: #f8f9fa;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 2px 6px;
+  transition: box-shadow 0.2s ease;
+}
+
+.search-bar:focus-within {
+  box-shadow: 0 0 0 2px rgba(16, 58, 127, 0.15);
+}
+
+.global-search-input {
+  border: none !important;
+  background-color: transparent !important;
+  height: 28px;
+  font-size: 14px;
+  box-shadow: none !important;
+}
+
+.global-search-input:focus {
+  outline: none;
+}
+
+.search-bar button {
+  width: 26px;
+  height: 26px;
+  padding: 0;
+}

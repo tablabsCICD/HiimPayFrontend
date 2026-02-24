@@ -1,0 +1,129 @@
+.col {
+    line-height: 22.5px;
+  }
+  
+  .table-row {
+    background-color: #ffffff;
+    /* border-radius: 10px; */
+    padding: 5px;
+    margin-bottom: 10px;
+    align-items: center;
+    height: auto;
+  
+    font-weight: 500;
+    font-size: 15px;
+    border: solid 1px rgb(148, 148, 148);
+  }
+  .table-row:hover {
+    border: 2px solid #103a7f;
+  }
+  .tableCointainer .table-row:hover {
+    border: 2px solid #103a7f;
+  }
+  .row-head {
+    height: 54px;
+    font-weight: 500;
+  
+    font-size: 16px;
+    background-color: #103a7f;
+  }
+  
+  .row-body {
+    font-weight: 300;
+    height: auto;
+  
+    text-align: center;
+  }
+  
+  .row-head .col {
+    text-align: center;
+  }
+  
+  .material {
+    display: inline-block;
+    text-align: center;
+  }
+  
+  button {
+    border: none;
+  }
+  
+  .popup-container {
+    height: 100vh;
+    overflow: scroll;
+  }
+  
+  .tableCointainer {
+    height: 330px;
+    overflow-y: auto !important;
+  }
+  
+  
+  .tableCointainer::-webkit-scrollbar {
+    width: 0px; 
+  }
+  
+  .tableCointainer .col{
+    font-size: 14px;
+    font-weight: 400px;
+  }
+  
+  .tableCointainer .row{
+    border-color: rgb(148, 148, 148);
+  }
+  
+  
+  .boldColmn {
+    font-weight: 400;
+    position: relative;
+    inset-inline: -1em;
+  }
+  
+  .no-style-button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+  
+  tbody:nth-child(2) {
+    max-width: 4px;
+  }
+  
+  .disableDownloadIcon {
+    opacity: 0.4;
+  }
+  
+  .disableDownloadButton:hover {
+    cursor: not-allowed;
+  }
+  
+  .dropdownToggleButton {
+    height: 57px;
+    flex-grow: 1;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .bthnHover:hover {
+    background-color: gray;
+    border-radius: 50px;
+  }
+  .bthnHover {
+    height: 25px;
+    width: 25px;
+    background-color: gainsboro;
+    border-radius: 50px;
+  }
+  
+  .unavailability {
+    font-size: 16px !important;
+    position: absolute;
+    top:20vh;
+    width: 100%;
+  }
+

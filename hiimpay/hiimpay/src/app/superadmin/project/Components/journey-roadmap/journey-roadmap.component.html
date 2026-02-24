@@ -1,0 +1,394 @@
+<div id="journeymap-content">
+  <div class="row mt-2 px-5">
+    <div class="col-lg col-md col-sm-12">
+        <div class="d-flex align-items-center justify-content-between">
+            <span class="blue-text-color font-weight-bold ps-4" style="font-weight: 700; max-width: 500px; text-wrap: wrap;">
+                Project name : {{ displayClientData?.clientName }}</span>
+            <span class="blue-text-color font-weight-bold ms-4" style="font-weight: 700">
+                EXwise consultant : {{ displayClientData?.consultantName }}</span>
+            <span class="blue-text-color font-weight-bold pe-4" (click)="editUser(displayClientData?.copcId)" style="font-weight: 700; cursor: pointer;">
+                CPOC name : {{ displayClientData?.contactPerson }}</span>
+        </div>
+    </div>
+  </div>
+  <div class="mx-3 mt-3">
+    <div class="text-center p-3" style="background-color: #103a7f; font-weight: bolder; color: white;">
+      JOURNEY MAP
+      <!-- <i class="fa fa-download float-end text-light" aria-hidden="true" style="font-size:26px" (click)="ondownload()"*ngIf="!isLoadingSpin"></i>
+      <i class="fa fa-spinner fa-spin float-end text-light" style="font-size:24px" *ngIf="isLoadingSpin"></i> -->
+      <i class="fa fa-download float-end text-light" data-html2canvas-ignore="true" aria-hidden="true" style="font-size:26px" [matMenuTriggerFor]="menu"
+        *ngIf="!isLoadingSpin"></i>
+      <i class="fa fa-spinner fa-spin float-end text-light" style="font-size:24px" *ngIf="isLoadingSpin"></i>
+  
+      <mat-menu #menu="matMenu">
+        <div mat-menu-item (click)="ondownload()" *ngIf="isCpoc!==true">Download Excel</div>
+        <div mat-menu-item (click)="downloadPDF()">Download PDF</div>
+      </mat-menu>
+  
+    </div>
+  
+    <section class=" mb-5" *ngIf="!isLoading" style="height: 100%;padding-bottom: 5%;">
+      <div class="row g-2 mt-2" data-html2canvas-ignore="true">
+        <div class="col-lg-11 col-sm-11 col-md-11 col-xl-11">
+          <div class="row g-2">
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6">
+              <select [(ngModel)]="selectedParent" name="" id=""
+                class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="onChangeParent($event)">
+                <option value="" selected disabled>Please select for filter</option>
+                <option value="contractType">Contract type</option>
+                <option value="gender">Gender</option>
+                <option value="lifecycle">Life cycle</option>
+                <!-- <option value="jobType">Job type</option> -->
+                <option value="tenure">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='contractType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select contract type</option>
+                <option value="Fulltime" [selected]="contractType === 'Fulltime'">Full time</option>
+                <option value="Parttime" [selected]="contractType === 'Parttime'">Part time</option>
+                <option value="Fixed contract" [selected]="contractType === 'Fixed contract'">Fixed contract</option>
+                <option value="Casual" [selected]="contractType === 'Casual'">Casual</option>
+                <option value="Other" [selected]="contractType === 'Other'">Other</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='gender'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select gender</option>
+                <option value="Male" [selected]="gender === 'Male'">Male</option>
+                <option value="Female" [selected]="gender === 'Female'">Female</option>
+                <option value="Other" [selected]="gender === 'Other'">Other</option>
+                <option value="Prefer not to say" [selected]="gender === 'Prefer not to say'">Prefer not to say</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='lifecycle'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select Life cycle</option>
+                <option value="Attract" [selected]="lifeCycle === 'Attract'">Attract</option>
+                <option value="Onboard" [selected]="lifeCycle === 'Onboard'">Onboard</option>
+                <option value="Develop" [selected]="lifeCycle === 'Develop'">Develop</option>
+                <option value="Retain" [selected]="lifeCycle === 'Retain'">Retain</option>
+                <option value="Separate" [selected]="lifeCycle === 'Separate'">Separate</option>
+              </select>
+            </div>
+            <!-- <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='jobType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select job type</option>
+                <option value="">Contract type</option>
+                <option value="">Gender</option>
+                <option value="">Job type</option>
+                <option value="">Tenure</option>
+              </select>
+            </div> -->
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='tenure'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select tenure</option>
+                <option value="<3 months" [selected]="tenure === '<3 months'">&lt; 3 months</option>
+                <option value="3-11 months" [selected]="tenure === '3-11 months'">3-11 months</option>
+                <option value="1-2 years" [selected]="tenure === '1-2 years'">1-2 years</option>
+                <option value="3-5 years" [selected]="tenure === '3-5 years'">3-5 years</option>
+                <option value="5-10 years" [selected]="tenure === '5-10 years'">5-10 years</option>
+                <option value=">10 years" [selected]="tenure === '>10 years'">&gt; 10 years</option>
+              </select>
+            </div>
+          </div> 
+        </div>
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xl-1">
+          <button class="border-0 py-2 rounded text-white mt-2 ms-2" style="background-color: #103a7f;"
+            (click)="onClearFilter()">Clear filters</button>
+        </div>
+      </div>
+  
+      <div class="row justify-content-center mt-4">
+        <div class="col-md-5 col-lg-5">
+          <div class="card shadow-sm cardheight" style="border: 2px solid gainsboro">
+            <h5 class="card-title mb-2 fw-bold text-center">Response Completion Rate</h5>
+            <div class="card-body my-5">
+  
+              <canvas baseChart [data]="barChartData" [options]="barChartOptions" chartType="bar">
+              </canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7 col-lg-7">
+          <div class="card shadow-sm h-100" style="border: 2px solid gainsboro">
+            <h5 class="card-title fw-bold text-center">EX Foundations Satisfaction v EX Foundations Reality and
+              Quality</h5>
+            <!-- <div class="ms-2">
+                <button (click)="resetChartZoom(barChart)" class="border-0 mb-2 rounded py-1 px-2 text-white blue-color">Reset
+                  zoom</button>
+              </div> -->
+            <div class="card-body">
+              <canvas id="barChartCanvas">{{ barChart }}</canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row justify-content-center info-card">
+        <div class="col-md-2 col-sm-1 flex-grow-1" *ngFor="let stage of cardsData; index as i">
+          <div class="card cardstyle" (click)="onChangeStage(stage,i)" [ngClass]="{'activeTab': stage?.clicked, 'disabled-card': isInnerLoading}">
+            <div class="card-body">
+              <div class="row">
+                <div class="col align-self-center">
+                  <!-- <h5 class="card-title  fs-6 text-uppercase fw-normal mb-2">All</h5> -->
+                  <h5 class="card-title fs-6 fw-normal">{{ stage?.stageName }}</h5>
+                </div>
+                <div class="col-auto">
+                  <circle-progress [percent]="stage?.stageScore" [radius]="35" [outerStrokeWidth]="10"
+                    [innerStrokeWidth]="10" [outerStrokeColor]="'#103a7f'" [innerStrokeColor]="'#069DE0'"
+                    [animation]="true" [showSubtitle]="false" [clockwise]="true" [showUnits]="true"
+                    [animationDuration]="300"></circle-progress>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- <div class="row justify-content-center info-card">
+        <div class="col-2 flex-grow-1" *ngFor="let stage of survey">
+          <div class="card1" (click)="clickOnStage(stage)" [ngClass]="{'activeTab': stage?.clicked}">
+            <div class="card-body">
+              <div class="row">
+                <div class="col align-self-center">
+                  <h5 class="card-title fs-6 text-uppercase fw-normal mb-2 text-center">
+                    {{ stage?.stageName }}
+                  </h5>
+                </div>
+                <div class="col-auto">
+                  <circle-progress [percent]="stage?.stageScore" [radius]="35" [outerStrokeWidth]="10"
+                    [innerStrokeWidth]="10" [outerStrokeColor]="'#103a7f'" [innerStrokeColor]="'#069DE0'"
+                    [animation]="true" [showSubtitle]="false" [clockwise]="true" [showUnits]="true"
+                    [animationDuration]="300"></circle-progress>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+  
+      <div class="row justify-content-center" *ngIf="!isInnerLoading">
+        <div class="col-md-5 mb-2">
+          <div class="card shadow-sm h-100" style="border: 2px solid gainsboro">
+  
+            <div class="text-center card-title mb-2"> {{stageName}} EX Foundations Satisfaction v EX Foundations Reality
+              and Quality</div>
+            <!-- <div>
+              <button (click)="resetChartZoom(barChart2)" class="border-0 rounded ms-2 py-1 px-2 text-white blue-color">Reset
+                zoom</button>
+             </div> -->
+            <div class="card-body my-5">
+  
+              <canvas id="barChartCanva2" style="height: 40vh !important;">{{ barChart2 }}</canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7  mb-2">
+          <div class="card shadow-sm h-100" style="border: 2px solid gainsboro">
+            <div class="text-center card-title mb-2"> {{stageName}} Touchpoints</div>
+            <div class="card-body">
+  
+              <canvas class="w-100 " baseChart [data]="efficiencyData2" [options]="touchpointOptions"
+                [plugins]="efficiencyPlugins" [legend]="efficiencyLegend" [type]="'bar'">
+              </canvas>
+  
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6  mb-2">
+          <div class="card shadow-sm h-100" style="border: 2px solid gainsboro">
+            <div class="text-center card-title mb-2"> {{stageName}} Touchpoint Efficiencies Automation</div>
+            <div class="card-body">
+  
+              <canvas class="w-100" baseChart [data]="efficiencyData3" [options]="efficiencyOptions"
+                [plugins]="efficiencyPlugins" [legend]="efficiencyLegend" [type]="'bar'">
+              </canvas>
+  
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6  mb-2 ">
+          <div class="card shadow-sm h-100" style="border: 2px solid gainsboro">
+            <div class="text-center card-title mb-2"> {{stageName}} Touchpoint Efficiencies System</div>
+            <div class="card-body">
+  
+              <canvas class="w-100" baseChart [data]="efficiencyData4" [options]="efficiencyOptions"
+                [plugins]="efficiencyPlugins" [legend]="efficiencyLegend" [type]="'bar'">
+              </canvas>
+  
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 mb-2" style="height: 400px;">
+          <div class="card shadow-sm h-100" style="border: 2px solid gainsboro">
+            <div class="text-center"> {{stageName}} Touchpoint Internal Ownership</div>
+            <div class="card-body">
+              <canvas class="w-100" baseChart [data]="efficiencyData" [options]="efficiencyOptions"
+                [plugins]="efficiencyPlugins" [legend]="efficiencyLegend" [type]="'bar'">
+              </canvas>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="card shadow-sm h-100" style="border: 2px solid gainsboro">
+            <!-- <div class="text-center"> {{stageName}} Questions</div> -->
+            <div class="card-body">
+              <div id="chart">
+                <apx-chart [series]="chartOptions?.series" [chart]="chartOptions?.chart"
+                  [dataLabels]="chartOptions?.dataLabels" [plotOptions]="chartOptions?.plotOptions" [yaxis]="chartOptions?.yaxis"
+                  [xaxis]="chartOptions?.xaxis" [stroke]="chartOptions?.stroke" [fill]="chartOptions?.fill"
+                  [title]="chartOptions?.title" [subtitle]="chartOptions?.subtitle" [tooltip]="chartOptions?.tooltip" [legend]="chartOptions?.legend"
+                  [colors]="chartOptions?.colors" [grid]="chartOptions?.grid"></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="mt-2">
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item" *ngFor="let faq of descriptiveQuestion; let i = index">
+                <h2 class="accordion-header" [id]="'heading' + i">
+                  <button class="accordion-button" type="button" 
+                    aria-expanded="true" 
+                    [attr.aria-controls]="'collapse' + i">
+                    {{ faq.question }}
+                  </button>
+                </h2>
+                <div [id]="'collapse' + i" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div *ngIf="!faq.answers?.length" class="text-center">
+                      <p class="my-2">No answers shared by anyone.</p>
+                    </div>
+                    <div *ngIf="faq.answers?.length">
+                      <div *ngFor="let answer of faq?.answers; let isLast = last">
+                        <p>{{ answer }}</p>
+                        <div *ngIf="!isLast">
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- <div class="accordion" id="accordionExample">
+              <div class="accordion-item" *ngFor="let faq of descriptiveQuestion; let i = index">
+                <h2 class="accordion-header" [id]="'heading' + i">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    [attr.data-bs-target]="'#collapse' + i" aria-expanded="true" [attr.aria-controls]="'collapse' + i">
+                    {{ faq.question }}
+                  </button>
+                </h2>
+                <div [id]="'collapse' + i" class="accordion-collapse collapse" data-bs-parent="#accordionExample" >
+                  <div class="accordion-body">
+                    <div *ngIf="!faq.answers?.length" class="text-center">
+                      <p class="my-2">No answers shared by anyone.</p>
+                    </div>
+                    <div *ngIf="faq.answers?.length">
+                      <div *ngFor="let answer of faq?.answers; let isLast = last">
+                        <p>{{ answer }}</p>
+                        <div *ngIf="!isLast">
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+
+        <div *ngIf="touchpointFreeNoteDtos?.length > 0; else noData" class="container mt-4">
+          <h3 style="margin: 0; color: #103a7f; font-weight: bolder">
+            Touchpoint Reality Summary
+          </h3>
+          <div class="p-3 shadow-sm rounded" style="border: 2px solid gainsboro">
+            <div *ngFor="let touchpoint of touchpointFreeNoteDtos">
+              <h3 class="fw-bold">{{ touchpoint.touchpointPhaseTitle }}</h3>
+              <p *ngIf="touchpoint.touchpointNote; else noDescription" class="text-muted">
+                <span [innerHTML]="formatText(touchpoint.touchpointNote)"></span>
+              </p>
+              <ng-template #noDescription class="text-center">
+                <p class="text-danger text-center">No description available for {{ touchpoint.touchpointPhaseTitle }}</p>
+              </ng-template>
+              <hr *ngIf="!isLastItem(touchpoint)">
+            </div>
+          </div>
+        </div>
+        
+        <ng-template #noData style="border: 2px solid gainsboro">
+          <div class="text-center">No touchpoint data available</div>
+        </ng-template>
+        
+  
+        <div class="col-12 mt-4">
+          <div class="d-flex align-items-center justify-content-between">
+            <h3 style="margin: 0; color: #103a7f; font-weight: bolder">
+              People Metrics
+            </h3>
+          </div>
+        </div>
+  
+        <div class="col-12">
+          <div class="mt-2">
+            <div class="row">
+              <div *ngIf="peopleMatrixData?.length > 0">
+                <div class="col-md-4 col-lg-4 mb-4" *ngFor="let item of peopleMatrixData">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h4 class="card-title font-weight-bold">{{ item.peopleMetrics?.metricsName || 'N/A' }}</h4>
+                      <p class="card-text">
+                        <strong>Calculation:</strong> {{ item.peopleMetrics?.calculationsOrDefination || 'N/A' }}<br />
+                        <strong>Additional Information:</strong> {{ item.peopleMetrics?.additionalInformation || 'N/A'
+                        }}<br />
+                        <strong>Due Date:</strong> {{ item.peopleMetrics?.nextDataDueDate | date }}<br />
+                        <strong>Consultant:</strong> {{ item?.loggedUserName || '-' }}<br />
+                        <strong>Phase ID:</strong> {{ item.peopleMetrics?.phaseId || 'N/A' }}<br />
+                        <strong>Client ID:</strong> {{ item.peopleMetrics?.clientId || 'N/A' }}<br />
+                        <strong>Frequency of Data Collection:</strong> {{ item.peopleMetrics?.frequencyOfDataCollection ||
+                        'N/A' }}<br />
+                        <strong>Created Date:</strong> {{ item.peopleMetrics?.createdDate | date }}<br />
+                        <strong>Data Point:</strong> {{ item.peopleMetrics?.dataPoint || 'N/A' }}
+                      </p>
+                      <div *ngIf="item.matrixDatas?.length > 0">
+                        <strong>Historic Data:</strong>
+                        <ul>
+                          <li *ngFor="let historic of item.matrixDatas">
+                            <strong>Month/Year:</strong> {{ historic.monthYear || 'N/A' }},
+                            <strong>Value:</strong> {{ historic.value || 'N/A' }},
+                            <strong>Created Date:</strong> {{ historic.createdDate | date }}
+                          </li>
+                        </ul>
+                      </div>
+                      <!-- <div *ngIf="item.peopleMetrics?.historicData?.length > 0">
+                        <strong>Historic Data IDs:</strong> {{ item.peopleMetrics.historicData.join(', ') }}
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="peopleMatrixData?.length <= 0" class="text-center">
+                No data available
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center my-5">
+        <i *ngIf="isInnerLoading" class="fa fa-spinner fa-spin" style="font-size: 64px; color: #103a7f"></i>
+      </div>
+    </section>
+    <div class="text-center my-5">
+      <i *ngIf="isLoading" class="fa fa-spinner fa-spin" style="font-size: 64px; color: #103a7f"></i>
+    </div>
+  </div>
+</div>

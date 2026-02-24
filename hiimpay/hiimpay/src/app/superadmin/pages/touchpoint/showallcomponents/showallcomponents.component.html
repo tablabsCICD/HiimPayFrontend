@@ -1,0 +1,91 @@
+<div class="container">
+    <div class="col-lg-12 mt-2">
+        <h3 style="display: inline; color: #103a7f; font-weight: 700;">All component</h3>
+        <button type="button" class="close bthnHover" aria-label="Close" (click)="onClose()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="row mt-2">
+        <div class="col d-flex justify-content-end align-self-center mb-2">
+            <button class="p-2 px-3 rounded button-color text-white border-0" (click)="toggleComponentForm()">Create
+                component</button>
+        </div>
+        <section id="component" class="collapse">
+            <div class="conatiner">
+                <form [formGroup]="createComponentForm" (submit)="createComponent()">
+                    <div class="row mb-4 justify-content-center">
+                        <div class="col-md-7">
+                            <div class="card">
+                                <div class="text-right p-2">
+                                    <button type="button" class="close bthnHover" aria-label="Close" (click)="toggleComponentForm()">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="p-2">
+                                    <label for="component_name">Component name</label>
+                                    <input type="text" id="component_name" class="form-control bg-light w-100"
+                                        formControlName="componentName" placeholder="Enter component name">
+                                </div>
+                                    <p *ngIf="createComponentForm.get('componentName')?.touched && createComponentForm.get('componentName')?.hasError('required')"
+                                        class="text-danger ms-3">
+                                        Component name is required
+                                    </p>
+                                <div class="p-2">
+                                    <label for="description">Description</label>
+                                    <input type="text" id="description" class="form-control bg-light w-100"
+                                        formControlName="description" placeholder="Enter description">
+                                </div>
+                                <div class="p-2">
+                                    <label for="weightage">Weightage</label>
+                                    <input type="number" id="weightage" class="form-control bg-light w-100" (keypress)="isNumber($event)"
+                                        formControlName="weightage" placeholder="Enter weightage">
+                                </div>
+                                <div class="p-2">
+                                    <button class="mt-2 rounded button-color text-white border-0 p-2 w-100">{{btnName}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+    <section *ngIf="!isLoading" style="height: 60vh;">
+        <div class="row table-row row-head gx-0">
+            <div class="col">Component name</div>
+            <div class="col">Weightage</div>
+            <div class="col">Created date</div>
+            <div class="col">Description</div>
+            <div class="col">Status</div>
+            <div class="col">Action</div>
+        </div>
+        <div class="tableCointainer" *ngIf="allComponents.length>0">
+            <div class="row gx-0 table-row row-body px-0 " *ngFor="let item of allComponents">
+                <div class="col">
+                    <div class="material">
+                        <div class="col"> {{item.componentName | titlecase }}</div>
+                    </div>
+                </div>
+                <div class="col">
+                    {{item?.weightage | number}}
+                </div>
+
+                <div class="col">{{item.created_date |  date:'MMM d yyyy'}}</div>
+                <div class="col">{{item.description}}</div>
+                <div class="col">{{ item.active ? 'Active' : 'Deactive' }}</div>
+                <div class="col">
+                    <button class="border-0 m-2 " style="font-size:20px" (click)="onEdit(item.id)"> <i class="fa fa-pencil"
+                            style="color: #103a7f;"></i></button>
+                    <button class="border-0 m-2 " style="font-size:20px" (click)="onDelete(item)"> <i class="fa fa-trash"
+                            style="color: #103a7f;"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="text-center my-5" *ngIf="allComponents.length <= 0">
+            No data available for components
+        </div>
+    </section>
+    <div class="text-center my-5">
+        <i *ngIf="isLoading" class="fa fa-spinner fa-spin" style="font-size:64px;color: #103a7f;"></i>
+      </div>
+</div>

@@ -1,0 +1,72 @@
+<section class="detail-shell" *ngIf="record; else noRecord">
+  <div class="detail-root">
+    <div class="hero">
+      <div>
+        <p class="eyebrow">Assignment Detail</p>
+        <h2>{{ recordType === 'coupon' ? 'Assigned Coupon Details' : 'Assigned Amount Details' }}</h2>
+        <p class="sub">Review assignment metadata and recipient details.</p>
+      </div>
+      <div class="stats">
+        <div class="stat" *ngIf="recordType === 'coupon'">
+          <span class="label">Brands</span>
+          <span class="value">{{ record.brands?.length || 0 }}</span>
+        </div>
+        <div class="stat" *ngIf="recordType === 'coupon'">
+          <span class="label">Coupons</span>
+          <span class="value">{{ record.coupons?.length || 0 }}</span>
+        </div>
+        <div class="stat">
+          <span class="label">Employees</span>
+          <span class="value">{{ record.employees?.length || 0 }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="meta-grid">
+      <div class="meta-item"><span>Client ID</span><strong>{{ record.clientId || '-' }}</strong></div>
+      <div class="meta-item"><span>Assigned Date</span><strong>{{ record.assignedDate | date:'medium' }}</strong></div>
+      <div class="meta-item"><span>Assigned By</span><strong>{{ record.assignedBy || '-' }}</strong></div>
+      <div class="meta-item"><span>Notes</span><strong>{{ record.notes || '-' }}</strong></div>
+      <div class="meta-item" *ngIf="recordType === 'amount'"><span>Mode</span><strong>{{ record.source || '-' }}</strong></div>
+      <div class="meta-item" *ngIf="recordType === 'amount'"><span>Amount</span><strong>{{ record.amount ? ('Rs ' + record.amount) : '-' }}</strong></div>
+      <div class="meta-item" *ngIf="recordType === 'amount'"><span>File</span><strong>{{ record.fileName || '-' }}</strong></div>
+    </div>
+
+    <div class="brand-wise" *ngIf="recordType === 'coupon'">
+      <h3>Brand-wise Assignment</h3>
+
+      <div class="brand-wise-card" *ngFor="let row of brandWiseRows">
+        <div class="brand-head">
+          <h4>{{ row.brandName }}</h4>
+        </div>
+
+        <div class="brand-grid">
+          <div class="mini-card">
+            <h5>Coupons</h5>
+            <ul>
+              <li *ngFor="let c of row.coupons">{{ c.name }}</li>
+            </ul>
+          </div>
+
+          <div class="mini-card">
+            <h5>Employees</h5>
+            <ul>
+              <li *ngFor="let e of row.employees">{{ e.name }}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-block" *ngIf="recordType === 'amount'">
+      <h4>Employees</h4>
+      <ul>
+        <li *ngFor="let e of record.employees">{{ e.name }}</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<ng-template #noRecord>
+  <div class="unavailability">Assignment detail not found.</div>
+</ng-template>

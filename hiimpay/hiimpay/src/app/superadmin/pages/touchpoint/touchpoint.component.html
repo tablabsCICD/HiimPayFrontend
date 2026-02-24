@@ -1,0 +1,90 @@
+<div class="container my-2">
+  <div class="row">
+    <div class="col">
+      <h3 class="font-weight-bold" style="color: #103a7f">
+        All touchpoints stages
+      </h3>
+    </div>
+    <div class="col d-flex justify-content-end align-self-center mb-2">
+      <button
+        class="p-2 px-3 rounded btn-outline me-2 blue-color"
+        (click)="openPopupForComponents()"
+      >
+        Show all components
+      </button>
+      <button
+        class="p-2 px-3 rounded btn-outline me-2 blue-color"
+        (click)="openPopupForTouchpoint()"
+      >
+        Show all touchpoints
+      </button>
+      <button
+        class="p-2 px-3 rounded button-color text-white border-0"
+        (click)="openPopup()"
+      >
+        Create stage
+      </button>
+    </div>
+  </div>
+  <section *ngIf="!isLoading" style="height: 100vh">
+    <div class="row table-row row-head gx-0">
+      <div class="col">Stage name</div>
+      <!-- <div class="col">Description</div> -->
+      <div class="col">Created date</div>
+      <div class="col">Add EX Phase</div>
+      <div class="col">Action</div>
+    </div>
+    <div class="tableCointainer" *ngIf="touchpointStages.length > 0">
+      <div
+        class="row gx-0 table-row row-body px-0"
+        *ngFor="let item of touchpointStages" style="cursor: pointer;"
+      >
+        <div class="col" (click)="onDetails(item?.id,item.stageName)">
+          <div class="material">
+            <div class="col">{{ item.stageName | titlecase }}</div>
+          </div>
+        </div>
+        <!-- <div class="col">
+                    {{item?.description}}
+                </div> -->
+
+        <div class="col">{{ item.created_date | date : "MMM d yyyy" }}</div>
+        <div class="col">
+          <button
+            class="border-0 btn btn-light ellipsis-button3"
+            style="background-color: #2980b9; color: white"
+            (click)="openAssignTouchPoints(item?.id, item?.stageName)"
+          >
+            Add
+          </button>
+        </div>
+        <div class="col">
+          <button
+            class="border-0 m-2"
+            style="font-size: 20px"
+            (click)="onEdit(item.id)"
+          >
+            <i class="fa fa-pencil" style="color: #103a7f"></i>
+          </button>
+          <button
+            class="border-0 m-2"
+            style="font-size: 20px"
+            (click)="onDelete(item)"
+          >
+            <i class="fa fa-trash" style="color: #103a7f"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="text-center my-5" *ngIf="touchpointStages.length <= 0">
+      No data available for touchpoint stage
+    </div>
+  </section>
+  <div class="text-center my-5">
+    <i
+      *ngIf="isLoading"
+      class="fa fa-spinner fa-spin"
+      style="font-size: 64px; color: #103a7f"
+    ></i>
+  </div>
+</div>

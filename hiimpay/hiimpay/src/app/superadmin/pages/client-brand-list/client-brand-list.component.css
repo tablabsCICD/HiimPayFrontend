@@ -1,0 +1,14 @@
+.client-brand-root { display: flex; flex-direction: column; gap: 16px; }
+.page-header h2 { margin: 0; color: #053067; font-weight: 600; }
+.subtitle { color: #64748b; font-size: 13px; }
+.filters { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.search, .client-select { padding: 8px 12px; border: 1px solid #e6eef6; border-radius: 8px; }
+.search { min-width: 260px; }
+.in-stock { font-size: 13px; color: #334155; display: flex; align-items: center; gap: 6px; }
+.table-wrap { overflow: auto; }
+.client-brand-table { width: 100%; border-collapse: collapse; background: #fff; box-shadow: 0 6px 18px rgba(12,16,32,.06); }
+.client-brand-table thead th { padding: 12px 16px; text-align: left; color: #fff; background: #053067; }
+.client-brand-table tbody td { padding: 12px 16px; border-top: 1px solid #f1f5f9; }
+.clickable { cursor: pointer; }
+.clickable:hover { background: #e9f5ff; }
+.empty { text-align: center; color: #64748b; }

@@ -1,0 +1,83 @@
+<div class="create-brand-card">
+  <div class="modal-header">
+    <h3>Create Brand</h3>
+    <button class="close-btn" (click)="cancel()">&times;</button>
+  </div>
+  <div class="modal-body">
+    <form class="brand-form" (submit)="save(); $event.preventDefault()">
+      <div class="form-row">
+        <label>Brand Name</label>
+        <input type="text" placeholder="Enter brand name" [(ngModel)]="brand.name" name="brandName" required />
+      </div>
+
+      <div class="form-row logo-row">
+        <!-- <label>Brand Logo</label> -->
+        <div class="logo-drop" (dragover)="$event.preventDefault()" (drop)="onDrop($event)">
+          <div class="logo-preview" *ngIf="logoPreview">
+            <img [src]="logoPreview" alt="logo preview" />
+          </div>
+          <div class="logo-placeholder" *ngIf="!logoPreview">
+            <p>Drag & Drop logo here or</p>
+            <input type="file" accept="image/*" (change)="onLogoSelected($event)" />
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label>Brand Description</label>
+        <textarea rows="4" placeholder="Short description" [(ngModel)]="brand.description" name="brandDescription"></textarea>
+      </div>
+
+      <div class="form-row two-col">
+        <div>
+          <label>Website URL</label>
+          <input type="url" placeholder="https://example.com" [(ngModel)]="brand.website" name="brandWebsite" />
+        </div>
+        <div>
+          <label>Category</label>
+          <select [(ngModel)]="brand.category" name="brandCategory">
+            <option value="E-commerce / Technology">E-commerce / Technology</option>
+            <option value="Retail">Retail</option>
+            <option value="Finance">Finance</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row two-col">
+        <div>
+          <label>Email</label>
+          <input type="email" placeholder="contact@brand.com" [(ngModel)]="brand.email" name="brandEmail" />
+        </div>
+        <div>
+          <label>Phone</label>
+          <input type="tel" placeholder="+1-555-555-5555" [(ngModel)]="brand.phone" name="brandPhone" />
+        </div>
+      </div>
+
+      <div class="form-row two-col">
+        <div>
+          <label>Founded Year</label>
+          <input type="number" min="1800" max="2100" [(ngModel)]="brand.foundedYear" name="brandFounded" />
+        </div>
+        <div>
+          <label>Country / Region</label>
+          <input type="text" [(ngModel)]="brand.country" name="brandCountry" />
+        </div>
+      </div>
+
+      <div class="form-row status-row">
+        <label>Status</label>
+        <label class="switch">
+          <input type="checkbox" [(ngModel)]="brand.active" name="brandStatus" />
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="modal-actions">
+        <button type="submit" class="btn primary">Save Brand</button>
+        <button type="button" class="btn secondary" (click)="cancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

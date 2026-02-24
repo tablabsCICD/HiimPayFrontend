@@ -1,0 +1,25 @@
+
+.activeTab {
+  background-color: #2980b9 !important;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+button {
+  flex: 1;
+  border-radius: 25px !important;
+  background-color: whitesmoke;
+  color: #2980b9;
+}
+
+button:hover {
+  color: #2980b9;
+}
+
+.activeTab:hover {
+  color: white;
+}
+
+
+

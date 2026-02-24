@@ -1,0 +1,93 @@
+<div class="container my-2">
+
+  <div class="row mt-2 px-2">
+    <div class="col-lg col-md col-sm-12">
+        <div class="d-flex align-items-center justify-content-between">
+            <h3 style="margin: 0; color: #103a7f; font-weight: bolder">
+                Surveys
+            </h3>
+            <span class="blue-color font-weight-bold" style="font-weight: 700; max-width: 500px; text-wrap: wrap;">
+                Project name : {{ displayClientData?.clientName }}</span>
+            <span class="blue-color font-weight-bold ms-4" style="font-weight: 700">
+                EXwise consultant : {{ displayClientData?.consultantName }}</span>
+            <span class="blue-color font-weight-bold" (click)="editUser(displayClientData?.copcId)" style="font-weight: 700; cursor: pointer;">
+                CPOC name : {{ displayClientData?.contactPerson }}</span>
+        </div>
+    </div>
+</div>
+
+  <div class="row mt-4">
+    <div class="col">
+      <!-- <h3 class="font-weight-bold" style="color: #103a7f;">Surveys</h3> -->
+    </div>
+    <div class="col d-flex justify-content-end align-self-center mb-2">
+      <!-- *ngIf="isCpoc!==true" -->
+      <button class="btn button-color me-2" type="button" (click)="sendSurveyReminder()" style="height: 3em;">
+        <!-- <img src="assets/plus.svg" class="me-2" height="18" alt="" /> -->
+        <span class="filter-text text-light">Send survey reminder</span>
+      </button>
+      <button class="btn button-color" type="button" (click)="openPopup2()" style="height: 3em;">
+        <img src="assets/plus.svg" class="me-2" height="18" alt="" />
+        <span class="filter-text text-light">Assign Survey</span>
+      </button>
+
+
+    </div>
+
+  </div>
+  <section class="mt-3" *ngIf="!isLoading">
+    <div class="row table-row row-head gx-0">
+      <div class="col ">Survey name</div>
+      <div class="col ">Stage name</div>
+      <div class="col ">Employee experience phase</div>
+      <div class="col ">Created date</div>
+      <!-- <div class="col">Record owner</div> -->
+      <!-- <div class="col ">Info</div> -->
+      <div class="col ">Status</div>
+    </div>
+    <div class="tableCointainer" *ngIf="details.length > 0">
+      <div class="row gx-0 table-row row-body px-0 "
+        *ngFor="let item of details | paginate: { itemsPerPage: itemPerPage, currentPage: page, totalItems: totalItems }"
+        (click)="onClick(item.assignmentToCLient?.id)" style="cursor: pointer;">
+        <div class="col">{{item.surveyWithDetailResponseDto.surveyName | titlecase}} </div>
+        <div class="col">
+          <div class="material">
+            <div class="col"> {{ item.surveyWithDetailResponseDto?.dto[0]?.stageName| titlecase }}</div>
+          </div>
+        </div>
+        <div class="col">{{item.surveyWithDetailResponseDto?.dto[0]?.subphaseName| titlecase }} </div>
+        <!-- <div class="col d-flex flex-column align-items-center" style=" overflow: hidden;">
+          <span *ngIf="item.assignmentToCLient?.status=='active'" class="badge rounded-pill d-inline" style="background-color: #069de0;">{{item.assignmentToCLient?.status |
+            titlecase}}</span>
+          <span *ngIf="item.assignmentToCLient?.status==='Inactive'" class="badge rounded-pill d-inline" style="background-color: #2980b9">{{item.assignmentToCLient?.status |
+            titlecase}}</span>
+        </div> -->
+
+        <div class="col">{{item.assignmentToCLient.startDate | date}}</div>
+        <!-- <div class="col">{{item?.loggedUserName}}</div> -->
+        <div class="col">
+          <select name="" id="" class="form-select form-select-sm" class="ellipsis-button"
+            (click)="stopPropagation($event)"
+            (change)="onChangeActiveDeactiveAssignment(item.assignmentToCLient?.id,$event)">
+            <option value="true" [selected]="item.assignmentToCLient?.active">Active</option>
+            <option value="false" [selected]="!item.assignmentToCLient?.active">Deactivate</option>
+          </select>
+        </div>
+
+      </div>
+      <div class="text-end my-4" style="font-weight: 300 !important; font-size: 13px">
+        <pagination-controls (pageChange)="pageChangeEvent($event)" [maxSize]="5"></pagination-controls>
+      </div>
+    </div>
+    <div class="tableContainer text-center my-5" *ngIf="details.length == 0">
+      <span class="my-5"> No data available for selected state</span>
+    </div>
+    <!-- <div class="text-center tableContainer " *ngIf="displayMesg">
+      No data available for selected state
+    </div> -->
+  </section>
+
+  <div class="text-center my-5">
+    <i *ngIf="isLoading" class="fa fa-spinner fa-spin" style="font-size:64px;color: #103a7f;"></i>
+  </div>
+</div>

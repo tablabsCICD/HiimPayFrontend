@@ -1,0 +1,28 @@
+<section class="popup-container">
+  <div class="col-12 my-2">
+    <h2 class="fw-normal" style="display: inline; color: #103a7f;font-style: poppins;">Coupoun list</h2>
+    <h2 class="fw-normal ms-5" style="display: inline; color: #103a7f;font-style: poppins;">EX consultant : {{ data.consultantName }}</h2>
+    <button type="button" class="close bthnHover" aria-label="Close" (click)="onClose()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="container py-3" style="position: relative;">
+    <div class="row table-row row-head gx-0">
+      <div class="col">Coupoun name</div>
+      <div class="col">Assign date</div>
+      <div class="col">Coupoun stage</div>
+      <div class="col">Coupoun status</div>
+    </div>
+    <div class="tableCointainer" *ngIf="surveyList.length>0">
+      <div class="row gx-0 table-row row-body px-0" *ngFor="let item of surveyList">
+      <div class="col"> {{ item?.surveyWithDetailResponseDto?.surveyName }} </div>
+      <div class="col"> {{item?.assignmentToCLient?.startDate | date     }}</div>
+      <div class="col"> {{ item?.surveyWithDetailResponseDto?.dto[0]?.stageName }}</div>
+      <div class="col"> {{item?.assignmentToCLient?.status }} </div>
+    </div>
+    </div>
+    <div class="text-center unavailability" *ngIf="surveyList.length <= 0">
+      No data available
+    </div>
+  </div>
+</section>

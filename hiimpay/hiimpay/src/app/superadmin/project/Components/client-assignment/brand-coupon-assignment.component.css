@@ -1,0 +1,360 @@
+:host {
+  --ink-900: #0d2446;
+  --ink-700: #264e7f;
+  --sky-500: #0891b2;
+  --sky-100: #ecfeff;
+  --line: #d7e2ef;
+  --surface: #ffffff;
+  --soft: #f6fbff;
+  --ok: #0f766e;
+  --font: "Poppins", "Montserrat", "Segoe UI", sans-serif;
+  display: block;
+}
+
+.assignment-shell {
+  position: relative;
+  max-width: 980px;
+  margin: 24px auto;
+  padding: 12px;
+  font-family: var(--font);
+  overflow: visible;
+  animation: riseIn .45s ease-out;
+}
+
+.bg-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(2px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.orb-one {
+  width: 260px;
+  height: 260px;
+  top: -100px;
+  right: -80px;
+  background: radial-gradient(circle at 30% 30%, #bae6fd 0%, #67e8f9 40%, transparent 75%);
+}
+
+.orb-two {
+  width: 320px;
+  height: 320px;
+  bottom: -180px;
+  left: -130px;
+  background: radial-gradient(circle at 60% 40%, #cffafe 0%, #93c5fd 45%, transparent 75%);
+}
+
+.assignment-root {
+  position: relative;
+  z-index: 1;
+  padding: 22px;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+  box-shadow: 0 16px 40px rgba(13, 36, 70, 0.12);
+  overflow: visible;
+}
+
+.hero {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: flex-start;
+  margin-bottom: 18px;
+}
+
+.eyebrow {
+  margin: 0 0 4px 0;
+  color: var(--sky-500);
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+.assignment-root h2 {
+  margin: 0 0 6px 0;
+  color: var(--ink-900);
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1.15;
+}
+
+.sub {
+  margin: 0;
+  color: #4b5f79;
+  max-width: 560px;
+}
+
+.meta-pills {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(92px, 1fr));
+  gap: 10px;
+  min-width: 300px;
+}
+
+.pill {
+  background: var(--soft);
+  border: 1px solid #c8ddf4;
+  border-radius: 12px;
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.pill-label {
+  color: #4b6b91;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+.pill-value {
+  color: var(--ink-900);
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.tabs, .sub-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.tab {
+  border: 1px solid #bfd4ea;
+  background: #fff;
+  color: #23466f;
+  border-radius: 10px;
+  padding: 9px 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform .18s ease, box-shadow .18s ease, background-color .18s ease;
+}
+
+.tab:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 16px rgba(16, 58, 127, 0.12);
+}
+
+.tab.active {
+  background: linear-gradient(135deg, #103a7f 0%, #0e7490 100%);
+  border-color: #103a7f;
+  color: #fff;
+}
+
+.panel {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px;
+  background: var(--surface);
+  overflow: visible;
+}
+
+.row-block {
+  margin-bottom: 14px;
+}
+
+label {
+  display: block;
+  margin-bottom: 7px;
+  font-weight: 600;
+  color: #1f3f67;
+}
+
+textarea,
+input[type="number"] {
+  width: 100%;
+  border: 1px solid #c8d8ea;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: #fff;
+  color: #0f2748;
+}
+
+textarea:focus,
+input[type="number"]:focus {
+  outline: none;
+  border-color: #0891b2;
+  box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.16);
+}
+
+/* Keep ng-multiselect popup as a proper floating panel */
+::ng-deep .assignment-root ng-multiselect-dropdown {
+  display: block;
+}
+
+::ng-deep .assignment-root ng-multiselect-dropdown .multiselect-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+::ng-deep .assignment-root ng-multiselect-dropdown .dropdown-btn {
+  border: 1px solid #c8d8ea !important;
+  border-radius: 10px !important;
+  min-height: 44px;
+  padding: 10px 40px 10px 12px !important;
+  background: #fff !important;
+  color: #0f2748 !important;
+}
+
+::ng-deep .assignment-root ng-multiselect-dropdown .dropdown-list {
+  position: absolute !important;
+  top: calc(100% + 6px) !important;
+  left: 0 !important;
+  width: 100% !important;
+  z-index: 9999 !important;
+  border: 1px solid #c8d8ea !important;
+  border-radius: 10px !important;
+  overflow: hidden !important;
+  background: #fff !important;
+  box-shadow: 0 16px 28px rgba(15, 39, 72, 0.16) !important;
+}
+
+::ng-deep .assignment-root ng-multiselect-dropdown .dropdown-list ul {
+  background: #fff !important;
+  max-height: 220px !important;
+  overflow-y: auto !important;
+  margin: 0 !important;
+}
+
+::ng-deep .assignment-root ng-multiselect-dropdown .dropdown-list .filter-textbox {
+  padding: 8px !important;
+  border-bottom: 1px solid #e6eef7 !important;
+}
+
+::ng-deep .assignment-root ng-multiselect-dropdown .dropdown-list .filter-textbox input {
+  border: 1px solid #d4e2f0 !important;
+  border-radius: 8px !important;
+  padding: 7px 10px !important;
+}
+
+::ng-deep .assignment-root ng-multiselect-dropdown .dropdown-list li {
+  padding: 8px 10px !important;
+  border-bottom: 1px solid #eff4fa !important;
+  background: #fff !important;
+}
+
+::ng-deep .assignment-root ng-multiselect-dropdown .dropdown-list li:hover {
+  background: #f3f9ff !important;
+}
+
+.upload-wrap {
+  position: relative;
+}
+
+.upload-wrap input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.upload-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 1.5px dashed #8bb7da;
+  background: linear-gradient(180deg, #f0f9ff 0%, #ecfeff 100%);
+  border-radius: 12px;
+  min-height: 110px;
+  padding: 14px;
+  cursor: pointer;
+  transition: border-color .18s ease, transform .18s ease;
+}
+
+.upload-label:hover {
+  border-color: #0891b2;
+  transform: translateY(-1px);
+}
+
+.upload-title {
+  color: #114078;
+  font-weight: 600;
+}
+
+.upload-sub {
+  color: #58779a;
+  font-size: 12px;
+}
+
+.hint {
+  display: inline-block;
+  margin-top: 8px;
+  color: var(--ok);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.actions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn.assign-btn {
+  background: linear-gradient(135deg, #103a7f 0%, #0f766e 100%);
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: 600;
+  letter-spacing: .01em;
+  box-shadow: 0 12px 20px rgba(16, 58, 127, 0.2);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+
+.btn.assign-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 26px rgba(16, 58, 127, 0.28);
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    flex-direction: column;
+  }
+
+  .meta-pills {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .assignment-root {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .assignment-root h2 {
+    font-size: 22px;
+  }
+
+  .tabs, .sub-tabs {
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    flex: 1 1 calc(50% - 10px);
+    text-align: center;
+  }
+
+  .meta-pills {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .pill-value {
+    font-size: 18px;
+  }
+}

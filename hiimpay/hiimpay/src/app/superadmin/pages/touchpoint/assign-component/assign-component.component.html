@@ -1,0 +1,59 @@
+<div class="container my-2 vh-100">
+    <div class="row  bg-light p-2">
+      <div class="col-lg col-md col-sm-12">
+        <div class="d-flex align-items-center">
+          <button class="btn btn-light rounded-circle me-1" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i>
+          </button> 
+          <h3 style="margin: 0;color: #103a7f;font-weight: bolder;">Assign Component</h3>
+  
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3"  cdkDropListGroup>
+      <div class="example-container col-xl-6 col-lg-6 col-md-6 col-sm-12  border-right-row">
+        <span class="h6 " style="font-weight: 700;color: #103a7f;">
+          Stage name : {{touchpointStageName}}</span>
+        <span class="h6 ms-2" style="font-weight: 700;color: #103a7f;">
+          Phase name : {{touchpointSubPhase}}</span>
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item" cdkDropList [cdkDropListData]="questions" class="example-list"
+            cdkDropListSortingDisabled (cdkDropListDropped)="drop($event)">
+            @for (item of questions; track item;let i = $index) {
+  
+            <h2 class="accordion-header" id="headingOne" cdkDrag>
+              <button class="accordion-button btn"   style="background-color: #103a7f;" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapseOne' + i"
+                aria-expanded="true" aria-controls="collapseOne">
+                {{item.componentName}}
+              </button>
+            </h2>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="example-container col-xl-6 col-lg-6 col-md-6 col-sm-12  ">
+        <span class="h6 " style="  font-weight: 700;color: #103a7f;">
+          Assigned Copmonent</span>
+  
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item" cdkDropList [cdkDropListData]="dragedQuestion" class="example-list"
+            (cdkDropListDropped)="drop($event)">
+            @for (item of dragedQuestion; track item;let i = $index) {
+            <div class="">
+              <h2 class="accordion-header" id="headingOne" cdkDrag>
+                <button class="accordion-button" type="button" style="background-color: #103a7f;" data-bs-toggle="collapse"  [attr.data-bs-target]="'#collapseOne' + i"
+                  aria-expanded="true" aria-controls="collapseOne">
+                  {{item.componentName}}
+                </button>
+              </h2>
+            </div>
+            }
+          </div>
+        </div>
+        <div class="text-right button-container">
+          <button class="px-5 py-2 border-0 rounded background-color text-white" (click)="onSubmit()">Assign
+            Component</button>
+        </div>
+      </div>
+    </div>
+  </div>

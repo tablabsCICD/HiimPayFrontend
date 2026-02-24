@@ -1,0 +1,225 @@
+<div class="">
+  <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col-lg-8 col-xl-9">
+      <mat-stepper labelPosition="bottom" [linear]="!isAllowToGoNextByStepper" #stepper (selectionChange)="onStepClick($event)">
+        <mat-step [stepControl]="reality">
+          <form [formGroup]="reality">
+            <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+              <div class="card-body p-4 p-md-5">
+                <div class="row">
+                  <div class="accordion" id="accordionExample">
+                    <div class="accordion-item" *ngFor="let reality of realityComponent; let i = index">
+                      <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" [attr.data-bs-target]="'#collapseOne' + i"
+                          aria-expanded="true" aria-controls="collapseOne">
+                          {{reality?.componentForReality?.componentName}}
+                        </button>
+                      </h2>
+                      <div [id]="'collapseOne'+i" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          <div class="row py-2">
+                            <div class="col-md-4">
+                              <div class="form-check mt-1">
+                                <input class="form-check-input" type="radio" name="{{ 'yes_no_' + i }}"
+                                  [(ngModel)]="reality.isPresent" [ngModelOptions]="{standalone: true}" [value]="'Yes'" id="{{ 'yes_' + i }}"
+                                  (change)="onOptionChangeForReality(reality?.componentForReality, 'yes_no', 'Yes')" (change)="isValueChange(isValueChanged); checkAllAnswered()">
+                                <label class="form-check-label" for="{{ 'yes_' + i }}">Yes</label>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-check mt-1">
+                                <input class="form-check-input" type="radio" name="{{ 'yes_no_' + i }}"
+                                  [(ngModel)]="reality.isPresent" [ngModelOptions]="{standalone: true}" [value]="'No'" id="{{ 'no_' + i }}"
+                                  (change)="onOptionChangeForReality(reality?.componentForReality, 'yes_no', 'No')" (change)="isValueChange(isValueChanged);  checkAllAnswered()">
+                                <label class="form-check-label" for="{{ 'no_' + i }}">No</label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-4 text-center">
+                  <button mat-button (click)="goBack()" class="me-3"
+                    style="background-color: #103a7f;color: white;padding: 15px;border-radius: 25px;">Back</button>
+                  <button mat-button matStepperNext [disabled]="!isAllAnsweredForReality"
+                    style="border-radius: 25px;width: 55px;" [ngClass]="{'disabled-button': !isAllAnsweredForReality, 'button-colors': isAllAnsweredForReality}">Next</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+        
+
+        <mat-step [stepControl]="touchpoint">
+          <form [formGroup]="touchpoint">
+            <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+              <div class="card-body p-4 p-md-5">
+                <div class="row">
+                  <div class="accordion" id="accordionExample">
+                    <div class="accordion-item" *ngFor="let touch of touchPoints; let i = index">
+                      <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                          [attr.data-bs-target]="'#collapseTwo' + i" aria-expanded="true" aria-controls="collapseTwo">
+                          {{touch?.touchpoint?.touchpoints}}
+                        </button>
+                      </h2>
+                      <div [id]="'collapseTwo'+i" class="accordion-collapse collapse show" aria-labelledby="headingTwo"
+                        data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                          <div class="row py-2">
+                            <h4 class="col-12 mb-2">Select touchpoint</h4>
+                            <div class="col-md-4">
+                              <div class="form-check mt-1">
+                                <input class="form-check-input" type="radio" name="{{ 'yes_no_' + i }}" [checked]="touch?.touchPointSelection==='Yes'"
+                                  id="{{ 'yes_' + i }}" value="Yes" (change)="onOptionChange(touch?.touchpoint, 'yes_no', 'Yes'); onChangeYesNo(touch, 'yes_no', 'Yes'); checkAllTouchPointAnswered()">
+                                <label class="form-check-label" for="{{ 'yes_' + i }}">Yes</label>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-check mt-1">
+                                <input class="form-check-input" type="radio" name="{{ 'yes_no_' + i }}" [checked]="touch?.touchPointSelection==='No'"
+                                  id="{{ 'no_' + i }}" value="No" (change)="onOptionChange(touch?.touchpoint, 'yes_no', 'No'); onChangeYesNo(touch, 'yes_no', 'No'); checkAllTouchPointAnswered()">
+                                <label class="form-check-label" for="{{ 'no_' + i }}">No</label>
+                              </div>
+                            </div>
+                          </div>
+                          <div *ngIf="touch?.touchPointSelection === 'Yes'">
+                          <hr>
+                          <div class="row py-2">
+                            <h4 class="col-12 mb-2">Select Touchpoint Efficiencies</h4>
+                            <div class="col-md-4">
+                              <div class="form-check mt-1">
+                                <input class="form-check-input" type="radio" name="{{ 'automated_' + i }}" [checked]="touch?.touchPointAutomation==='Manual'"
+                                  id="{{ 'manual_' + i }}" value="Manual"
+                                  (change)="onOptionChange(touch?.touchpoint, 'automated', 'Manual'); checkAllTouchPointAnswered()">
+                                <label class="form-check-label" for="{{ 'manual_' + i }}">Manual</label>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-check mt-1">
+                                <input class="form-check-input" type="radio" name="{{ 'automated_' + i }}" [checked]="touch?.touchPointAutomation==='Partially automated'"
+                                  id="{{ 'partially_' + i }}" value="Partially automated"
+                                  (change)="onOptionChange(touch?.touchpoint, 'automated', 'Partially automated'); checkAllTouchPointAnswered()">
+                                <label class="form-check-label" for="{{ 'partially_' + i }}">Partially automated</label>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-check mt-1">
+                                <input class="form-check-input" type="radio" name="{{ 'automated_' + i }}" [checked]="touch?.touchPointAutomation==='Automated'"
+                                  id="{{ 'automated_' + i }}" value="Automated"
+                                  (change)="onOptionChange(touch?.touchpoint, 'automated', 'Automated'); checkAllTouchPointAnswered()">
+                                <label class="form-check-label" for="{{ 'automated_' + i }}">Automated</label>
+                              </div>
+                            </div>
+                            <div class="container">
+                              <hr>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-check mt-1">
+                                <input class="form-check-input" type="radio" name="{{ 'internalExternal_' + i }}" [checked]="touch?.touchPointSystem==='Internal system'"
+                                  id="{{ 'internal_' + i }}" value="Internal system"
+                                  (change)="onOptionChange(touch?.touchpoint, 'internalExternal', 'Internal system'); checkAllTouchPointAnswered()">
+                                <label class="form-check-label" for="{{ 'internal_' + i }}">Internal system</label>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-check mt-1">
+                                <input class="form-check-input" type="radio" name="{{ 'internalExternal_' + i }}" [checked]="touch?.touchPointSystem==='External system'"
+                                  id="{{ 'external_' + i }}" value="External system"
+                                  (change)="onOptionChange(touch?.touchpoint, 'internalExternal', 'External system'); checkAllTouchPointAnswered()">
+                                <label class="form-check-label" for="{{ 'external_' + i }}">External system</label>
+                              </div>
+                            </div>
+                          </div>
+                          <hr>
+                          <div class="row mb-2">
+                            <h4 class="col-12 mb-2">Select stakeholders</h4>
+                            <div class="d-flex flex-wrap">
+                              <div class="form-check mt-3 me-3" *ngFor="let owner of internalOwners">
+                                <input class="form-check-input" type="checkbox" name="{{ 'owner_' + i }}"  [checked]="touch?.touchpointStakeholders?.includes(owner)"
+                                  id="{{ owner + '_' + i }}" [value]="owner"
+                                  (change)="onOwnerChange(touch?.touchpoint, owner, $event); checkAllTouchPointAnswered()">
+                                <label class="form-check-label me-3" for="{{ owner + '_' + i }}">{{ owner }}</label>
+                              </div>
+                            </div>
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-4 text-center">
+                  <button mat-button matStepperPrevious
+                    style="background-color: #103a7f;color: white;padding: 15px;border-radius: 25px;">Back</button>
+                  <button mat-button matStepperNext
+                    style="margin-left: 15px;padding: 15px;border-radius: 25px;" [disabled]="!isAllTouchpointAnswered" [ngClass]="{'disabled-button': !isAllTouchpointAnswered, 'button-colors': isAllTouchpointAnswered}">Next</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="quality" [completed]="false">
+          <div class="mx-0 mx-sm-auto h-100">
+            <div class="card p-3">
+              <div class="modal-body">
+                <h3 class="font-weight-bold">Touchpoint Quality</h3>
+                <div class="text-center">
+                  <i class="far fa-file-alt fa-4x mb-3 text-primary"></i>
+                  <p>Using the EXwise Touchpoint Quality Rubric, assess the Quality of the Phase and add
+                    the score below.
+                  </p>
+                  <strong> [SCORE out of 100]</strong>
+                  <div class="d-flex justify-content-center align-items-center text-center mt-3">
+                    <input type="number" class="form-control form-control-lg w-50" max="100" placeholder="Enter your score out of 100" (input)="onInputScoreChange($event)" (keypress)="isNumber($event)">
+                  </div>
+                  <!-- <p>
+                    <strong>Your opinion matters</strong>
+                  </p>
+                  <p>
+                    Have some ideas on how to improve our product?
+                    <strong>Give us your feedback.</strong>
+                  </p> -->
+                </div>
+                <hr />
+                <form class="px-4" (ngSubmit)="submitForm()">
+                  <!-- <p class="text-center ms-4"><strong>Your rating</strong></p>
+                  <ul class="h2 rating justify-content-center pb-3 text-center ">
+                    <li (click)="onRatingChange('Good')" title="Good" [class.selected]="selectedRating === 'Good'">
+                      😀
+                    </li>
+                    <li (click)="onRatingChange('Fair')" title="Fair" [class.selected]="selectedRating === 'Fair'"
+                      class="ms-4">
+                      😐
+                    </li>
+                    <li (click)="onRatingChange('Poor')" title="Poor" [class.selected]="selectedRating === 'Poor'"
+                      class="ms-4">
+                      😞
+                    </li>
+                  </ul> -->
+                  <p class="text-center">Use this space to capture any free format notes relating to this Phase</p>
+                  <div data-mdb-input-init class="form-outline mb-4">
+                    <textarea class="form-control" id="form4Example3" rows="4"
+                      (input)="onFeedbackChange($event)"></textarea>
+                    <!-- <label class="form-label" for="form4Example3">Your feedback</label> -->
+                  </div>
+                </form>
+              </div>
+              <div class="text-center">
+                <button mat-button matStepperPrevious
+                  style="background-color: #103a7f;color: white;padding: 15px;border-radius: 25px;">Back</button>
+                <button mat-button (click)="submitForm()"
+                  style="background-color: #103a7f;color: white; margin-left: 15px;padding: 15px;border-radius: 25px;">Submit</button>
+              </div>
+            </div>
+          </div>
+        </mat-step>
+
+      </mat-stepper>
+    </div>
+  </div>
+</div>

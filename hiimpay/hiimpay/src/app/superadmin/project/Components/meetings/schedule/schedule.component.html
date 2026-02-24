@@ -1,0 +1,179 @@
+<div class="container">
+    <div class="row mt-3 mx-1">
+        <div class="col-12">
+            <h2 class="" style="display: inline; color: #103a7f;">Schedule activity</h2>
+            <button type="button" class="close bthnHover" aria-label="Close" (click)="onClose()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <form [formGroup]="meetingForm">
+            <!-- First row -->
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mt-2">
+                        <label class="form-label">Title</label>
+                        <input type="text" rows="3" class="form-control form-control-lg" placeholder="Title"
+                            formControlName="title" />
+                        <small
+                            *ngIf="meetingForm.get('title')?.hasError('required') && meetingForm.get('title')?.touched"
+                            class="text-danger">Title is required</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mt-2">
+                        <label class="form-label">Description</label>
+                        <input type="text" rows="3" class="form-control form-control-lg" placeholder="Description"
+                            formControlName="description" />
+                        <small
+                            *ngIf="meetingForm.get('description')?.hasError('required') && meetingForm.get('description')?.touched"
+                            class="text-danger">Description is required</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second row -->
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <div class="mt-2">
+                        <label class="form-label">Link</label>
+                        <input type="text" rows="3" class="form-control form-control-lg" placeholder="Link"
+                            formControlName="meeting_link" />
+                        <small
+                            *ngIf="meetingForm.get('meeting_link')?.hasError('required') && meetingForm.get('meeting_link')?.touched"
+                            class="text-danger">Link is required</small>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mt-2">
+                        <label class="form-label">Meeting date</label>
+                        <input type="date" [min]="getToday()" formControlName="meetingDate" rows="3" class="form-control form-control-lg"  (change)="onDateChange()"
+                            placeholder="" />
+                        <small
+                            *ngIf="meetingForm.get('meetingDate')?.hasError('required') && meetingForm.get('meetingDate')?.touched"
+                            class="text-danger">Date is required</small>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Third row -->
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <div class="mt-2">
+                      <label class="form-label">Start Time</label>
+                      <input type="time" formControlName="startTime" class="form-control form-control-lg" />
+                      <small *ngIf="meetingForm.get('startTime')?.hasError('required') && meetingForm.get('startTime')?.touched" class="text-danger">
+                        Start time is required
+                      </small>
+                      <small *ngIf="meetingForm.get('startTime')?.hasError('invalidStartTime')" class="text-danger">
+                        Start time cannot be before the current time
+                      </small>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6">
+                    <div class="mt-2">
+                        <label class="form-label">End Time</label>
+                        <input type="time" formControlName="endTime" class="form-control form-control-lg" />
+                        <small *ngIf="meetingForm.get('endTime')?.hasError('required') && meetingForm.get('endTime')?.touched" class="text-danger">
+                            End time is required
+                        </small>
+                        <small *ngIf="meetingForm.get('endTime')?.hasError('timeInvalid')" class="text-danger">
+                            End time must be after start time
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-2" *ngIf="vissible">
+                <div class="col-md-6" *ngIf="!isCpoc">
+                    <div class="mt-2">
+                        <label class="form-label">Select</label>
+                        <select class="form-select dropdown form-select-lg" formControlName="selectedOption">
+                            <option value="" disabled selected>Please select</option>
+                            <option value="employee">Employee</option>
+                            <option value="group">Focus group</option>
+                        </select>
+                        <small *ngIf="meetingForm.get('selectedOption')?.hasError('required') && meetingForm.get('selectedOption')?.touched" class="text-danger">
+                            Please select a option
+                        </small>
+                    </div>
+                </div>
+                <div class="col-md-6" *ngIf="meetingForm.get('selectedOption')?.value === 'employee'">
+                    <!-- <div class="mt-2">
+                        <label class="form-label">Employee List</label>
+                        <select class="form-select dropdown form-select-lg" aria-label="Employee List"
+                            formControlName="userId">
+                            <option value="" selected disabled>Select employee</option>
+                            <option *ngFor="let e of allUser" [value]="e.id">
+                                {{ e.name }}
+                            </option>
+                        </select>
+                    </div> -->
+
+                    <div class="mt-2 ps-2 w-100">
+                        <label class="form-label" for="employeeDataList">Employee List</label>
+                        <mat-form-field class="w-100">
+                          <input matInput [matAutocomplete]="auto" required formControlName="userId" />
+                          <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayUser" (optionSelected)="onUserSelected($event.option.value)">
+                            <mat-option *ngFor="let user of filteredUsers | async" [value]="user">
+                              <span>{{ user.name }}</span>
+                            </mat-option>
+                          </mat-autocomplete>
+                          <small *ngIf="meetingForm.get('userId')?.hasError('required') && meetingForm.get('userId')?.touched" class="text-danger">
+                            Employee is required
+                          </small>
+                        </mat-form-field>
+                      </div>
+                      
+                      
+                    <!-- <div class="mt-2">
+                        <label class="form-label" for="employeeDataList">Employee List</label>
+                        <input class="form-control" list="employeeOptions" id="employeeDataList" placeholder="Type to search..." formControlName="userId">
+                        <datalist id="employeeOptions">
+                            <option *ngFor="let e of allUser" [value]="e?.id">{{e?.name}}</option>
+                        </datalist>
+                    </div> -->
+                </div>
+
+                <div class="col-md-6" *ngIf="meetingForm.get('selectedOption')?.value === 'group'">
+                    <div class="mt-2">
+                        <label class="form-label">Group List</label>
+                        <select class="form-select dropdown form-select-lg" aria-label="Group List" formControlName="focusGroupId" (change)="onGroupChange($event)">
+                            <option value="" selected disabled>Select focus group</option>
+                            <option value="createGroup">Create group</option>
+                            <option *ngFor="let group of allFocusGroup" [value]="group?.focusGroup?.id">{{group?.focusGroup?.title}}</option>
+                            <!-- <option value="group2">Group 2</option> -->
+                        </select>
+                        <small *ngIf="meetingForm.get('focusGroupId')?.hasError('required') && meetingForm.get('focusGroupId')?.touched" class="text-danger">
+                            Focus group is required
+                        </small>
+                    </div>  
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-6">
+                    <div class="mt-2">
+                        <label class="form-label">Location</label>
+                        <input type="text" class="form-control form-control-lg" placeholder="Location"
+                            formControlName="location" />
+                        <small
+                            *ngIf="meetingForm.get('location')?.hasError('required') && meetingForm.get('location')?.touched"
+                            class="text-danger">Location is required</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="position-absolute bottom-0 start-50 translate-middle-x mb-3">
+                <button class="py-2 px-5 text-white me-4 rounded border-0" style="background-color: #069de0;"
+                    (click)="onClose()">Cancel</button>
+                <button class="py-2 px-5 text-white me-4 rounded background-color border-0" *ngIf="vissible" [disabled]="checkMeetingCreateSpinner"
+                    (click)="createMeeting()"> <span *ngIf="checkMeetingCreateSpinner" class="spinner-border spinner-border-sm" role="status"
+                    aria-hidden="true"></span> Submit</button>
+                <button class="py-2 px-5 text-white me-4 rounded background-color border-0" [disabled]="checkMeetingCreateSpinner" (click)="updateMeeting()"
+                    *ngIf="isVissible"> <span *ngIf="checkMeetingCreateSpinner" class="spinner-border spinner-border-sm" role="status"
+                    aria-hidden="true"></span>  Update</button>
+            </div>
+        </form>
+    </div>
+</div>

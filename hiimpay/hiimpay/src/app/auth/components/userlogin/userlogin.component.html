@@ -1,0 +1,118 @@
+<section class="vh-100">
+  <div class="container">
+    <nav class="py-4">
+
+      <img src="assets/images/exwiselogo.jpeg" alt="" width="50%" height="" class="login-logo" />
+
+    </nav>
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-12 col-lg-7 col-xl-6 col-sm-12 form-column  order-2 order-lg-1 order-xl-1 order-md-2">
+
+        <div class="container mx-xl-5 mt-5 mt-lg-0 mt-xl-0">
+
+
+          <div *ngIf="!showOtp" class="mx-5">
+            <h3 class=" text-center mb-5" style="color: #103a7f;font-weight:500;font-size: x-large;">Sign In</h3>
+            <label for="" class="font-weight-bold">Email</label>
+            <div class="w-100">
+              <input type="text" [(ngModel)]="emailId" placeholder="email@gmail.com"
+                class="border-0 form-control bg-light">
+            </div>
+            <div class="mt-4">
+              <button *ngIf="!isLoading" type="button" (click)="generate()"
+                class="btn  text-light py-2 w-100 button-style" style="background-color: #103a7f;">Get
+                OTP </button>
+              <button *ngIf="isLoading" disabled class="btn btn-primary w-100">Please Wait. . .</button>
+            </div>
+            <div class="text-danger">
+              <span>{{ displayMsg }}</span>
+            </div>
+          </div>
+
+
+          <div *ngIf="showOtp" class="mx-5">
+            <h3 class=" text-center mb-3" style="color: #103a7f;font-weight:500;font-size: x-large;">OTP Verification
+            </h3>
+            <!-- <label for="" class="text-center">OTP Verification</label> -->
+            <button class="border-0 bg-white mb-4" (click)="onBack()">Back</button>
+            <p class="card-text mx-2">
+              One Time Password(OTP) has been sent via Email to <b>{{emailId}}</b> Enter the OTP below to verify it.
+            </p>
+            <p class="text-muted mb-4 mx-2"> <b>Note:</b> The OTP is valid for only 5 minutes.</p>
+            <!-- <p>Enter the OTP below to verify it.</p> -->
+            <div class="otp-container">
+              <ngx-otp-input #otpInputRef [config]="otpInputConfig" (otpChange)="handeOtpChange($event)"
+                (fill)="handleFillEvent($event)">
+              </ngx-otp-input>
+            </div>
+            <div class="row mb-4">
+              <div class="col-md-6 d-flex justify-content-center">
+
+              </div>
+
+              <div class="col-md-6 d-flex justify-content-center">
+                <!-- Simple link -->
+                <!-- <a>Resend Otp</a> -->
+              </div>
+            </div>
+            <p class="card-text mb-4 mx-2">
+              <input type="checkbox" class="custom-checkbox" [(ngModel)]="isChecked" (change)="onChangeCheckBox()">
+              &nbsp;&nbsp;By signing in, you accept our <b><u> <span (click)="navigateTo('terms')"
+                    class="clickable-text">Terms and Conditions</span></u></b> and <b><u><span
+                    (click)="navigateTo('privacy')" class="clickable-text">Research Privacy Policy</span></u></b>
+            </p>
+            <!-- [ngClass]="{'error': isInvalid}"  -->
+
+            <div class="mt-4 {{ config.cssClass }}">
+              <div class="d-flex flex-column align-items-center">
+                <!-- Flex container to align canvas and button inline -->
+                <div class="d-flex align-items-center mb-3">
+                  <canvas id="captcahCanvas" width="325" height="80"></canvas>
+                  <button class="btn btn-outline-secondary ms-3" (click)="reloadCaptcha()">&#x21bb;</button>
+                </div>
+                <div class="input-group mb-3 recaptcha-input">
+                  <input type="text" [(ngModel)]="captch_input" name="captcha" [ngModelOptions]="{standalone: true}"
+                    class="form-control" placeholder="Enter the CAPTCHA" (input)="checkCaptcha()" />
+                </div>
+              </div>
+            </div>
+            <div style="margin-top: 1em;">
+              <button *ngIf="!isLoading" type="button mb-2" (click)="goToReset()" [disabled]="!isChecked"
+                class="btn py-2 text-light w-100 button-style" style="background-color: #103a7f;">Sign In</button>
+              <button *ngIf="isLoading" type="button mb-2" class="btn py-2 text-light w-100 button-style"
+                style="background-color: #103a7f;">please wait</button>
+            </div>
+            <div class="text-danger">
+              <span>{{ displayMsg }}</span>
+            </div>
+          </div>
+
+          <div class="text-center pb-sm-3 mt-3  span-style">
+            <span class="span-text">
+              <span>Unable to access your email? </span><span style="cursor: pointer;" class="font-weight-bold"
+                routerLink="/auth/help">Contact our support team
+                here</span>
+            </span>
+          </div>
+        </div>
+
+      </div>
+      <!-- <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1 addDots">
+          <img src="assets\images\login.png"
+          class="img-fluid rounded-pill" alt="Phone image" style="border: solid 20px #103a7f;">
+        </div> -->
+      <div
+        class="col-md-12 col-lg-5 col-xl-5 col-sm-12 offset-xl-1 order-1 order-lg-2 order-xl-2 order-md-1 justify-content-center image-column"
+        style="position: relative;">
+        <img src="assets/images/login.jpeg" class="img-fluid rounded-pill responsive-img" alt="Phone image">
+        <div>
+          <div class="dot-grid-container">
+            <div *ngFor="let item of [].constructor(36)">
+              <div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

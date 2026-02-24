@@ -1,0 +1,197 @@
+body {
+    background-color: #eee
+}
+.cardheight{
+height: 100%;
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+  overflow-y: auto;
+}
+::-webkit-scrollbar {
+  width: 9px;
+
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 0px grey; 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #C0C0C0; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: gainsboro; 
+}
+.card {
+    background-color: white;
+    color: black;
+    font-weight: 600;
+    pointer-events: stroke;
+    border: solid 1px #103a7f;
+}
+/* canvas {
+  width: 100% !important;
+  height: 400px !important;
+} */
+.card1{
+  padding: 2px;
+  background-color: white;
+  color: black;
+  font-weight: 600;
+  pointer-events: stroke;
+  border: solid 1px #103a7f;
+}
+
+.icon {
+    width: 50px;
+    height: 50px;
+    background-color: #eee;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 39px
+}
+
+.badge span {
+    background-color: #fffbec;
+    width: 60px;
+    height: 25px;
+    padding-bottom: 3px;
+    border-radius: 5px;
+    display: flex;
+    color: #2980b9;
+    justify-content: center;
+    align-items: center
+}
+
+.progress {
+    height: 10px;
+    border-radius: 10px
+}
+
+.progress div {
+    background-color:#103a7f
+}
+
+.text1 {
+    font-size: 14px;
+    font-weight: 600
+}
+
+.text2 {
+    color: #a5aec0
+}
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+    border-spacing: 0;
+  }
+  table thead tr,
+  table thead tr th{
+      /* background: #103a7f; */
+      border: 1px ;
+      /* background-clip: content-box; */
+    
+     
+  }
+  
+  table thead tr th{
+      border: none;
+      padding: 2px;
+      /* background-clip: content-box; */
+   
+  }
+
+  table tbody tr td {
+    vertical-align: middle;
+    pointer-events: stroke;
+    padding: 2px;
+    vertical-align: middle;
+  }
+
+  .blue-color{
+    background-color: #103a7f;
+  }
+
+  .blue-text-color{
+    color : #103a7f
+  }
+ 
+  
+  .button1 {
+    flex: 1;
+    border-radius: 25px !important;
+    background-color: #E5E4E2;
+    color: black;
+    padding: 10px;
+  }
+  
+  button:hover {
+    color: black;
+  }
+  
+  .activeTab:hover {
+    color: black;
+  }
+
+  .disabled-card {
+    pointer-events: none !important; 
+    opacity: 0.6;
+  }
+  
+
+  .info-card {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .info-card {
+    /* flex-wrap: nowrap !important; */
+    > div {
+      min-width: 260px !important;
+      padding-block: 10px;
+      /* flex-grow: 1; */
+      .card-body {
+        padding-block: 10px !important;
+      }
+    }
+  }
+  @media (width < 1400px) {
+    .info-card > div {
+      flex-grow: 1;
+    }
+  }
+  .cardshadow{
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
+
+  /* .activephase {
+    background: linear-gradient(135deg, #103a7f, #103a7f);
+    color: white !important;
+  } */
+  .activeTab {
+    background-color: whitesmoke !important;
+    color: black;
+    /* border: none; */
+  }
+
+  select {
+    font-size: small;
+    font-weight: bold;
+  }
+
+  option{
+    font-size: small;
+    font-weight: bold;
+  }

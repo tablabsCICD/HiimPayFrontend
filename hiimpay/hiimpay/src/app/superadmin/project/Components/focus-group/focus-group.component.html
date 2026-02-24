@@ -1,0 +1,180 @@
+<!-- <section id="tasksection2"> -->
+<div class="container py-2 leaveHeader">
+  <div *ngIf="!isLoading">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="row mt-2">
+          <div class="d-flex align-items-center justify-content-between">
+            <div class="d-flex align-items-center">
+                <button class="btn btn-light rounded-circle me-2" (click)="goBack()">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <h3 class="blue-color m-0 font-weight-bold">Focus group details</h3>
+            </div>
+            <button class="btn background-color py-2 d-flex align-items-center" type="button" (click)="createGroups()">
+                <img src="assets/plus.svg" class="me-2" height="18" alt="" />
+                <span class="filter-text">Create group</span>
+            </button>
+        </div>
+        
+        </div>
+        <section class="mt-2">
+          <div class="row table-row row-head gx-0">
+            <div class="col ">Date</div>
+            <div class="col ">Title</div>
+            <!-- <div class="col ">Status</div> -->
+            <div class="col ">Lifecycle requirement</div>
+            <!-- <div class="col ">Record owner</div> -->
+            <div class="col">Participants</div>
+            <div class="col ">Action</div>
+          </div>
+          <div class="tableCointainer" *ngIf="allUser?.length > 0">
+            <div class="row gx-0 table-row row-body px-0 " *ngFor="let item of allUser">
+              <div class="col">
+                <div class="d-flex justify-content-center">
+                  <div class="timeline">
+                    <div class="timeline-date  text-center rounded float-end" style="background-color: #103a7f;">
+                      <h3 class="text-white mb-0 fs-17">{{meetingDay}}</h3>
+                      <p class="mb-0 text-white-50" style="font-size: x-small;">{{meetingMonth}}</p>
+                    </div>
+                  </div>
+  
+  
+                </div>
+              </div>
+              <div class="col">
+                <p class="fw-bold mb-1">{{item.focusGroup.title}}</p>
+              </div>
+              <!-- <div class="col d-flex flex-column align-items-center" style="overflow: hidden;">
+              <span class="badge badge-success rounded-pill d-inline">Active</span>
+              <span *ngIf="item.focusGroup.status=='Active'"
+                class="badge badge-success rounded-pill d-inline">{{item.focusGroup.status | titlecase}}</span>
+              <span *ngIf="item.focusGroup.status==='Inactive'"
+                class="badge badge-danger rounded-pill d-inline">{{item.focusGroup.status | titlecase}}</span>
+            </div> -->
+              <div class="col">
+                <p class="text-muted mb-0">{{item.focusGroup.criteria}}</p>
+              </div>
+
+              <!-- <div class="col">
+                <p>{{item?.loggedUserName  || '-'}}</p>
+              </div> -->
+
+              <div class="col" (click)="openGroup(item.focusGroup.id)">
+                <div class="d-flex justify-content-center align-items-center">
+                  <ng-container *ngFor="let user of item.listOfMember.slice(0, 4); let i = index">
+                    <div class="rounded-circle overflow-hidden position-relative" [ngStyle]="{'margin-right': '-5%'}">
+                      <img [src]="user.profileImage ? user.profileImage : 'assets/download.png'" alt="Member {{i + 1}}" class="img-fluid"
+                        style="object-fit: cover; width: 40px; height: 40px;" />
+                    </div>
+                  </ng-container>
+                  <div class="rounded-circle overflow-hidden position-relative bg-light d-flex justify-content-center align-items-center"
+                    style="width: 40px; height: 40px;">
+                    <i class="fa fa-plus" style="color: #103a7f;"></i>
+                  </div>
+                </div>
+              </div>
+              
+
+
+
+              <!-- <div class="col" (click)="openGroup(item.focusGroup.id)">
+                    <div class="d-flex justify-content-center align-items-center">
+                      <div class="rounded-circle overflow-hidden position-relative" style="margin-right: -7%;">
+                        <img src="assets\download.png" alt="Member 1" class="img-fluid"
+                          style="object-fit: cover; width: 40px; height: 40px;" />
+                      </div>
+                      <div class="rounded-circle overflow-hidden position-relative" style="margin-right: -7%;">
+                        <img src="assets\download.png" alt="Member 2" class="img-fluid"
+                          style="object-fit: cover; width: 40px; height: 40px;" />
+                      </div>
+                      <div class="rounded-circle overflow-hidden position-relative" style="margin-right: -7%;">
+                        <img src="assets\download.png" alt="Member 3" class="img-fluid"
+                          style="object-fit: cover; width: 40px; height: 40px;" />
+                      </div>
+                      <div class="rounded-circle overflow-hidden position-relative" style="margin-right: -7%;">
+                        <img src="assets\download.png" alt="Member 4" class="img-fluid"
+                          style="object-fit: cover; width: 40px; height: 40px;" />
+                      </div>
+                      <div
+                        class="rounded-circle overflow-hidden position-relative bg-light d-flex justify-content-center align-items-center"
+                        style="width: 40px; height: 40px;">
+                        <i class="fa fa-plus" style="color: #103a7f;"></i>
+                      </div>
+                    </div>
+                  </div> -->
+
+              <div class="col">
+                <button class="border-0 m-2 " style="font-size:20px " (click)="onEditGroup(item.focusGroup.id)"> <i
+                    class="fa fa-pencil" style="color: #103a7f"></i></button>
+                <button class="border-0 m-2 " style="font-size:20px" (click)="onDeleteFocusGroup(item.focusGroup)"> <i
+                    class="fa fa-trash" style="color: #103a7f;"></i></button>
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-5" *ngIf="allUser?.length <= 0">
+            No data available for focus group
+          </div>
+        </section>
+      </div>
+
+    </div>
+  </div>
+  <div class="text-center my-5">
+    <i *ngIf="isLoading" class="fa fa-spinner fa-spin" style="font-size:64px;color: #103a7f;"></i>
+  </div>
+
+</div>
+
+<!-- </section> -->
+
+<!-- <section id="tasksection2">
+  <div class="container-fluid ">
+    <div class="container-fluid leaveHeader">
+
+
+    </div>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight3" aria-labelledby="offcanvasRightLabel"
+      (hide.bs.offcanvas)="hideOffCanvas()">
+      <div class="offcanvas-header" style="justify-content: start; gap: 3em">
+        <div class="d-flex align-items-center">
+          <img src="assets/back.svg" alt="" height="10" class="me-2" srcset="" />
+          <span class="backtext" type="button" data-bs-dismiss="offcanvas" aria-label="Close" id="closeOffCanvas">Back
+          </span>
+        </div>
+        <h4 class="mb-0">Schedule Meeting</h4>
+      </div>
+      <div class="offcanvas-body">
+        <form [formGroup]="meetingForm">
+          <div class="mt-2">
+            <label class="form-label">Group Name</label>
+            <input type="text" rows="3" class="form-control form-control-lg" placeholder="title"
+              formControlName="title" />
+          </div>
+          <div class="mt-2">
+            <label class="form-label">Criteria</label>
+            <input type="text" rows="3" class="form-control form-control-lg" placeholder="criteria"
+              formControlName="criteria" />
+          </div>
+          <div class="mt-2">
+            <label class="form-label">Description</label>
+            <input type="text" rows="3" class="form-control form-control-lg" placeholder="description"
+              formControlName="description" />
+          </div>
+
+
+          <div class="d-grid mt-3">
+            <button class="btn background-color p-3" *ngIf="vissible" (click)="createGroup()">
+              Submit
+            </button>
+            <button class="btn btn-primary p-3" onclick="updateMeeting()" *ngIf="isVissible">
+              Update
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+</section> -->

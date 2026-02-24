@@ -1,0 +1,159 @@
+<div class="container" *ngIf="showcontainer==='create-project'">
+    <div class="row">
+        <form [formGroup]="createForm" (submit)="createProject()" class="w-100">
+            <div class="col-12 mt-2">
+                <h2 class="font-weight-bold" style="display: inline; color: #103a7f;">Register Company</h2>
+                <button type="button" class="close mt-2 bthnHover" aria-label="Close" (click)="onClose()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="col-sm-12 p-4">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label for="" class="label-control">Company name</label>
+                        <input type="text" class="form-control" formControlName="client_Name"
+                            placeholder="Enter company name">
+                        <small class="p-0">
+                            <p *ngIf="createForm.get('client_Name')?.touched && createForm.get('client_Name')?.hasError('required')"
+                                class="text-danger">
+                                Company name is required
+                            </p>
+                        </small>
+
+                        <label for="" class="label-control mt-4">Contact person</label>
+                        <input type="text" class="form-control" formControlName="contact_Person"
+                            placeholder="Enter contact person">
+                        <small class="p-0">
+                            <p *ngIf="createForm.get('contact_Person')?.touched && createForm.get('contact_Person')?.hasError('required')"
+                                class="text-danger">
+                                Contact person is required
+                            </p>
+                        </small>
+
+                        <!-- <label for="consultantId" class="label-control mt-4">EXwise consultant</label>
+                        <select id="consultantId" class="form-select" formControlName="consultantId">
+                            <option value="" disabled selected>Please select</option>
+                            <option [value]="data.id" *ngFor="let data of consultants">{{ data.name }}</option>
+                        </select> -->
+
+
+                        <label for="" class="label-control mt-4">Location</label>
+                        <input type="text" class="form-control" formControlName="location" placeholder="Enter location">
+
+                        <label for="" class="label-control mt-4" *ngIf="buttonName==='Update'">Change status</label>
+                        <select class="form-select" formControlName="status" *ngIf="buttonName==='Update'">
+                            <option value="" selected disabled>Please select</option>
+                            <option value="new">New</option>
+                            <option value="open">Open</option>
+                            <option value="closed">Closed</option>
+                            <!-- <option value="pending">Pending</option> -->
+                        </select>
+
+                    </div>
+                    <div class="col-sm-6">
+                        <label for="" class="label-control mt-4 mt-sm-0">Company email ID</label>
+                        <input type="text" class="form-control" formControlName="contact_Email"
+                            placeholder="Enter email ID">
+                        <small class="p-0">
+                            <p *ngIf="createForm.get('contact_Email')?.touched && createForm.get('contact_Email')?.hasError('required')"
+                                class="text-danger">
+                                Email is required
+                            </p>
+                            <p *ngIf="createForm.get('contact_Email')?.hasError('pattern')" class="text-danger">
+                                Invalid Email Id
+                            </p>
+                        </small>
+
+                        <label for="" class="label-control mt-4">Second company email ID</label>
+                        <input type="text" class="form-control" formControlName="second_Contact_Email"
+                            placeholder="Enter second email ID">
+                        <small class="p-0">
+                            <p *ngIf="createForm.get('second_Contact_Email')?.hasError('pattern')" class="text-danger">
+                                Invalid second email Id
+                            </p>
+                        </small>
+
+                        <label for="" class="label-control mt-4">Mobile number 1</label>
+                        <input type="text" class="form-control" formControlName="mobile_Number1"
+                            (keypress)="isNumber($event)" placeholder="Enter mobile number 1">
+                        <small class="p-0">
+                            <p *ngIf="createForm.get('mobile_Number1')?.touched && createForm.get('mobile_Number1')?.hasError('required')"
+                                class="text-danger">
+                                Mobile number 1 is required
+                            </p>
+                            <p *ngIf="createForm.get('mobile_Number1')?.hasError('pattern')" class="text-danger">
+                                Invalid mobile number 1
+                            </p>
+                        </small>
+
+                        <label for="" class="label-control mt-4">Mobile number 2</label>
+                        <input type="text" class="form-control" formControlName="mobile_Number2"
+                            (keypress)="isNumber($event)" placeholder="Enter mobile number 2">
+                        <small class="p-0">
+                            <p *ngIf="createForm.get('mobile_Number2')?.hasError('pattern')" class="text-danger">
+                                Invalid mobile number 2
+                            </p>
+                        </small>
+
+                        <label for="" class="label-control mt-4">Landline number</label>
+                        <input type="text" class="form-control" formControlName="landline_Number"
+                            (keypress)="isNumber($event)" placeholder="Enter landline number">
+                        <small class="p-0">
+                            <p *ngIf="createForm.get('landline_Number')?.hasError('pattern')" class="text-danger">
+                                Invalid landline number
+                            </p>
+                        </small>
+
+                        <!-- <label for="" class="label-control mt-4">Industry</label>
+                        <input type="text" class="form-control" formControlName="industry" placeholder="Enter industry"> -->
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-12 mt-4 text-right pe-4">
+                <button class="btn px-4 py-2 blue-color text-white">{{buttonName}}</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+<div class="container" *ngIf="showcontainer==='create-user'">
+    <div class="row">
+        <div class="col-12 mt-2">
+            <h2 class="font-weight-bold" style="display: inline; color: #103a7f;">Create User</h2>
+            <button type="button" class="close mt-2" aria-label="Close" (click)="onClose()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <div class="col-12 p-4">
+            <label for="" class="label-control">First name</label>
+            <input type="text" class="form-control" placeholder="Enter first name">
+
+            <label for="" class="label-control mt-4">Last name</label>
+            <input type="text" class="form-control" placeholder="Enter last name">
+
+            <label for="" class="label-control mt-4">Contact number</label>
+            <input type="text" class="form-control" placeholder="Enter contact number">
+
+            <label for="" class="label-control mt-4">User email</label>
+            <input type="text" class="form-control" placeholder="Enter email">
+
+            <label for="" class="label-control mt-4">Password</label>
+            <input type="text" class="form-control" placeholder="Enter password">
+
+            <button class="btn p-4 py-1 blue-color text-white fs-2 w-100" style="margin-top: 3em;">Create User</button>
+
+        </div>
+
+
+        <!-- <div class="col-12 mt-auto text-right pe-4">
+            
+        </div> -->
+    </div>
+</div>

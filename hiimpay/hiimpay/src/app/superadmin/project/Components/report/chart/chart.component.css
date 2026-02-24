@@ -1,0 +1,381 @@
+body {
+  background-color: #eee
+}
+
+.card {
+  /* border: none; */
+  border-radius: 10px
+}
+
+.blue-color {
+  background-color: #103a7f;
+}
+
+.blue-text-color{
+  color:#103a7f;
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  background-color: #eee;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 39px
+}
+
+.badge span {
+  background-color: #fffbec;
+  width: 60px;
+  height: 25px;
+  padding-bottom: 3px;
+  border-radius: 5px;
+  display: flex;
+  color: #2980b9;
+  justify-content: center;
+  align-items: center
+}
+
+
+
+
+.cardshadow {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+body {
+  background-color: #eee
+}
+
+.card {
+  border: none;
+  border-radius: 10px
+}
+
+.c-details span {
+  font-weight: 300;
+  font-size: 13px
+}
+
+.icon {
+  width: 50px;
+  height: 50px;
+  background-color: #eee;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 39px
+}
+
+.badge span {
+  background-color: #fffbec;
+  width: 60px;
+  height: 25px;
+  padding-bottom: 3px;
+  border-radius: 5px;
+  display: flex;
+  color: #2980b9;
+  justify-content: center;
+  align-items: center
+}
+
+.progress {
+  height: 10px;
+  border-radius: 10px
+}
+
+.progress div {
+  background-color: #103a7f
+}
+
+.text1 {
+  font-size: 14px;
+  font-weight: 600
+}
+
+.text2 {
+  color: #a5aec0
+}
+
+table {
+  border-spacing: 0;
+}
+
+table thead tr,
+table thead tr th {
+  background: #103a7f;
+  border: 1px;
+  background-clip: content-box;
+
+
+}
+
+table thead tr th {
+  border: none;
+  padding: 2px;
+  background-clip: content-box;
+
+}
+
+table tbody tr td {
+  vertical-align: middle;
+  pointer-events: stroke;
+  padding: 2px;
+  vertical-align: middle;
+}
+
+.activeTab {
+  background-color: #103a7f !important;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+.activetab {
+  background-color: #2980b9 !important;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+button {
+  flex: 1;
+  border-radius: 10px !important;
+  background-color: rgb(243, 236, 236);
+  color: black;
+}
+
+.buttons2 {
+  flex: 1;
+  border-radius: 25px !important;
+  background-color: whitesmoke;
+}
+
+
+.accordion-button {
+  background-color: #103a7f;
+  color: black;
+}
+
+
+button:hover {
+  color: black;
+}
+
+.activeTab:hover {
+  color: white;
+}
+
+.cardshadow {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.table-row {
+  background-color: #ffffff;
+  /* border-radius: 10px; */
+  padding: 5px;
+  margin-bottom: 10px;
+  align-items: center;
+  height: auto;
+
+  font-weight: 500;
+  font-size: 15px;
+  border: solid 1px rgb(148, 148, 148);
+}
+
+.table-row:hover {
+  border: 2px solid #103a7f;
+}
+
+.tableCointainer .table-row:hover {
+  border: 2px solid #103a7f;
+}
+
+.row-head {
+  height: 54px;
+  font-weight: 500;
+
+  font-size: 16px;
+  background-color: #103a7f;
+}
+
+.button-color {
+  background-color: #103a7f;
+}
+
+.row-body {
+  font-weight: 300;
+  height: auto;
+
+  text-align: center;
+}
+
+.row-head .col {
+  text-align: center;
+}
+
+.material {
+  display: inline-block;
+  text-align: center;
+}
+
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) {
+    .progress-labels {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.progress-container {
+  position: relative;
+  margin-bottom: 3rem;
+}
+
+/* Safari-specific styles */
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance:none) {
+
+    /* Your Safari-specific styles */
+    .example {
+      background-color: blue;
+      /* Safari */
+    }
+  }
+}
+
+/* Chrome-specific styles */
+@media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution:.001dpcm) {
+  @supports (-webkit-appearance:none) and (not (color:inherit)) {
+
+    /* Your Chrome-specific styles */
+    .example {
+      background-color: red;
+      /* Chrome */
+    }
+  }
+}
+
+/* .progress-bar-percentage {
+  position: absolute;
+  top: -10px !important;
+  right: 0;
+}
+
+@supports (-webkit-appearance: none) {
+  .progress-bar-percentage {
+    /* Styles for Safari */
+/* top: -25px !important;
+  }
+} */
+ .progress {
+  height: 15px;
+}
+
+.progress-bar {
+  border-radius: 15px;
+}
+
+/* .scroll-container {
+  height: 100%;
+  overflow-y: scroll;
+  padding-top: 10px; */
+/* -ms-overflow-style: none; */
+/* IE and Edge */
+/* scrollbar-width: thin; */
+/* Firefox */
+/* scrollbar-color: grey transparent; */
+/* Firefox */
+/* } */
+.scroll-container {
+  height: 100%;
+  overflow-y: scroll;
+  padding-top: 10px;
+  box-sizing: border-box;
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: thin;
+  /* Firefox */
+  scrollbar-color: grey transparent;
+  /* Firefox */
+
+  /* Safari specific */
+  -webkit-overflow-scrolling: touch;
+  /* Smooth scrolling on iOS */
+  scrollbar-color: grey transparent;
+}
+
+
+/* Webkit-based browsers */
+.scroll-container::-webkit-scrollbar {
+  width: 12px;
+}
+
+/* Track */
+.scroll-container::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: transparent;
+  /* Ensuring the background is transparent */
+}
+
+/* Handle */
+.scroll-container::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: transparent;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Hide default scrollbar arrows */
+.scroll-container::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Firefox Customization */
+.scroll-container scrollbarbutton {
+  display: none;
+}
+
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 11px;
+}
+
+
+.activeTab {
+  background-color: #103a7f !important;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+.activeTab:hover {
+  color: white;
+}
+
+.blink {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.hide-element {
+  display: none !important;
+}

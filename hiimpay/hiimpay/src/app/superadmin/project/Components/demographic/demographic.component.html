@@ -1,0 +1,128 @@
+<div class="container my-2">
+    <div class="row mt-2 px-2 mb-2">
+        <div class="col-lg col-md col-sm-12">
+            <div class="d-flex align-items-center justify-content-between">
+                <h3 style="margin: 0; color: #103a7f; font-weight: bolder">
+                    Demographics
+                </h3>
+                <span class="blue-color font-weight-bold" style="font-weight: 700; max-width: 500px; text-wrap: wrap;">
+                    Project name : {{ displayClientData?.clientName }}</span>
+                <span class="blue-color font-weight-bold ms-4" style="font-weight: 700">
+                    EXwise consultant : {{ displayClientData?.consultantName }}</span>
+                <span class="blue-color font-weight-bold" (click)="editUser(displayClientData?.copcId)" style="font-weight: 700; cursor: pointer;">
+                    CPOC name : {{ displayClientData?.contactPerson }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="row justify-content-center text-danger">
+            <div class="col-12 text-center">
+              <p style="font-weight: 500;">Note: Demographic details are compiled through employee self-disclosure, which may cause
+                variations if employees choose not to share their data.</p>
+            </div>
+          </div>
+        <div class="d-flex align-items-center justify-content-between">
+            <button class="btn btn-light rounded-circle me-1" (click)="goBack()">
+                <i class="fas fa-arrow-left"></i>
+            </button> 
+            <h3 class="flex-grow-1 text-center m-0 font-weight-bold blue-color">{{surveyName}}</h3>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="row">
+                <div class="row">
+                    <div id="chart">
+                        <apx-chart
+                          [series]="chartOptionsage?.series!"
+                          [chart]="chartOptionsage?.chart!"
+                          [dataLabels]="chartOptionsage?.dataLabels!"
+                          [plotOptions]="chartOptionsage?.plotOptions!"
+                          [xaxis]="chartOptionsage?.xaxis!"
+                          [yaxis]="chartOptionsage?.yaxis!"
+                          [stroke]="chartOptionsage?.stroke!"
+                          [fill]="chartOptionsage?.fill!"
+                          [title]="chartOptionsage?.title!"
+                          [tooltip]="chartOptionsage?.tooltip!"
+                          [legend]="chartOptionsage?.legend!"
+                          [colors]="chartOptionsage?.colors!"
+                        ></apx-chart>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <div class="row">
+                <div class="row">
+                    <div id="chart">
+                        <apx-chart
+                          [series]="chartOptionsTenure?.series!"
+                          [chart]="chartOptionsTenure?.chart!"
+                          [dataLabels]="chartOptionsTenure?.dataLabels!"
+                          [plotOptions]="chartOptionsTenure?.plotOptions!"
+                          [xaxis]="chartOptionsTenure?.xaxis!"
+                          [yaxis]="chartOptionsTenure?.yaxis!"
+                          [stroke]="chartOptionsTenure?.stroke!"
+                          [fill]="chartOptionsTenure?.fill!"
+                          [title]="chartOptionsTenure?.title!"
+                          [tooltip]="chartOptionsTenure?.tooltip!"
+                          [legend]="chartOptionsTenure?.legend!"
+                          [colors]="chartOptionsTenure?.colors!"
+                        ></apx-chart>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="height: 100%; padding-bottom: 8%;">
+        <div class="col-md-4 col-sm-12">
+            <div class="row mt-4">
+                <div id="chart">
+                    <apx-chart
+                      [series]="chartOptionsGender?.series"
+                      [chart]="chartOptionsGender?.chart"
+                      [title]="chartOptionsGender?.title"
+                      [tooltip]="chartOptionsGender?.tooltip"
+                      [legend]="chartOptionsGender?.legend"
+                      [labels]="chartOptionsGender?.labels"
+                      [colors]="chartOptionsGender?.colors"
+                      [plotOptions]="chartOptionsGender?.plotOptions!"
+                      [stroke]="chartOptionsGender?.stroke"
+                    ></apx-chart>
+                  </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="row mt-4">
+                <div id="chart">
+                    <apx-chart
+                      [series]="chartOptionsWorkFlexibility?.series!"
+                      [chart]="chartOptionsWorkFlexibility?.chart!"
+                      [title]="chartOptionsWorkFlexibility?.title!"
+                      [tooltip]="chartOptionsWorkFlexibility?.tooltip!"
+                      [legend]="chartOptionsWorkFlexibility?.legend!"
+                      [labels]="chartOptionsWorkFlexibility?.labels!"
+                      [colors]="chartOptionsWorkFlexibility?.colors!"
+                      [plotOptions]="chartOptionsWorkFlexibility?.plotOptions!"
+                      [stroke]="chartOptionsWorkFlexibility?.stroke"
+                    ></apx-chart>
+                  </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-12">
+            <div class="row mt-4">
+                <div id="chart">
+                    <apx-chart
+                      [series]="chartOptionsContractType?.series!"
+                      [chart]="chartOptionsContractType?.chart!"
+                      [title]="chartOptionsContractType?.title!"
+                      [tooltip]="chartOptionsContractType?.tooltip!"
+                      [legend]="chartOptionsContractType?.legend!"
+                      [labels]="chartOptionsContractType?.labels!"
+                      [colors]="chartOptionsContractType?.colors!"
+                      [plotOptions]="chartOptionsContractType?.plotOptions!"
+                      [stroke]="chartOptionsContractType?.stroke"
+                    ></apx-chart>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

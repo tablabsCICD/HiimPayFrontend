@@ -1,0 +1,124 @@
+<!-- <div class="container">
+    <div class="row justify-content-between pt-2">
+        <div class="col-auto">
+            <h2 class="font-weight-bold blue-color ps-3">Add more question</h2>
+        </div>
+        <div class="col-auto">
+            <button type="button" class="close bthnHover" aria-label="Close" (click)="onClose()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="row px-4">
+      <div class="p-2 mt-2 rounded rounded-pill shadow search-bar w-100" style="background-color: white;">
+          <div class="input-group">
+              <input type="search" placeholder="Search" aria-describedby="button-addon1" class="form-control border-0" style="height: 30px; background-color:white" (input)="searchQuestion($event)">
+              <div class="input-group-append">
+                  <button id="button-addon1" type="submit" class="btn btn-link text-primary rounded-circle button-color d-flex justify-content-center align-items-center ms-1" style="width: 30px;">
+                      <i class="fa fa-search text-white" style="font-size: 13px;"></i>
+                  </button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+    <section class="mt-2">
+        <div class="row table-row row-head gx-0">
+          <div class="col">Questions</div>
+          <div class="col">Action</div>
+        </div>
+        <div class="tableCointainer" *ngIf="fectchedQuestions?.length > 0">
+          <div class="row gx-0 table-row row-body px-0" *ngFor="let data of fectchedQuestions">
+            <div class="col">{{ data.question | titlecase }}</div>
+            <div class="col">
+                 
+            </div>
+          </div>
+        </div>
+    
+        <div class="text-center unavailability" *ngIf="fectchedQuestions?.length <= 0">
+          No data available
+        </div>
+      </section>
+</div> -->
+
+<div class="container">
+  <div class="top-container">
+    <div class="row justify-content-between pt-2">
+      <div class="col-auto">
+        <div class="d-flex align-items-center">
+          <h2 class="font-weight-bold blue-color me-5">Add more question</h2>
+          <h3 class="me-5 blue-color">Stage name : {{stageName}}</h3>
+          <h3 class="blue-color">Employee experience phase : {{subPhaseName}}</h3>
+        </div>
+
+      </div>
+      <div class="col-auto">
+        <button type="button" class="close bthnHover" aria-label="Close" (click)="onClose()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+    <div class="text-center">
+      <p class="text-danger">Care: Adding questions will impact overall scoring.</p>
+    </div>
+    <div class="row px-4">
+      <div class="p-2 rounded rounded-pill shadow search-bar w-100" style="background-color: white;">
+        <div class="input-group">
+          <input type="search" placeholder="Search" aria-describedby="button-addon1" class="form-control border-0"
+            style="height: 30px; background-color:white" (input)="searchQuestion($event)">
+          <div class="input-group-append">
+            <button id="button-addon1" type="submit"
+              class="btn btn-link text-primary rounded-circle button-color d-flex justify-content-center align-items-center ms-1"
+              style="width: 30px;">
+              <i class="fa fa-search text-white" style="font-size: 13px;"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content-wrapper">
+    <section class="mt-4">
+      <table class="table align-middle mb-0 table-responsive-lg"*ngIf="fectchedQuestions?.length > 0">
+      <thead>
+      <tr>
+        <th>Questions</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <!-- <div class="tableContainer" *ngIf="fectchedQuestions?.length > 0"> -->
+        <tr *ngFor="let data of fectchedQuestions">
+          <td>
+            <div class="ms-2"><strong>Question:</strong> {{ data.question }}</div>
+            <div class="ms-2 options-container">
+              <strong  *ngIf="data.questionType === 'mcq' || data.questionType === 'both'">Options:</strong>
+              <ul class="option-list ms-2" *ngIf="data.questionType === 'mcq' || data.questionType === 'both'">
+                <li *ngFor="let option of data.options">{{ option }}</li>
+              </ul>
+            </div>
+            <p *ngIf="data.questionType === 'descriptive'" class="ms-4">This is a descriptive question.</p>
+            <p *ngIf="data.questionType === 'both'" class="ms-4 mt-2">This is also a descriptive question.</p>
+            <p *ngIf="data.questionType === 'eNPS'" class="ms-4">This is an ENPS question.</p>
+          </td>
+          
+          <td>
+            <div class="me-5 mt-3">
+              <input type="checkbox" [(ngModel)]="data.checked" (change)="toggleQuestionSelection(data)" class="big-checkbox">
+            </div>
+          </td>
+        </tr>
+        </table>
+      <!-- </div> -->
+      <div class="text-center unavailability" *ngIf="fectchedQuestions?.length <= 0">
+        No data available
+      </div>
+    </section>
+  </div>
+  
+
+  <div class="button-container text-center mb-2">
+    <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
+  </div>
+</div>

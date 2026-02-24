@@ -1,0 +1,27 @@
+<section class="popup-container">
+    <div class="col-12 my-2">
+      <h2 class="fw-normal" style="display: inline; color: #103a7f;font-style: poppins;">Client list</h2>
+      <button type="button" class="close bthnHover" aria-label="Close" (click)="onClose()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="container py-3" style="position: relative;">
+      <div class="row table-row row-head gx-0">
+        <div class="col">Client name</div>
+        <div class="col">Location</div>
+        <div class="col">Email</div>
+        <div class="col">Created date</div>
+      </div>
+      <div class="tableCointainer" *ngIf="exConsultantClientsList?.length>0">
+        <div class="row gx-0 table-row row-body px-0" *ngFor="let item of exConsultantClientsList">
+        <div class="col"> {{ item?.clientName }} </div>
+        <div class="col"> {{item?.location }}</div>
+        <div class="col"> {{ item?.contactEmail }}</div>
+        <div class="col"> {{item?.createdDate | date }} </div>
+      </div>
+      </div>
+      <div class="text-center unavailability" *ngIf="exConsultantClientsList?.length <= 0">
+        No data available
+      </div>
+    </div>
+  </section>

@@ -1,0 +1,30 @@
+.bthnHover:hover{
+    background-color: gray;
+    border-radius: 50px;
+    
+      }
+      .bthnHover{
+        height: 25px;
+    width:25px;
+    background-color: gainsboro;
+    border-radius: 50px;
+      }
+    
+    .blue-color{
+        color:#103a7f;
+    }
+
+    .form-select:focus{
+        outline:none !important;
+        box-shadow:none !important;
+      }
+      
+
+    .form-control:focus {
+        outline: none !important;
+        box-shadow: none !important;
+      }
+    
+      .button-color{
+        background-color: #103a7f;
+      }

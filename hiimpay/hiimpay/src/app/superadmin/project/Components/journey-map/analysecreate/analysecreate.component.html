@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="row my-2">
+      <div class="col-12">
+        <button type="button" class="close bthnHover" aria-label="Close" (click)="onClose()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="" [formGroup]="createForm">
+        <div class="col-sm-12 p-2">
+          <div class="row my-2">
+            <div class="col-sm-12">
+              <label for="" class="label-control mt-2">Summary</label>
+              <input type="text" class="form-control" formControlName="executiveSummary" placeholder="">
+              <small class="p-0">
+                <p *ngIf="createForm.get('executiveSummary')?.touched && createForm.get('executiveSummary')?.hasError('required')" class="text-danger">
+                  Summary is required
+                </p>
+              </small>
+  
+              <label for="" class="label-control mt-2">Ex-highlights</label>
+              <input type="text" class="form-control" formControlName="exHighlights">
+              <small class="p-0">
+                <p *ngIf="createForm.get('exHighlights')?.touched && createForm.get('exHighlights')?.hasError('required')" class="text-danger">
+                  ex-highlights is required
+                </p>
+              </small>
+  
+              <label for="" class="label-control mt-2">Do you have suggestions on what we can do to provide you with a better service?</label>
+              <input type="text" class="form-control" formControlName="recommendedNextSteps">
+              <small class="p-0">
+                <p *ngIf="createForm.get('recommendedNextSteps')?.touched && createForm.get('recommendedNextSteps')?.hasError('required')" class="text-danger">
+                  recommendedNextSteps is required
+                </p>
+              </small>
+  
+              <label for="" class="label-control mt-2">What would you like to see improved the most?</label>
+              <textarea type="text" class="form-control" rows="4" cols="50" formControlName="description" placeholder=""></textarea>
+              <small class="p-0">
+                <p *ngIf="createForm.get('description')?.touched && createForm.get('description')?.hasError('required')" class="text-danger">
+                  description is required
+                </p>
+              </small>
+  
+              <div class="row mb-2">
+                <label for="" class="label-control mt-2">Survey</label>
+                <div class="d-flex flex-wrap">
+                  <div class="form-check mt-3 me-3" *ngFor="let owner of details; let i = index">
+                    <input class="form-check-input" type="checkbox" [value]="owner" (change)="onOwnerChange(owner?.assignmentToCLient?.id, $event)">
+                    <label class="form-check-label me-3">{{ owner?.surveyWithDetailResponseDto?.surveyName }}</label>
+                  </div>
+                </div>
+              </div>
+  
+              <label class="label-control mt-3" for="myfile">Select a file:</label>
+              <input type="file" id="myfile" name="myfile" (change)="onFileBrowse($event)"><br><br>
+              <div *ngIf="createForm.get('document')?.value">
+                Current file: {{ createForm.get('document')?.value }}
+              </div>
+              <small class="p-0">
+                <p *ngIf="isFileTypeInvalid" class="text-danger">Invalid file type. Please upload an Excel file.</p>
+              </small>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div class="text-center mt-5">
+        <button class="p-2 rounded button-color w-25 text-center text-white shadow border-0" (click)="createProject()">{{buttonName}}</button>
+      </div>
+    </div>
+  </div>
+  

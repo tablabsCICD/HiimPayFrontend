@@ -1,0 +1,136 @@
+.voucher-detail-modal {
+  padding: 18px;
+  background: #ffffff;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #103a7f;
+  font-size: 22px;
+}
+
+.close-btn {
+  border: 0;
+  background: transparent;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.desc {
+  margin: 0 0 14px;
+  color: #374151;
+  line-height: 1.5;
+}
+
+.summary-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 14px;
+}
+
+.kv-card {
+  border: 1px solid #d7dce3;
+  border-radius: 8px;
+  padding: 10px;
+  background: #fff;
+}
+
+.kv-card .label {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.kv-card .value {
+  color: #111827;
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+.section-title {
+  margin: 10px 0;
+  color: #103a7f;
+}
+
+.summary-grid.epay {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.accordion {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin-top: 8px;
+  background: #fff;
+}
+
+.accordion summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.accordion ul,
+.accordion ol,
+.accordion p {
+  margin: 10px 0 0;
+  padding-left: 18px;
+}
+
+.empty {
+  margin: 10px 0 0;
+  color: #6b7280;
+  padding-left: 4px;
+}
+
+.footer-actions {
+  margin-top: 18px;
+  display: flex;
+  gap: 10px;
+}
+
+.btn {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 9px 14px;
+  font-weight: 600;
+}
+
+.btn.primary {
+  background: #103a7f;
+  color: #fff;
+}
+
+.btn.light {
+  background: #fff;
+  border-color: #d1d5db;
+  color: #374151;
+}
+
+@media (max-width: 992px) {
+  .summary-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .summary-grid.epay {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 576px) {
+  .summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-grid.epay {
+    grid-template-columns: 1fr;
+  }
+}

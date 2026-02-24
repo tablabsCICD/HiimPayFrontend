@@ -1,0 +1,73 @@
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+
+.form-control:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.form-select:focus{
+  outline: none !important;
+  box-shadow: none !important ;
+}
+
+.button-color {
+  background-color: #103a7f;
+}
+
+.blue-color{
+  color: #103a7f;
+}
+
+.bthnHover:hover {
+  background-color: gray;
+  border-radius: 50px;
+
+}
+
+.bthnHover {
+  height: 25px;
+  width: 25px;
+  background-color: gainsboro;
+  border-radius: 50px;
+}
+
+
+.user-list-container {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+.user-list-container::-webkit-scrollbar {
+  display: none;
+}
+
+.user-item {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  white-space: nowrap;
+  margin-right: 15px;
+}
+
+.fixed-bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.change-container {
+  max-height: calc(100vh - 490px); 
+  overflow-y: scroll;
+}
+
+.change-container::-webkit-scrollbar {
+  display: none;
+}
+

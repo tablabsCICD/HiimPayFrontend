@@ -1,0 +1,120 @@
+.brand-details-root { display:flex; flex-direction:column; gap:16px; max-width:900px; margin:0 auto; padding:16px; }
+.brand-header { display:flex; gap:16px; align-items:center; }
+.brand-media img { width:120px; height:120px; object-fit:cover; border-radius:12px; }
+.brand-fallback { width:120px; height:120px; display:flex; align-items:center; justify-content:center; background:#f1f5f9; font-size:36px; border-radius:12px; }
+.brand-meta h1 { margin:0; font-size:24px; color: #053067 }
+.brand-cats { margin-top:6px; display:flex; gap:8px; }
+.chip { background:#eef2ff; color:#3730a3; padding:6px 10px; border-radius:999px; font-size:13px; }
+.brand-sub { margin-top:8px; color:#64748b; }
+
+.brand-summary { display:flex; flex-direction:column; gap:12px; }
+.desc { margin:0; color:#374151; }
+.key-cards { display:flex; gap:12px; margin-top:8px; }
+.card.small { background:#fff; padding:12px; border-radius:8px; box-shadow:0 6px 18px rgba(12,16,32,0.04); min-width:140px; }
+.card.small .label { color:#64748b; font-size:12px; }
+.card.small .value { font-weight:700; margin-top:6px; }
+
+.accordions details { background:#fff; padding:12px; border-radius:8px; margin-top:8px; box-shadow:0 6px 18px rgba(12,16,32,0.04); }
+.accordions summary { font-weight:700; cursor:pointer; }
+.accordions .content { margin-top:8px; color:#374151; }
+
+.cta-row { display:flex; gap:12px; margin-top:14px; }
+.primary-cta { background:#053067; color:#fff; border:none; padding:12px 18px; border-radius:8px; font-weight:700; }
+.secondary-cta { background:#fff; border:1px solid #e6eef6; padding:10px 16px; border-radius:8px; }
+
+.loading-placeholder { padding:24px; text-align:center; color:#64748b; }
+
+@media (max-width:700px) {
+	.brand-header { flex-direction:column; align-items:flex-start; }
+	.key-cards { flex-direction:column; }
+}
+
+/* ================= Redemption Steps ================= */
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.step {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 12px;
+  background: #f8fafc;
+  border-radius: 10px;
+}
+
+.step-text {
+  flex: 1;
+  color: #374151;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.step img {
+  width: 96px;
+  height: 96px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+/* ================= Cards consistency ================= */
+
+.card {
+  background: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(12,16,32,0.04);
+  min-width: 140px;
+}
+
+.card .label {
+  color: #64748b;
+  font-size: 12px;
+}
+
+.card .value {
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+/* ================= Accordion polish ================= */
+
+.accordions details[open] summary {
+  margin-bottom: 8px;
+}
+
+.accordions summary {
+  list-style: none;
+}
+
+.accordions summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordions summary::after {
+  content: '▾';
+  float: right;
+  transition: transform 0.2s ease;
+}
+
+.accordions details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+/* ================= Mobile tweaks ================= */
+
+@media (max-width: 700px) {
+  .step {
+    flex-direction: column;
+  }
+
+  .step img {
+    width: 100%;
+    height: auto;
+  }
+}

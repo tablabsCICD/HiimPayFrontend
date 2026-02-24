@@ -1,0 +1,102 @@
+<div class="col-lg-12 mt-2">
+    <h2  style="display: inline; color: #103a7f; font-weight: 700;">{{buttonName}}</h2>
+    <button type="button" class="close bthnHover" aria-label="Close" (click)="onClose()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="col-lg-12 mx-auto">
+    <div class="row">
+        <form [formGroup]="createSurveyForm" (ngSubmit)="onSubmit()" class="w-100">
+            <div class="col-md-12 mt-4">
+                <label for="survey_name">Coupon name</label>
+                <input type="text" id="survey_name" class="form-control bg-light w-100" placeholder="Coupon name"
+                    formControlName="survey_name">
+                    <small class="p-0">
+                        <p *ngIf="createSurveyForm.get('survey_name')?.touched && createSurveyForm.get('survey_name')?.hasError('required')" class="text-danger">
+                            Coupon name is required
+                        </p>
+                        <p *ngIf="createSurveyForm.get('survey_name')?.touched && createSurveyForm.get('survey_name')?.hasError('pattern')" class="text-danger">
+                            Coupon name should not contain numbers
+                        </p>
+                    </small>
+            </div>
+            <div class="col-md-12 mt-4">
+                <label for="survey_Type">Coupon type</label>
+                <input type="text" id="survey_Type" class="form-control bg-light w-100" placeholder="Coupon type"
+                    formControlName="survey_Type">
+                    <small class="p-0">
+                        <p *ngIf="createSurveyForm.get('survey_Type')?.touched && createSurveyForm.get('survey_Type')?.hasError('required')" class="text-danger">
+                            Coupon type is required
+                        </p>
+                    </small>
+            </div>
+
+                <div class="col-md-12 mt-4">
+                <label for="survey_Type">Coupon Price</label>
+                <input type="text" id="survey_Type" class="form-control bg-light w-100" placeholder="Coupon Price"
+                    formControlName="survey_Type">
+                    <small class="p-0">
+                        <p *ngIf="createSurveyForm.get('survey_Type')?.touched && createSurveyForm.get('survey_Type')?.hasError('required')" class="text-danger">
+                            Coupon Price is required
+                        </p>
+                    </small>
+            </div>
+
+            <!-- <div class="col-md-12 mt-4">
+                <label for="survey_description">Coupon opening message</label>
+                <textarea id="survey_description" class="form-control bg-light w-100" placeholder="Coupon opening message"
+                    formControlName="survey_description" rows="3" style="height: 100px; resize: none;"></textarea>
+                <small class="p-0">
+                    <p *ngIf="createSurveyForm.get('survey_description')?.touched && createSurveyForm.get('survey_description')?.hasError('required')" class="text-danger">
+                        Survey description is required
+                    </p>
+                </small>
+            </div> -->
+            
+
+            <!-- <div class="col-md-12 mt-4">
+                <label for="endDescription">Coupon closing message</label>
+                <textarea id="endDescription" class="form-control bg-light w-100" placeholder="Coupon closing message"
+                    formControlName="endDescription" rows="3" style="height: 100px; resize: none;"></textarea>
+                <small class="p-0">
+                    <p *ngIf="createSurveyForm.get('survey_description')?.touched && createSurveyForm.get('survey_description')?.hasError('required')" class="text-danger">
+                        Survey description is required
+                    </p>
+                </small>
+            </div> -->
+
+
+            <!-- <div class="col-md-12 mt-4">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="journey-map-checkbox" formControlName="addInJourneyMap">
+                    <label class="form-check-label" for="journey-map-checkbox">Needed for journey map?</label>
+                </div>
+            </div> -->
+            
+            <hr>
+           
+            <!-- <div class="col-md-12 mt-2">
+                <label for="stage">Add stage</label>
+                <div class=""formArrayName="stages">
+                <div class="input-group mb-3"*ngFor="let item of stages().controls; let i = index">
+                    <input type="text" class="form-control"[formControlName]="i" placeholder="Add stage" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"(click)="deleteRow(i)"><i class="fa fa-trash-o" style="font-size:22px;color:red"></i></button>
+                  </div>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-outline-secondary w-100" (click)="addRow()">Add stage</button>
+                </div>
+            </div> -->
+
+            <!-- <div class="col-md-12 mt-4">
+                <label for="related_documents">Related documents</label>
+                <input type="file" id="related_documents" class="bg-light form-control"
+                    >
+            </div> -->
+
+            <div class="col-md-12 mt-3 mb-3 text-center text-right">
+                <button type="submit" class="py-2 px-4 border-0 rounded button-color text-white ">{{buttonName}}</button>
+            </div>
+        </form>
+    </div>
+</div>

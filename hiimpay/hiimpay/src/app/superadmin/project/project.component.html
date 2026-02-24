@@ -1,0 +1,160 @@
+<mat-toolbar class="bg-white">
+  <img src="assets/images/navexwise.jpeg" alt="" class="h-75">
+  <!-- <span class="example-spacer"></span> -->
+  <div class="flex-grow-1" style="padding-inline: 2em;">
+    <div class="p-1 bg-light rounded rounded-pill shadow-sm search-bar flex-grow-1">
+      <div class="input-group">
+        <input #searchInput type="search" placeholder="" aria-describedby="button-addon1" class="form-control border-0 bg-light"
+          style="height: 30px;" (input)="searh($event)">
+        <div class="input-group-append">
+          <button id="button-addon1" type="submit"
+            class="btn btn-link text-primary rounded-circle button-color d-flex justify-content-center align-items-center"
+            style="width: 30px;">
+            <i class="fa fa-search text-white" style="font-size: 13px;"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center" style="gap:1em">
+    <!-- <i class="fa fa-bell-o" style="font-size:26px;color:  #323842FF;"></i> -->
+    <!-- <i class="fa fa-bell-o" (click)="onreadNotification()" matBadge="{{ unreadNotificationsCount }}"
+      matBadgeColor="primary" matBadgeHidden="{{ unreadNotificationsCount === 0 }}"
+      style="font-size:26px;color: #323842FF;" [matMenuTriggerFor]="notificationsMenu"></i> -->
+    <mat-menu #notificationsMenu="matMenu">
+      <div class="col-md mb-4 mb-md-0">
+        <h5 class="font-weight-bold mb-3 text-center button-color text-white">Notifications</h5>
+        <div class="card mask-custom text-primary border-0" style="max-height: 250px;">
+          <div class="card-body">
+            <ul class="list-unstyled mb-0" style="border-bottom: 1px solid rgba(255,255,255,.3) !important;">
+              <li *ngFor="let notification of notifications" class="p-2 border-bottom">
+                <a class="d-flex justify-content-between link-light">
+                  <div class="d-flex flex-row">
+                    <!-- <img [src]="notification.image" alt="avatar" class="rounded-circle d-flex align-self-center me-3 shadow-1-strong" width="60"> -->
+                    <div class="pt-1">
+                      <p class="fw-bold mb-0" style="color: gray;">{{ notification.title }}</p>
+                      <p class="small" style="color: rgb(174, 174, 174);">{{ notification.body }}</p>
+                    </div>
+                  </div>
+                  <div class="pt-1">
+                    <p class="small mb-1" style="font-size: xx-small;" style="color:#103a7f">{{ notification.time }}</p>
+                    <span class="badge button-color text-white float-end"
+                      *ngIf="notification.isNotificationRead === 0">1</span>
+                  </div>
+                </a>
+              </li>
+            </ul>
+            <div *ngIf="notifications.length === 0" class="text-center" style="color:#103a7f">No notifications available
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-menu>
+    <i class="fa fa-question" style="font-size:26px;color:  #323842FF;" routerLink="./faq"></i>
+    <div [matMenuTriggerFor]="menu" aria-label="User Profile">
+      <img src="assets\download-old.png" alt="Profile Picture" class="rounded-circle" height="40" width="40">
+    </div>
+  </div>
+  <mat-menu #menu="matMenu" class="custom-menu rounded-lg">
+    <div class="popup-content">
+      <button mat-menu-item routerLink="./profile-cpoc">
+        <mat-icon>
+          account_box
+          <!-- <img src="assets\download-old.png" alt="Profile Picture" class="profile-picture-large text-center rounded-circle"
+        height="22" width="22"> -->
+        </mat-icon>
+        <span>Profile</span>
+      </button>
+      <button mat-menu-item (click)="OnLogout()">
+        <mat-icon>exit_to_app</mat-icon>
+        <span>Logout</span>
+      </button>
+    </div>
+  </mat-menu>
+</mat-toolbar>
+
+
+<mat-sidenav-container autosize="true">
+  <mat-sidenav [ngClass]="!isCollapsed ? 'expanded' : ''" [mode]="isMobile ? 'over' : 'side'"
+    [opened]="isMobile ? 'false' : 'true'">
+    <mat-nav-list>
+      <a mat-list-item *ngIf="isCpoc!==true">
+        <button class="back-button ms-2" (click)="onBack()">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+      </a>
+
+      <a mat-list-item (click)="expandNavBar()">
+        <span class="entry">
+          <mat-icon>menu</mat-icon>
+          <!-- <i class="fas fa-list fs-5"></i> -->
+          <span *ngIf="!isCollapsed"> </span>
+        </span>
+      </a>
+      <a mat-list-item routerLink="./project-admin" routerLinkActive="active">
+        <span class="entry">
+          <mat-icon>group</mat-icon>
+          <span *ngIf="!isCollapsed">Manage users</span>
+        </span>
+      </a>
+      <a mat-list-item routerLink="./client-brands" routerLinkActive="active">
+        <span class="entry">
+          <mat-icon>store</mat-icon>
+          <span *ngIf="!isCollapsed">Brands</span>
+        </span>
+      </a>
+      <a mat-list-item routerLink="./assign-brand-coupon" routerLinkActive="active">
+        <span class="entry">
+          <mat-icon>assignment_turned_in</mat-icon>
+          <span *ngIf="!isCollapsed">Assign Coupon & Amount</span>
+        </span>
+      </a>
+      <a mat-list-item routerLink="./assigned-brands" routerLinkActive="active">
+        <span class="entry">
+          <mat-icon>fact_check</mat-icon>
+          <span *ngIf="!isCollapsed">Assigned Brands</span>
+        </span>
+      </a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content class="bg-white">
+    <router-outlet></router-outlet>
+    <footer class="bottom-tab-bar">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-auto">
+            <a mat-list-item routerLink="./project-admin" matTolltip="Manage users" routerLinkActive="active">
+              <span class="entry">
+                <mat-icon>group</mat-icon>
+              </span>
+            </a>
+          </div>
+          <div class="col-auto">
+            <a mat-list-item routerLink="./client-brands" matTooltip="Brands" routerLinkActive="active">
+              <span class="entry">
+                <mat-icon>store</mat-icon>
+              </span>
+            </a>
+          </div>
+          <div class="col-auto">
+            <a mat-list-item routerLink="./assign-brand-coupon" matTooltip="Assign Coupon & Amount" routerLinkActive="active">
+              <span class="entry">
+                <mat-icon>assignment_turned_in</mat-icon>
+              </span>
+            </a>
+          </div>
+          <div class="col-auto">
+            <a mat-list-item routerLink="./assigned-brands" matTooltip="Assigned Brands" routerLinkActive="active">
+              <span class="entry">
+                <mat-icon>fact_check</mat-icon>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<app-child (idChange)="onIdChange($event)" (statusChange)="onStatusChange($event)"></app-child>

@@ -1,0 +1,82 @@
+
+
+<div class="container mx-5" style="height: 100vh;">
+  <div class="row mb-2 " >
+    <div class="col-lg col-md col-sm-12">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3 style="margin: 0;color: #103a7f;font-weight: bolder;">Brand dashboard</h3>
+        <!-- <span class="blue-color font-weight-bold"style="font-family: poppins;font-weight: 700;"> Project Name : ABC</span>
+        <span class="blue-color font-weight-bold ms-4"style="font-family: poppins;font-weight: 700;">
+          EXwise Consultant : name</span> -->
+      </div></div>
+  </div>
+  <div class="row table-row row-head gx-0">
+    <div class="col">Company name</div>
+    <div class="col">Contact number</div>
+    <div class="col">Company email</div>
+    <div class="col">Second email</div>
+    <!-- <div class="col">Phase</div> -->
+    <div class="col">Info</div>
+    <!-- <div class="col ">Assign Survey</div> -->
+    <div class="col fw-bold">Action</div>
+  </div>
+  <div class="tableCointainer" *ngIf="!isLoading">
+    <div
+      class="row gx-0 table-row row-body px-0 "
+      *ngFor="let item of data | paginate: { itemsPerPage: itemPerPage, currentPage: page, totalItems: totalItems }" (click)="setClientId($event,item.id)" 
+    >
+    <div class="col">{{ item.clientName }} </div>
+      <div class="col">
+        <div class="material">
+          <div class="col"> {{ item.contactPhone }}</div>
+        </div>
+      </div>
+      <div class="col">
+        {{ item.contactEmail }}
+       
+      </div>
+      <div class="col">
+        {{ item.secondContactEmail || item.second_Contact_Email || item.contactEmail2 || item.secondaryEmail || '-' }}
+      </div>
+      <!-- <div class="col">{{ item.consultinghaseName }}</div> -->
+
+      <div class="col"><button type="button" class=" btn btn-light btn-rounded ellipsis-button2" data-mdb-ripple-init (click)=" openPopup(item.id)"><i class="fa fa-info-circle me-2" ></i>Info</button></div>
+    <!-- <div class="col"><button type="button" class="border-0 btn btn-light ellipsis-button3" style="background-color: #2980b9;color: white;"(click)=" openPopup2(item.id)">Assign</button></div> -->
+    <div class="col"> <button mat-icon-button [matMenuTriggerFor]="menu" class="ellipsis-button"
+      (click)="openMenu($event)">
+      <mat-icon class="ellipsis-icon">more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" class="custom-menu rounded-lg">
+      <button mat-menu-item [matMenuTriggerFor]="phases">
+        <mat-icon>compare_arrows</mat-icon>
+        <span>Change phase</span>
+      </button>
+      <button mat-menu-item (click)="editClient(item.id)">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+      <button mat-menu-item (click)="deleteClient(item)">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+      <button mat-menu-item (click)="pinClient(item.id)">
+        <mat-icon>push_pin</mat-icon>
+        <span>Pin</span>
+      </button>
+    </mat-menu>
+    <mat-menu #phases="matMenu">
+      <button mat-menu-item *ngFor="let phase of changeablePhases(item?.consultinghaseName)" 
+      (click)="changePhase(item, phase)">
+          {{phase}}
+      </button>
+    </mat-menu>
+  </div>
+  </div>
+  <div class="text-end my-4" style="font-weight: 300 !important; font-size: 13px">
+    <pagination-controls (pageChange)="pageChangeEvent($event)" [maxSize]="5"></pagination-controls>
+  </div>
+  </div>
+  <div class="text-center my-5">
+    <i *ngIf="isLoading"  class="fa fa-spinner fa-spin" style="font-size:64px;color: #103a7f;"></i>
+  </div>
+</div>

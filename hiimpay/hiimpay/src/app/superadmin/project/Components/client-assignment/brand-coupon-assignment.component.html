@@ -1,0 +1,123 @@
+<div class="assignment-shell">
+  <div class="bg-orb orb-one"></div>
+  <div class="bg-orb orb-two"></div>
+
+  <div class="assignment-root">
+    <div class="hero">
+      <div>
+        <p class="eyebrow">Client Rewards Console</p>
+        <h2>Assign Coupon Or Amount</h2>
+        <p class="sub">Create bulk reward assignments in a cleaner and faster workflow.</p>
+      </div>
+      <div class="meta-pills">
+        <div class="pill">
+          <span class="pill-label">Brands</span>
+          <span class="pill-value">{{ selectedBrands.length }}</span>
+        </div>
+        <div class="pill">
+          <span class="pill-label">Coupons</span>
+          <span class="pill-value">{{ selectedCoupons.length }}</span>
+        </div>
+        <div class="pill">
+          <span class="pill-label">Employees</span>
+          <span class="pill-value">{{ activeTab==='coupon' ? selectedEmployees.length : selectedAmountEmployees.length }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab" [class.active]="activeTab==='coupon'" (click)="activeTab='coupon'">Assign Coupon</button>
+      <button class="tab" [class.active]="activeTab==='amount'" (click)="activeTab='amount'">Assign Amount</button>
+    </div>
+
+    <ng-container *ngIf="activeTab==='coupon'">
+      <div class="panel">
+        <div class="row-block">
+          <label>Step 1: Select Brands</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Select brands'"
+            [settings]="brandDropdownSettings"
+            [data]="brands"
+            [(ngModel)]="selectedBrands">
+          </ng-multiselect-dropdown>
+        </div>
+
+        <div class="row-block">
+          <label>Step 2: Select Coupons</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Select coupons'"
+            [settings]="couponDropdownSettings"
+            [data]="coupons"
+            [(ngModel)]="selectedCoupons">
+          </ng-multiselect-dropdown>
+        </div>
+
+        <div class="row-block">
+          <label>Step 3: Select Employees</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Select employees'"
+            [settings]="employeeDropdownSettings"
+            [data]="employees"
+            [(ngModel)]="selectedEmployees">
+          </ng-multiselect-dropdown>
+        </div>
+
+        <div class="row-block">
+          <label>Notes (Optional)</label>
+          <textarea rows="3" [(ngModel)]="notes" placeholder="Any special instructions"></textarea>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn assign-btn" (click)="assignCouponNow()">Assign Coupon</button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="activeTab==='amount'">
+      <div class="sub-tabs">
+        <button class="tab" [class.active]="amountEntryMode==='manual'" (click)="amountEntryMode='manual'">Manual</button>
+        <button class="tab" [class.active]="amountEntryMode==='excel'" (click)="amountEntryMode='excel'">Excel Upload</button>
+      </div>
+
+      <div class="panel" *ngIf="amountEntryMode==='manual'">
+        <div class="row-block">
+          <label>Step 1: Select Employees</label>
+          <ng-multiselect-dropdown
+            [placeholder]="'Select employees'"
+            [settings]="employeeDropdownSettings"
+            [data]="employees"
+            [(ngModel)]="selectedAmountEmployees">
+          </ng-multiselect-dropdown>
+        </div>
+
+        <div class="row-block">
+          <label>Step 2: Enter Amount</label>
+          <input type="number" min="1" [(ngModel)]="amountValue" placeholder="Enter amount">
+        </div>
+
+        <div class="row-block">
+          <label>Notes (Optional)</label>
+          <textarea rows="3" [(ngModel)]="amountNotes" placeholder="Any special instructions"></textarea>
+        </div>
+      </div>
+
+      <div class="panel" *ngIf="amountEntryMode==='excel'">
+        <div class="row-block">
+          <label>Upload Excel</label>
+          <div class="upload-wrap">
+            <input id="amountExcel" type="file" accept=".xlsx,.xls" (change)="onAmountExcelSelect($event)">
+            <label class="upload-label" for="amountExcel">
+              <span class="upload-title">Drop your file here or click to browse</span>
+              <span class="upload-sub">Supported: .xlsx, .xls</span>
+            </label>
+          </div>
+          <small class="hint" *ngIf="amountExcelFileName">Selected: {{ amountExcelFileName }}</small>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn assign-btn" (click)="assignAmountNow()">Assign Amount</button>
+      </div>
+    </ng-container>
+  </div>
+</div>

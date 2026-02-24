@@ -1,0 +1,143 @@
+.blue-color{
+    color: #103a7f;
+  }
+  
+  .background-color{
+    background-color: #103a7f;
+    color: white;
+  }
+  
+  .col {
+    line-height: 22.5px;
+    /* font-family: Poppins; */
+  }
+  .button-color{
+    background-color: #103a7f;
+  }
+  .table-row {
+    background-color: #ffffff;
+    /* border-radius: 10px; */
+    padding: 10px;
+    margin-bottom: 10px;
+    align-items: center;
+    height: auto;
+    /* font-family: Poppins; */
+    font-weight: 500;
+    font-size: 15px;
+    border: solid 1px rgb(148, 148, 148);
+  }
+  .table-row:hover{
+    border: 2px solid #103a7f;
+  }
+  .tableCointainer .table-row:hover{
+    border: 2px solid #103a7f;
+  }
+  .row-head {
+    height: 64px;
+    font-weight: 500;
+    /* font-family: Poppins; */
+    font-size: 16px;
+    background-color: #103a7f;
+  }
+  
+  .row-body {
+    font-weight: 300;
+    height: auto;
+    /* font-family: Poppins; */
+    text-align: center;
+  }
+  
+  .row-head .col {
+    text-align: center;
+  }
+  
+  .material {
+    display: inline-block;
+    text-align: center;
+  }
+  
+  
+  ::ng-deep .mat-mdc-slide-toggle.mat-mdc-slide-toggle-checked:not(.mat-mdc-slide-toggle-disabled) .mdc-switch__shadow {
+    background-color: rgb(0, 128, 0) !important; /* Green when checked */
+  }
+  
+  ::ng-deep .mat-mdc-slide-toggle.mat-mdc-slide-toggle-checked:not(.mat-mdc-slide-toggle-disabled) .mdc-switch__track::after {
+    background-color: rgb(74, 133, 74) !important; /* Darker green track when checked */
+  }
+  
+  /* Styles for unchecked state */
+  ::ng-deep .mat-mdc-slide-toggle:not(.mat-mdc-slide-toggle-checked) .mdc-switch__shadow {
+    background-color: rgb(255, 0, 0) !important; /* Red when unchecked */
+  }
+  
+  ::ng-deep .mat-mdc-slide-toggle:not(.mat-mdc-slide-toggle-checked) .mdc-switch__track::after {
+    background-color: rgb(200, 50, 50) !important; /* Darker red track when unchecked */
+  }
+  
+  .mat-mdc-slide-toggle .mdc-form-field .mdc-switch {
+  /* --mdc-switch-selected-track-color: green; */
+  --mdc-switch-unselected-track-color: rgb(200, 50, 50) !important;
+
+  /* --mdc-switch-selected-icon-color: yellow;
+  --mdc-switch-unlected-icon-color: black; */
+}
+  
+  button {
+    border: none;
+  }
+  
+  
+  
+  
+  .tableCointainer {
+    height: 300px;
+    overflow-y: hidden !important;
+    /* font-family: Poppins; */
+  
+  }
+  
+  
+  
+  
+  
+  
+  .boldColmn {
+    font-weight: 400;
+    position: relative;
+    inset-inline: -1em;
+  }
+  
+  .no-style-button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+  
+  tbody:nth-child(2) {
+    max-width: 4px;
+  }
+  
+  
+  .disableDownloadButton:hover {
+    cursor: not-allowed;
+  }
+  
+  .dropdownToggleButton {
+    height: 57px;
+    flex-grow: 1;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .unavailability {
+    font-size: 16px !important;
+    position: absolute;
+    top:20vh;
+    width: 100%;
+  }
+  

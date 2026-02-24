@@ -1,0 +1,71 @@
+<div class="container my-2">
+    <div class="row mb-3">
+        <div class="col-lg col-md col-sm-12">
+            <div class="d-flex align-items-center justify-content-between">
+                <h3 style="margin: 0;color: #103a7f;font-weight: bolder;  ">Suvvey Info</h3>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- <div class="col-lg-4 col-md-12 col-sm-12">
+          
+            <div class="card">
+                <div class="d-flex justify-content-between m-2">
+                    <div>
+                        <p class="fs-6">Survey Overivew</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <canvas baseChart [type]="'pie'" [datasets]="pieChartDatasets" [labels]="pieChartLabels"
+                        [options]="pieChartOptions" [plugins]="pieChartPlugins" [legend]="pieChartLegend">
+                    </canvas>
+
+                </div>
+            </div>
+        </div> -->
+        <div class="col-lg-4 col-md-12 col-sm-12">
+            <!-- <div class="col-md-6"> -->
+            <div class="card">
+                <div class="d-flex justify-content-between m-2">
+                    <div>
+                        <p class="fs-6">Survey Overivew</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <canvas baseChart
+                    [data]="barChartData"
+                    [options]="barChartOptions"
+                    [plugins]="barChartPlugins"
+                    [legend]="barChartLegend"
+                    [type]="'bar'">
+            </canvas>
+
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-lg-4 col-md-12 col-sm-12">
+            <div class="col-md-6">
+            <div class="card">
+                <div class="d-flex justify-content-between m-2">
+                    <div>
+                        <p class="fs-6">Survey Overivew</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div style="display: block;">
+                        <canvas baseChart width="400" height="400"
+                          [type]="'line'"
+                          [data]="lineChartData"
+                          [options]="lineChartOptions"
+                          [legend]="lineChartLegend">
+                        </canvas>
+                      </div>
+
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+</div>

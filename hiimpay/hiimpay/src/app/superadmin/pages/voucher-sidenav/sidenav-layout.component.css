@@ -1,0 +1,5 @@
+.voucher-sidenav-container { height: 100%; }
+.voucher-sidenav { width: 220px; background: #ffffff; box-shadow: 0 2px 8px rgba(16,24,40,0.06); }
+.voucher-sidenav .brand { font-weight: 700; padding: 16px; font-size: 14px; }
+.voucher-content { padding: 20px; min-height: 400px; background:#f6f8fb; }
+.voucher-sidenav .mat-nav-list .mat-list-item.active { background: rgba(6,157,224,0.06); }

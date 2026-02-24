@@ -1,0 +1,2279 @@
+
+<div class="container mt-3 mb-3 vh-100">
+  <div class="row mt-2 px-2">
+    <div class="col-lg col-md col-sm-12">
+        <div class="d-flex align-items-center justify-content-between">
+            <h3 style="margin: 0; color: #103a7f; font-weight: bolder">
+                Report
+            </h3>
+            <span class="blue-text-color font-weight-bold" style="font-weight: 700; max-width: 500px; text-wrap: wrap;">
+                Project name : {{ displayClientData?.clientName }}</span>
+            <span class="blue-text-color font-weight-bold ms-4" style="font-weight: 700">
+                EXwise consultant : {{ displayClientData?.consultantName }}</span>
+            <span class="blue-text-color font-weight-bold" (click)="editUser(displayClientData?.copcId)" style="font-weight: 700; cursor: pointer;">
+                CPOC name : {{ displayClientData?.contactPerson }}</span>
+        </div>
+    </div>
+  </div>
+  <div *ngIf="paramsName==='Feel, Use, Do and See survey '" id="survey-content">
+    <div [hidden]="isLoading">
+
+      <!-- <div class="row g-2">
+        <div class="col-lg-11 col-sm-11 col-md-11 col-xl-11">
+          <div class="row g-2">
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6">
+              <select [(ngModel)]="selectedParent" name="" id=""
+                class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="onChangeParent($event)">
+                <option value="" selected disabled>Please select for filter</option>
+                <option value="contractType">Contract type</option>
+                <option value="gender">Gender</option>
+                <option value="Lifecycle">Life cycle</option>
+                <option value="jobType">Job type</option>
+                <option value="tenure">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='contractType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select  type</option>
+                <option value="Fulltime">Full time</option>
+                <option value="Parttime">Part time</option>
+                <option value="Fixed contract">Fixed contract</option>
+                <option value="Casual">Casual</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='gender'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='Lifecycle'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select Life cycle</option>
+                <option value="Attract">Attract</option>
+                <option value="Onboard">Onboard</option>
+                <option value="Develop">Develop</option>
+                <option value="Retain">Retain</option>
+                <option value="Separate">Separate</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='jobType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select job type</option>
+                <option value="">Contract type</option>
+                <option value="">Gender</option>
+                <option value="">Job type</option>
+                <option value="">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='tenure'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select tenure</option>
+                <option value="<3 months">&lt; 3 months</option>
+                <option value="3-11 months">3-11 months</option>
+                <option value="1-2 years">1-2 years</option>
+                <option value="3-5 years">3-5 years</option>
+                <option value="5-10 years">5-10 years</option>
+                <option value=">10 years">&gt; 10 years</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xl-1">
+          <button class="border-0 py-2 rounded text-white mt-3" style="background-color: #103a7f;"
+            (click)="onClearFilter()">Clear filters</button>
+        </div>
+      </div> -->
+
+      <div class="row d-flex mt-4 align-items-center justify-content-between">
+        <div class="col-auto">
+          <button class="btn btn-light rounded-circle me-1" data-html2canvas-ignore="true" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+        </div>
+        <div class="col text-center">
+          <h3 class="font-weight-bold" style="color: #103a7f;">Feel, Use, Do and See survey</h3>
+        </div>
+        <div class="col-auto text-end">
+          <button class="border-0 text-white py-2 px-3 ms-3" style="background-color: #103a7f;"
+            data-html2canvas-ignore="true" (click)="exportToExcel()" [disabled]="checkPDFDownloadSpinner">
+            <span *ngIf="checkPDFDownloadSpinner" class="spinner-border spinner-border-sm" role="status"
+              aria-hidden="true"></span>
+            <span *ngIf="!checkPDFDownloadSpinner">Export</span>
+          </button>
+        </div>
+      </div>
+
+
+      <div class="row mt-2" style="height: auto;">
+        <div class="col-md-7">
+          <div class="card p-2 cardshadow">
+            <div class="d-flex justify-content-between">
+              <div data-html2canvas-ignore="true">
+                <button (click)="resetFUDSLineChartZoom()" hidden
+                  class="border-0 rounded py-1 px-2 text-white blue-color">Reset
+                  zoom</button>
+              </div>
+              <mat-icon mat-icon-button [matMenuTriggerFor]="menu">menu</mat-icon>
+              <mat-menu #menu="matMenu">
+                <div mat-menu-item (click)="downloadChart('fudsChartCanvas', 'png')">Download PNG</div>
+                <div mat-menu-item (click)="downloadChart('fudsChartCanvas', 'svg')">Download SVG</div>
+                <div mat-menu-item (click)="downloadChart('fudsChartCanvas', 'csv')">Download CSV</div>
+              </mat-menu>
+            </div>
+            <canvas id="fudsChartCanvas">{{fudsLineChart}}</canvas>
+          </div>
+        </div>
+        <div class="col-md-4 ms-5">
+          <div class="mt-4">
+            <h3 style="color: #103a7f;" class="font-weight-bold">Completion rate ({{fudsWithDetails?.totalSolved || 0}}/{{fudsWithDetails?.totalEmployee || 0}})</h3>
+            <div class="card h-100">
+              <div class="card-body text-center" style="height: 30vh;">
+                <div *ngFor="let bar of fudsProgressBar" class="progress-container">
+                  <div class="progress-labels">
+                    <span class="progress-bar-label"></span>
+                    <!-- {{ bar?.stageName }} -->
+                    <span class="progress-bar-percentage">{{ bar?.percentage }}%</span>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar" [style.background-color]="bar?.color" [style.width.%]="bar?.percentage"
+                      role="progressbar" [attr.aria-valuenow]="bar?.percentage" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+ 
+        <hr class="mt-4" style="border: none; height: 3px; background-color: #000; margin: 1rem 0;">
+
+        <div class="row mt-4">
+          <div class="nav nav-tabs d-flex border-0" id="nav-tab" style="gap: 2em">
+            <button *ngFor="let tab of fudstabs" class="w-100 nav-item nav-link"
+              [ngClass]="{ activeTab: activeTab === tab }" (click)="setActiveTabForFuds(tab)">
+              {{ tab }}
+            </button>
+          </div>
+        </div>
+        <div class="mt-4 d-flex justify-content-between">
+          <div class="d-flex border-0" style="gap: 1em">
+            <button class="w-100 py-2 px-4 border-0 buttons2" *ngFor="let tab of tabsdata" (click)="onTabClick(tab)"
+              data-html2canvas-ignore="true" [ngClass]="{'activetab': tab.clicked}">
+              {{tab.name}}
+            </button>
+          </div>
+          <div>
+            <button type="button" class="border-0 me-2" data-html2canvas-ignore="true" (click)="toggleDisplay()"><img
+                src="assets\repeat.png" alt="" width="30px" height="30px"></button>
+            <button class="border-0 text-white py-2 px-3" data-html2canvas-ignore="true"
+              style="background-color: #103a7f;" (click)="openPopup(paramsName)">Show details</button>
+          </div>
+        </div>
+        <section class="mt-3" style="height: 100vh" [hidden]="!isTableVisible">
+          <div *ngIf="selectedTab === 'MCQ'">
+            <div class="row table-row row-head gx-0">
+              <div class="col">Question</div>
+              <div class="col" *ngIf="activeTab !== 'FUDS Importance statements'">Strongly agree</div>
+              <div class="col" *ngIf="activeTab !== 'FUDS Importance statements'">Agree</div>
+              <div class="col" *ngIf="activeTab !== 'FUDS Importance statements'">Neither agree nor disagree</div>
+              <div class="col" *ngIf="activeTab !== 'FUDS Importance statements'">Disagree</div>
+              <div class="col" *ngIf="activeTab !== 'FUDS Importance statements'">Strongly disagree</div>
+              <div class="col" *ngIf="activeTab === 'FUDS Importance statements'">Most important</div>
+              <div class="col" *ngIf="activeTab === 'FUDS Importance statements'">Important</div>
+              <div class="col" *ngIf="activeTab === 'FUDS Importance statements'">Slightly important</div>
+              <div class="col" *ngIf="activeTab === 'FUDS Importance statements'">Least important</div>
+              <div class="col">Weightage</div>
+              <div class="col">Score</div>
+            </div>
+            <div class="tableContainer">
+              <div *ngFor="let item of fudsDetails">
+                <div class="row gx-0 table-row row-body px-0">
+                  <div class="col">{{ item?.question || 'N/A' }}</div>
+                  <div class="col" *ngIf="activeTab !== 'FUDS Importance statements'">{{ item?.optionWithCount['Strongly
+                    agree '] || 0 }}</div>
+                  <div class="col" *ngIf="activeTab !== 'FUDS Importance statements'">{{ item?.optionWithCount['Agree']
+                    ||
+                    0 }}</div>
+                  <div class="col" *ngIf="activeTab !== 'FUDS Importance statements'">{{ item?.optionWithCount['Neither
+                    agree nor disagree '] || 0 }}</div>
+                  <div class="col" *ngIf="activeTab !== 'FUDS Importance statements'">{{ item?.optionWithCount['Disagree
+                    '] || 0 }}</div>
+                  <div class="col" *ngIf="activeTab !== 'FUDS Importance statements'">{{ item?.optionWithCount['Strongly
+                    disagree '] || 0 }}</div>
+                  <div class="col" *ngIf="activeTab === 'FUDS Importance statements'">{{ item?.optionWithCount['Most
+                    important'] || 0 }}</div>
+                  <div class="col" *ngIf="activeTab === 'FUDS Importance statements'">{{
+                    item?.optionWithCount['Important'] || 0 }}</div>
+                  <div class="col" *ngIf="activeTab === 'FUDS Importance statements'">{{ item?.optionWithCount['Slightly
+                    important'] || 0 }}</div>
+                  <div class="col" *ngIf="activeTab === 'FUDS Importance statements'">{{ item?.optionWithCount['Least
+                    important '] || 0 }}</div>
+                  <div class="col">{{ item?.weightage || 0 }}</div>
+                  <div class="col">{{ item?.totalScore || 0 }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div *ngIf="selectedTab === 'Descriptive'">
+            <div *ngIf="!fudsDetails2?.length" class="text-center">
+              <p class="my-5">No descriptive questions available.</p>
+            </div>
+            <div *ngIf="fudsDetails?.length">
+              <div class="accordion" id="accordionExample">
+                <div class="accordion-item" *ngFor="let faq of fudsDetails2; let i = index">
+                  <h2 class="accordion-header" [id]="'heading' + i">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                      [attr.data-bs-target]="'#collapse' + i" aria-expanded="false"
+                      [attr.aria-controls]="'collapse' + i">
+                      {{ faq.question }}
+                    </button>
+                  </h2>
+                  <div [id]="'collapse' + i" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                      <div *ngIf="!faq.answers?.length" class="text-center">
+                        <p class="my-2">No answers shared by anyone.</p>
+                      </div>
+                      <div *ngIf="faq.answers?.length">
+                        <div *ngFor="let answer of faq.answers; let isLast = last">
+                          <p>{{ answer }}</p>
+                          <div *ngIf="!isLast">
+                            <hr>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <section class="mt-3" style="height: 100vh" [hidden]="isTableVisible">
+          <div class="text-left" data-html2canvas-ignore="true">
+            <button (click)="resetFUDSBarChartZoom()" hidden
+              class="border-0 rounded py-1 px-2 text-white blue-color">Reset
+              zoom</button>
+          </div>
+          <div class="card p-2 cardshadow">
+            <canvas id="fudsbarChartCanvas">{{fudsBarChart}}</canvas>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="text-center my-5" [hidden]="!isLoading">
+      <i class="fa fa-spinner fa-spin" style="font-size:64px;color: #103a7f;"></i>
+    </div>
+  </div>
+
+
+
+  <div *ngIf="paramsName==='Employee Engagement survey'" id="survey-content">
+    <div [hidden]="isLoading">
+
+      <!-- <div class="row g-2">
+        <div class="col-lg-11 col-sm-11 col-md-11 col-xl-11">
+          <div class="row g-2">
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6">
+              <select [(ngModel)]="selectedParent" name="" id=""
+                class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="onChangeParent($event)">
+                <option value="" selected disabled>Please select for filter</option>
+                <option value="contractType">Contract type</option>
+                <option value="gender">Gender</option>
+                <option value="Lifecycle">Life cycle</option>
+                <option value="jobType">Job type</option>
+                <option value="tenure">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='contractType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select contract type</option>
+                <option value="Fulltime">Full time</option>
+                <option value="Parttime ">Part time</option>
+                <option value="Fixed contract">Fixed contract</option>
+                <option value="Casual">Casual</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='gender'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='Lifecycle'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select Life cycle</option>
+                <option value="Attract">Attract</option>
+                <option value="Onboard">Onboard</option>
+                <option value="Develop">Develop</option>
+                <option value="Retain">Retain</option>
+                <option value="Separate">Separate</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='jobType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select job type</option>
+                <option value="">Contract type</option>
+                <option value="">Gender</option>
+                <option value="">Job type</option>
+                <option value="">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='tenure'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select tenure</option>
+                <option value="<3 months">&lt; 3 months</option>
+                <option value="3-11 months">3-11 months</option>
+                <option value="1-2 years">1-2 years</option>
+                <option value="3-5 years">3-5 years</option>
+                <option value="5-10 years">5-10 years</option>
+                <option value=">10 years">&gt; 10 years</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xl-1">
+          <button class="border-0 py-2 rounded text-white mt-3" style="background-color: #103a7f;"
+            (click)="onClearFilter()">Clear filters</button>
+        </div>
+      </div> -->
+
+      <div class="row d-flex mt-4 align-items-center justify-content-between">
+        <div class="col-auto">
+          <button class="btn btn-light rounded-circle me-1" (click)="goBack()" data-html2canvas-ignore="true">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+        </div>
+        <div class="col text-center">
+          <h3 class="font-weight-bold" style="color: #103a7f;">Employee engagement survey</h3>
+        </div>
+        <div class="col-auto text-end">
+          <button class="border-0 text-white py-2 px-3 ms-3" data-html2canvas-ignore="true"
+            style="background-color: #103a7f;" (click)="exportToExcel()" [disabled]="checkPDFDownloadSpinner">
+            <span *ngIf="checkPDFDownloadSpinner" class="spinner-border spinner-border-sm" role="status"
+              aria-hidden="true"></span>
+            <span *ngIf="!checkPDFDownloadSpinner">Export</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="row mt-2" style="height: auto;">
+        <div class="col-md-7">
+          <div class="card p-2 cardshadow">
+            <div id="chart">
+              <apx-chart [series]="chartOptions?.series!" [chart]="chartOptions?.chart!"
+                [dataLabels]="chartOptions?.dataLabels!" [title]="chartOptions?.title!" [xaxis]="chartOptions?.xaxis!"
+                [yaxis]="chartOptions?.yaxis!" [tooltip]="chartOptions?.tooltip!" [colors]="chartOptions?.colors!"
+                [plotOptions]="chartOptions?.plotOptions!" [subtitle]="chartOptions?.subtitle!">
+              </apx-chart>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 ms-5">
+          <div class="mt-2">
+            <h3 style="color: #103a7f;" class="font-weight-bold">Completion rate</h3>
+            <div class="card h-100">
+              <div class="card-body text-center" style="height: 42vh; overflow: hidden;">
+                <div class="scroll-container">
+                  <div *ngFor="let bar of eeProgressBar" class="progress-container">
+                    <div class="progress-labels">
+                      <span class="progress-bar-label">{{ bar?.stageName }}</span>
+                      <span class="progress-bar-percentage">{{ bar?.percentage }}%</span>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar" [style.background-color]="bar?.color" [style.width.%]="bar?.percentage"
+                        role="progressbar" [attr.aria-valuenow]="bar?.percentage" aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <hr class="mt-4" style="border: none; height: 3px; background-color: #000; margin: 1rem 0;">
+
+      <div class="row mt-4">
+        <div class="nav nav-tabs d-flex border-0" id="nav-tab" style="gap: 1em">
+          <button *ngFor="let tab of eetabs" class="w-100 nav-item nav-link"
+            [ngClass]="{ activeTab: activeTab === tab }" (click)="setActiveTabForEE(tab)">
+            {{ tab }}
+          </button>
+        </div>
+      </div>
+      <div class="mt-4 d-flex justify-content-between">
+        <div class="d-flex border-0" style="gap: 1em">
+          <button class="w-100 py-2 px-4 border-0 buttons2" *ngFor="let tab of tabsdata" (click)="onTabClick(tab)"
+            data-html2canvas-ignore="true" [ngClass]="{'activetab': tab.clicked}">
+            {{tab.name}}
+          </button>
+        </div>
+        <div>
+          <button type="button" class="border-0 me-2" data-html2canvas-ignore="true" (click)="toggleDisplay()"><img
+              src="assets\repeat.png" alt="" width="30px" height="30px"></button>
+          <button class="border-0 text-white py-2 px-3" data-html2canvas-ignore="true"
+            style="background-color: #103a7f;" (click)="openPopup(paramsName)">Show details</button>
+        </div>
+      </div>
+      <section class="mt-3" style="height: 100vh" [hidden]="!isTableVisible">
+        <div *ngIf="selectedTab === 'MCQ'">
+          <div class="row table-row row-head gx-0">
+            <div class="col">Question</div>
+            <div class="col">Strongly agree</div>
+            <div class="col">Agree</div>
+            <div class="col">Neither agree nor disagree</div>
+            <div class="col">Disagree</div>
+            <div class="col">Strongly disagree</div>
+            <div class="col">Weightage</div>
+            <div class="col">Score</div>
+          </div>
+          <div class="tableContainer">
+            <div *ngFor="let item of eeDetails">
+              <div class="row gx-0 table-row row-body px-0">
+                <div class="col">{{ item?.question || 'N/A' }}</div>
+                <div class="col">{{ item?.optionWithCount['Strongly agree '] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Agree'] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Neither agree nor disagree '] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Disagree '] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Strongly disagree '] || 0 }}</div>
+                <div class="col">{{ item?.weightage || 0 }}</div>
+                <div class="col">{{ item?.totalScore || 0 }}</div>
+              </div>
+            </div>
+            <div class="text-end me-2">
+              <h2>Theme score : {{eeThemeScore | number: '1.2-2'}}</h2>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="selectedTab === 'Descriptive'">
+          <div *ngIf="!eeDetails2?.length" class="text-center">
+            <p class="my-5">No descriptive questions available.</p>
+          </div>
+          <div *ngIf="eeDetails2?.length">
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item" *ngFor="let faq of eeDetails2; let i = index">
+                <h2 class="accordion-header" [id]="'heading' + i">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    [attr.data-bs-target]="'#collapse' + i" aria-expanded="false" [attr.aria-controls]="'collapse' + i">
+                    {{ faq.question }}
+                  </button>
+                </h2>
+                <div [id]="'collapse' + i" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div *ngIf="!faq.answers?.length" class="text-center">
+                      <p class="my-2">No answers shared by anyone.</p>
+                    </div>
+                    <div *ngIf="faq.answers?.length">
+                      <div *ngFor="let answer of faq.answers; let isLast = last">
+                        <p>{{ answer }}</p>
+                        <div *ngIf="!isLast">
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mt-3" style="height: 100vh" [hidden]="isTableVisible">
+        <div class="text-left" data-html2canvas-ignore="true">
+          <button (click)="resetEEBarChartZoom()" hidden class="border-0 rounded py-1 px-2 text-white blue-color">Reset
+            zoom</button>
+        </div>
+        <div class="card p-2 cardshadow">
+          <canvas id="eebarChartCanvas">{{eeBarChart}}</canvas>
+        </div>
+      </section>
+    </div>
+    <div class="text-center my-5" [hidden]="!isLoading">
+      <i class="fa fa-spinner fa-spin" style="font-size:64px;color: #103a7f;"></i>
+    </div>
+  </div>
+
+  <div *ngIf="paramsName==='Exit survey'" id="survey-content">
+    <div [hidden]="isLoading">
+
+      <!-- <div class="row g-2">
+        <div class="col-lg-11 col-sm-11 col-md-11 col-xl-11">
+          <div class="row g-2">
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6">
+              <select [(ngModel)]="selectedParent" name="" id=""
+                class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="onChangeParent($event)">
+                <option value="" selected disabled>Please select for filter</option>
+                <option value="contractType">Contract type</option>
+                <option value="gender">Gender</option>
+                <option value="Lifecycle">Life cycle</option>
+                <option value="jobType">Job type</option>
+                <option value="tenure">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='contractType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select contract type</option>
+                <option value="Fulltime">Full time</option>
+                <option value="Parttime ">Part time</option>
+                <option value="Fixed contract">Fixed contract</option>
+                <option value="Casual">Casual</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='gender'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='Lifecycle'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select Life cycle</option>
+                <option value="Attract">Attract</option>
+                <option value="Onboard">Onboard</option>
+                <option value="Develop">Develop</option>
+                <option value="Retain">Retain</option>
+                <option value="Separate">Separate</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='jobType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select job type</option>
+                <option value="">Contract type</option>
+                <option value="">Gender</option>
+                <option value="">Job type</option>
+                <option value="">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='tenure'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select tenure</option>
+                <option value="<3 months">&lt; 3 months</option>
+                <option value="3-11 months">3-11 months</option>
+                <option value="1-2 years">1-2 years</option>
+                <option value="3-5 years">3-5 years</option>
+                <option value="5-10 years">5-10 years</option>
+                <option value=">10 years">&gt; 10 years</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xl-1">
+          <button class="border-0 py-2 rounded text-white mt-3" style="background-color: #103a7f;"
+            (click)="onClearFilter()">Clear filters</button>
+        </div>
+      </div> -->
+
+      <div class="row d-flex mt-4 align-items-center justify-content-between">
+        <div class="col-auto">
+          <button class="btn btn-light rounded-circle me-1" data-html2canvas-ignore="true" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+        </div>
+        <div class="col text-center">
+          <h3 class="font-weight-bold" style="color: #103a7f;">Exit survey</h3>
+        </div>
+        <div class="col-auto text-end">
+          <button class="border-0 text-white py-2 px-3 ms-3" data-html2canvas-ignore="true"
+            style="background-color: #103a7f;" (click)="exportToExcel()" [disabled]="checkPDFDownloadSpinner">
+            <span *ngIf="checkPDFDownloadSpinner" class="spinner-border spinner-border-sm" role="status"
+              aria-hidden="true"></span>
+            <span *ngIf="!checkPDFDownloadSpinner">Export</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="row mt-2" style="height: auto;">
+        <div class="col-md-6">
+          <div class="card p-2 cardshadow">
+            <div class="d-flex justify-content-between">
+              <div>
+                <button (click)="resetExitLineChartZoom()" hidden data-html2canvas-ignore="true"
+                  class="border-0 rounded py-1 px-2 text-white blue-color">Reset
+                  zoom</button>
+              </div>
+              <mat-icon mat-icon-button [matMenuTriggerFor]="menu">menu</mat-icon>
+              <mat-menu #menu="matMenu">
+                <div mat-menu-item (click)="downloadChart('exitChartCanvas', 'png')">Download PNG</div>
+                <div mat-menu-item (click)="downloadChart('exitChartCanvas', 'svg')">Download SVG</div>
+                <div mat-menu-item (click)="downloadChart('exitChartCanvas', 'csv')">Download CSV</div>
+              </mat-menu>
+            </div>
+            <canvas id="exitChartCanvas">{{exitsurvey}}</canvas>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="">
+            <!-- <h3 style="color: #103a7f;" class="font-weight-bold ms-5">Leaving reason</h3> -->
+            <div class="card">
+              <div id="chart">
+                <apx-chart [series]="exitdoughnutChart?.series" [chart]="exitdoughnutChart?.chart"
+                  [labels]="exitdoughnutChart?.labels" [responsive]="exitdoughnutChart?.responsive"
+                  [colors]="exitdoughnutChart?.colors" [title]="exitdoughnutChart?.title"></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="mt-4" style="border: none; height: 3px; background-color: #000; margin: 1rem 0;">
+
+      <div class="mt-4 d-flex justify-content-between">
+        <div class="d-flex border-0" style="gap: 1em">
+          <button class="w-100 py-2 px-4 border-0 buttons2" *ngFor="let tab of tabsdata" (click)="onTabClick(tab)"
+            data-html2canvas-ignore="true" [ngClass]="{'activetab': tab.clicked}">
+            {{tab.name}}
+          </button>
+        </div>
+        <div>
+          <button type="button" class="border-0 me-2" data-html2canvas-ignore="true" (click)="toggleDisplay()"><img
+              src="assets\repeat.png" alt="" width="30px" height="30px"></button>
+          <button class="border-0 text-white py-2 px-3" data-html2canvas-ignore="true"
+            style="background-color: #103a7f;" (click)="openPopup(paramsName)">Show details</button>
+        </div>
+      </div>
+      <section class="mt-3" style="height: 100%; padding-bottom: 5%;" [hidden]="!isTableVisible">
+        <div *ngIf="selectedTab === 'MCQ'">
+          <div class="row table-row row-head gx-0">
+            <div class="col-8 text-center">Question</div>
+            <div class="col-2 text-center">Yes</div>
+            <div class="col-2 text-center">No</div>
+            <!-- <div class="col">Strongly agree</div>
+          <div class="col">Agree</div>
+          <div class="col">Neither agree nor disagree</div>
+          <div class="col">Disagree</div>
+          <div class="col">Strongly disagree</div>
+          <div class="col">Weightage</div>
+          <div class="col">Score</div> -->
+          </div>
+          <div class="tableContainer">
+            <div *ngFor="let item of exitTable?.listOfStaticSubPhase[0]?.staticQuestionScoreForSurveyResponseDto">
+              <div class="row gx-0 table-row row-body px-0">
+                <div class="col-8 text-left ps-2">{{ item?.question || 'N/A' }}</div>
+                <div class="col-2">{{ item?.optionWithCount['Yes'] || 0 }}</div>
+                <div class="col-2">{{ item?.optionWithCount['No'] || 0 }}</div>
+                <!-- <div class="col">{{ item?.optionWithCount['Neither agree nor disagree '] || 0 }}</div>
+              <div class="col">{{ item?.optionWithCount['Disagree '] || 0 }}</div>
+              <div class="col">{{ item?.optionWithCount['Strongly disagree '] || 0 }}</div>
+              <div class="col">{{ item?.weightage || 0 }}</div>
+              <div class="col">{{ item?.totalScore || 0 }}</div> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="selectedTab === 'Descriptive'">
+          <div *ngIf="!exitTable?.listOfStaticSubPhase[0]?.descriptiveQuestion?.length" class="text-center">
+            <p class="my-5">No descriptive questions available.</p>
+          </div>
+          <div *ngIf="exitTable?.listOfStaticSubPhase[0]?.descriptiveQuestion?.length">
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item"
+                *ngFor="let faq of exitTable?.listOfStaticSubPhase[0]?.descriptiveQuestion; let i = index">
+                <h2 class="accordion-header" [id]="'heading' + i">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    [attr.data-bs-target]="'#collapse' + i" aria-expanded="false" [attr.aria-controls]="'collapse' + i">
+                    {{ faq.question }}
+                  </button>
+                </h2>
+                <div [id]="'collapse' + i" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div *ngIf="!faq.answers?.length" class="text-center">
+                      <p class="my-2">No answers shared by anyone.</p>
+                    </div>
+                    <div *ngIf="faq.answers?.length">
+                      <div *ngFor="let answer of faq.answers; let isLast = last">
+                        <p>{{ answer }}</p>
+                        <div *ngIf="!isLast">
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mt-3" style="height: 100vh" [hidden]="isTableVisible">
+        <div class="text-left">
+          <button (click)="resetExitBarChartZoom()" hidden data-html2canvas-ignore="true"
+            class="border-0 rounded py-1 px-2 text-white blue-color">Reset
+            zoom</button>
+        </div>
+        <div class="card p-2 cardshadow">
+          <canvas id="exitbarChartCanvas">{{exitBarChart}}</canvas>
+        </div>
+      </section>
+    </div>
+    <div class="text-center my-5" [hidden]="!isLoading">
+      <i class="fa fa-spinner fa-spin" style="font-size:64px;color: #103a7f;"></i>
+    </div>
+  </div>
+
+
+  <div *ngIf="paramsName==='Onboarding feedback survey'" id="survey-content">
+    <div [hidden]="isLoading">
+
+      <!-- <div class="row g-2">
+        <div class="col-lg-11 col-sm-11 col-md-11 col-xl-11">
+          <div class="row g-2">
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6">
+              <select [(ngModel)]="selectedParent" name="" id=""
+                class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="onChangeParent($event)">
+                <option value="" selected disabled>Please select for filter</option>
+                <option value="contractType">Contract type</option>
+                <option value="gender">Gender</option>
+                <option value="Lifecycle">Life cycle</option>
+                <option value="jobType">Job type</option>
+                <option value="tenure">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='contractType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select contract type</option>
+                <option value="Fulltime">Full time</option>
+                <option value="Parttime ">Part time</option>
+                <option value="Fixed contract">Fixed contract</option>
+                <option value="Casual">Casual</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='gender'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='Lifecycle'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select Life cycle</option>
+                <option value="Attract">Attract</option>
+                <option value="Onboard">Onboard</option>
+                <option value="Develop">Develop</option>
+                <option value="Retain">Retain</option>
+                <option value="Separate">Separate</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='jobType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select job type</option>
+                <option value="">Contract type</option>
+                <option value="">Gender</option>
+                <option value="">Job type</option>
+                <option value="">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='tenure'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select tenure</option>
+                <option value="<3 months">&lt; 3 months</option>
+                <option value="3-11 months">3-11 months</option>
+                <option value="1-2 years">1-2 years</option>
+                <option value="3-5 years">3-5 years</option>
+                <option value="5-10 years">5-10 years</option>
+                <option value=">10 years">&gt; 10 years</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xl-1">
+          <button class="border-0 py-2 rounded text-white mt-3" style="background-color: #103a7f;"
+            (click)="onClearFilter()">Clear filters</button>
+        </div>
+      </div> -->
+
+      <div class="row mt-4 d-flex align-items-center justify-content-between">
+        <div class="col-auto">
+          <button class="btn btn-light rounded-circle me-1" data-html2canvas-ignore="true" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+        </div>
+        <div class="col text-center">
+          <h3 class="font-weight-bold" style="color: #103a7f;">Onboarding feedback survey</h3>
+        </div>
+        <div class="col-auto text-end">
+          <button class="border-0 text-white py-2 px-3 ms-3" style="background-color: #103a7f;"
+            data-html2canvas-ignore="true" (click)="exportToExcel()" [disabled]="checkPDFDownloadSpinner">
+            <span *ngIf="checkPDFDownloadSpinner" class="spinner-border spinner-border-sm" role="status"
+              aria-hidden="true"></span>
+            <span *ngIf="!checkPDFDownloadSpinner">Export</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="row mt-2" style="height: auto;">
+        <div class="col-md-12">
+          <div class="card p-2 cardshadow">
+            <div class="d-flex justify-content-between">
+              <div>
+                <button (click)="resetOnboardingLineChartZoom()" hidden data-html2canvas-ignore="true"
+                  class="border-0 rounded py-1 px-2 text-white blue-color">Reset zoom</button>
+              </div>
+              <mat-icon mat-icon-button [matMenuTriggerFor]="menu">menu</mat-icon>
+              <mat-menu #menu="matMenu">
+                <div mat-menu-item (click)="downloadChart('onboardChartCanvas', 'png')">Download PNG</div>
+                <div mat-menu-item (click)="downloadChart('onboardChartCanvas', 'svg')">Download SVG</div>
+                <div mat-menu-item (click)="downloadChart('onboardChartCanvas', 'csv')">Download CSV</div>
+              </mat-menu>
+            </div>
+            <canvas id="onboardChartCanvas" style="width: 100%; height: 100px;">{{onboardinglineChart}}</canvas>
+          </div>
+        </div>
+        <!-- <div class="col-md-4 ms-5">
+          <div class="mt-4">
+            <h3 style="color: #103a7f;" class="font-weight-bold">Stage score</h3>
+            <div class="card h-100">
+              <div class="card-body text-center" style="height: 30vh;">
+                <div *ngFor="let bar of onboardingProgressBar" class="progress-container">
+                  <div class="progress-labels">
+                    <span class="progress-bar-label">{{ bar.stageName }}</span>
+                    <span class="progress-bar-percentage">{{ bar.percentage }}%</span>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar" [style.background-color]="bar.color" [style.width.%]="bar.percentage"
+                      role="progressbar" [attr.aria-valuenow]="bar.percentage" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+
+      <hr class="mt-4" style="border: none; height: 3px; background-color: #000; margin: 1rem 0;">
+
+      <div class="mt-4 d-flex justify-content-between">
+        <div class="d-flex border-0" style="gap: 1em">
+          <button class="w-100 py-2 px-4 border-0 buttons2" *ngFor="let tab of tabsdata" (click)="onTabClick(tab)"
+            data-html2canvas-ignore="true" [ngClass]="{'activetab': tab.clicked}">
+            {{tab.name}}
+          </button>
+        </div>
+        <div>
+          <button type="button" class="border-0 me-2" data-html2canvas-ignore="true" (click)="toggleDisplay()"><img
+              src="assets\repeat.png" alt="" width="30px" height="30px"></button>
+          <button class="border-0 text-white py-2 px-3" data-html2canvas-ignore="true"
+            style="background-color: #103a7f;" (click)="openPopup(paramsName)">Show details</button>
+        </div>
+      </div>
+      <section class="mt-3" style="height: 100%; padding-bottom: 5%;" [hidden]="!isTableVisible">
+        <div *ngIf="selectedTab === 'MCQ'">
+          <div class="row table-row row-head gx-0">
+            <div class="col">Question</div>
+            <div class="col">Strongly agree</div>
+            <div class="col">Agree</div>
+            <div class="col">Neutral</div>
+            <div class="col">Disagree</div>
+            <div class="col">Strongly disagree</div>
+            <div class="col">Weightage</div>
+            <div class="col">Score</div>
+          </div>
+          <div class="tableContainer">
+            <div *ngFor="let item of onboardTable?.listOfStaticSubPhase[0]?.staticQuestionScoreForSurveyResponseDto">
+              <div class="row gx-0 table-row row-body px-0">
+                <div class="col">{{ item?.question || 'N/A' }}</div>
+                <div class="col">{{ item?.optionWithCount['Strongly agree '] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Agree'] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Neutral'] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Disagree '] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Strongly disagree '] || 0 }}</div>
+                <div class="col">{{ item?.weightage || 0 }}</div>
+                <div class="col">{{ item?.totalScore || 0 }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="selectedTab === 'Descriptive'">
+          <div *ngIf="!onboardTable?.listOfStaticSubPhase[0]?.descriptiveQuestion?.length" class="text-center">
+            <p class="my-5">No descriptive questions available.</p>
+          </div>
+          <div *ngIf="onboardTable?.listOfStaticSubPhase[0]?.descriptiveQuestion?.length">
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item"
+                *ngFor="let faq of onboardTable?.listOfStaticSubPhase[0]?.descriptiveQuestion; let i = index">
+                <h2 class="accordion-header" [id]="'heading' + i">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    [attr.data-bs-target]="'#collapse' + i" aria-expanded="false" [attr.aria-controls]="'collapse' + i">
+                    {{ faq.question }}
+                  </button>
+                </h2>
+                <div [id]="'collapse' + i" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div *ngIf="!faq.answers?.length" class="text-center">
+                      <p class="my-2">No answers shared by anyone.</p>
+                    </div>
+                    <div *ngIf="faq.answers?.length">
+                      <div *ngFor="let answer of faq.answers; let isLast = last">
+                        <p>{{ answer }}</p>
+                        <div *ngIf="!isLast">
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mt-3" style="height: 100vh" [hidden]="isTableVisible">
+        <div class="text-left">
+          <button (click)="resetOnboardingBarChartZoom()" hidden data-html2canvas-ignore="true"
+            class="border-0 rounded py-1 px-2 text-white blue-color">Reset
+            zoom</button>
+        </div>
+        <div class="card p-2 cardshadow">
+          <canvas id="onboardbarChartCanvas">{{onboardBarChart}}</canvas>
+        </div>
+      </section>
+    </div>
+    <div class="text-center my-5" [hidden]="!isLoading">
+      <i class="fa fa-spinner fa-spin" style="font-size:64px;color: #103a7f;"></i>
+    </div>
+  </div>
+
+  <div *ngIf="paramsName==='Induction effectiveness survey '" id="survey-content">
+    <div [hidden]="isLoading">
+
+      <!-- <div class="row g-2">
+        <div class="col-lg-11 col-sm-11 col-md-11 col-xl-11">
+          <div class="row g-2">
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6">
+              <select [(ngModel)]="selectedParent" name="" id=""
+                class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="onChangeParent($event)">
+                <option value="" selected disabled>Please select for filter</option>
+                <option value="contractType">Contract type</option>
+                <option value="gender">Gender</option>
+                <option value="Lifecycle">Life cycle</option>
+                <option value="jobType">Job type</option>
+                <option value="tenure">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='contractType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select contract type</option>
+                <option value="Fulltime">Full time</option>
+                <option value="Parttime ">Part time</option>
+                <option value="Fixed contract">Fixed contract</option>
+                <option value="Casual">Casual</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='gender'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='Lifecycle'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select Life cycle</option>
+                <option value="Attract">Attract</option>
+                <option value="Onboard">Onboard</option>
+                <option value="Develop">Develop</option>
+                <option value="Retain">Retain</option>
+                <option value="Separate">Separate</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='jobType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select job type</option>
+                <option value="">Contract type</option>
+                <option value="">Gender</option>
+                <option value="">Job type</option>
+                <option value="">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='tenure'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select tenure</option>
+                <option value="<3 months">&lt; 3 months</option>
+                <option value="3-11 months">3-11 months</option>
+                <option value="1-2 years">1-2 years</option>
+                <option value="3-5 years">3-5 years</option>
+                <option value="5-10 years">5-10 years</option>
+                <option value=">10 years">&gt; 10 years</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xl-1">
+          <button class="border-0 py-2 rounded text-white mt-3" style="background-color: #103a7f;"
+            (click)="onClearFilter()">Clear filters</button>
+        </div>
+      </div> -->
+
+      <div class="row d-flex mt-4 align-items-center justify-content-between">
+        <div class="col-auto">
+          <button class="btn btn-light rounded-circle me-1" data-html2canvas-ignore="true" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+        </div>
+        <div class="col text-center">
+          <h3 class="font-weight-bold" style="color: #103a7f;">Induction effectiveness survey</h3>
+        </div>
+        <div class="col-auto text-end">
+          <button class="border-0 text-white py-2 px-3 ms-3" data-html2canvas-ignore="true"
+            style="background-color: #103a7f;" (click)="exportToExcel()" [disabled]="checkPDFDownloadSpinner">
+            <span *ngIf="checkPDFDownloadSpinner" class="spinner-border spinner-border-sm" role="status"
+              aria-hidden="true"></span>
+            <span *ngIf="!checkPDFDownloadSpinner">Export</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="row mt-2" style="height: auto;">
+        <div class="col-md-12">
+          <div class="card p-2 cardshadow">
+            <div class="d-flex justify-content-between">
+              <div>
+                <button (click)="resetInductionLineChartZoom()" hidden data-html2canvas-ignore="true"
+                  class="border-0 rounded py-1 px-2 text-white blue-color">Reset zoom</button>
+              </div>
+              <mat-icon mat-icon-button [matMenuTriggerFor]="menu">menu</mat-icon>
+              <mat-menu #menu="matMenu">
+                <div mat-menu-item (click)="downloadChart('inductionChartCanvas', 'png')">Download PNG</div>
+                <div mat-menu-item (click)="downloadChart('inductionChartCanvas', 'svg')">Download SVG</div>
+                <div mat-menu-item (click)="downloadChart('inductionChartCanvas', 'csv')">Download CSV</div>
+              </mat-menu>
+            </div>
+            <canvas id="inductionChartCanvas" style="height: 100px; width: 100%;">{{inductionSurvey}}</canvas>
+          </div>
+        </div>
+        <!-- <div class="col-md-4 ms-5">
+          <div class="mt-4">
+            <h3 style="color: #103a7f;" class="font-weight-bold">Stage score</h3>
+            <div class="card h-100">
+              <div class="card-body text-center" style="height: 30vh;">
+                <div *ngFor="let bar of inductionProgressBar" class="progress-container">
+                  <div class="progress-labels">
+                    <span class="progress-bar-label">{{ bar.stageName }}</span>
+                    <span class="progress-bar-percentage">{{ bar.percentage }}%</span>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar" [style.background-color]="bar.color" [style.width.%]="bar.percentage"
+                      role="progressbar" [attr.aria-valuenow]="bar.percentage" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <hr class="mt-4" style="border: none; height: 3px; background-color: #000; margin: 1rem 0;">
+
+      <div class="mt-4 d-flex justify-content-between">
+        <div class="d-flex border-0" style="gap: 1em">
+          <button class="w-100 py-2 px-4 border-0 buttons2" *ngFor="let tab of tabsdata" (click)="onTabClick(tab)"
+            data-html2canvas-ignore="true" [ngClass]="{'activetab': tab.clicked}">
+            {{tab.name}}
+          </button>
+        </div>
+        <div>
+          <button type="button" class="border-0 me-2" data-html2canvas-ignore="true" (click)="toggleDisplay()"><img
+              src="assets\repeat.png" alt="" width="30px" height="30px"></button>
+          <button class="border-0 text-white py-2 px-3" data-html2canvas-ignore="true"
+            style="background-color: #103a7f;" (click)="openPopup(paramsName)">Show details</button>
+        </div>
+      </div>
+      <section class="mt-3" style="height: 100%; padding-bottom: 5%;" [hidden]="!isTableVisible">
+        <div *ngIf="selectedTab === 'MCQ'">
+          <div class="row table-row row-head gx-0">
+            <div class="col">Question</div>
+            <div class="col">Strongly agree</div>
+            <div class="col">Agree</div>
+            <div class="col">Neutral</div>
+            <div class="col">Disagree</div>
+            <div class="col">Strongly disagree</div>
+            <div class="col">Weightage</div>
+            <div class="col">Score</div>
+          </div>
+          <div class="tableContainer">
+            <div *ngFor="let item of inductionTable?.listOfStaticSubPhase[0]?.staticQuestionScoreForSurveyResponseDto">
+              <div class="row gx-0 table-row row-body px-0">
+                <div class="col">{{ item?.question || 'N/A' }}</div>
+                <div class="col">{{ item?.optionWithCount['Strongly agree '] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Agree'] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Neutral'] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Disagree '] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Strongly disagree '] || 0 }}</div>
+                <div class="col">{{ item?.weightage || 0 }}</div>
+                <div class="col">{{ item?.totalScore || 0 }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="selectedTab === 'Descriptive'">
+          <div *ngIf="!inductionTable?.listOfStaticSubPhase[0]?.descriptiveQuestion?.length" class="text-center">
+            <p class="my-5">No descriptive questions available.</p>
+          </div>
+          <div *ngIf="inductionTable?.listOfStaticSubPhase[0]?.descriptiveQuestion?.length">
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item"
+                *ngFor="let faq of inductionTable?.listOfStaticSubPhase[0]?.descriptiveQuestion; let i = index">
+                <h2 class="accordion-header" [id]="'heading' + i">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    [attr.data-bs-target]="'#collapse' + i" aria-expanded="false" [attr.aria-controls]="'collapse' + i">
+                    {{ faq.question }}
+                  </button>
+                </h2>
+                <div [id]="'collapse' + i" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div *ngIf="!faq.answers?.length" class="text-center">
+                      <p class="my-2">No answers shared by anyone.</p>
+                    </div>
+                    <div *ngIf="faq.answers?.length">
+                      <div *ngFor="let answer of faq.answers; let isLast = last">
+                        <p>{{ answer }}</p>
+                        <div *ngIf="!isLast">
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mt-3" style="height: 100vh" [hidden]="isTableVisible">
+        <div class="text-left" data-html2canvas-ignore="true">
+          <button (click)="resetInductionBarChartZoom()" hidden
+            class="border-0 rounded py-1 px-2 text-white blue-color">Reset
+            zoom</button>
+        </div>
+        <div class="card p-2 cardshadow">
+          <canvas id="inductionBarChartCanvas">{{inductionBarChart}}</canvas>
+        </div>
+      </section>
+    </div>
+    <div class="text-center my-5" [hidden]="!isLoading">
+      <i class="fa fa-spinner fa-spin" style="font-size:64px;color: #103a7f;"></i>
+    </div>
+  </div>
+
+  <div *ngIf="paramsName==='On-the-job training effectiveness survey'" id="survey-content">
+    <div [hidden]="isLoading">
+
+      <!-- <div class="row g-2">
+        <div class="col-lg-11 col-sm-11 col-md-11 col-xl-11">
+          <div class="row g-2">
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6">
+              <select [(ngModel)]="selectedParent" name="" id=""
+                class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="onChangeParent($event)">
+                <option value="" selected disabled>Please select for filter</option>
+                <option value="contractType">Contract type</option>
+                <option value="gender">Gender</option>
+                <option value="Lifecycle">Life cycle</option>
+                <option value="jobType">Job type</option>
+                <option value="tenure">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='contractType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select contract type</option>
+                <option value="Fulltime">Full time</option>
+                <option value="Parttime ">Part time</option>
+                <option value="Fixed contract">Fixed contract</option>
+                <option value="Casual">Casual</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='gender'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='Lifecycle'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select Life cycle</option>
+                <option value="Attract">Attract</option>
+                <option value="Onboard">Onboard</option>
+                <option value="Develop">Develop</option>
+                <option value="Retain">Retain</option>
+                <option value="Separate">Separate</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='jobType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select job type</option>
+                <option value="">Contract type</option>
+                <option value="">Gender</option>
+                <option value="">Job type</option>
+                <option value="">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='tenure'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select tenure</option>
+                <option value="<3 months">&lt; 3 months</option>
+                <option value="3-11 months">3-11 months</option>
+                <option value="1-2 years">1-2 years</option>
+                <option value="3-5 years">3-5 years</option>
+                <option value="5-10 years">5-10 years</option>
+                <option value=">10 years">&gt; 10 years</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xl-1">
+          <button class="border-0 py-2 rounded text-white mt-3" style="background-color: #103a7f;"
+            (click)="onClearFilter()">Clear filters</button>
+        </div>
+      </div> -->
+
+      <div class="row d-flex mt-4 align-items-center justify-content-between">
+        <div class="col-auto">
+          <button class="btn btn-light rounded-circle me-1" data-html2canvas-ignore="true" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+        </div>
+        <div class="col text-center">
+          <h3 class="font-weight-bold" style="color: #103a7f;">On-the-job training effectiveness survey</h3>
+        </div>
+        <div class="col-auto text-end">
+          <button class="border-0 text-white py-2 px-3 ms-3" data-html2canvas-ignore="true"
+            style="background-color: #103a7f;" (click)="exportToExcel()" [disabled]="checkPDFDownloadSpinner">
+            <span *ngIf="checkPDFDownloadSpinner" class="spinner-border spinner-border-sm" role="status"
+              aria-hidden="true"></span>
+            <span *ngIf="!checkPDFDownloadSpinner">Export</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="row mt-2" style="height: auto;">
+        <div class="col-md-12">
+          <div class="card p-2 cardshadow">
+            <div class="d-flex justify-content-between">
+              <div>
+                <button (click)="resetOjtLineChartZoom()" hidden data-html2canvas-ignore="true"
+                  class="border-0 rounded py-1 px-2 text-white blue-color">Reset
+                  zoom</button>
+              </div>
+              <mat-icon mat-icon-button [matMenuTriggerFor]="menu">menu</mat-icon>
+              <mat-menu #menu="matMenu">
+                <div mat-menu-item (click)="downloadChart('ojtChartCanvas', 'png')">Download PNG</div>
+                <div mat-menu-item (click)="downloadChart('ojtChartCanvas', 'svg')">Download SVG</div>
+                <div mat-menu-item (click)="downloadChart('ojtChartCanvas', 'csv')">Download CSV</div>
+              </mat-menu>
+            </div>
+            <canvas id="ojtChartCanvas" style="height: 100px; width: 100%;">{{ojtEffectiveness}}</canvas>
+          </div>
+        </div>
+        <!-- <div class="col-md-4 ms-5">
+          <div class="mt-4">
+            <h3 style="color: #103a7f;" class="font-weight-bold">Stage score</h3>
+            <div class="card h-100">
+              <div class="card-body text-center" style="height: 30vh;">
+                <div *ngFor="let bar of ojtProgressBar" class="progress-container">
+                  <div class="progress-labels">
+                    <span class="progress-bar-label">{{ bar.stageName }}</span>
+                    <span class="progress-bar-percentage">{{ bar.percentage }}%</span>
+                  </div>
+                  <div class="progress">
+                    <div class="progress-bar" [style.background-color]="bar.color" [style.width.%]="bar.percentage"
+                      role="progressbar" [attr.aria-valuenow]="bar.percentage" aria-valuemin="0" aria-valuemax="100">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <hr class="mt-4" style="border: none; height: 3px; background-color: #000; margin: 1rem 0;">
+      <div class="mt-4 d-flex justify-content-between">
+        <div class="d-flex border-0" style="gap: 1em">
+          <button class="w-100 py-2 px-4 border-0 buttons2" *ngFor="let tab of tabsdata" (click)="onTabClick(tab)"
+            data-html2canvas-ignore="true" [ngClass]="{'activetab': tab.clicked}">
+            {{tab.name}}
+          </button>
+        </div>
+        <div>
+          <button type="button" class="border-0 me-2" data-html2canvas-ignore="true" (click)="toggleDisplay()"><img
+              src="assets\repeat.png" alt="" width="30px" height="30px"></button>
+          <button class="border-0 text-white py-2 px-3" data-html2canvas-ignore="true"
+            style="background-color: #103a7f;" (click)="openPopup(paramsName)">Show details</button>
+        </div>
+      </div>
+      <section class="mt-3" style="height: 100%; padding-bottom: 5%;" [hidden]="!isTableVisible">
+        <div *ngIf="selectedTab === 'MCQ'">
+          <div class="row table-row row-head gx-0">
+            <div class="col">Question</div>
+            <div class="col">Strongly agree</div>
+            <div class="col">Agree</div>
+            <div class="col">Neutral</div>
+            <div class="col">Disagree</div>
+            <div class="col">Strongly disagree</div>
+            <div class="col">Weightage</div>
+            <div class="col">Score</div>
+          </div>
+          <div class="tableContainer">
+            <div *ngFor="let item of ojtTable?.listOfStaticSubPhase[0]?.staticQuestionScoreForSurveyResponseDto">
+              <div class="row gx-0 table-row row-body px-0">
+                <div class="col">{{ item?.question || 'N/A' }}</div>
+                <div class="col">{{ item?.optionWithCount['Strongly agree '] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Agree'] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Neutral'] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Disagree '] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Strongly disagree '] || 0 }}</div>
+                <div class="col">{{ item?.weightage || 0 }}</div>
+                <div class="col">{{ item?.totalScore || 0 }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="selectedTab === 'Descriptive'">
+          <div *ngIf="!ojtTable?.listOfStaticSubPhase[0]?.descriptiveQuestion?.length" class="text-center">
+            <p class="my-5">No descriptive questions available.</p>
+          </div>
+          <div *ngIf="ojtTable?.listOfStaticSubPhase[0]?.descriptiveQuestion?.length">
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item"
+                *ngFor="let faq of ojtTable?.listOfStaticSubPhase[0]?.descriptiveQuestion; let i = index">
+                <h2 class="accordion-header" [id]="'heading' + i">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    [attr.data-bs-target]="'#collapse' + i" aria-expanded="false" [attr.aria-controls]="'collapse' + i">
+                    {{ faq.question }}
+                  </button>
+                </h2>
+                <div [id]="'collapse' + i" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div *ngIf="!faq.answers?.length" class="text-center">
+                      <p class="my-2">No answers shared by anyone.</p>
+                    </div>
+                    <div *ngIf="faq.answers?.length">
+                      <div *ngFor="let answer of faq.answers; let isLast = last">
+                        <p>{{ answer }}</p>
+                        <div *ngIf="!isLast">
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mt-3" style="height: 100vh" [hidden]="isTableVisible">
+        <div class="text-left" data-html2canvas-ignore="true">
+          <button (click)="resetOjtBarChartZoom()" hidden class="border-0 rounded py-1 px-2 text-white blue-color">Reset
+            zoom</button>
+        </div>
+        <div class="card p-2 cardshadow">
+          <canvas id="ojtBarChartCanvas">{{ojtBarChart}}</canvas>
+        </div>
+      </section>
+    </div>
+    <div class="text-center my-5" [hidden]="!isLoading">
+      <i class="fa fa-spinner fa-spin" style="font-size:64px;color: #103a7f;"></i>
+    </div>
+  </div>
+
+  <div *ngIf="paramsName===' Pulse surveys'" id="survey-content">
+    <div [hidden]="isLoading">
+
+      <!-- <div class="row g-2">
+        <div class="col-lg-11 col-sm-11 col-md-11 col-xl-11">
+          <div class="row g-2">
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6">
+              <select [(ngModel)]="selectedParent" name="" id=""
+                class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="onChangeParent($event)">
+                <option value="" selected disabled>Please select for filter</option>
+                <option value="contractType">Contract type</option>
+                <option value="gender">Gender</option>
+                <option value="Lifecycle">Life cycle</option>
+                <option value="jobType">Job type</option>
+                <option value="tenure">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='contractType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select contract type</option>
+                <option value="Fulltime">Full time</option>
+                <option value="Parttime ">Part time</option>
+                <option value="Fixed contract">Fixed contract</option>
+                <option value="Casual">Casual</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='gender'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='Lifecycle'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select Life cycle</option>
+                <option value="Attract">Attract</option>
+                <option value="Onboard">Onboard</option>
+                <option value="Develop">Develop</option>
+                <option value="Retain">Retain</option>
+                <option value="Separate">Separate</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='jobType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select job type</option>
+                <option value="">Contract type</option>
+                <option value="">Gender</option>
+                <option value="">Job type</option>
+                <option value="">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='tenure'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select tenure</option>
+                <option value="<3 months">&lt; 3 months</option>
+                <option value="3-11 months">3-11 months</option>
+                <option value="1-2 years">1-2 years</option>
+                <option value="3-5 years">3-5 years</option>
+                <option value="5-10 years">5-10 years</option>
+                <option value=">10 years">&gt; 10 years</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xl-1">
+          <button class="border-0 py-2 rounded text-white mt-3" style="background-color: #103a7f;"
+            (click)="onClearFilter()">Clear filters</button>
+        </div>
+      </div> -->
+
+      <div class="row d-flex mt-4 align-items-center justify-content-between">
+        <div class="col-auto">
+          <button class="btn btn-light rounded-circle me-1" data-html2canvas-ignore="true" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+        </div>
+        <div class="col text-center">
+          <h3 class="font-weight-bold" style="color: #103a7f;">Pulse survey</h3>
+        </div>
+        <div class="col-auto text-end">
+          <button class="border-0 text-white py-2 px-3 ms-3" data-html2canvas-ignore="true"
+            style="background-color: #103a7f;" (click)="exportToExcel()" [disabled]="checkPDFDownloadSpinner">
+            <span *ngIf="checkPDFDownloadSpinner" class="spinner-border spinner-border-sm" role="status"
+              aria-hidden="true"></span>
+            <span *ngIf="!checkPDFDownloadSpinner">Export</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="row mt-2" style="height: auto;">
+        <div class="col-md-7">
+          <div class="card p-2 cardshadow">
+            <!-- <div class="text-end">
+              <mat-icon mat-icon-button [matMenuTriggerFor]="menu">menu</mat-icon>
+              <mat-menu #menu="matMenu">
+                <div mat-menu-item (click)="downloadChart('pulsechartCanvas', 'png')">Download PNG</div>
+                <div mat-menu-item (click)="downloadChart('pulsechartCanvas', 'svg')">Download SVG</div>
+                <div mat-menu-item (click)="downloadChart('pulsechartCanvas', 'csv')">Download CSV</div>
+              </mat-menu>
+             </div>
+            <canvas id="pulsechartCanvas">{{pulse}}</canvas> -->
+            <div id="pulsechart">
+              <apx-chart [series]="pulseChartOptions?.series!" [chart]="pulseChartOptions?.chart!"
+                [dataLabels]="pulseChartOptions?.dataLabels!" [title]="pulseChartOptions?.title!"
+                [xaxis]="pulseChartOptions?.xaxis!" [yaxis]="pulseChartOptions?.yaxis!"
+                [tooltip]="pulseChartOptions?.tooltip!" [colors]="pulseChartOptions?.colors!"
+                [plotOptions]="pulseChartOptions?.plotOptions!" [subtitle]="pulseChartOptions?.subtitle">
+              </apx-chart>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 ms-5">
+          <div class="mt-2">
+            <h3 style="color: #103a7f;" class="font-weight-bold">Completion rate</h3>
+            <div class="card h-100">
+              <div class="card-body text-center" style="height: 42vh; overflow: hidden;">
+                <div class="scroll-container">
+                  <div *ngFor="let bar of pulseProgressBar" class="progress-container">
+                    <div class="progress-labels">
+                      <span class="progress-bar-label">{{ bar?.stageName }}</span>
+                      <span class="progress-bar-percentage">{{ bar?.percentage }}%</span>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar" [style.background-color]="bar?.color" [style.width.%]="bar?.percentage"
+                        role="progressbar" [attr.aria-valuenow]="bar?.percentage" aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="mt-4" style="border: none; height: 3px; background-color: #000; margin: 1rem 0;">
+      <div class="row mt-4">
+        <div class="nav nav-tabs d-flex border-0" id="nav-tab" style="gap: 1.2em">
+          <button *ngFor="let tab of pulsetabs" class="w-100 nav-item nav-link"
+            [ngClass]="{ activeTab: activeTab === tab }" (click)="setActiveTabForPulse(tab)">
+            {{ tab }}
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-4 d-flex justify-content-between">
+        <div class="d-flex border-0" style="gap: 1em">
+          <button class="w-100 py-2 px-4 border-0 buttons2" *ngFor="let tab of tabsdata" (click)="onTabClick(tab)"
+            data-html2canvas-ignore="true" [ngClass]="{'activetab': tab.clicked}">
+            {{tab.name}}
+          </button>
+        </div>
+        <div>
+          <button type="button" class="border-0 me-2" data-html2canvas-ignore="true" (click)="toggleDisplay()"><img
+              src="assets\repeat.png" alt="" width="30px" height="30px"></button>
+          <button class="border-0 text-white py-2 px-3" data-html2canvas-ignore="true"
+            style="background-color: #103a7f;" (click)="openPopup(paramsName)">Show details</button>
+        </div>
+      </div>
+      <section class="mt-3" style="height: 100vh" [hidden]="!isTableVisible">
+        <div *ngIf="selectedTab === 'MCQ'">
+          <div class="row table-row row-head gx-0">
+            <div class="col">Question</div>
+            <div class="col">Strongly agree</div>
+            <div class="col">Agree</div>
+            <div class="col">Neither agree nor disagree</div>
+            <div class="col">Disagree</div>
+            <div class="col">Strongly disagree</div>
+            <div class="col">Weightage</div>
+            <div class="col">Score</div>
+
+          </div>
+          <div class="tableContainer">
+            <div *ngFor="let item of pulseDetails">
+              <div class="row gx-0 table-row row-body px-0">
+                <div class="col">{{ item?.question || 'N/A' }}</div>
+                <div class="col">{{ item?.optionWithCount['Strongly agree '] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Agree'] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Neither agree nor disagree '] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Disagree '] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Strongly disagree '] || 0 }}</div>
+                <div class="col">{{ item?.weightage || 0 }}</div>
+                <div class="col">{{ item?.totalScore || 0 }}</div>
+              </div>
+            </div>
+            <div class="text-end me-2">
+              <h2>Theme score : {{pulseThemeScore | number: '1.2-2'}}</h2>
+            </div>
+          </div>
+
+        </div>
+        <div *ngIf="selectedTab === 'Descriptive'">
+          <div *ngIf="!pulseDetails2?.length" class="text-center">
+            <p class="my-5">No descriptive questions available.</p>
+          </div>
+          <div *ngIf="pulseDetails2?.length">
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item" *ngFor="let faq of pulseDetails2; let i = index">
+                <h2 class="accordion-header" [id]="'heading' + i">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    [attr.data-bs-target]="'#collapse' + i" aria-expanded="false" [attr.aria-controls]="'collapse' + i">
+                    {{ faq.question }}
+                  </button>
+                </h2>
+                <div [id]="'collapse' + i" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div *ngIf="!faq.answers?.length" class="text-center">
+                      <p class="my-2">No answers shared by anyone.</p>
+                    </div>
+                    <div *ngIf="faq.answers?.length">
+                      <div *ngFor="let answer of faq.answers; let isLast = last">
+                        <p>{{ answer }}</p>
+                        <div *ngIf="!isLast">
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-3" style="height: 100vh" [hidden]="isTableVisible">
+        <div class="text-left">
+          <button (click)="resetPulseBarChartZoom()" hidden data-html2canvas-ignore="true"
+            class="border-0 rounded py-1 px-2 text-white blue-color">Reset
+            zoom</button>
+        </div>
+        <div class="card p-2 cardshadow">
+          <canvas id="pulsebarChartCanvas">{{pulseBarChart}}</canvas>
+        </div>
+      </section>
+    </div>
+    <div class="text-center my-5" [hidden]="!isLoading">
+      <i class="fa fa-spinner fa-spin" style="font-size:64px;color: #103a7f;"></i>
+    </div>
+  </div>
+
+
+  <div *ngIf="paramsName==='Manager Effectiveness survey'" id="survey-content">
+    <div [hidden]="isLoading">
+
+      <!-- <div class="row g-2">
+        <div class="col-lg-11 col-sm-11 col-md-11 col-xl-11">
+          <div class="row g-2">
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6">
+              <select [(ngModel)]="selectedParent" name="" id=""
+                class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="onChangeParent($event)">
+                <option value="" selected disabled>Please select for filter</option>
+                <option value="contractType">Contract type</option>
+                <option value="gender">Gender</option>
+                <option value="Lifecycle">Life cycle</option>
+                <option value="jobType">Job type</option>
+                <option value="tenure">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='contractType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select contract type</option>
+                <option value="Fulltime">Full time</option>
+                <option value="Parttime ">Part time</option>
+                <option value="Fixed contract">Fixed contract</option>
+                <option value="Casual">Casual</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='gender'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='Lifecycle'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select Life cycle</option>
+                <option value="Attract">Attract</option>
+                <option value="Onboard">Onboard</option>
+                <option value="Develop">Develop</option>
+                <option value="Retain">Retain</option>
+                <option value="Separate">Separate</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='jobType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select job type</option>
+                <option value="">Contract type</option>
+                <option value="">Gender</option>
+                <option value="">Job type</option>
+                <option value="">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='tenure'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select tenure</option>
+                <option value="<3 months">&lt; 3 months</option>
+                <option value="3-11 months">3-11 months</option>
+                <option value="1-2 years">1-2 years</option>
+                <option value="3-5 years">3-5 years</option>
+                <option value="5-10 years">5-10 years</option>
+                <option value=">10 years">&gt; 10 years</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xl-1">
+          <button class="border-0 py-2 rounded text-white mt-3" style="background-color: #103a7f;"
+            (click)="onClearFilter()">Clear filters</button>
+        </div>
+      </div> -->
+
+      <div class="row mt-4 d-flex align-items-center justify-content-between">
+        <div class="col-auto">
+          <button class="btn btn-light rounded-circle me-1" data-html2canvas-ignore="true" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+        </div>
+        <div class="col text-center">
+          <h3 class="font-weight-bold" style="color: #103a7f;">Manager effectiveness survey</h3>
+        </div>
+        <div class="col-auto text-end">
+          <button class="border-0 text-white py-2 px-3 ms-3" data-html2canvas-ignore="true"
+            style="background-color: #103a7f;" (click)="exportToExcel()" [disabled]="checkPDFDownloadSpinner">
+            <span *ngIf="checkPDFDownloadSpinner" class="spinner-border spinner-border-sm" role="status"
+              aria-hidden="true"></span>
+            <span *ngIf="!checkPDFDownloadSpinner">Export</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="row mt-2" style="height: auto;">
+        <div class="col-md-12">
+          <div class="card p-2 cardshadow">
+            <div class="d-flex justify-content-between">
+              <div>
+                <button (click)="resetManagerLineChartZoom()" hidden data-html2canvas-ignore="true"
+                  class="border-0 rounded py-1 px-2 text-white blue-color">Reset zoom</button>
+              </div>
+              <mat-icon mat-icon-button [matMenuTriggerFor]="menu">menu</mat-icon>
+              <mat-menu #menu="matMenu">
+                <div mat-menu-item (click)="downloadChart('managerChartCanvas', 'png')">Download PNG</div>
+                <div mat-menu-item (click)="downloadChart('managerChartCanvas', 'svg')">Download SVG</div>
+                <div mat-menu-item (click)="downloadChart('managerChartCanvas', 'csv')">Download CSV</div>
+              </mat-menu>
+            </div>
+            <canvas id="managerChartCanvas" style="width: 100%; height: 100px;">{{managerEffectiveness}}</canvas>
+          </div>
+        </div>
+        <!-- <div class="col-md-4 ms-5">
+          <div>
+            <h3 style="color: #103a7f;" class="font-weight-bold">Stage score</h3>
+            <div class="card h-100">
+              <div class="card-body text-center" style="height: 48vh;">
+                <canvas id="managerdoughnutChartCanvas">{{managerdoughnutChart}}</canvas>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+      <hr class="mt-4" style="border: none; height: 3px; background-color: #000; margin: 1rem 0;">
+      <div class="mt-4 d-flex justify-content-between">
+        <div class="d-flex border-0" style="gap: 1em">
+          <button class="w-100 py-2 px-4 border-0 buttons2" *ngFor="let tab of tabsdata" (click)="onTabClick(tab)"
+            data-html2canvas-ignore="true" [ngClass]="{'activetab': tab.clicked}">
+            {{tab.name}}
+          </button>
+        </div>
+        <div>
+          <button type="button" class="border-0 me-2" data-html2canvas-ignore="true" (click)="toggleDisplay()"><img
+              src="assets\repeat.png" alt="" width="30px" height="30px"></button>
+          <button class="border-0 text-white py-2 px-3" data-html2canvas-ignore="true"
+            style="background-color: #103a7f;" (click)="openPopup(paramsName)">Show details</button>
+        </div>
+      </div>
+      <section class="mt-3" style="height: 100%; padding-bottom: 5%;" [hidden]="!isTableVisible">
+        <div *ngIf="selectedTab === 'MCQ'">
+          <div class="row table-row row-head gx-0">
+            <div class="col">Question</div>
+            <div class="col">Strongly agree</div>
+            <div class="col">Agree</div>
+            <div class="col">Neither agree nor disagree</div>
+            <div class="col">Disagree</div>
+            <div class="col">Strongly disagree</div>
+            <div class="col">Weightage</div>
+            <div class="col">Score</div>
+          </div>
+          <div class="tableContainer">
+            <div *ngFor="let item of managerTable?.listOfStaticSubPhase[0]?.staticQuestionScoreForSurveyResponseDto">
+              <div class="row gx-0 table-row row-body px-0">
+                <div class="col">{{ item?.question || 'N/A' }}</div>
+                <div class="col">{{ item?.optionWithCount['Strongly agree '] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Agree'] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Neither agree nor disagree '] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Disagree '] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Strongly disagree '] || 0 }}</div>
+                <div class="col">{{ item?.weightage || 0 }}</div>
+                <div class="col">{{ item?.totalScore || 0 }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="selectedTab === 'Descriptive'">
+          <div *ngIf="!managerTable?.listOfStaticSubPhase[0]?.descriptiveQuestion?.length" class="text-center">
+            <p class="my-5">No descriptive questions available.</p>
+          </div>
+          <div *ngIf="managerTable?.listOfStaticSubPhase[0]?.descriptiveQuestion?.length">
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item"
+                *ngFor="let faq of managerTable?.listOfStaticSubPhase[0]?.descriptiveQuestion; let i = index">
+                <h2 class="accordion-header" [id]="'heading' + i">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    [attr.data-bs-target]="'#collapse' + i" aria-expanded="false" [attr.aria-controls]="'collapse' + i">
+                    {{ faq.question }}
+                  </button>
+                </h2>
+                <div [id]="'collapse' + i" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div *ngIf="!faq.answers?.length" class="text-center">
+                      <p class="my-2">No answers shared by anyone.</p>
+                    </div>
+                    <div *ngIf="faq.answers?.length">
+                      <div *ngFor="let answer of faq.answers; let isLast = last">
+                        <p>{{ answer }}</p>
+                        <div *ngIf="!isLast">
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="mt-3" style="height: 100vh" [hidden]="isTableVisible">
+        <div class="text-left">
+          <button (click)="resetManagerBarChartZoom()" hidden data-html2canvas-ignore="true"
+            class="border-0 rounded py-1 px-2 text-white blue-color">Reset
+            zoom</button>
+        </div>
+        <div class="card p-2 cardshadow">
+          <canvas id="managerBarChartCanvas">{{managerBarChart}}</canvas>
+        </div>
+      </section>
+    </div>
+    <div class="text-center my-5" [hidden]="!isLoading">
+      <i class="fa fa-spinner fa-spin" style="font-size:64px;color: #103a7f;"></i>
+    </div>
+  </div>
+
+  <div *ngIf="paramsName==='eNPS survey'" id="survey-content">
+    <div [hidden]="isLoading">
+
+      <!-- <div class="row g-2">
+        <div class="col-lg-11 col-sm-11 col-md-11 col-xl-11">
+          <div class="row g-2">
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6">
+              <select [(ngModel)]="selectedParent" name="" id=""
+                class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="onChangeParent($event)">
+                <option value="" selected disabled>Please select for filter</option>
+                <option value="contractType">Contract type</option>
+                <option value="gender">Gender</option>
+                <option value="Lifecycle">Life cycle</option>
+                <option value="jobType">Job type</option>
+                <option value="tenure">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='contractType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select contract type</option>
+                <option value="Fulltime">Full time</option>
+                <option value="Parttime ">Part time</option>
+                <option value="Fixed contract">Fixed contract</option>
+                <option value="Casual">Casual</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='gender'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='Lifecycle'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select Life cycle</option>
+                <option value="Attract">Attract</option>
+                <option value="Onboard">Onboard</option>
+                <option value="Develop">Develop</option>
+                <option value="Retain">Retain</option>
+                <option value="Separate">Separate</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='jobType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select job type</option>
+                <option value="">Contract type</option>
+                <option value="">Gender</option>
+                <option value="">Job type</option>
+                <option value="">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='tenure'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select tenure</option>
+                <option value="<3 months">&lt; 3 months</option>
+                <option value="3-11 months">3-11 months</option>
+                <option value="1-2 years">1-2 years</option>
+                <option value="3-5 years">3-5 years</option>
+                <option value="5-10 years">5-10 years</option>
+                <option value=">10 years">&gt; 10 years</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xl-1">
+          <button class="border-0 py-2 rounded text-white mt-3" style="background-color: #103a7f;"
+            (click)="onClearFilter()">Clear filters</button>
+        </div>
+      </div> -->
+
+      <div class="row mt-4 align-items-center">
+        <div class="col-auto">
+          <button class="btn btn-light rounded-circle me-1" data-html2canvas-ignore="true" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+        </div>
+        <div class="col text-center">
+          <h3 class="font-weight-bold" style="color: #103a7f;">Employee net promoter score survey</h3>
+        </div>
+        <div class="col-auto text-end">
+          <button class="border-0 text-white py-2 px-3 ms-3" data-html2canvas-ignore="true"
+            style="background-color: #103a7f;" (click)="exportToExcel()" [disabled]="checkPDFDownloadSpinner">
+            <span *ngIf="checkPDFDownloadSpinner" class="spinner-border spinner-border-sm" role="status"
+              aria-hidden="true"></span>
+            <span *ngIf="!checkPDFDownloadSpinner">Export</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="row mt-4 justify-content-center text-center">
+        <div class="card col-md-6" *ngIf="backendMessage===null; else noChart">
+          <div class="card-body text-center">
+            <div id="chart">
+              <apx-chart [series]="eNPSdoughnutChart?.series" [chart]="eNPSdoughnutChart?.chart"
+                [labels]="eNPSdoughnutChart?.labels" [responsive]="eNPSdoughnutChart?.responsive"
+                [colors]="eNPSdoughnutChart?.colors" [title]="eNPSdoughnutChart?.title"
+                [legend]="eNPSdoughnutChart?.legend" [plotOptions]="eNPSdoughnutChart?.plotOptions"></apx-chart>
+            </div>
+          </div>
+        </div>
+        <ng-template #noChart>
+          <div class="text-center py-5">
+            <p>{{backendMessage}}</p>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div class="text-center my-5" [hidden]="!isLoading">
+      <i class="fa fa-spinner fa-spin" style="font-size:64px;color: #103a7f;"></i>
+    </div>
+  </div>
+
+  <div *ngIf="otherSurvey" id="survey-content">
+    <div [hidden]="isLoading">
+
+
+      <!-- <div class="row g-2">
+        <div class="col-lg-11 col-sm-11 col-md-11 col-xl-11">
+          <div class="row g-2">
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6">
+              <select [(ngModel)]="selectedParent" name="" id=""
+                class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="onChangeParent($event)">
+                <option value="" selected disabled>Please select for filter</option>
+                <option value="contractType">Contract type</option>
+                <option value="gender">Gender</option>
+                <option value="Lifecycle">Life cycle</option>
+                <option value="jobType">Job type</option>
+                <option value="tenure">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='contractType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select contract type</option>
+                <option value="Fulltime">Full time</option>
+                <option value="Parttime ">Part time</option>
+                <option value="Fixed contract">Fixed contract</option>
+                <option value="Casual">Casual</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='gender'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+                <option value="Prefer not to say">Prefer not to say</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='Lifecycle'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select Life cycle</option>
+                <option value="Attract">Attract</option>
+                <option value="Onboard">Onboard</option>
+                <option value="Develop">Develop</option>
+                <option value="Retain">Retain</option>
+                <option value="Separate">Separate</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='jobType'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select job type</option>
+                <option value="">Contract type</option>
+                <option value="">Gender</option>
+                <option value="">Job type</option>
+                <option value="">Tenure</option>
+              </select>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xl-6" *ngIf="selectedParent==='tenure'">
+              <select name="" id="" class="form-select form-select-lg rounded rounded-pill w-100 mt-2 shadow"
+                (change)="filterData($event)">
+                <option value="" selected disabled>Please select tenure</option>
+                <option value="<3 months">&lt; 3 months</option>
+                <option value="3-11 months">3-11 months</option>
+                <option value="1-2 years">1-2 years</option>
+                <option value="3-5 years">3-5 years</option>
+                <option value="5-10 years">5-10 years</option>
+                <option value=">10 years">&gt; 10 years</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xl-1">
+          <button class="border-0 py-2 rounded text-white mt-3" style="background-color: #103a7f;"
+            (click)="onClearFilter()">Clear filters</button>
+        </div>
+      </div> -->
+
+      <div class="row mt-4 align-items-center">
+        <div class="col-auto">
+          <button class="btn btn-light rounded-circle me-1" data-html2canvas-ignore="true" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+        </div>
+        <div class="col text-center">
+          <h3 class="font-weight-bold" style="color: #103a7f;">{{paramsName}}</h3>
+        </div>
+        <div class="col-auto text-end">
+          <button class="border-0 text-white py-2 px-3 ms-3" data-html2canvas-ignore="true"
+            style="background-color: #103a7f;" (click)="exportToExcel()" [disabled]="checkPDFDownloadSpinner">
+            <span *ngIf="checkPDFDownloadSpinner" class="spinner-border spinner-border-sm" role="status"
+              aria-hidden="true"></span>
+            <span *ngIf="!checkPDFDownloadSpinner">Export</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="row mt-2" style="height: auto;">
+        <div class="col-md-7">
+          <div class="card p-2 cardshadow">
+            <div class="d-flex justify-content-between">
+              <div>
+                <button (click)="resetOtherLineChartZoom()" hidden data-html2canvas-ignore="true"
+                  class="border-0 rounded py-1 px-2 text-white blue-color">Reset
+                  zoom</button>
+              </div>
+              <mat-icon mat-icon-button [matMenuTriggerFor]="menu">menu</mat-icon>
+              <mat-menu #menu="matMenu">
+                <div mat-menu-item (click)="downloadChart('otherChartCanvas', 'png')">Download PNG</div>
+                <div mat-menu-item (click)="downloadChart('otherChartCanvas', 'svg')">Download SVG</div>
+                <div mat-menu-item (click)="downloadChart('otherChartCanvas', 'csv')">Download CSV</div>
+              </mat-menu>
+            </div>
+            <canvas id="otherChartCanvas">{{otherChart}}</canvas>
+          </div>
+        </div>
+        <div class="col-md-4 ms-5">
+          <div class="mt-2">
+            <h3 style="color: #103a7f;" class="font-weight-bold">Completion rate</h3>
+            <div class="card h-100">
+              <div class="card-body text-center" style="height: 45vh; overflow: hidden;">
+                <div class="scroll-container">
+                  <div *ngFor="let bar of otherProgressBar" class="progress-container">
+                    <div class="progress-labels">
+                      <span class="progress-bar-label pb-0">{{ bar?.stageName }}</span>
+                      <span class="progress-bar-percentage">{{ bar?.percentage }}%</span>
+                    </div>
+                    <div class="progress">
+                      <div class="progress-bar" [style.background-color]="bar?.color" [style.width.%]="bar?.percentage"
+                        role="progressbar" [attr.aria-valuenow]="bar?.percentage" aria-valuemin="0" aria-valuemax="100">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr class="mt-4" style="border: none; height: 3px; background-color: #000; margin: 1rem 0;">
+      <div class="row mt-4" *ngIf="othertabs[0]!=='default'">
+        <div class="nav nav-tabs d-flex border-0" id="nav-tab" style="gap: 1.2em">
+          <button *ngFor="let tab of othertabs" class="w-100 nav-item nav-link"
+            [ngClass]="{ activeTab: activeTab === tab }" (click)="setActiveTabForOther(tab)">
+            {{ tab }}
+          </button>
+        </div>
+      </div>
+
+      <div class="mt-4 d-flex justify-content-between">
+        <div class="d-flex border-0" style="gap: 1em">
+          <button class="w-100 py-2 px-4 border-0 buttons2" *ngFor="let tab of tabsdata" (click)="onTabClick(tab)"
+            data-html2canvas-ignore="true" [ngClass]="{'activetab': tab.clicked}">
+            {{tab.name}}
+          </button>
+        </div>
+        <div>
+          <button type="button" class="border-0 me-2" data-html2canvas-ignore="true" (click)="toggleDisplay()"><img
+              src="assets\repeat.png" alt="" width="30px" height="30px"></button>
+          <button class="border-0 text-white py-2 px-3" data-html2canvas-ignore="true"
+            style="background-color: #103a7f;" (click)="openPopup(paramsName)">Show details</button>
+        </div>
+      </div>
+      <section class="mt-3" style="height: 100%; padding-bottom: 5%;" [hidden]="!isTableVisible">
+        <div *ngIf="selectedTab === 'MCQ'">
+          <div class="row table-row row-head gx-0">
+            <div class="col">Question</div>
+            <div class="col">Strongly agree</div>
+            <div class="col">Agree</div>
+            <div class="col">Disagree</div>
+            <div class="col">Strongly disagree</div>
+            <div class="col">Weightage</div>
+            <div class="col">Score</div>
+
+          </div>
+          <div class="tableContainer">
+            <div *ngFor="let item of otherDetails">
+              <div class="row gx-0 table-row row-body px-0">
+                <div class="col">{{ item?.question || 'N/A' }}</div>
+                <div class="col">{{ item?.optionWithCount['Strongly agree '] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Agree'] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Disagree '] || 0 }}</div>
+                <div class="col">{{ item?.optionWithCount['Strongly disagree '] || 0 }}</div>
+                <div class="col">{{ item?.weightage || 0 }}</div>
+                <div class="col">{{ item?.totalScore || 0 }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="selectedTab === 'Descriptive'">
+          <div *ngIf="otherDetails2?.length===0" class="text-center">
+            <p class="my-5">No descriptive questions available.</p>
+          </div>
+          <div *ngIf="otherDetails2?.length > 0">
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item" *ngFor="let faq of otherDetails2; let i = index">
+                <h2 class="accordion-header" [id]="'heading' + i">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    [attr.data-bs-target]="'#collapse' + i" aria-expanded="false" [attr.aria-controls]="'collapse' + i">
+                    {{ faq.question }}
+                  </button>
+                </h2>
+                <div [id]="'collapse' + i" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <div *ngIf="!faq.answers?.length" class="text-center">
+                      <p class="my-2">No answers shared by anyone.</p>
+                    </div>
+                    <div *ngIf="faq.answers?.length">
+                      <div *ngFor="let answer of faq?.answers; let isLast = last">
+                        <p>{{ answer }}</p>
+                        <div *ngIf="!isLast">
+                          <hr>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="mt-3" style="height: 100vh" [hidden]="isTableVisible">
+        <div class="text-left" data-html2canvas-ignore="true">
+          <button (click)="resetOtherBarChartZoom()" hidden
+            class="border-0 rounded py-1 px-2 text-white blue-color">Reset
+            zoom</button>
+        </div>
+        <div class="card p-2 cardshadow">
+          <canvas id="otherbarChartCanvas">{{otherBarChart}}</canvas>
+        </div>
+      </section>
+    </div>
+    <div class="text-center my-5" [hidden]="!isLoading">
+      <i class="fa fa-spinner fa-spin" style="font-size:64px;color: #103a7f;"></i>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="locator-root">
+  <div class="page-header">
+    <h1>{{title}}</h1>
+    <div class="subtitle">{{subtitle}}</div>
+  </div>
+
+  <div class="filters card mb-3">
+    <div class="left">
+      <input placeholder="Search by city" list="city-list" [(ngModel)]="searchCity" (input)="applyFilters()" />
+      <datalist id="city-list">
+        <option *ngFor="let c of citySuggestions" [value]="c"></option>
+      </datalist>
+      <select [(ngModel)]="selectedBrand" (change)="applyFilters()">
+        <option [ngValue]="null">All brands</option>
+        <option *ngFor="let b of brands" [value]="b.id">{{b.name}}</option>
+      </select>
+    </div>
+   
+    
+  </div>
+
+  <div class="split">
+    <div class="table-wrap card" style="width:100%">
+      <div *ngIf="loading" class="loading">Loading stores…</div>
+      <div *ngIf="!loading && filtered.length===0" class="empty">No stores found</div>
+
+      <table *ngIf="!loading && filtered.length>0" class="store-table">
+        <thead>
+          <tr>
+            <th>Store Name</th>
+            <th>Store Code</th>
+            <th>City</th>
+            <th>State</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let s of filtered">
+            <tr [class.selected]="selectedStoreId===s.id" (click)="selectStore(s)">
+              <td class="clickable">{{s.name}}</td>
+              <td class="mono">{{s.code}}</td>
+              <td>{{s.city}}</td>
+              <td>{{s.state}}</td>
+              <td><span class="badge" [class.active]="s.status==='Active'" [class.inactive]="s.status!=='Active'">{{s.status}}</span></td>
+              <td><button (click)="toggleExpand(s); $event.stopPropagation()">▾</button></td>
+            </tr>
+            <tr *ngIf="s.expanded" class="expanded-row">
+              <td colspan="6">
+                <div class="expanded-details">
+                  <div><strong>Address:</strong> {{s.address}}</div>
+                  <div><strong>Contact:</strong> {{s.phone}}</div>
+                  <div><strong>Store GUID:</strong> {{s.id}}</div>
+                </div>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="col-lg-12 mt-2">
+    <h2  style="display: inline; color: #103a7f; font-weight: 700;">{{buttonName}}</h2>
+    <button type="button" class="close bthnHover" aria-label="Close" (click)="onClose()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="col-lg-12 mx-auto">
+    <div class="row">
+        <form [formGroup]="createTouchpointStageForm" (ngSubmit)="onCreateStage()" class="w-100">
+            <div class="col-md-12 mt-4">
+                <label for="survey_name">Stage name</label>
+                <input type="text" id="survey_name" class="form-control bg-light w-100" placeholder="Enter stage name"
+                    formControlName="stageName">
+                        <p *ngIf="createTouchpointStageForm.get('stageName')?.touched && createTouchpointStageForm.get('stageName')?.hasError('required')" class="text-danger">
+                            Srage name is required
+                        </p>
+            </div>
+            <hr>
+           
+            <!-- <div class="col-md-12 mt-2">
+                <label for="survey_description">Add Subphase</label>
+                <div class="" formArrayName="stages">
+                <div class="input-group mb-3"*ngFor="let item of stages().controls; let i = index">
+                    <input type="text" class="form-control"[formControlName]="i" placeholder="Add Stage of survey" aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"(click)="deleteRow(i)"><i class="fa fa-trash-o" style="font-size:22px;color:red"></i></button>
+                  </div>
+                </div>
+                <div class="row">
+                    <button type="button" class="btn btn-outline-secondary w-100" (click)="addRow()">Add Subphase</button>
+                </div>
+            </div> -->
+            <div class="col-md-12 mt-3 mb-3 text-center text-right">
+                <button type="submit" class="py-2 px-4 border-0 rounded button-color text-white ">{{buttonName}}</button>
+            </div>
+        </form>
+    </div>
+</div>

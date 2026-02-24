@@ -1,0 +1,48 @@
+.bthnHover:hover {
+    background-color: gray;
+    border-radius: 50px;
+}
+
+.bthnHover {
+    height: 25px;
+    width: 25px;
+    background-color: gainsboro;
+    border-radius: 50px;
+}
+
+.blue-color{
+    color: #103a7f;
+  }
+  
+  .background-color{
+    background-color: #103a7f;
+    color: white;
+  }
+  
+  .icon-sky-color{
+    color: #069de0;
+  }
+
+::placeholder {
+    position: absolute;
+    margin: 0 !important;
+    top: 14px;
+    left: 15px;
+    font-size: 13px;
+    font-weight: 200;
+    
+    color: #ccc;
+    text-align: left;
+  }
+  select::placeholder {
+    position: absolute;
+    margin: 0 !important;
+    top: 14px;
+    left: 15px;
+    font-size: 13px;
+    font-weight: 200;
+    
+    color: #ccc;
+    text-align: left;
+  }
+

@@ -1,0 +1,156 @@
+<div class="container ">
+    <div class="row mt-4 mx-3">
+        <div class="col-12 ">
+            <h2 class="" style="display: inline; color: #103a7f;">{{btnName}}</h2>
+            <button type="button" class="close bthnHover" aria-label="Close" (click)="onClose()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+    <form [formGroup]="questionForm">
+        <div class="row mx-3">
+
+            <div class="col-md-6 col-sm-12">
+                <div class="mt-4 px-5 py-4 bg-light">
+                    <h3 class="blue-color font-weight-bold">Enter question</h3>
+                    <textarea name="" id="" cols="20" rows="5" class="form-control" formControlName="question"
+                        placeholder="Question"></textarea>
+                        <p *ngIf="questionForm.get('question')?.touched && questionForm.get('question')?.hasError('required')" class="text-danger">
+                            Question is required
+                        </p>
+                </div>
+
+                <div class="mt-4 ms-5">
+                    <label class="blue-color font-weight-bold">Enter max weightage for question</label>
+                    <input type="number" placeholder="Enter max weightage for question"
+                        class="form-control border-grey w-75" formControlName="maxWeightage"
+                        (keypress)="isNumber($event)">
+                </div>
+                <div class="mt-5 ms-5">
+                    <h3 class="font-weight-bold blue-color">Type of question ?</h3>
+                    <div class="ms-5 font-weight-bold">
+                        <div class="mt-4">
+                            <input type="radio" class="form-check-input" value="mcq" name="mcq"
+                                (change)="updateSelection('mcq')" [checked]="selectedOption === 'mcq'">
+                            <label class="form-check-label">
+                                MCQ
+                            </label>
+                        </div>
+
+                        <div class="mt-4">
+                            <input type="radio" class="form-check-input" value="descriptive" name="mcq"
+                                (change)="updateSelection('descriptive')" [checked]="selectedOption === 'descriptive'">
+                            <label class="form-check-label">
+                                Descriptive
+                            </label>
+                        </div>
+
+                        <!-- <div class="mt-4">
+                            <input type="radio" class="form-check-input" value="both" name="mcq"
+                                (change)="updateSelection('both')"  [checked]="selectedOption === 'both'">
+                            <label class="form-check-label">
+                                MCQ & Descriptive
+                            </label>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12" *ngIf="selectedOption === 'mcq'">
+                <div class="mt-4">
+                    <h3 class="font-weight-bold text-color">Select option you want to show with question</h3>
+                </div>
+                <div class="text-center mb-2 d-flex justify-content-center align-items-center">
+                    <select name="" id="" class="form-select p-2 w-75" (change)="onSelectChange($event)">
+                        <option value="" selected disabled>Change responses</option>
+                        <option value="agree">Agree-Disagree</option>
+                        <option value="satisfied">Satisfied-Dissatisfied</option>
+                        <option value="important">Important-Unimportant</option>
+                    </select>
+                </div>
+
+                <div class="form-check ms-5 mt-4">
+                    <input class="form-check-input" type="checkbox" style="width: 18px; height: 18px;"
+                        [checked]="selectAllChecked" (change)="toggleSelectAll()">
+                    <label class="form-check-label font-weight-bold m-1 blue-color">
+                        Select all
+                    </label>
+                </div>
+                <div style="margin-inline-start: 40%">
+                    <div class="form-check mt-4" *ngFor="let option of options">
+                        <input class="form-check-input" type="checkbox" [checked]="option.checked"
+                            (change)="updateOptionCheck(option)">
+                        <label class="form-check-label font-weight-bold blue-color">
+                            {{ option.label | titlecase }}
+                        </label>
+                    </div>
+                </div>
+                <!-- <div class="text-center mt-5">
+                <button class="px-5 py-2 border-0 rounded button-color text-white">Add Question</button>
+            </div> -->
+            </div>
+            <div class="col-md-6 col-sm-12" *ngIf="selectedOption === 'descriptive'">
+                <div class="mt-4 px-5 py-4 bg-light">
+                    <h3 class="blue-color font-weight-bold">Enter answer</h3>
+                    <textarea name="" id="" cols="20" rows="30" class="form-control" placeholder="Question" formControlName="answer"
+                        style="height: 60vh;"></textarea>
+                </div>
+                <!-- <div class="text-center mt-2">
+                <button class="px-5 py-2 border-0 rounded button-color text-white">Enter answer</button>
+            </div> -->
+            </div>
+            <div class="col-md-6 col-sm-12" *ngIf="selectedOption === 'both'">
+                <div class="mt-4">
+                    <h3 class="font-weight-bold text-color">Select option you want to show with question</h3>
+                </div>
+                <div class="text-center mb-2 d-flex justify-content-center align-items-center">
+                    <select name="" id="" class="form-select p-2 w-75" (change)="onSelectChange($event)">
+                        <option value="" selected disabled>Change responses</option>
+                        <option value="agree">Agree-Disagree</option>
+                        <option value="satisfied">Satisfied-Dissatisfied</option>
+                        <option value="important">Important-Unimportant</option>
+                    </select>
+                </div>
+                <div class="form-check ms-5 mt-4">
+                    <input class="form-check-input" type="checkbox" style="width: 18px; height: 18px;"
+                        [checked]="selectAllChecked" (change)="toggleSelectAll()">
+                    <label class="form-check-label font-weight-bold m-1 blue-color">
+                        Select all
+                    </label>
+                </div>
+                <div style="margin-inline-start: 20%">
+                    <div class="row">
+                        <div class="col">
+                            <ng-container *ngFor="let chunk of options.slice(0, 3)">
+                                <div class="form-check mt-4">
+                                    <input class="form-check-input" type="checkbox" [checked]="chunk.checked"
+                                    (change)="updateOptionCheck(chunk)">
+                                    <label class="form-check-label font-weight-bold m-1 blue-color">
+                                        {{ chunk.label }}
+                                    </label>
+                                </div>
+                            </ng-container>
+                        </div>
+                        <div class="col">
+                            <ng-container *ngFor="let chunk of options.slice(3)">
+                                <div class="form-check mt-4">
+                                    <input class="form-check-input" type="checkbox" [checked]="chunk.checked"
+                                        (change)="updateOptionCheck(chunk)">
+                                    <label class="form-check-label font-weight-bold m-1 blue-color">
+                                        {{ chunk.label }}
+                                    </label>
+                                </div>
+                            </ng-container>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 px-4 py-4 bg-light">
+                    <h3 class="blue-color font-weight-bold">Enter answer</h3>
+                    <textarea name="" id="" cols="20" rows="5" class="form-control" formControlName="answer" placeholder="Answer"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="text-right mt-4 button-container">
+            <button class="px-5 py-2 border-0 rounded button-color text-white" (click)="onSubmit()">{{btnName}}</button>
+        </div>
+    </form>
+</div>

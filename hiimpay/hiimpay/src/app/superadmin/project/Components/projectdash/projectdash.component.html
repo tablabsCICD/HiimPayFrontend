@@ -1,0 +1,917 @@
+<div class="container my-2">
+    <div class="row mt-2 pe-5">
+        <div class="col-lg col-md col-sm-12">
+            <div class="d-flex align-items-center justify-content-between">
+                <h3 style="margin: 0; color: #103a7f; font-weight: bolder">
+                    Project dashboard
+                </h3>
+                <span class="blue-color font-weight-bold" style="font-weight: 700; max-width: 500px; text-wrap: wrap;">
+                    Project name : {{ displayClientData?.clientName }}</span>
+                <span class="blue-color font-weight-bold ms-4" style="font-weight: 700">
+                    EXwise consultant : {{ displayClientData?.consultantName }}</span>
+                <span class="blue-color font-weight-bold" (click)="editUser(displayClientData?.copcId)" style="font-weight: 700; cursor: pointer;">
+                    CPOC name : {{ displayClientData?.contactPerson }}</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center info-card pe-5">
+        <div class="col-2 flex-grow-1" (click)="listen('Listen')">
+            <div class="card" [ngClass]="{ activeTab: activeTab === 'Listen' }" style="height: 110px;">
+                <div class="card-body d-flex flex-column">
+                    <div class="row flex-grow-1">
+                        <div class="col align-self-center">
+                            <h5 class="card-title fs-6 text-uppercase fw-normal mb-2">
+                                Listen
+                            </h5>
+                        </div>
+                        <div class="col-auto d-flex justify-content-center align-items-center">
+                            <div class="align-self-center me-3">
+                                <img src="assets\volume.png" alt="" height="70" width="60" style="object-fit: contain;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2 flex-grow-1" (click)="Analyse('Analyse')">
+            <div class="card" [ngClass]="{ activeTab: activeTab === 'Analyse' }" style="height: 110px;">
+                <div class="card-body d-flex flex-column">
+                    <div class="row flex-grow-1">
+                        <div class="col align-self-center">
+                            <h5 class="card-title fs-6 text-uppercase fw-normal mb-2">
+                                Analyse
+                            </h5>
+                        </div>
+                        <div class="col-auto d-flex justify-content-center align-items-center">
+                            <div class="align-self-center me-3">
+                                <img src="assets/analysis.png" alt="" height="70" width="60"
+                                    style="object-fit: contain;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2 flex-grow-1" (click)="Share('Share')">
+            <div class="card" [ngClass]="{ activeTab: activeTab === 'Share' }" style="height: 110px;">
+                <div class="card-body d-flex flex-column">
+                    <div class="row flex-grow-1">
+                        <div class="col align-self-center">
+                            <h5 class="card-title fs-6 text-uppercase fw-normal mb-2">
+                                Share
+                            </h5>
+                        </div>
+                        <div class="col-auto d-flex justify-content-center align-items-center">
+                            <div class="align-self-center me-3">
+                                <img src="assets/send.png" alt="" height="55" width="60" style="object-fit: contain;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2 flex-grow-1" (click)="cocreate('Co-Create')">
+            <div class="card" [ngClass]="{ activeTab: activeTab === 'Co-Create' }" style="height: 110px;">
+                <div class="card-body d-flex flex-column">
+                    <div class="row flex-grow-1">
+                        <div class="col align-self-center">
+                            <h5 class="card-title fs-6 text-uppercase fw-normal mb-2">
+                                Co-create
+                            </h5>
+                        </div>
+                        <div class="col-auto d-flex justify-content-center align-items-center">
+                            <div class="align-self-center me-3">
+                                <img src="assets/group.png" alt="" height="70" width="60" style="object-fit: contain;">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- <div class="row justify-content-center info-card">
+        <div class="col-2 flex-grow-1" (click)="listen('Listen')">
+            <div class="card" [ngClass]="{ activeTab: activeTab === 'Listen' }">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <h5 class="card-title fs-6 text-uppercase fw-normal mb-2">
+                                Listen
+                            </h5>
+                        </div>
+                        <div class="col-auto">
+                            <div class="align-self-center me-3">
+                                <img src="assets\listen2.png" alt="" height="90" width="80">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2 flex-grow-1">
+            <div class="card" (click)="Analyse('Analyse')" [ngClass]="{ activeTab: activeTab === 'Analyse' }">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <h5 class="card-title fs-6 text-uppercase fw-normal mb-2">
+                                Analyse
+                            </h5>
+                        </div>
+                        <div class="col-auto">
+                            <div class="align-self-center me-3">
+                                <img src="assets\analysis.png" alt="" height="90" width="80">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2 flex-grow-1">
+            <div class="card" (click)="Share('Share')" [ngClass]="{ activeTab: activeTab === 'Share' }">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <h5 class="card-title fs-6 text-uppercase fw-normal mb-2">
+                                Share
+                            </h5>
+                        </div>
+                        <div class="col-auto">
+                            <div class="align-self-center me-3">
+                                <img src="assets/send.png" alt="" height="90" width="80">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2 flex-grow-1">
+            <div class="card" (click)="cocreate('create')" [ngClass]="{ activeTab: activeTab === 'create' }">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col align-self-center">
+                            <h5 class="card-title fs-6 text-uppercase fw-normal mb-2">
+                                Co-create
+                            </h5>
+                        </div>
+                        <div class="col-auto">
+                            <div class="align-self-center me-3">
+                                <img src="assets\group.png" alt="" height="90" width="80">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>
+<div class="container">
+    <div class="row mt-3" *ngIf="viewMore">
+        <div class="row mt-3" *ngIf="!isLoading">
+            <div class="row">
+                <div class="col-sm-6 col-md-6 col-xl-3">
+                    <div class="card px-3 py-3" style="height:643px;  overflow-x: hidden; overflow-y: auto;">
+                        <h3 class="text-center">Upcoming tasks</h3>
+                        <div class="row">
+                            <div class="text-center my-5" *ngIf="upcomingTimeline.length === 0">
+                                Upcoming task not found
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-xl-12 py-2" *ngFor="let timeline of upcomingTimeline">
+                                <div class="card" style="border-radius: 15px;">
+                                    <div class="card-body p-1">
+                                        <div class="d-flex">
+                                            <!-- <div class="flex-shrink-0">
+                                          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                                            alt="Generic placeholder image" class="img-fluid" style="width: 180px; border-radius: 10px;">
+                                        </div> -->
+                                            <div class="flex-grow-1 ms-3 align-items-center">
+                                                <!-- <div class="fw-normal">
+                                                    <p class="small label">Upcoming task</p>
+                                                </div> -->
+                                                <h5 class="mb-1 fw-bold">{{timeline.activity}}</h5>
+                                                <div class="flex-grow-1">
+                                                    <div class="d-flex flex-row  mb-2">
+                                                        <h3 class="mb-1">
+                                                            <span class="small label">Estimated time : </span>
+                                                            {{timeline.estimatedTimeToComplete}}
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex align-items-center justify-content-center" *ngIf="isCpoc !== true">
+                                                    <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                                        class="btn border-0 rounded me-1 complete-button"
+                                                        (click)="taskUpdate(timeline)">Done</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-xl-9">
+                    <div class="card" style="height:643px;  overflow-x: hidden; overflow-y: auto;">
+                        <h3 class="text-center mt-3">Completed tasks</h3>
+                        <div class="row px-3 py-3">
+                            <div class="col-sm-12 col-md-12 col-xl-12">
+                                <div class="main-timeline">
+                                    <div class="timeline" *ngFor="let task of completeTimeLine; let i = index"
+                                        [ngClass]="{'left': i % 2 === 0, 'right': i % 2 !== 0}">
+                                        <div class="card">
+                                            <div class="card-body p-4">
+                                                <!-- Display Completed Date -->
+                                                <h3>{{ task.completedDate | date }}</h3>
+                                                <!-- Display Activity Name -->
+                                                <p class="mb-0">{{ task.activity }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="text-center my-5" *ngIf="completeTimeLine.length === 0">
+                                    Completed task not found
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row w-100 mt-2 px-4" id="chart">
+               <div class="card shadow border-0">
+                <apx-chart [series]="chartOptions.series!" [chart]="chartOptions.chart!"
+                [plotOptions]="chartOptions.plotOptions!" [xaxis]="chartOptions.xaxis!"
+                [yaxis]="chartOptions.yaxis!" [dataLabels]="chartOptions.dataLabels!"
+                [tooltip]="chartOptions.tooltip!" [grid]="chartOptions.grid!" [title]="chartOptions.title" [subtitle]="chartOptions.subtitle"
+                [annotations]="chartOptions.annotations!"></apx-chart>
+               </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-9 col-sm-12 col-xl-9 col-lg-9">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <div class="card p-3 " style="height:643px;  overflow-x: hidden; overflow-y: auto;">
+                                <div class="px-4 py-0">
+                                    <div class="d-flex border-0" style="gap: 2em">
+                                        <button class="w-100 p-2 border-0 buttons" *ngFor="let tab of tabsdata"
+                                            (click)="onTabClick(tab)" [ngClass]="{'activetab': tab.clicked}">
+                                            {{tab.name}}
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="row p-4" *ngIf="filteredSurveys?.length > 0">
+                                    <div class="col-md-6 col-sm-12 mb-2" *ngFor="let survey of filteredSurveys">
+                                        <div class="card" style="background-color: #103a7f;">
+                                            <div class="card-container-blue">
+                                                <div class="card-content-blue">
+                                                    <div class="survey-box">
+                                                        <h3 class="text-center">{{
+                                                            survey?.surveyWithDetailResponseDto?.surveyName }}</h3>
+                                                        <!-- <ul>
+                                                            <li
+                                                                *ngFor="let stage of survey?.surveyWithDetailResponseDto?.dto">
+                                                                {{ stage?.stageName }}
+                                                            </li>
+                                                        </ul> -->
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="card-footer text-muted text-center"
+                                                (click)="openPopup(survey?.assignmentToCLient?.isStaticSurvey,survey?.surveyWithDetailResponseDto?.surveyName,survey?.surveyWithDetailResponseDto?.surveyId)">
+                                                Show assignees ></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-4 my-5 text-center" *ngIf="filteredSurveys?.length <= 0">
+                                    Assignment not found for selected state.
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6 col-sm-12 col-lg-6">
+                            <div class="card p-3 overflow-auto" style="height: 643px;">
+                                <div class="row">
+                                    <div class=" col-sm-12 col-md-6 col-lg-6 ">
+                                        <canvas id="emloyeeResponseChartCanvas" height="100"
+                                            width="100">{{employeeResponsesLineChart}}</canvas>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 ">
+                                        <canvas id="focuseGroupChartCanvas" height="100"
+                                            width="100">{{focuseGroupLineChart}}</canvas>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 ">
+                                        <canvas id="focuseGroupMeetingChartCanvas" height="100"
+                                            width="100">{{focuseGroupMeetingLineChart}}</canvas>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 ">
+                                        <canvas id="oneToOneInterviewChartCanvas" height="100"
+                                            width="100">{{oneToOneInterviewLineChart}}</canvas>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 ">
+                                        <canvas id="surveyAssignmentChartCanvas" height="100"
+                                            width="100">{{surveyAssignmentLineChart}}</canvas>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 ">
+                                        <canvas id="onboardingChartCanvas" height="100"
+                                            width="100">{{onboardingLineChart}}</canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-12 col-xl-3 col-lg-3">
+                    <div class="card">
+                        <mat-card class="demo-inline-calendar-card">
+                            <ng-container *ngIf="allDates; else loadingCalender">
+                                <mat-calendar [(selected)]="selected!" (selectedChange)="onDateSelected($event)"
+                                    (monthSelected)="onMonthSelected($event)" [dateClass]="dateClass"></mat-calendar>
+                            </ng-container>
+                            <ng-template #loadingCalender>
+                                <div class="text-center mt-4">
+                                    <p>Fetching data ...</p>
+                                </div>
+                            </ng-template>
+                        </mat-card>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between mt-1">
+                        <span class="blue-color font-weight-bold">Reminders</span>
+                        <span class="blue-color font-weight-bold ms-4">
+                            <i class="fa fa-bell"></i>
+                        </span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg col-md col-sm">
+                            <div class="d-flex flex-column">
+                                <div class="reminder-list">
+                                    <div *ngIf="!isLoadingReminder">
+                                        <ng-container *ngIf="reminders?.length > 0; else noReminders">
+                                            <div *ngFor="let reminder of reminders" class="card m-2 reminder-card">
+                                                <div class="row g-0 d-flex align-items-center">
+                                                    <div class="col-md-3 col-lg-3 col-sm-3">
+                                                        <img src="assets/images/schedule.png" alt="avatar"
+                                                            class="img-fluid me-3 mx-3 py-2" width="45">
+                                                    </div>
+                                                    <div class="col-sm-9 col-md-9 col-lg-9">
+                                                        <div
+                                                            class="card-body d-flex justify-content-between align-items-center">
+                                                            <div class="flex-grow-1">
+                                                                <h4 class="card-title mb-2">{{ reminder?.title }}</h4>
+                                                                <h5 class="card-text">{{ reminder?.meetingDate | date }}
+                                                                </h5>
+                                                            </div>
+                                                            <button
+                                                                class="btn background-color mt-2 px-3 py-1 rounded border-0"
+                                                                (click)="openMeeting(reminder?.meetingLink)">Join</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </ng-container>
+                                        <ng-template #noReminders>
+                                            <div class="text-center mt-4">
+                                                <p>No events found</p>
+                                            </div>
+                                        </ng-template>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="row mt-3" *ngIf="!isLoading">
+            <div class="col-lg-6 align-items-center">
+                <div class="text-center tableContainer" *ngIf="reminderSurveyList?.length === 0">
+                    No data available for the selected state
+                </div>
+                <div class="row" *ngIf="reminderSurveyList?.length > 0">
+                    <div *ngFor="let survey of reminderSurveyList" class="col-md-6 mb-4 d-flex align-items-stretch">
+                        <div class="card fixed-card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ survey.surveyName }}</h5>
+                                <p class="card-text">
+                                    <strong>Sub Phase:</strong> {{ survey.subPhaseName }}<br>
+                                    <strong>Stage:</strong> {{ survey.stageName }}<br>
+                                    <strong>Reminder Count:</strong> {{ survey.reminderCount }}<br>
+                                    <strong>Last Reminder Sent:</strong> {{ survey.lastReminderSent | date:'short' }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card shadow-sm h-100" style="border: 2px solid gainsboro">
+                    <div class="card-body">
+                        <canvas baseChart [data]="barChartData" [options]="barChartOptions" [plugins]="barChartPlugins"
+                            [legend]="barChartLegend" [type]="'bar'" width="950" height="750">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+            <!-- <div class="text-center my-5">
+            <i *ngIf="isLoading" class="fa fa-spinner fa-spin" style="font-size: 64px; color: #103a7f"></i>
+        </div> -->
+        </div>
+        <div class="text-center my-5">
+            <i *ngIf="isLoading" class="fa fa-spinner fa-spin" style="font-size: 64px; color: #103a7f"></i>
+        </div>
+    </div>
+
+    <div class="row mt-3 pe-5" *ngIf="analyse">
+            <div class="col">
+                <div class="row ps-2">
+                    <button class="py-2 px-4 border-0 buttons me-2" *ngFor="let tab of tabsdataForAnalyse"
+                        (click)="onTabClickForAnalyse(tab)" [ngClass]="{'activetab': tab.clicked}">
+                        {{tab.name}}
+                    </button>
+                </div>
+                <!-- <h3 class="font-weight-bold" style="color: #103a7f"></h3> -->
+            </div>
+            <div class="col d-flex justify-content-end align-self-center">
+                <button class="p-2 rounded button-color text-white shadow border-0" (click)="createAnalyse()"
+                    *ngIf="isCpoc !== true">
+                    <img src="assets/plus.svg" class="me-2" height="18" alt="" />Add
+                    Ex-dignostic report
+                </button>
+            </div>
+        <div *ngIf="tabsdataForAnalyse[0]?.clicked">
+        <section *ngIf="!isLoading" class="mt-3">
+            <div class="row table-row row-head gx-0">
+                <div class="col">Name</div>
+                <div class="col">EX Highlights</div>
+                <div class="col">Information</div>
+                <div class="col">Info</div>
+                <div class="col">Attachments</div>
+                <div class="col" *ngIf="isCpoc !== true">Action</div>
+            </div>
+            <div class="tableCointainer" *ngIf="details?.length > 0">
+                <div class="row gx-0 table-row row-body px-0" *ngFor="let item of details">
+                    <div class="col">{{ item?.executiveSummary }}</div>
+
+                    <div class="col">{{ item?.exHighlights }}</div>
+
+                    <div class="col">
+                        {{ item?.description }}
+                    </div>
+                    <div class="col"><button type="button" class=" btn btn-light btn-rounded ellipsis-button2"
+                        (click)="openPopupForShowMoreDetailsOfEXDiagnosticReport(item?.id)"><i class="fa fa-info-circle me-2"></i>Info</button>
+                    </div>
+                    <div class="col boldColmn">
+                        <button style="padding: 0.5em" type="button" class="no-style-button"
+                            (click)="openInvoice(item?.id)">
+                            <i [ngClass]="{
+                    bi: true,
+                    'bi-download': true,
+                    'fs-6': true,
+              
+                  }">
+                            </i>
+                        </button>
+                    </div>
+
+
+                    <div class="col" *ngIf="isCpoc !== true">
+                        <button class="border-0 m-2" style="font-size: 20px" (click)="updateanalyse(item?.id)">
+                            <i class="fa fa-pencil" style="color: #103a7f"></i>
+                        </button>
+                        <button class="border-0 m-2" style="font-size: 20px" (click)="deleteanalyse(item?.id)">
+                            <i class="fa fa-trash" style="color: #103a7f"></i>
+                        </button>
+                        <button class="border-0 m-2" style="font-size: 20px" (click)="shareAnalyse(item?.id)">
+                            <i class="fa fa-share-alt" style="color: #103a7f" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center tableContainer my-5" *ngIf="details?.length <= 0">
+                No data available for selected state
+            </div>
+        </section>
+        <div class="text-center my-5">
+            <i *ngIf="isLoading" class="fa fa-spinner fa-spin" style="font-size: 64px; color: #103a7f"></i>
+        </div>
+        </div>
+        <div *ngIf="tabsdataForAnalyse[1]?.clicked" style="height: 100vh; padding-bottom: 5px;">
+            <div class="row mt-4">
+                <div class="card shadow border-0">
+                    <apx-chart [series]="chartOptions.series!" [chart]="chartOptions.chart!"
+                    [plotOptions]="chartOptions.plotOptions!" [xaxis]="chartOptions.xaxis!"
+                    [yaxis]="chartOptions.yaxis!" [dataLabels]="chartOptions.dataLabels!" [title]="chartOptions.title!" [subtitle]="chartOptions.subtitle"
+                    [tooltip]="chartOptions.tooltip!" [grid]="chartOptions.grid!"
+                    [annotations]="chartOptions.annotations!"></apx-chart>
+                   </div>
+            </div>
+            <!-- <div class="row mt-4">
+                <div class="col-sm-6 col-md-6 col-xl-4">
+                    <div class="card px-3 py-3" style="height:643px;  overflow-x: hidden; overflow-y: auto;">
+                        <h3 class="text-center">Upcoming tasks</h3>
+                        <div class="row">
+                            <div class="text-center my-5" *ngIf="upcomingTimeline?.length === 0">
+                                Upcoming task not found
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-xl-12 py-2" *ngFor="let timeline of upcomingTimeline">
+                                <div class="card" style="border-radius: 15px;">
+                                    <div class="card-body p-4">
+                                        <div class="d-flex">
+                                           
+                                            <div class="flex-grow-1 ms-3 align-items-center">
+                                                
+                                                <h5 class="mb-1 fw-bold">{{timeline.activity}}</h5>
+                                                <div class="flex-grow-1 ">
+                                                    <div class="d-flex flex-row  mb-2">
+                                                        <h3 class="mb-2 pb-1">
+                                                            <span class="small label">Estimated time : </span>
+                                                            {{timeline.estimatedTimeToComplete}}
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex pt-1" *ngIf="isCpoc !== true">
+                                                    <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                                        class="btn border-0 rounded me-1 flex-grow-1 complete-button"
+                                                        (click)="taskUpdate(timeline)">Done</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-xl-8">
+                    <div class="card" style="height:643px;  overflow-x: hidden; overflow-y: auto;">
+                        <h3 class="text-center mt-3">Completed tasks</h3>
+                        <div class="row px-3 py-3">
+                            <div class="col-sm-12 col-md-12 col-xl-12">
+                                <div class="main-timeline">
+                                    <div class="timeline" *ngFor="let task of completeTimeLine; let i = index"
+                                        [ngClass]="{'left': i % 2 === 0, 'right': i % 2 !== 0}">
+                                        <div class="card">
+                                            <div class="card-body p-4">
+                                                <h3>{{ task.completedDate | date }}</h3>
+                                                
+                                                <p class="mb-0">{{ task.activity }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="text-center my-5" *ngIf="completeTimeLine.length === 0">
+                                    Completed task not found
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="row mt-3 pe-5" *ngIf="coCreate">
+        <div class="col-md-6 mb-4 px-4">
+            <div class="row">
+                <button class="w-100 py-2 px-4 border-0 buttons me-2" *ngFor="let tab of tabsdataForCocreate"
+                (click)="onTabClickForCoCreate(tab)" [ngClass]="{'activetab': tab.clicked}">
+                {{tab.name}}
+            </button>
+            </div>
+        </div>
+        <div *ngIf="tabsdataForCocreate[0]?.clicked">
+        <section *ngIf="!isLoading">
+            <div class="container vh-100">
+                <div class="row d-flex">
+                    <div class="col-md-6 col-lg-5 col-xl-4">
+                        <div class="card text-center" id="chat1" style="border-radius: 15px" *ngIf="isCpoc !== true">
+                            <div class="card-header d-flex justify-content-between align-items-center p-3 text-white border-bottom-0"
+                                style="
+                    border-top-left-radius: 15px;
+                    border-top-right-radius: 15px;
+                    background-color: #2980b9;
+                  ">
+                                <p class="mb-0 fw-bold">Add Your Suggestions</p>
+                            </div>
+                            <div class="card-body">
+                                <div class="bg-light rounded rounded-pill shadow-sm search-bar flex-grow-2">
+                                    <div class="input-group">
+                                        <input type="text" placeholder="" aria-describedby="button-addon1"
+                                            [(ngModel)]="msg" class="form-control border-0 bg-light"
+                                            style="height: 30px" />
+                                        <div class="input-group-append">
+                                            <button id="button-addon1" type="submit" (click)="onCocreateData()"
+                                                class="btn btn-link rounded-circle button-color d-flex justify-content-center align-items-center"
+                                                style="width: 30px">
+                                                <i class="fa fa-paper-plane text-white" style="font-size: 13px"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-7 col-xl-8">
+                        <div class="" *ngIf="data?.length > 0">
+                            <div class="card mb-1" style="border-radius: 15px" *ngFor="let item of data">
+                                <div class="card-body p-2">
+                                    <h3 class="mb-3 ms-3">
+                                        <strong>{{ item?.msg }}</strong>
+                                    </h3>
+                                    <p class="small mb-0 ms-3">
+                                        Created on {{ item.createdDate | date }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center tableContainer" *ngIf="data?.length <= 0">
+                        No data available for selected state
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="text-center my-5">
+            <i *ngIf="isLoading" class="fa fa-spinner fa-spin" style="font-size: 64px; color: #103a7f"></i>
+        </div>
+        </div>
+        <div *ngIf="tabsdataForCocreate[1]?.clicked" style="height: 100vh; padding-bottom: 5px;">
+            <div class="row mt-4">
+                <div class="card shadow border-0">
+                    <apx-chart [series]="chartOptions.series!" [chart]="chartOptions.chart!"
+                    [plotOptions]="chartOptions.plotOptions!" [xaxis]="chartOptions.xaxis!"
+                    [yaxis]="chartOptions.yaxis!" [dataLabels]="chartOptions.dataLabels!" [title]="chartOptions.title!" [subtitle]="chartOptions.subtitle"
+                    [tooltip]="chartOptions.tooltip!" [grid]="chartOptions.grid!"
+                    [annotations]="chartOptions.annotations!"></apx-chart>
+                   </div>
+            </div>
+            <!-- <div class="row">
+                <div class="col-sm-6 col-md-6 col-xl-4">
+                    <div class="card px-3 py-3" style="height:643px;  overflow-x: hidden; overflow-y: auto;">
+                        <h3 class="text-center">Upcoming tasks</h3>
+                        <div class="row">
+                            <div class="text-center my-5" *ngIf="upcomingTimeline.length === 0">
+                                Upcoming task not found
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-xl-12 py-2" *ngFor="let timeline of upcomingTimeline">
+                                <div class="card" style="border-radius: 15px;">
+                                    <div class="card-body p-4">
+                                        <div class="d-flex">
+                                            <div class="flex-grow-1 ms-3 align-items-center">
+                                                <h5 class="mb-1 fw-bold">{{timeline.activity}}</h5>
+                                                <div class="flex-grow-1 ">
+                                                    <div class="d-flex flex-row  mb-2">
+                                                        <h3 class="mb-2 pb-1">
+                                                            <span class="small label">Estimated time : </span>
+                                                            {{timeline.estimatedTimeToComplete}}
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex pt-1" *ngIf="isCpoc !== true">
+                                                    <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                                        class="btn border-0 rounded me-1 flex-grow-1 complete-button"
+                                                        (click)="taskUpdate(timeline)">Done</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-xl-8">
+                    <div class="card" style="height:643px;  overflow-x: hidden; overflow-y: auto;">
+                        <h3 class="text-center mt-3">Completed tasks</h3>
+                        <div class="row px-3 py-3">
+                            <div class="col-sm-12 col-md-12 col-xl-12">
+                                <div class="main-timeline">
+                                    <div class="timeline" *ngFor="let task of completeTimeLine; let i = index"
+                                        [ngClass]="{'left': i % 2 === 0, 'right': i % 2 !== 0}">
+                                        <div class="card">
+                                            <div class="card-body p-4">
+                                                <h3>{{ task.completedDate | date }}</h3>
+                                                <p class="mb-0">{{ task.activity }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="text-center my-5" *ngIf="completeTimeLine.length === 0">
+                                    Completed task not found
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </div>
+
+    <section class="row pe-5" *ngIf="share">
+        <div class="col-md-6 mb-4 mt-3">
+            <div class="row ps-2">
+                <button class="w-100 py-2 px-4 border-0 buttons me-2" *ngFor="let tab of tabsdataForShare"
+                (click)="onTabClickForShare(tab)" [ngClass]="{'activetab': tab.clicked}">
+                {{tab.name}}
+            </button>
+            </div>
+        </div>
+        <div *ngIf="tabsdataForShare[0]?.clicked">
+        <div class="container py-5 h-100" *ngIf="!isLoading">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-md-6">
+                    <div class="row" *ngIf="isCpoc !== true">
+                        <div class="col-md mb-3">
+                            <div class="card" style="border-radius: 15px">
+                                <div class="card-body text-center">
+                                    <div class="row">
+                                        <div class="form-check form-switch">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">
+                                                <strong>Do you want to share feedback form</strong></label>
+                                            <input class="form-check-input ms-3 custom-toggle" type="checkbox"
+                                                id="flexSwitchCheckDefault" [(ngModel)]="clientData.isSharedFeedback"
+                                                (change)="toggleFeedbackForm($event)" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="isCpoc !== true">
+                        <div class="col-md">
+                            <div class="card" style="border-radius: 15px">
+                                <div class="card-body text-center">
+                                    <div class="row">
+                                        <div class="form-check form-switch">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">
+                                                <strong>Do you want to share journey map</strong></label>
+                                            <input class="form-check-input ms-4 custom-toggle" type="checkbox"
+                                                id="flexSwitchCheckDefault" [(ngModel)]="clientData.isSharedJourneyMap"
+                                                (change)="toggleJourneyMap($event)" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="visibleToClient">
+                        <div class="col-md">
+                            <div class="card" style="border-radius: 15px">
+                                <div class="card-body text-center">
+                                    <div class="row align-items-center justify-content-center">
+                                        <strong>
+                                            Journey map shared successfully! Do you want to go to the
+                                            journey map screen ?</strong>
+                                        <button type="button" class="btn button-color text-light w-25 text-center mt-2"
+                                            routerLink="../roadmap">
+                                            yes
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-6" *ngIf="visibleToClient2">
+                    <div class="card border-0" style="background-color: rgb(241, 238, 238)">
+                        <div class="card-body p-4">
+                            <div class="d-flex flex-start w-100">
+                                <img class="rounded-circle shadow-1-strong me-3" src="assets/default_avatar.png"
+                                    alt="avatar" width="65" height="65" />
+                                <div class="w-100">
+                                    <h5>Add a comment</h5>
+                                    <form [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()">
+                                        <div class="my-2">
+                                            <rating class="fs-3"
+                                                [titles]="['Very bad', 'Poor', 'Ok', 'Good', 'Excellent']"
+                                                style="color: #103a7f" formControlName="rate" [max]="5"
+                                                [readonly]="false"></rating>
+                                        </div>
+                                        <div data-mdb-input-init class="form-outline">
+                                            <textarea class="form-control" id="textAreaExample" rows="4"
+                                                formControlName="feedback"></textarea>
+                                            <label class="form-label" for="textAreaExample">What is your view?</label>
+                                            <div *ngIf="feedbackForm.get('feedback')?.invalid && feedbackForm.get('feedback')?.touched"
+                                                class="text-danger">
+                                                Feedback is required.
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between mt-3">
+                                            <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                                                class="btn button-color text-light" [disabled]="btnDisplay">
+                                                Send <i class="fas fa-long-arrow-alt-right ms-1"></i>
+                                            </button>
+                                        </div>
+                                    </form>
+                                    <div *ngIf="feedbackMessageVisible" class="mt-3 alert alert-success">
+                                        {{ feedbackMessage }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="text-center my-5">
+            <i *ngIf="isLoading" class="fa fa-spinner fa-spin" style="font-size: 64px; color: #103a7f"></i>
+        </div>
+        <div *ngIf="isCpoc == true">
+            <div class="text-center my-5" *ngIf="!clientData.isSharedFeedback && !clientData.isSharedJourneyMap">
+                <h3 class="fw-bold">Unfortunately, the consultant has not shared any information with us yet.</h3>
+            </div>
+        </div>
+        </div>
+        <div *ngIf="tabsdataForShare[1]?.clicked" style="height: 100vh; padding-bottom: 5px;">
+            <div class="row mt-4">
+                <div class="card shadow border-0">
+                    <apx-chart [series]="chartOptions.series!" [chart]="chartOptions.chart!"
+                    [plotOptions]="chartOptions.plotOptions!" [xaxis]="chartOptions.xaxis!"
+                    [yaxis]="chartOptions.yaxis!" [dataLabels]="chartOptions.dataLabels!" [title]="chartOptions.title!" [subtitle]="chartOptions.subtitle"
+                    [tooltip]="chartOptions.tooltip!" [grid]="chartOptions.grid!" 
+                    [annotations]="chartOptions.annotations!"></apx-chart>
+                   </div>
+            </div>
+            <!-- <div class="row">
+                <div class="col-sm-6 col-md-6 col-xl-4">
+                    <div class="card px-3 py-3" style="height:643px;  overflow-x: hidden; overflow-y: auto;">
+                        <h3 class="text-center">Upcoming tasks</h3>
+                        <div class="row">
+                            <div class="text-center my-5" *ngIf="upcomingTimeline.length === 0">
+                                Upcoming task not found
+                            </div>
+                            <div class="col-sm-12 col-md-12 col-xl-12 py-2" *ngFor="let timeline of upcomingTimeline">
+                                <div class="card" style="border-radius: 15px;">
+                                    <div class="card-body p-4">
+                                        <div class="d-flex">
+                                            <div class="flex-shrink-0">
+                                          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                                            alt="Generic placeholder image" class="img-fluid" style="width: 180px; border-radius: 10px;">
+                                        </div>
+                                            <div class="flex-grow-1 ms-3 align-items-center">
+                                                <div class="fw-normal">
+                                                    <p class="small label">Upcoming task</p>
+                                                </div>
+                                                <h5 class="mb-1 fw-bold">{{timeline.activity}}</h5>
+                                                <div class="flex-grow-1 ">
+                                                    <div class="d-flex flex-row  mb-2">
+                                                        <h3 class="mb-2 pb-1">
+                                                            <span class="small label">Estimated time : </span>
+                                                            {{timeline.estimatedTimeToComplete}}
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex pt-1" *ngIf="isCpoc !== true">
+                                                    <button type="button" data-mdb-button-init data-mdb-ripple-init
+                                                        class="btn border-0 rounded me-1 flex-grow-1 complete-button"
+                                                        (click)="taskUpdate(timeline)">Done</button>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-6 col-xl-8">
+                    <div class="card" style="height:643px;  overflow-x: hidden; overflow-y: auto;">
+                        <h3 class="text-center mt-3">Completed tasks</h3>
+                        <div class="row px-3 py-3">
+                            <div class="col-sm-12 col-md-12 col-xl-12">
+                                <div class="main-timeline">
+                                    <div class="timeline" *ngFor="let task of completeTimeLine; let i = index"
+                                        [ngClass]="{'left': i % 2 === 0, 'right': i % 2 !== 0}">
+                                        <div class="card">
+                                            <div class="card-body p-4">
+                                                <h3>{{ task.completedDate | date }}</h3>
+                                                <p class="mb-0">{{ task.activity }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="text-center my-5" *ngIf="completeTimeLine.length === 0">
+                                    Completed task not found
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+    </section>
+</div>

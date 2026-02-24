@@ -1,0 +1,158 @@
+<div class="container">
+    <div class="row mt-2 justify-content-center">
+        <div class="d-flex justify-content-between align-items-center">
+            <button class="btn btn-light rounded-circle me-1" (click)="goBack()">
+                <i class="fas fa-arrow-left"></i>
+            </button>
+            <div class="text-right fs-5">
+                <span>Total Questions: {{ totalQuestions }}</span> |
+                <span>Attempted: {{ attemptedQuestions }}</span> |
+                <span>Unattempted: {{ unattemptedQuestions }}</span>
+            </div>
+        </div>
+
+        <div class="col-md-10">
+            <div class="survey-container">
+                <div class="card mt-2 bg-light" style="background-color: #103a7f;">
+                    <div class="card-body">
+                        <div class="card mb-4" style="background-color: #103a7f;">
+                            <h3 class="card-title text-center mb-0" style="font-weight: bold; color: #103a7f;">
+                                Survey Name: {{data?.surveyWithDetailResponseDto?.surveyName}}
+                            </h3>
+                        </div>
+                        <!-- <h4 class="card-title" style="font-weight: 600;">
+                            {{data?.surveyWithDetailResponseDto?.startDescription}}</h4> -->
+                        <h4 class="card-title" style="font-weight: 600;"
+                            [innerHTML]="data?.surveyWithDetailResponseDto?.startDescription"></h4>
+                    </div>
+                </div>
+                <form [formGroup]="questionnaireForm">
+                    <ng-container formArrayName="questions">
+                        <ng-container
+                            *ngFor="let surveyDetail of getSurveyDetailsFormArray().controls; let index = index">
+                            <!-- Display the Stage Description above the questions -->
+                            <ng-container
+                                *ngIf="index === 0 || (surveyDetail.value.question.stageDescription !== getSurveyDetailsFormArray().controls[index - 1].value.question.stageDescription)">
+                                <div class="stage-description mt-4 mb-3" *ngIf="index!==0">
+                                    <div class="card mt-2" *ngIf="surveyDetail?.value?.question?.stageDescription">
+                                        <div class="card-body">
+                                            <h4 class="card-title" style="font-weight: 600;">
+                                                {{surveyDetail?.value?.question?.stageDescription}}
+                                            </h4>
+                                        </div>
+
+                                    </div>
+                                    <!-- <h3>{{ surveyDetail.value.question.stageDescription }}</h3> -->
+                                    <!-- <p>{{ surveyDetail.value.question.stageDescription }}</p> -->
+                                </div>
+                            </ng-container>
+
+                            <div class="card mt-2" [formGroupName]="index">
+                                <div class="card-body">
+                                    <h4 class="card-title" style="font-weight: 600;">
+                                        <p>{{ surveyDetail.value.question.question }} <span class="text-danger">*</span>
+                                        </p>
+                                    </h4>
+
+                                    <div class="row mb-2">
+                                        <!-- Multiple Choice Questions (MCQ) -->
+                                        <div class="col-lg-12"
+                                            *ngIf="['mcq', 'mixed', 'both'].includes(surveyDetail.value.question.questionType)">
+                                            <mat-radio-group formControlName="answer">
+                                                <mat-radio-button [value]="option"
+                                                    *ngFor="let option of surveyDetail.value.question.options">
+                                                    {{ option }}
+                                                </mat-radio-button>
+                                            </mat-radio-group>
+                                        </div>
+
+                                        <!-- Descriptive Questions -->
+                                        <div class="col-lg-12"
+                                            *ngIf="['descriptive', 'mixed', 'both'].includes(surveyDetail.value.question.questionType)">
+                                            <textarea class="form-control" rows="3" placeholder="Type your answer here"
+                                                formControlName="ansForDescriptive"></textarea>
+                                        </div>
+
+                                        <!-- Reason for EXIT Questions -->
+                                        <div class="col-lg-12"
+                                            *ngIf="['reasonForEXIT'].includes(surveyDetail.value.question.questionType)">
+                                            <mat-radio-group formControlName="answer">
+                                                <mat-radio-button [value]="option"
+                                                    *ngFor="let option of exitSurveyList">
+                                                    {{ option }}
+                                                </mat-radio-button>
+                                            </mat-radio-group>
+                                        </div>
+
+                                        <!-- eNPS Questions -->
+                                        <div class="col-lg-12"
+                                            *ngIf="['eNPS'].includes(surveyDetail.value.question.questionType)">
+                                            <div class="number-container p-5">
+                                                <span *ngFor="let number of numbers; let i = index" class="number"
+                                                    [ngClass]="{'selected': selectedEmojiIndex === i}"
+                                                    (click)="selectEmojiSCore(number, index, i)">
+                                                    {{ number }}
+                                                    <span *ngIf="number === 1" class="label">Not very likely</span>
+                                                    <span *ngIf="number === 10" class="label">Very likely</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <ng-container>
+                            <div *ngIf="rankquestion.length>0 && rankquestion[0]?.questionType==='Importance'">
+                                <div class="card mt-2">
+                                    <div class="card-body">
+                                        <h4 class="card-title" style="font-weight: 600;">
+                                            <p>
+                                                Please rate the following in order of importance to you, one being the
+                                                most
+                                                important and four being the least important.
+                                                <span class="text-danger">*</span>
+                                            </p>
+                                        </h4>
+                                        <div cdkDropList class="row mb-2" (cdkDropListDropped)="drop($event)">
+                                            <div *ngFor="let movie of rankquestion; let i = index" cdkDrag
+                                                class="col-12 mb-3">
+                                                <div class="d-flex">
+                                                    <div class="p-3 border text-center" style="width: 80px;">
+                                                        <span class="font-weight-bold">{{ i + 1 }}.</span>
+                                                    </div>
+                                                    <div class="flex-grow-1 border p-3 ml-2">
+                                                        {{ movie?.question }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div cdkDropList class="row mb-2" (cdkDropListDropped)="drop($event)">
+                                            @for (movie of rankquestion; track movie) {
+                                            <div class="example-box" cdkDrag>{{movie?.question}}</div>
+                                            }
+                                            <div *ngFor="let movie of rankquestion; let i = index" cdkDrag>
+                                                <span class="font-weight-bold">{{ i + 1 }}.</span> {{ movie?.question }}
+                                              </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <div class="card" *ngIf="data?.surveyWithDetailResponseDto?.endDescription">
+                            <div class="card-body">
+                                <h4 class="card-title" style="font-weight: 600;">
+                                    {{data?.surveyWithDetailResponseDto?.endDescription}}</h4>
+                            </div>
+                        </div>
+                    </ng-container>
+                </form>
+                <div class="text-center mt-4">
+                    <button class="text-white border-0 py-2 px-4 rounded" style="background-color: #069de0;"
+                        (click)="goBack()">Cancel</button>
+                    <button class="button-color text-white border-0 py-2 px-4 rounded ms-2"
+                        (click)="submitSurvey()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

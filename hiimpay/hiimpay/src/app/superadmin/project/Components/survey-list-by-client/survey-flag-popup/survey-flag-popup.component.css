@@ -1,0 +1,17 @@
+.blue-color{
+    color: #103a7f;
+}
+
+.button-color{
+  background-color: #103a7f;
+}
+
+.background-color{
+    background-color: #103a7f;
+}
+
+.table td,
+  .table th {
+    text-align: center;
+    vertical-align: middle;
+  }

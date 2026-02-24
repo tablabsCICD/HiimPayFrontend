@@ -1,0 +1,17 @@
+.dashboard-root { display: flex; flex-direction: column; gap: 16px; }
+.dashboard-header { display:flex; justify-content:space-between; align-items:center; }
+.dashboard-header h2 { margin:0; font-weight:600; color: #053067 }
+.dashboard-header .actions button { margin-left:8px; background: #053067; color: #fff; }
+
+.cards-grid { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:16px; }
+.stat-card { background:#fff; padding:18px; border-radius:8px; box-shadow: 0 6px 18px rgba(12,16,32,0.06); }
+.stat-title { color:#64748b; font-size:13px; margin-bottom:8px; }
+.stat-value { font-size:28px; font-weight:700; }
+.orders-card .orders-list { display:flex; flex-direction:column; gap:8px; margin-top:8px; }
+.order { padding:10px; border-radius:6px; background: #fbfdff; box-shadow: 0 2px 6px rgba(16,24,40,0.03); }
+.order-id { font-weight:600; }
+.order-meta { color:#64748b; font-size:13px; }
+
+@media (max-width: 600px) {
+  .dashboard-header { flex-direction:column; align-items:flex-start; gap:8px; }
+}

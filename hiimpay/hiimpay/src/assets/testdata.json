@@ -1,0 +1,1352 @@
+{
+  "reports": [
+    {
+      "id": "1",
+      "survey_name": "Feel, Use, Do and See survey",
+      "description": "FUDS survey description",
+      "status": "active",
+      "created_date": "2023-01-15"
+    },
+    {
+      "id": "2",
+      "survey_name": "Employee Engagement survey",
+      "description": "Employee enhagement survey description",
+      "status": "active",
+      "created_date": "2023-02-10"
+    },
+    {
+      "id": "3",
+      "survey_name": "Exit survey",
+      "description": "Exit survey description",
+      "status": "active",
+      "created_date": "2023-03-05"
+    },
+    {
+      "id": "4",
+      "survey_name": "Onboarding feedback survey",
+      "description": "Onboarding feedback survey description",
+      "status": "active",
+      "created_date": "2023-04-20"
+    },
+    {
+      "id": "5",
+      "survey_name": "Induction effectiveness survey",
+      "description": "Induction effectiveness survey description",
+      "status": "active",
+      "created_date": "2023-05-18"
+    },
+    {
+      "id": "6",
+      "survey_name": "On-the-job training effectiveness survey",
+      "description": "On-the-job training effectiveness survey description",
+      "status": "active",
+      "created_date": "2023-06-12"
+    },
+    {
+      "id": "7",
+      "survey_name": "Pulse surveys",
+      "description": "Pulse survey description",
+      "status": "active",
+      "created_date": "2023-07-08"
+    },
+    {
+      "id": "8",
+      "survey_name": "Manager Effectiveness survey",
+      "description": "Manager effectiveness survey description",
+      "status": "active",
+      "created_date": "2023-08-22"
+    }
+  ],
+  "graphFuds": [
+    {
+      "message": "Success",
+      "lineGraph": [
+        {
+          "stageName": "feel",
+          "importance": 70,
+          "agreement": 50
+        },
+        {
+          "stageName": "do",
+          "importance": 30,
+          "agreement": 80
+        },
+        {
+          "stageName": "use",
+          "importance": 60,
+          "agreement": 40
+        },
+        {
+          "stageName": "see",
+          "importance": 85,
+          "agreement": 45
+        }
+      ],
+      "progressBar": [
+        {
+          "stage": "Feel",
+          "responseCount": 90
+        },
+        {
+          "stage": "Use",
+          "responseCount": 60
+        },
+        {
+          "stage": "DO",
+          "responseCount": 80
+        },
+        {
+          "stage": "See",
+          "responseCount": 50
+        }
+      ],
+      "table": [
+        {
+          "stageName": "Feel",
+          "questions": [
+            {
+              "question": "Our organisation’s purpose makes a positive contribution to wider society",
+              "options": {
+                "Strongly agree": 15,
+                "Agree": 4,
+                "Neither agree or disagree": 3,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 5,
+              "score": 66
+            },
+            {
+              "question": "The organisational culture that our leaders describe reflects what I experience everyday",
+              "options": {
+                "Strongly agree": 0,
+                "Agree": 16,
+                "Neither agree or disagree": 0,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 0,
+              "score": 0
+            },
+            {
+              "question": "I see our organisation’s values when colleagues are working or interacting together",
+              "options": {
+                "Strongly agree": 0,
+                "Agree": 0,
+                "Neither agree or disagree": 0,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 0,
+              "score": 0
+            },
+            {
+              "question": "We appreciate each other and treat everyone fairly and equally",
+              "options": {
+                "Strongly agree": 0,
+                "Agree": 0,
+                "Neither agree or disagree": 0,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 0,
+              "score": 0
+            },
+            {
+              "question": "Importance is placed on the needs of the team rather than any one individual",
+              "options": {
+                "Strongly agree": 0,
+                "Agree": 0,
+                "Neither agree or disagree": 0,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 0,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "stageName": "Use",
+          "questions": [
+            {
+              "question": "The technology I use in my day to day work is comparable to the technology our customers use",
+              "options": {
+                "Strongly agree": 0,
+                "Agree": 0,
+                "Neither agree or disagree": 0,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 0,
+              "score": 0
+            },
+            {
+              "question": "The technology and processes I use are reliable and help me to do my job",
+              "options": {
+                "Strongly agree": 0,
+                "Agree": 0,
+                "Neither agree or disagree": 0,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 0,
+              "score": 0
+            },
+            {
+              "question": "I have access to and use tools that help me share information and collaborate with my colleagues",
+              "options": {
+                "Strongly agree": 0,
+                "Agree": 0,
+                "Neither agree or disagree": 0,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 0,
+              "score": 0
+            },
+            {
+              "question": "There are methods of communication in place that allow leaders to communicate with me and for me to communicate with leaders",
+              "options": {
+                "Strongly agree": 0,
+                "Agree": 0,
+                "Neither agree or disagree": 0,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 0,
+              "score": 0
+            },
+            {
+              "question": "It is easy to access organisation information",
+              "options": {
+                "Strongly agree": 0,
+                "Agree": 0,
+                "Neither agree or disagree": 0,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 0,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "stageName": "Do",
+          "questions": [
+            {
+              "question": "My role requires me to perform varied tasks of differing complexity",
+              "options": {
+                "Strongly agree": 0,
+                "Agree": 0,
+                "Neither agree or disagree": 0,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 0,
+              "score": 0
+            },
+            {
+              "question": "I feel my skills are being used in my current role",
+              "options": {
+                "Strongly agree": 0,
+                "Agree": 0,
+                "Neither agree or disagree": 0,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 0,
+              "score": 0
+            },
+            {
+              "question": "I understand how my role impacts the end customer",
+              "options": {
+                "Strongly agree": 0,
+                "Agree": 0,
+                "Neither agree or disagree": 0,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 0,
+              "score": 0
+            },
+            {
+              "question": "I have the freedom to perform my tasks in the most appropriate way",
+              "options": {
+                "Strongly agree": 0,
+                "Agree": 0,
+                "Neither agree or disagree": 0,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 0,
+              "score": 0
+            },
+            {
+              "question": "I have opportunities to learn and grow on the job",
+              "options": {
+                "Strongly agree": 0,
+                "Agree": 0,
+                "Neither agree or disagree": 0,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 0,
+              "score": 0
+            }
+          ]
+        },
+        {
+          "stageName": "See",
+          "questions": [
+            {
+              "question": "Our organisation’s values are evident in our physical environment e.g., we talk about openness and the office layout is open planned.",
+              "options": {
+                "Strongly agree": 0,
+                "Agree": 0,
+                "Neither agree or disagree": 0,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 0,
+              "score": 0
+            },
+            {
+              "question": "There are a variety of spaces exist that I can use when performing different types of work such as private spaces for focused time or meetings rooms for collaboration",
+              "options": {
+                "Strongly agree": 0,
+                "Agree": 0,
+                "Neither agree or disagree": 0,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 0,
+              "score": 0
+            },
+            {
+              "question": "My workplace has good air quality, suitable lighting, comfortable seating, ergonomic workstations and is the right temperature",
+              "options": {
+                "Strongly agree": 0,
+                "Agree": 0,
+                "Neither agree or disagree": 0,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 0,
+              "score": 0
+            },
+            {
+              "question": "Facilities available in my workplace are sufficient and well maintained",
+              "options": {
+                "Strongly agree": 0,
+                "Agree": 0,
+                "Neither agree or disagree": 0,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 0,
+              "score": 0
+            },
+            {
+              "question": "I am proud to invite friends or visitors to my workplace",
+              "options": {
+                "Strongly agree": 0,
+                "Agree": 0,
+                "Neither agree or disagree": 0,
+                "Disagree": 0,
+                "Strongly disagree": 0
+              },
+              "weightage": 0,
+              "score": 0
+            }
+          ]
+        }
+      ],
+      "questionGraph": [
+        {
+          "stage": "Feel",
+          "xaxis": [
+            "Our organisation’s purpose makes a positive contribution to wider society",
+            "The organisational culture that our leaders describe reflects what I experience everyday",
+            "I see our organisation’s values when colleagues are working or interacting together",
+            "We appreciate each other and treat everyone fairly and equally",
+            "Importance is placed on the needs of the team rather than any one individual"
+          ],
+          "options": [
+            {
+              "value1": [
+                15,
+                30,
+                15,
+                30,
+                10
+              ],
+              "option1": "Agree"
+            },
+            {
+              "value2": [
+                20,
+                40,
+                10,
+                15,
+                15
+              ],
+              "option2": "Disagree"
+            },
+            {
+              "value3": [
+                15,
+                25,
+                20,
+                15,
+                25
+              ],
+              "option3": "Strongly agree"
+            },
+            {
+              "value4": [
+                40,
+                10,
+                30,
+                10,
+                10
+              ],
+              "option4": "Neither agree or disagree"
+            },
+            {
+              "value5": [
+                20,
+                10,
+                20,
+                20,
+                30
+              ],
+              "option5": "Strongly disagree"
+            }
+          ]
+        },
+        {
+          "stage": "Use",
+          "xaxis": [
+            "The technology I use in my day to day work is comparable to the technology our customers use",
+            "The technology and processes I use are reliable and help me to do my job",
+            "I have access to and use tools that help me share information and collaborate with my colleagues",
+            "There are methods of communication in place that allow leaders to communicate with me and for me to communicate with leaders",
+            "It is easy to access organisation information"
+          ],
+          "options": [
+            {
+              "value1": [
+                20,
+                10,
+                20,
+                20,
+                30
+              ],
+              "option1": "Agree"
+            },
+            {
+              "value2": [
+                20,
+                10,
+                20,
+                20,
+                30
+              ],
+              "option2": "Disagree"
+            },
+            {
+              "value3": [
+                20,
+                40,
+                10,
+                15,
+                15
+              ],
+              "option3": "Strongly agree"
+            },
+            {
+              "value4": [
+                15,
+                30,
+                15,
+                30,
+                10
+              ],
+              "option4": "Neither agree or disagree"
+            },
+            {
+              "value5": [
+                40,
+                10,
+                30,
+                10,
+                10
+              ],
+              "option5": "Strongly disagree"
+            }
+          ]
+        },
+        {
+          "stage": "Do",
+          "xaxis": [
+            "My role requires me to perform varied tasks of differing complexity",
+            "I feel my skills are being used in my current role",
+            "I understand how my role impacts the end customer",
+            "I have the freedom to perform my tasks in the most appropriate way",
+            "I have opportunities to learn and grow on the job"
+          ],
+          "options": [
+            {
+              "value1": [
+                40,
+                10,
+                30,
+                10,
+                10
+              ],
+              "option1": "Agree"
+            },
+            {
+              "value2": [
+                20,
+                10,
+                20,
+                20,
+                30
+              ],
+              "option2": "Disagree"
+            },
+            {
+              "value3": [
+                15,
+                30,
+                15,
+                30,
+                10
+              ],
+              "option3": "Strongly agree"
+            },
+            {
+              "value4": [
+                20,
+                10,
+                20,
+                20,
+                30
+              ],
+              "option4": "Neither agree or disagree"
+            },
+            {
+              "value5": [
+                25,
+                30,
+                15,
+                20,
+                20
+              ],
+              "option5": "Strongly disagree"
+            }
+          ]
+        },
+        {
+          "stage": "See",
+          "xaxis": [
+            "Our organisation’s values are evident in our physical environment e.g., we talk about openness and the office layout is open planned.",
+            "There are a variety of spaces exist that I can use when performing different types of work such as private spaces for focused time or meetings rooms for collaboration",
+            "My workplace has good air quality, suitable lighting, comfortable seating, ergonomic workstations and is the right temperature",
+            "Facilities available in my workplace are sufficient and well maintained",
+            "I am proud to invite friends or visitors to my workplace"
+          ],
+          "options": [
+            {
+              "value1": [
+                15,
+                30,
+                15,
+                30,
+                10
+              ],
+              "option1": "Agree"
+            },
+            {
+              "value2": [
+                20,
+                10,
+                20,
+                20,
+                30
+              ],
+              "option2": "Disagree"
+            },
+            {
+              "value3": [
+                20,
+                10,
+                20,
+                20,
+                30
+              ],
+              "option3": "Strongly agree"
+            },
+            {
+              "value4": [
+                40,
+                10,
+                30,
+                10,
+                10
+              ],
+              "option4": "Neither agree or disagree"
+            },
+            {
+              "value5": [
+                20,
+                10,
+                20,
+                20,
+                30
+              ],
+              "option5": "Strongly disagree"
+            }
+          ]
+        }
+      ],
+      "success": true
+    }
+  ],
+
+  "graphEE":[ {
+    "Communication": {
+      "xaxis": [
+        "I receive the information and communications I need to do my job effectively.",
+        "Open, honest, two way communication is encouraged.",
+        "Information is shared across teams.",
+        "I can confidently give upward feedback without fear of retribution."
+      ],
+      "options": [
+        {
+          "value1": [
+            10,
+            20,
+            30,
+            40
+          ],
+          "option1": "Agree"
+        },
+        {
+          "value2": [
+            5,
+            10,
+            15,
+            20
+          ],
+          "option2": "Disagree"
+        },
+        {
+          "value3": [
+            2,
+            4,
+            6,
+            8
+          ],
+          "option3": "Strongly agree"
+        },
+        {
+          "value4": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "option4": "Neither agree"
+        },
+        {
+          "value5": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "option5": "Strongly disagree"
+        }
+      ]
+    },
+    "Direct manager": {
+      "xaxis": [
+        "My direct manager provides me with timely and useful feedback.",
+        "My direct manager actively role models our organisational values.",
+        "My direct manager encourages me to learn from mistakes rather than apportion blame.",
+        "My direct manager takes accountability for the team’s actions."
+      ],
+      "options": [
+        {
+          "value1": [
+            10,
+            20,
+            30,
+            40
+          ],
+          "option1": "Agree"
+        },
+        {
+          "value2": [
+            5,
+            10,
+            15,
+            20
+          ],
+          "option2": "Disagree"
+        },
+        {
+          "value3": [
+            2,
+            4,
+            6,
+            8
+          ],
+          "option3": "Strongly agree"
+        },
+        {
+          "value4": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "option4": "Neither agree"
+        },
+        {
+          "value5": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "option5": "Strongly disagree"
+        }
+      ]
+    },
+    "Diversity and inclusion": {
+      "xaxis": [
+        "Diverse opinions, ideas and perspectives are valued.",
+        "I trust the organisation to treat all employees with fairness.",
+        "I feel comfortable discussing my background, beliefs, and cultural experiences with my colleagues.",
+        "The organisation encourages a good balance between personal and work life."
+      ],
+      "options": [
+        {
+          "value1": [
+            10,
+            20,
+            30,
+            40
+          ],
+          "option1": "Agree"
+        },
+        {
+          "value2": [
+            5,
+            10,
+            15,
+            20
+          ],
+          "option2": "Disagree"
+        },
+        {
+          "value3": [
+            2,
+            4,
+            6,
+            8
+          ],
+          "option3": "Strongly agree"
+        },
+        {
+          "value4": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "option4": "Neither agree"
+        },
+        {
+          "value5": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "option5": "Strongly disagree"
+        }
+      ]
+    },
+    "Employee engagement index": {
+      "xaxis": [
+        "I am proud to work for this company. (Pride)",
+        "I would recommend this company as a great place to work. (Advocacy)",
+        "I rarely think about looking for a new job with another company. (Intent to stay)",
+        "Overall, I am extremely satisfied with this company as a place to work. (Satisfaction)"
+      ],
+      "options": [
+        {
+          "value1": [
+            10,
+            20,
+            30,
+            40
+          ],
+          "option1": "Agree"
+        },
+        {
+          "value2": [
+            5,
+            10,
+            15,
+            20
+          ],
+          "option2": "Disagree"
+        },
+        {
+          "value3": [
+            2,
+            4,
+            6,
+            8
+          ],
+          "option3": "Strongly agree"
+        },
+        {
+          "value4": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "option4": "Neither agree"
+        },
+        {
+          "value5": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "option5": "Strongly disagree"
+        }
+      ]
+    },
+    "Job satisfaction": {
+      "xaxis": [
+        "My job makes good use of my knowledge, skills and abilities.",
+        "I feel my ideas and suggestions count.",
+        "I understand the impact I have on my customers.",
+        "I have control over how I manage my workload."
+      ],
+      "options": [
+        {
+          "value1": [
+            10,
+            20,
+            30,
+            40
+          ],
+          "option1": "Agree"
+        },
+        {
+          "value2": [
+            5,
+            10,
+            15,
+            20
+          ],
+          "option2": "Disagree"
+        },
+        {
+          "value3": [
+            2,
+            4,
+            6,
+            8
+          ],
+          "option3": "Strongly agree"
+        },
+        {
+          "value4": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "option4": "Neither agree"
+        },
+        {
+          "value5": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "option5": "Strongly disagree"
+        }
+      ]
+    },
+    "Leadership": {
+      "xaxis": [
+        "The leadership of my organisation have communicated a vision of the future that motivates me.",
+        "I trust the leadership of my organisation.",
+        "I believe the leadership make decisions based on the best outcome for the organisation.",
+        "The leadership actively role models our organisational values."
+      ],
+      "options": [
+        {
+          "value1": [
+            10,
+            20,
+            30,
+            40
+          ],
+          "option1": "Agree"
+        },
+        {
+          "value2": [
+            5,
+            10,
+            15,
+            20
+          ],
+          "option2": "Disagree"
+        },
+        {
+          "value3": [
+            2,
+            4,
+            6,
+            8
+          ],
+          "option3": "Strongly agree"
+        },
+        {
+          "value4": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "option4": "Neither agree"
+        },
+        {
+          "value5": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "option5": "Strongly disagree"
+        }
+      ]
+    },
+    "Performance management and reward": {
+      "xaxis": [
+        "I understand what level of performance is expected.",
+        "I feel that my performance is evaluated fairly.",
+        "I believe that I am adequately rewarded for the work I do.",
+        "High performance is recognised, and underperformance is addressed."
+      ],
+      "options": [
+        {
+          "value1": [
+            10,
+            20,
+            30,
+            40
+          ],
+          "option1": "Agree"
+        },
+        {
+          "value2": [
+            5,
+            10,
+            15,
+            20
+          ],
+          "option2": "Disagree"
+        },
+        {
+          "value3": [
+            2,
+            4,
+            6,
+            8
+          ],
+          "option3": "Strongly agree"
+        },
+        {
+          "value4": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "option4": "Neither agree"
+        },
+        {
+          "value5": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "option5": "Strongly disagree"
+        }
+      ]
+    },
+    "Purpose": {
+      "xaxis": [
+        "I have a clear understanding of the organisation’s goals.",
+        "I believe my company has an outstanding future.",
+        "I am supportive of the organisation’s strategic direction.",
+        "The customer is placed at the centre of all we do."
+      ],
+      "options": [
+        {
+          "value1": [
+            10,
+            20,
+            30,
+            40
+          ],
+          "option1": "Agree"
+        },
+        {
+          "value2": [
+            5,
+            10,
+            15,
+            20
+          ],
+          "option2": "Disagree"
+        },
+        {
+          "value3": [
+            2,
+            4,
+            6,
+            8
+          ],
+          "option3": "Strongly agree"
+        },
+        {
+          "value4": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "option4": "Neither agree"
+        },
+        {
+          "value5": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "option5": "Strongly disagree"
+        }
+      ]
+    },
+    "Teamwork": {
+      "xaxis": [
+        "I feel that I am part of a team.",
+        "Team members are supportive of each other in times of high stress or pressure.",
+        "I believe that everyone is working as a team to achieve a common goal."
+      ],
+      "options": [
+        {
+          "value1": [
+            10,
+            20,
+            30
+          ],
+          "option1": "Agree"
+        },
+        {
+          "value2": [
+            5,
+            10,
+            15
+          ],
+          "option2": "Disagree"
+        },
+        {
+          "value3": [
+            2,
+            4,
+            6
+          ],
+          "option3": "Strongly agree"
+        },
+        {
+          "value4": [
+            1,
+            2,
+            3
+          ],
+          "option4": "Neither agree"
+        },
+        {
+          "value5": [
+            0,
+            1,
+            2
+          ],
+          "option5": "Strongly disagree"
+        }
+      ]
+    },
+    "Learning and growth opportunities": {
+      "xaxis": [
+        "I am aware of the learning opportunities available to me.",
+        "In the last 12 months, there have been opportunities for me to learn and grow.",
+        "I have access to a variety of development opportunities, not just formal learning methods.",
+        "I feel that the organisation is supportive of my career goals."
+      ],
+      "options": [
+        {
+          "value1": [
+            10,
+            20,
+            30,
+            40
+          ],
+          "option1": "Agree"
+        },
+        {
+          "value2": [
+            5,
+            10,
+            15,
+            20
+          ],
+          "option2": "Disagree"
+        },
+        {
+          "value3": [
+            2,
+            4,
+            6,
+            8
+          ],
+          "option3": "Strongly agree"
+        },
+        {
+          "value4": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "option4": "Neither agree"
+        },
+        {
+          "value5": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "option5": "Strongly disagree"
+        }
+      ]
+    },
+    "Wellness": {
+      "xaxis": [
+        "I believe that the organisation cares about my physical and mental wellbeing.",
+        "I feel my workload is right - neither too much nor too little.",
+        "I rarely feel stressed about deadlines or my workload.",
+        "I can get sufficient rest, without work related interruptions when I am away from work."
+      ],
+      "options": [
+        {
+          "value1": [
+            10,
+            20,
+            30,
+            40
+          ],
+          "option1": "Agree"
+        },
+        {
+          "value2": [
+            5,
+            10,
+            15,
+            20
+          ],
+          "option2": "Disagree"
+        },
+        {
+          "value3": [
+            2,
+            4,
+            6,
+            8
+          ],
+          "option3": "Strongly agree"
+        },
+        {
+          "value4": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "option4": "Neither agree"
+        },
+        {
+          "value5": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "option5": "Strongly disagree"
+        }
+      ]
+    },
+
+    "lineGraph":[
+      {
+        "message": "EE survey fetch Successfully",
+          "xaxis": {
+            "categories": [
+              "No of respondents",
+              "Communication",
+              "Direct manager",
+              "Diversity and inclusion",
+              "Employee engagement index",
+              "Job satisfaction",
+              "Leadership",
+              "Performance management and reward",
+              "Purpose",
+              "Teamwork",
+              "Learning and growth opportunities",
+              "Wellness"
+            ]
+          },
+          "backendData": [
+            {
+              "data": [
+                30,
+                40,
+                35,
+                50,
+                49,
+                60,
+                70,
+                91,
+                74,
+                30,
+                73,
+                43
+              ],
+              "name": "Compliance and legal"
+            },
+            {
+              "data": [62, 85, 47, 71, 93, 55, 80, 68, 72, 90, 78, 65],
+              "name": "External Communications"
+            },
+            {
+              "data": [40, 78, 59, 80, 65, 55, 87, 72, 90, 62, 55, 69],
+              "name": "Facilities Management"
+            },
+            {
+              "data": [73, 81, 45, 67, 58, 84, 91, 75, 86, 93, 76, 88],
+              "name": "Finance"
+            },
+            {
+              "data": [87, 69, 92, 79, 68, 81, 70, 64, 85, 78, 93, 76],
+              "name": "HR Shared Services"
+            },
+            {
+              "data": [76, 82, 64, 93, 85, 77, 89, 92, 70, 86, 78, 71],
+              "name": "HR"
+            },
+            {
+              "data": [58, 84, 73, 79, 87, 90, 67, 81, 95, 78, 92, 83],
+              "name": "Internal Communications"
+            },
+            {
+              "data": [85, 74, 68, 93, 79, 87, 65, 82, 90, 71, 84, 77],
+              "name": "IT"
+            },
+            {
+              "data": [79, 86, 75, 88, 92, 70, 84, 76, 90, 81, 68, 83],
+              "name": "Learning & Development"
+            },
+            {
+              "data": [72, 89, 67, 83, 91, 78, 85, 69, 93, 80, 76, 87],
+              "name": "Operations"
+            },
+            {
+              "data": [85, 74, 68, 93, 79, 87, 65, 82, 90, 71, 84, 77],
+              "name": "Procurement"
+            },
+            {
+              "data": [88, 71, 77, 94, 82, 86, 73, 68, 91, 75, 83, 79],
+              "name": "Security"
+            }
+          ],
+        "success": true
+      }
+    ],
+    "progressBar": [
+      {
+        "stage": "Communication",
+        "responseCount": 100
+      },
+      {
+        "stage": "Direct manager",
+        "responseCount": 150
+      },
+      {
+        "stage": "Diversity and inclusion",
+        "responseCount": 200
+      },
+      {
+        "stage": "Employee engagement index",
+        "responseCount": 120
+      },
+      {
+        "stage": "Job satisfaction",
+        "responseCount": 180
+      },
+      {
+        "stage": "Leadership",
+        "responseCount": 90
+      },
+      {
+        "stage": "Performance management and reward",
+        "responseCount": 160
+      },
+      {
+        "stage": "Purpose",
+        "responseCount": 210
+      },
+      {
+        "stage": "Teamwork",
+        "responseCount": 140
+      },
+      {
+        "stage": "Learning and growth opportunities",
+        "responseCount": 170
+      },
+      {
+        "stage": "Wellness",
+        "responseCount": 110
+      }
+    ]
+  }]
+}

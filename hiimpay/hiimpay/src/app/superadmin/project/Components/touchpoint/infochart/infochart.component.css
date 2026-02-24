@@ -1,0 +1,65 @@
+.bthnHover:hover {
+    background-color: gray;
+    border-radius: 50px;
+
+}
+
+.bthnHover {
+    height: 25px;
+    width: 25px;
+    background-color: gainsboro;
+    border-radius: 50px;
+}
+.activeTab:hover {
+    color: black;
+  }
+  
+  .info-card {
+    /* flex-wrap: nowrap !important; */
+    > div {
+      min-width: 260px !important;
+      padding-block: 10px;
+      /* flex-grow: 1; */
+      .card-body {
+        padding-block: 10px !important;
+      }
+    }
+  }
+  @media (width < 1400px) {
+    .info-card > div {
+      flex-grow: 1;
+    }
+  }
+  .cardshadow{
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  }
+
+  /* .activephase {
+    background: linear-gradient(135deg, #103a7f, #103a7f);
+    color: white !important;
+  } */
+  .activeTab {
+    background-color: whitesmoke !important;
+    color: black;
+    border: none;
+    border-radius: 10px;
+  }
+  .card {
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    pointer-events: stroke;
+}
+/* canvas {
+  width: 100% !important;
+  height: 400px !important;
+} */
+.card1{
+  padding: 2px;
+  background-color: white;
+  border-radius: 10px;;
+  color: black;
+  font-weight: 600;
+  pointer-events: stroke;
+  border: solid 1px #103a7f;
+}

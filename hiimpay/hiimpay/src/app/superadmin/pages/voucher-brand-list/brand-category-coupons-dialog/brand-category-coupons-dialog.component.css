@@ -1,0 +1,72 @@
+.brand-coupon-modal {
+  padding: 16px;
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.head h3 {
+  margin: 0;
+  color: #103a7f;
+}
+
+.subline {
+  margin-top: 4px;
+  color: #4b5563;
+  font-size: 13px;
+}
+
+.close-btn {
+  border: 0;
+  background: transparent;
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.all-categories {
+  margin-bottom: 14px;
+}
+
+.chip {
+  display: inline-block;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  background: #eef2ff;
+  color: #3730a3;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+}
+
+.category-block {
+  margin-bottom: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.category-block h4 {
+  margin: 0;
+  padding: 10px 12px;
+  background: #f8fafc;
+  color: #103a7f;
+}
+
+.coupon-head {
+  background: #103a7f;
+  color: #fff;
+  font-weight: 600;
+  padding: 8px 10px;
+}
+
+.coupon-row {
+  padding: 10px;
+  border-top: 1px solid #eef2f7;
+  font-size: 13px;
+}
+

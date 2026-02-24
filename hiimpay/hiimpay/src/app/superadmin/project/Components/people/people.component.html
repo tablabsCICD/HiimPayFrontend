@@ -1,0 +1,36 @@
+<section  >
+    <div class="col-12 my-2">
+        <h2 class="font-weight-bold" style="display: inline; color: #103a7f;font-style: poppins;"></h2>
+        <button type="button" class="close" aria-label="Close" (click)="onClose()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class=""*ngIf="hide">
+<div class="card my-5 mx-5" >
+    <select class="form-select" aria-label="Default select example">
+        <option selected>Select Client</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+</div>
+<div class="text-right mt-4 button-container">
+    <button class="px-5 py-2 border-0 rounded button-color text-white" style="background-color: #103a7f;" (click)="displayFunction()">Next</button>
+</div>
+</div>
+<div class="" *ngIf="display">
+<div class="my-5 mx-5">
+    <mat-form-field class="w-100">
+        <mat-label>Select Employee</mat-label>
+        <mat-select [formControl]="toppings" multiple>
+          @for (topping of toppingList; track topping) {
+            <mat-option [value]="topping">{{topping}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+</div>
+<div class="text-right mt-4 button-container">
+    <button class="px-5 py-2 border-0 rounded button-color text-white" style="background-color: #103a7f;">Submit</button>
+</div>
+</div>
+    </section>

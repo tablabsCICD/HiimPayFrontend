@@ -1,0 +1,118 @@
+<section class="vh-100">
+  <div class="container">
+    <nav class="py-4">
+
+      <!-- <img src="assets/images/exwiselogo.jpeg" alt="" width="50%" height="" /> -->
+
+    </nav>
+    <div class="row d-flex align-items-center justify-content-center h-100">
+      <div class="col-md-8 col-lg-7 col-xl-6">
+        <h3 class=" heading-tag mt-3 text-center " style="color: #103a7f;font-weight:800;font-size: xx-large;">Sign In
+        </h3>
+        <div class="card mx-5 border-0">
+          <div class="card-body  px-md-5 text-center">
+
+            <form [formGroup]="loginForm">
+
+              <div class="input-group mb-4">
+                <label for="exampleInputEmail1" class="mb-2" style="font-weight: 600;">Email / Mobile No
+                </label>
+                <div class="input-group ">
+                  <button
+                    class="btn btn-outline-secondary border-top-0 border-start-0 border-end-0 border-bottom bg-light"
+                    type="button" id="button-addon2" style="background-color: #fff">
+                    <i style="color: gray" class="fa fa-envelope"></i>
+                  </button>
+                  <input formControlName="email"
+                    class="form-control border-top-0 border-start-0 border-end-0 border-bottom bg-light"
+                    placeholder="Please enter your email ID / Mobile number" aria-label="Recipient's username"
+                    aria-describedby="button-addon2" />
+                </div>
+                <small>
+                  <p *ngIf="
+                      loginForm.get('email')?.touched &&
+                      loginForm.get('email')?.hasError('required')
+                    " class="text-danger">
+                    Email is required
+                  </p>
+                  <p *ngIf="loginForm.get('email')?.hasError('pattern')" class="text-danger">
+                    Invalid email ID
+                  </p>
+                </small>
+              </div>
+
+              <div class="input-group mb-4">
+                <label for="exampleInputEmail1" class="mb-2" style="font-weight: 600;">Password</label>
+                <div class="input-group">
+                  <button
+                    class="btn btn-outline-secondary border-top-0 border-start-0 border-end-0 border-bottom bg-light"
+                    type="button" id="button-addon2" style="background-color: #fff">
+                    <i style="color: gray" class="fa" [ngClass]="{
+                        'fa-eye-slash': !fieldTextType,
+                        'fa-eye': fieldTextType
+                      }" (click)="myFunction()"></i>
+                  </button>
+                  <input formControlName="password" [type]="fieldTextType ? 'text' : 'password'"
+                    class="form-control border-top-0 border-start-0 border-end-0 border-bottom bg-light"
+                    placeholder="Please enter your password" aria-label="Recipient's username"
+                    aria-describedby="button-addon2" />
+                </div>
+                <small>
+                  <p *ngIf="
+                      loginForm.get('password')?.touched &&
+                      loginForm.get('password')?.hasError('required')
+                    " class="text-danger">
+                    Password is required
+                  </p>
+                </small>
+              </div>
+              <div class="mt-4 {{ config.cssClass }}">
+                <div class="d-flex flex-column align-items-center">
+                  <!-- Flex container to align canvas and button inline -->
+                  <div class="d-flex align-items-center mb-3">
+                    <canvas id="captcahCanvas" width="325" height="80"></canvas>
+                    <button class="btn btn-outline-secondary ms-3" (click)="reloadCaptcha()">&#x21bb;</button>
+                  </div>
+                  <div class="input-group mb-3 recaptcha-input">
+                    <input type="text" [(ngModel)]="captch_input" name="captcha" [ngModelOptions]="{standalone: true}"
+                      class="form-control" placeholder="Enter the CAPTCHA" (input)="checkCaptcha()" />
+                  </div>
+                </div>
+              </div>
+              <button type="submit" (click)="submit()" class="btn btn-block mb-2 text-center text-light  w-100 mt-2"
+                style="background-color: #103a7f">
+                Sign In
+              </button>
+
+              <div class="text-danger">
+                <span>{{ displayMsg }}</span>
+              </div>
+            </form>
+            <div class="text-center pb-sm-3 signup-style">
+              <span>
+                <!-- <span
+                  class="signup-text font-weight-bold"
+                  routerLink="/auth/forgotpassword"
+                  >Forgot Password</span
+                >
+            -->
+                <a class="text-muted" routerLink="/auth/forgotpassword">Forgot password?</a>
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1" style="position: relative;">
+        <img src="assets/images/login1.jpeg" class="img-fluid" alt="Phone image">
+        <div>
+          <div class="dot-grid-container">
+            <div *ngFor="let item of [].constructor(36)">
+              <div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

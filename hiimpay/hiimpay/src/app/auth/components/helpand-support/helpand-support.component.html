@@ -1,0 +1,85 @@
+<!-- 
+<div class="container">
+    <div class="row text-center">
+        <div class="col-md-8">
+            <div class="captcha-container {{ config.cssClass }}">
+                <div class="d-flex flex-wrap recaptcha-input">
+                  <div class="captcha-actions">
+                    <input type="text" [(ngModel)]="captch_input"  name="captcha" [ngModelOptions]="{standalone: true}" 
+                    placeholder="Enter the CAPTCHA" (input)="checkCaptcha()" >
+                    <div *ngIf="((captch_input.touched)||submitted===true)" class="error">
+                      <div *ngIf="captch_input.errors">
+                        captch text is required.
+                      </div>
+                    </div>
+                    <input type="button" value="Check" (click)="checkCaptcha()" />
+                    <a href="" class="cpt-btn" (click)="playCaptcha()">🔈</a>
+                  </div>
+                  <canvas id="captcahCanvas" width="325" height="80"></canvas>
+                  <a class="cpt-btn "   (click)="reloadCaptcha()" >&#x21bb;</a>
+                </div>
+                <button (click)="onSubmit()">submit</button>
+              </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="container d-flex justify-content-center align-items-center vh-100" *ngIf="!showContainer">
+    <div class="row justify-content-center w-100">
+        <div class="col-md-6">
+            <div class="captcha-container {{ config.cssClass }} p-3 border rounded shadow-sm text-center">
+                <div class="d-flex flex-column align-items-center">
+                    <!-- Flex container to align canvas and button inline -->
+                    <div class="d-flex align-items-center mb-3">
+                        <canvas id="captcahCanvas" width="325" height="80"></canvas>
+                        <button class="btn btn-outline-secondary ms-3" (click)="reloadCaptcha()">&#x21bb;</button>
+                    </div>
+                    <div class="input-group mb-3 recaptcha-input">
+                        <input type="text" [(ngModel)]="captch_input" name="captcha"
+                            [ngModelOptions]="{standalone: true}" class="form-control" placeholder="Enter the CAPTCHA"
+                            (input)="checkCaptcha()" />
+                    </div>
+                    <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container vh-100 d-flex justify-content-center align-items-center" *ngIf="showContainer">
+    <div class="card shadow p-4 w-75">
+        <h2 class="card-title text-center">Submit Your Details</h2>
+        <form [formGroup]="emailForm">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" id="email" class="form-control" formControlName="email" placeholder="Enter your email">
+                <div *ngIf="emailForm.get('email')?.invalid && emailForm.get('email')?.touched" class="text-danger">
+                    Email is required and should be a valid email.
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="subject" class="form-label">Subject</label>
+                <input type="text" id="subject" class="form-control" formControlName="subject" placeholder="Enter your subject">
+                <div *ngIf="emailForm.get('subject')?.invalid && emailForm.get('subject')?.touched" class="text-danger">
+                    Subject is required
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea id="message" class="form-control no-resize" formControlName="message" rows="8"
+                    placeholder="Enter your message"></textarea>
+                <div *ngIf="emailForm.get('message')?.invalid && emailForm.get('message')?.touched" class="text-danger">
+                    Message is required.
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-6">
+                    <button type="button" class="btn btn-primary w-100" routerLink="/auth/userlogin">Cancel</button>
+                </div>
+                <div class="col-6">
+                    <button type="submit" class="btn btn-primary w-100" [disabled]="emailForm.invalid" (click)="submitForm()">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

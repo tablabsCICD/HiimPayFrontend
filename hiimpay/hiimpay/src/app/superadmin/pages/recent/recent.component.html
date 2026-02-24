@@ -1,0 +1,81 @@
+<section class="mt-3" style="height: 100%; padding-bottom:5%; position: relative">
+  <div class="row table-row row-head gx-0">
+    <div class="col">Company name</div>
+    <div class="col">Mobile number 1</div>
+    <div class="col">Mobile number 2</div>
+    <div class="col">Landline number</div>
+    <div class="col" style="max-width: 200px;">Company email</div>
+    <div class="col" style="max-width: 200px;">Second email</div>
+    <!-- <div class="col">Consulting phase</div> -->
+    <!-- <div class="col">Record owner</div> -->
+    <div class="col">Info</div>
+    <div class="col">Action</div>
+  </div>
+  <div class="tableCointainer" style="position: relative;">
+    <ng-container *ngIf="data.length > 0">
+      <div class="row gx-0 table-row row-body px-0"
+        *ngFor="let item of data | paginate: { itemsPerPage: itemPerPage, currentPage: page, totalItems: totalItems }"
+        (click)="setClientId($event, item.id)" style="cursor: pointer;">
+        <div class="col">{{ item.clientName  || '-' }} </div>
+        <div class="col">{{ item.mobileNumber1 || item.mobile_Number1 || item.contactPhone || '-' }}</div>
+        <div class="col">{{ item.mobileNumber2 || item.mobile_Number2 || '-' }}</div>
+        <div class="col">{{ item.landlineNumber || item.landline_Number || '-' }}</div>
+        <div class="col me-2" style="max-width: 200px;">
+          {{ item.contactEmail }}
+        </div>
+        <div class="col me-2" style="max-width: 200px;">
+          {{ item.secondContactEmail || item.second_Contact_Email || item.contactEmail2 || item.secondaryEmail || '-' }}
+        </div>
+        <!-- <div class="col text-center">{{ item?.consultinghaseName }}</div> -->
+        <!-- <div class="col">{{ item?.loggedUserName}}</div> -->
+        <div class="col"><button type="button" class=" btn btn-light btn-rounded ellipsis-button2" data-mdb-ripple-init
+            (click)=" openPopup(item.id, item?.consultantName)"><i class="fa fa-info-circle me-2"></i>Info</button></div>
+        <div class="col"> <button mat-icon-button [matMenuTriggerFor]="menu" class="ellipsis-button"
+            (click)="openMenu($event)">
+            <mat-icon class="ellipsis-icon">more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" class="custom-menu rounded-lg">
+            <button mat-menu-item [matMenuTriggerFor]="phases">
+              <mat-icon>compare_arrows</mat-icon>
+              <span>Change phase</span>
+            </button>
+            <button mat-menu-item [matMenuTriggerFor]="status">
+              <mat-icon>compare_arrows</mat-icon>
+              <span>Change status</span>
+            </button>
+            <button mat-menu-item (click)="editClient(item.id)">
+              <mat-icon>edit</mat-icon>
+              <span>Edit</span>
+            </button>
+            <button mat-menu-item (click)="deleteClient(item)">
+              <mat-icon>delete</mat-icon>
+              <span>Delete</span>
+            </button>
+            <button mat-menu-item (click)="pinClient(item.id)">
+              <mat-icon>push_pin</mat-icon>
+              <span>Pin</span>
+            </button>
+          </mat-menu>
+          <mat-menu #phases="matMenu">
+            <button mat-menu-item *ngFor="let phase of changeablePhases(item?.consultinghaseName)" 
+            (click)="changePhase(item?.id, phase)">
+                {{phase}}
+            </button>
+          </mat-menu>
+          <mat-menu #status="matMenu">
+            <button mat-menu-item *ngFor="let status of changeableStatus(item?.status)" 
+            (click)="changeStatus(item?.id, status)">
+                {{status}}
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+      <div class="text-end my-4" style="font-weight: 300 !important; font-size: 13px">
+        <pagination-controls (pageChange)="pageChangeEvent($event)" [maxSize]="5"></pagination-controls>
+      </div>
+    </ng-container>
+    <div class="text-center unavailability" *ngIf="data.length <= 0">
+      No data available for selected state
+    </div>
+    </div>
+</section>

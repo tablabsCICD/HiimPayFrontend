@@ -1,0 +1,91 @@
+.col {
+  line-height: 22.5px;
+}
+
+.table-row {
+  background-color: #ffffff;
+  padding: 5px;
+  margin-bottom: 5px;
+  align-items: center;
+  height: auto;
+
+  font-weight: 400;
+  font-size: 14px;
+  border: solid 0.3px rgb(148, 148, 148);
+}
+.table-row:hover {
+  border: 2px solid #103a7f;
+}
+.tableCointainer .table-row:hover {
+  border: 2px solid #103a7f;
+}
+.row-head {
+  height: 54px;
+  font-weight: 500;
+
+  font-size: 16px;
+  background-color: #103a7f;
+}
+
+.row-body {
+  font-weight: 400;
+  height: auto;
+
+  text-align: center;
+}
+
+.row-head .col {
+  text-align: center;
+}
+
+.material {
+  display: inline-block;
+  text-align: center;
+}
+
+button {
+  border: none;
+}
+
+.boldColmn {
+  font-weight: 400;
+  position: relative;
+  inset-inline: -1em;
+}
+
+.no-style-button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+tbody:nth-child(2) {
+  max-width: 4px;
+}
+
+.disableDownloadIcon {
+  opacity: 0.4;
+}
+
+.disableDownloadButton:hover {
+  cursor: not-allowed;
+}
+
+.dropdownToggleButton {
+  height: 57px;
+  flex-grow: 1;
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.unavailability {
+  font-size: 16px !important;
+  position: absolute;
+  top:20vh;
+  width: 100%;
+}

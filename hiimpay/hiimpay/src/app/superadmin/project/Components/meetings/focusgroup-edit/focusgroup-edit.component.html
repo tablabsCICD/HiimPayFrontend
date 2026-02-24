@@ -1,0 +1,47 @@
+    <div class="container">
+        <div class="row justify-content-between pt-2">
+            <!-- <div class="col-auto">
+            <button type="button" class="fs-6 bg-white btn-link border-0 blue-color" (click)="onClose()">Back</button>
+        </div> -->
+            <div class="col-auto">
+                <h2 class="font-weight-bold blue-color ps-3">Update Group</h2>
+            </div>
+            <div class="col-auto">
+                <button type="button" class="close bthnHover" aria-label="Close" (click)="onClose()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="mt-5 px-5">
+        <ng-multiselect-dropdown [placeholder]="'Select users'" [settings]="dropdownSettings" [data]="dropdownList"
+        [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"  [ngModelOptions]="{standalone: true}">
+    </ng-multiselect-dropdown>
+
+    <div class="row px-2 mt-5">
+        <form [formGroup]="meetingForm" (submit)="updateFocusGroup()">
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-6 card p-4 border-0 shadow">
+                    <div class="mt-2">
+                        <label class="form-label">Group Name</label>
+                        <input type="text" class="form-control form-control-lg" placeholder="Title"
+                            formControlName="title" />
+                    </div>
+                    <div class="mt-4">
+                        <label class="form-label">Lifecycle requirement</label>
+                        <input type="text" class="form-control form-control-lg" placeholder="Lifecycle requirement"
+                            formControlName="criteria" />
+                    </div>
+                    <div class="mt-4">
+                        <label class="form-label">Description</label>
+                        <input type="text" class="form-control form-control-lg" placeholder="Description"
+                            formControlName="description" />
+                    </div>
+                </div>
+            </div>
+            <div class="fixed-bottom">
+                <button type="submit" class="w-100 button-color border-0 py-3 text-white fs-5">Update</button>
+            </div>
+        </form>
+    </div>
+    </div>

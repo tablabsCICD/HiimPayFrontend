@@ -1,0 +1,27 @@
+.noThanks:hover {
+  background-color: #069de0;
+  color: white;
+}
+
+.noThanks {
+  background-color: rgb(225, 222, 222);
+}
+
+button {
+  font-size: 14px !important;
+}
+
+.card {
+  border-radius: 1px;
+}
+
+.enclosingDiv {
+  label {
+    font-size: 16px !important;
+  }
+}
+
+.updateButton {
+  background-color: #103a7f !important;
+  color: white !important;
+}

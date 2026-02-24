@@ -1,0 +1,79 @@
+<div class="container my-2">
+    <div class="row ">
+      <div class="col-lg col-md col-sm-12">
+        <div class="d-flex align-items-center justify-content-between">
+          <h3 style="margin: 0;color: #103a7f;font-weight: bolder; ">Employee dashboard</h3>
+        
+        </div>
+    </div>
+    </div>
+    <div class="row justify-content-center info-card">
+        <div class="col-2 flex-grow-1">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col align-self-center">
+                  <h5 class="card-title  fs-6 text-uppercase fw-normal mb-2">All</h5>
+                  <h5 class="card-title fs-6 fw-normal">80</h5>
+                </div>
+                <div class="col-auto">
+                    <circle-progress [percent]="100" [radius]="35" [outerStrokeWidth]="10" [innerStrokeWidth]="10"
+                    [outerStrokeColor]="'#103a7f'" [innerStrokeColor]="'#069DE0'" [animation]="true" [showSubtitle]="false"
+                    [clockwise]="true" [showUnits]="true" [animationDuration]="300"></circle-progress>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-2 flex-grow-1" >
+          <div class="card" >
+            <div class="card-body">
+              <div class="row">
+                <div class="col align-self-center">
+                  <h5 class="card-title  fs-6 text-uppercase fw-normal mb-2">New</h5>
+                  <h5 class="card-title fs-6 fw-normal">5</h5>
+                </div>
+                <div class="col-auto">
+                    <circle-progress [percent]="relativePercentage(newCount)" [radius]="35" [outerStrokeWidth]="10" [innerStrokeWidth]="10"
+                    [outerStrokeColor]="'#103a7f'" [innerStrokeColor]="'#069DE0'" [animation]="true" [showSubtitle]="false"
+                    [clockwise]="true" [showUnits]="true" [animationDuration]="300"></circle-progress>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+</div>
+<div class="row ">
+  <div class="col ">
+    <!-- <h3 class="font-weight-bold" style="color: #103a7f;">All Surveys</h3> -->
+  </div>
+    <div class="col  d-flex justify-content-end align-self-center mb-2">
+  <button  class="p-2 rounded button-color text-white  border-0" (click)="openOnboardForm()">Onboard Employee</button>
+    </div>
+
+</div>
+  <section>
+    <div class="row table-row row-head gx-0">
+      <div class="col">Name</div>
+      <div class="col">Company</div>
+      <div class="col">Designation</div>
+      <div class="col">Phone</div>
+      <div class="col">Email</div>
+      <div class="col">Second Email</div>
+      <div class="col">City</div>
+    </div>
+
+    <div class="tableCointainer">
+      <div class="row gx-0 table-row row-body px-0" *ngFor="let emp of employees">
+        <div class="col">{{ emp.name }}</div>
+        <div class="col">{{ emp.company }}</div>
+        <div class="col">{{ emp.designation }}</div>
+        <div class="col">{{ emp.phone }}</div>
+        <div class="col">{{ emp.email }}</div>
+        <div class="col">{{ emp.secondEmail || '-' }}</div>
+        <div class="col">{{ emp.city }}</div>
+      </div>
+    </div>
+  </section>
+</div>

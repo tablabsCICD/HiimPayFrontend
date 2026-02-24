@@ -1,0 +1,89 @@
+/* Adjust column width for options */
+.survey-container .card-body .row .col-md-4 {
+  width: 16%;
+}
+
+.button-color {
+  background-color: #103a7f;
+}
+
+.form-control:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.survey-container {
+  height: 82vh;
+  overflow-y: scroll;
+  padding-bottom: 5%;
+}
+
+@media (max-width: 768px) { 
+  .survey-container {
+    padding-bottom: 20%;
+  }
+}
+
+.survey-container::-webkit-scrollbar {
+  width: 6px; 
+}
+
+.survey-container::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+.survey-container::-webkit-scrollbar-thumb {
+  background-color: #888; 
+  border-radius: 10px; 
+}
+
+.survey-container::-webkit-scrollbar-thumb:hover {
+  background-color: #555; 
+}
+
+
+:host ::ng-deep .mdc-label {
+  margin-bottom: 0px !important;
+  font-size: 16px;
+}
+
+.number-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start; 
+  flex-wrap: nowrap; 
+  position: relative;
+}
+
+.number {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  background-color: #2980b9;
+  color: white;
+  font-size: 1.5rem;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.number.selected {
+  font-size: 2rem;
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.label {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1rem;
+  color: black;
+  white-space: nowrap;
+}

@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12 mt-2 d-flex justify-content-between align-items-center">
+            <div class="col-md-8 text-right">
+                <h2 class="font-weight-bold" style="color: #103a7f;">Stage report with questions and options</h2>
+            </div>
+            <div class="col-md-4 text-right">
+                <button type="button" class="close btnHover" aria-label="Close" (click)="onClose()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div id="chart">
+            <apx-chart
+              [series]="chartOptions.series!"
+              [chart]="chartOptions.chart!"
+              [dataLabels]="chartOptions.dataLabels!"
+              [plotOptions]="chartOptions.plotOptions!"
+              [xaxis]="chartOptions.xaxis!"
+              [stroke]="chartOptions.stroke!"
+              [fill]="chartOptions.fill!"
+              [title]="chartOptions.title!"
+              [tooltip]="chartOptions.tooltip!"
+              [legend]="chartOptions.legend!"
+              [colors]="chartOptions.colors!"
+            ></apx-chart>
+          </div>
+    </div>
+</div>

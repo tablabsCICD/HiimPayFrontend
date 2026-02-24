@@ -1,0 +1,39 @@
+<div class="dashboard-root py-5 px-5">
+  <div class="dashboard-header">
+    <h2>Voucher Dashboard</h2>
+    <div class="actions">
+      <button mat-flat-button color="primary" (click)="getBrands()">Get Brands</button>
+      <button mat-flat-button color="primary" (click)="pullVoucher()">Pull Voucher</button>
+      <button mat-flat-button color="primary" (click)="checkStatus()">Check Status</button>
+      <button mat-flat-button color="primary" (click)="getStock()">Get Stock</button>
+      <button mat-flat-button color="primary" (click)="storeList()">Store List</button>
+    </div>
+  </div>
+
+  <div class="cards-grid">
+    <div class="stat-card">
+      <div class="stat-title">Total Brands</div>
+      <div class="stat-value">{{ totalBrands }}</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-title">Available Vouchers</div>
+      <div class="stat-value">{{ availableVouchers }}</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-title">Active Tokens</div>
+      <div class="stat-value">{{ activeTokens }}</div>
+    </div>
+
+    <div class="stat-card orders-card">
+      <div class="stat-title">Recent Orders</div>
+      <div class="orders-list">
+        <div class="order" *ngFor="let o of recentOrders">
+          <div class="order-id">{{ o.id }}</div>
+          <div class="order-meta">{{ o.date }} • ${{ o.total }} • {{ o.status }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

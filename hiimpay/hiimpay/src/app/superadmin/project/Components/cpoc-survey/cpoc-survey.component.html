@@ -1,0 +1,116 @@
+<div class="container my-2">
+    <div class="row ">
+      <div class="col-lg col-md col-sm-12">
+        <div class="d-flex align-items-center justify-content-between">
+          <h3 style="margin: 0;color: #103a7f;font-weight: bolder; ">My surveys</h3>
+          <!-- <span class="blue-color font-weight-bold"style="font-family: poppins;font-weight: 700;"> Project Name : ABC</span>
+          <span class="blue-color font-weight-bold ms-4"style="font-family: poppins;font-weight: 700;">
+            EXwise Consultant : name</span> -->
+        </div>
+      </div>
+    </div>
+    <div class="row row-cols-1 row-cols-sm-4  justify-content-center info-card">
+  
+      <div class="col" (click)="getSurveysByStatus('all')">
+        <div class="card" [ngClass]="{activeTab: selectedCard == 'all'}">
+          <div class="card-body">
+            <div class="row">
+              <div class="col align-self-center">
+                <h5 class="card-title  fs-6 text-uppercase fw-normal mb-2">All</h5>
+                <h5 class="card-title fs-6 fw-normal">{{total}}</h5>
+                <!-- <span class="h2 font-weight-bold mb-0" sty>{{newCount}}</span> -->
+              </div>
+              <div class="col-auto">
+                <circle-progress [percent]="100" [radius]="35" [outerStrokeWidth]="10" [innerStrokeWidth]="10"
+                  [outerStrokeColor]="'#103a7f'" [innerStrokeColor]="'#069DE0'" [animation]="true" [showSubtitle]="false"
+                  [clockwise]="true" [showUnits]="true" [animationDuration]="300"></circle-progress>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col" (click)="getSurveysByStatus('attempted')">
+        <div class="card" [ngClass]="{'activeTab': selectedCard == 'attempted'}">
+          <div class="card-body">
+            <div class="row">
+              <div class="col align-self-center">
+                <h5 class="card-title fs-6 text-uppercase fw-normal  mb-2">Attempted</h5>
+                <h5 class="card-title fs-6 fw-normal">{{attempted}}</h5>
+                <!-- <span class="h2 font-weight-bold mb-0">{{closedCount}}</span> -->
+              </div>
+              <div class="col-auto">
+                <circle-progress [percent]="relativePercentage(attempted)" [radius]="35" [outerStrokeWidth]="10" [innerStrokeWidth]="10"
+                  [outerStrokeColor]="'#103a7f'" [innerStrokeColor]="'#069DE0'" [animation]="true" [showSubtitle]="false"
+                  [clockwise]="true" [showUnits]="true" [animationDuration]="300"></circle-progress>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col" (click)="getSurveysByStatus('notattempted')">
+        <div class="card" [ngClass]="{'activeTab': selectedCard == 'notAttempted'}">
+          <div class="card-body">
+            <div class="row">
+              <div class="col align-self-center">
+                <h5 class="card-title fs-6 text-uppercase fw-normal  mb-2">Not Attempted</h5>
+                <h5 class="card-title fs-6 fw-normal">{{notAttempted}}</h5>
+                <!-- <span class="h2 font-weight-bold mb-0">{{pendingCount}}</span> -->
+              </div>
+              <div class="col-auto">
+                <circle-progress [percent]="relativePercentage(notAttempted)" [radius]="35" [outerStrokeWidth]="10" [innerStrokeWidth]="10"
+                  [outerStrokeColor]="'#103a7f'" [innerStrokeColor]="'#069DE0'" [animation]="true" [showSubtitle]="false"
+                  [clockwise]="true" [showUnits]="true" [animationDuration]="300"></circle-progress>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+  
+      <!-- </div> -->
+  
+    </div>
+  </div>
+  
+  <section class="container mt-3">
+    <div class="row table-row row-head gx-0">
+      <!-- <div class="col ">Survey ID</div> -->
+      <div class="col ">Survey name</div>
+      <div class="col ">Assigned on</div>
+      <div class="col ">Status</div>
+      <div class="col ">Action</div>
+    </div>
+    <div class="tableCointainer" style="position: relative; padding-bottom: 5%;">
+      <ng-container *ngIf="items.length > 0">
+        <div class="row gx-0 table-row row-body px-0"
+          *ngFor="let item of items | paginate: { itemsPerPage: itemPerPage, currentPage: page, totalItems: totalItems }">
+          <!-- <div class="col">{{ item.survey?.id }} </div> -->
+          <div class="col"> {{ item.survey?.survey_name }}</div>
+          <div class="col">
+            {{ item.assignmentToCLient?.startDate | date:'MMM d yyyy'}}
+          </div>
+          <div class="col">
+            <span *ngIf="item.status=='not yet started'" class="badge rounded-pill d-inline"
+              style="background-color: #069be0;">{{capitalizeFirstLetter(item?.status)}}</span>
+            <span *ngIf="item.status==='Inactive'" class="badge rounded-pill d-inline"
+              style="background-color: lightgoldenrodyellow;">{{capitalizeFirstLetter(item.status)}}</span>
+            <span *ngIf="item.status==='completed'" class="badge rounded-pill d-inline"
+              style="background-color: lightgreen; color: black;">{{capitalizeFirstLetter(item.status)}}</span>
+          </div>
+          <div class="col">
+            <button type="button" class="py-1 px-2 border-0 rounded button-enabled"
+              [ngClass]="{'button-disabled':item.status!=='not yet started'}"
+              (click)="onSurveyStart(item.assignmentToCLient?.id)" [disabled]="item.status!=='not yet started'">Start survey</button>
+          </div>
+        </div>
+        <div class="text-end my-4" style="font-weight: 300 !important; font-size: 13px">
+          <pagination-controls (pageChange)="pageChangeEvent($event)" [maxSize]="5"></pagination-controls>
+        </div>
+      </ng-container>
+      <div class="text-center unavailability" *ngIf="items.length <= 0">
+        No data available for selected state
+      </div>
+    </div>
+  </section>

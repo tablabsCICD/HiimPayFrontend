@@ -1,0 +1,57 @@
+
+<div class="container vh-100">
+  <div class="row ">
+      <div class="col ">
+          <h3 class="font-weight-bold" style="color: #103a7f; font-family: Times New Roman;">All Surveys</h3>
+      </div>
+      <div class="col mb-2 d-flex justify-content-end align-items-center">
+
+         
+              <button class="py-2 px-4 rounded text-white button-color shadow border-0"(click)="openPopup()">Create
+                  Survey</button>
+         
+        
+      </div>
+    
+        <section  style="height: 100vh;">
+          <div class="row table-row row-head gx-0">
+            <div class="col ">Survey name</div>
+            <div class="col ">Survey type</div>
+            <div class="col ">Survey description</div>
+            <div class="col ">Created date</div>
+       
+            <div class="col ">Status</div>
+            <div class="col ">Action</div>
+          </div>
+          <div class="tableCointainer">
+            <div
+              class="row gx-0 table-row row-body px-0 "
+              *ngFor="let item of surveyList" 
+           
+            >
+            <div class="col">{{item.survey_name | titlecase}} </div>
+            <div class="col">{{item.survey_Type | titlecase}}</div>
+              <div class="col">
+                <div class="material">
+                  <div class="col"> {{item.survey_description | titlecase }}</div>
+                </div>
+              </div>
+              <div class="col">{{item.created_date  | date}}</div>
+              <div class="col d-flex flex-column align-items-center" style=" overflow: hidden;">
+                <span *ngIf="item.status=='Active'" class="badge badge-success rounded-pill d-inline">{{item.status | titlecase}}</span>
+                <span *ngIf="item.status==='Inactive'" class="badge badge-danger rounded-pill d-inline">{{item.status | titlecase}}</span>
+              </div>
+              
+              
+            <div class="col"> 
+              <button class="border-0 m-2 " style="font-size:20px" (click)="editSurvey(item.id)"> <i class="fa fa-pencil"
+                style="color: gray;"></i></button>
+            <button class="border-0 m-2 " style="font-size:20px" (click)="deleteSurvey(item.id)"> <i
+                class="fa fa-trash" style="color: gray;"></i></button>
+            </div>
+          </div>
+          </div>
+        </section>
+        
+  </div>
+</div>

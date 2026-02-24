@@ -1,0 +1,42 @@
+<div class="conatiner">
+    <div class="col-lg-12 mt-2">
+        <h3  style="display: inline; color: #103a7f; font-weight: 700;">Stakeholder</h3>
+        <button type="button" class="close bthnHover justify-content-end" aria-label="Close" (click)="onClose()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row mt-2 justify-content-center">
+        <div class="col-md-12">
+            <div class="survey-container">
+                <div class="card mt-2 bg-light" style="background-color: #103a7f;">
+                    <div class="card-body">
+                        <div class="card mb-4" style="background-color: #103a7f;">
+                            <h3 class="card-title text-center mb-0" style="font-weight: bold; color: #103a7f; font-family: Times New Roman;">Survey Name: ABC Survey</h3>
+                        </div>
+                        <p>Here instruction</p>
+                    </div>
+                </div>
+                <div class="card mt-2" *ngFor="let question of stakeHolderOptions; let i = index">
+                    <div class="card-body">
+                        <h4 class="card-title" style="font-weight: 600;">{{ i + 1 }}. {{ question.question }} <span class="text-danger">*</span></h4> 
+                        <div class="row mb-2">
+                            <div class="col-md-4" *ngFor="let option of question.options; let j = index">
+                                <div class="form-check mt-3" style="font-family: Times New Roman;">
+                                    <input class="form-check-input" type="radio" name="{{ 'question_' + i }}" id="{{ 'option_' + j }}" value="{{ option }}">
+                                    <label class="form-check-label" for="{{ 'option_' + j }}">{{ option }}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-4">
+                    <button class="button-color text-white border-0 py-2 px-4 rounded" (click)="submitStakeHolder()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

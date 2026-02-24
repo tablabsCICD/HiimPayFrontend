@@ -1,0 +1,81 @@
+<div class="container" *ngIf="showcontainer==='attempted'">
+    <div class="row">
+        <div class="d-flex justify-content-between mt-4">
+            <h2 class="font-weight-bold blue-color">Survey attempted by participants</h2>
+            <div class="d-flex">
+                <h4 class="font-weight-bold blue-color me-4">Survey name: FUDS</h4>
+                <h4 class="font-weight-bold blue-color me-4">Client name: ABC</h4>
+                <h4 class="background-color text-white px-3 py-1 rounded">Attempted Total: 15</h4>
+            </div>
+        </div>
+        <div>
+            <div class="table-responsive">
+                <table class="table mt-2 table-hover">
+                    <thead>
+                      <tr style="background-color: #103a7f;">
+                        <th scope="col">Employee ID</th>
+                        <th scope="col">Employee name</th>
+                        <th scope="col">Email ID</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Contact number</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of items">
+                        <td>{{item.empId}}</td>
+                        <td>{{item.empName}}</td>
+                        <td>{{item.emailID}}</td>
+                        <td>{{item.city}}</td>
+                        <td>{{item.contactNumber}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+        <div class="text-right">
+            <button (click)="onClose()" type="button" class="py-2 px-4 rounded border-0 button-color text-white">close</button>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container" *ngIf="showcontainer==='notattempted'">
+    <div class="row">
+        <div class="d-flex justify-content-between mt-4">
+            <h2 class="font-weight-bold blue-color">Survey not attempted by participants</h2>
+            <div class="d-flex">
+                <h4 class="font-weight-bold blue-color me-4">Survey name: FUDS</h4>
+                <h4 class="font-weight-bold blue-color me-4">Client name: ABC</h4>
+                <h4 class="background-color text-white px-3 py-1 rounded">Attempted Total: 15</h4>
+            </div>
+        </div>
+        <div>
+            <div class="table-responsive">
+                <table class="table mt-2 table-hover">
+                    <thead>
+                      <tr style="background-color: #103a7f;">
+                        <th scope="col">Employee ID</th>
+                        <th scope="col">Employee name</th>
+                        <th scope="col">Email ID</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Contact number</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of items">
+                        <td>{{item.empId}}</td>
+                        <td>{{item.empName}}</td>
+                        <td>{{item.emailID}}</td>
+                        <td>{{item.city}}</td>
+                        <td>{{item.contactNumber}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+            </div>
+        </div>
+        <div class="text-right">
+            <button (click)="onClose()" type="button" class="py-2 px-4 rounded border-0 button-color text-white">close</button>
+        </div>
+    </div>
+</div>

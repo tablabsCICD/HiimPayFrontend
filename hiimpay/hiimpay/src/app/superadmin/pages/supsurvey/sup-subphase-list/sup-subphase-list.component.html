@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="row">
+        <div class="col mt-2">
+            <h3 class="font-weight-bold" style="color: #103a7f;">All Subphases</h3>
+        </div>
+        <div class="col d-flex justify-content-end align-items-center mb-2 pb-3">
+
+            <div class="mt-2">
+                <button class="py-2 px-4 rounded text-white button-color shadow border-0" (click)="openPopup()">Create
+                    Subphase</button>
+            </div>
+            <!-- <div class="filter-container mt-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search by name">
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-secondary text-white button-color" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <table class="table align-middle">
+            <thead>
+              <tr >
+                <th scope="col">Subphase name</th>
+                <th scope="col">Subphase description</th>
+                <th scope="col">Created date</th>
+                <th scope="col">Created by</th>
+                <!-- <th scope="col">Status</th> -->
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of subphaseList" class="row-clickable">
+                <td >{{item.subPhaseName | titlecase}}</td>
+                <td>{{item.description | titlecase}}</td>
+                <td>{{item.createdDate | date}}</td>
+                <td>Created By</td>
+                <td>
+                  <button mat-icon-button [matMenuTriggerFor]="menu" class="ellipsis-button">
+                    <mat-icon class="ellipsis-icon">more_vert</mat-icon>
+                  </button>
+                  <mat-menu #menu="matMenu" class="custom-menu rounded-lg">
+                    <button mat-menu-item (click)="editSubphase(item.id)">
+                      <mat-icon>edit</mat-icon>
+                      <span>Edit</span>
+                    </button>
+                    <button mat-menu-item (click)="deleteSubphase(item.id)">
+                      <mat-icon>delete</mat-icon>
+                      <span>Delete</span>
+                    </button>
+                    <button mat-menu-item (click)="pinSubphase(item.id)">
+                      <mat-icon>push_pin</mat-icon>
+                      <span>Pin</span>
+                    </button>
+                  </mat-menu>
+                </td>
+              </tr>
+              
+            </tbody>
+          </table>
+    </div>
+</div>
+
+

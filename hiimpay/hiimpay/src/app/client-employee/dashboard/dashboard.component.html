@@ -1,0 +1,508 @@
+<div class="coupon-portal">
+  <div class="ambient-bg"></div>
+
+  <section class="screen auth-screen" *ngIf="!isAuthenticated">
+    <div class="bg-shape shape-a"></div>
+    <div class="bg-shape shape-b"></div>
+    <div class="login-wrapper">
+      <article class="login-card">
+        <img src="assets/images/navexwise.jpeg" alt="HiimPay" class="login-logo" />
+        <h1>Welcome to HiimPay</h1>
+        <p class="login-subtitle">Access your employee savings & benefits</p>
+
+        <h3 *ngIf="authStep === 'request'" class="step-title">Sign In</h3>
+        <h3 *ngIf="authStep === 'verify'" class="step-title">Verify OTP</h3>
+
+        <div class="auth-form" *ngIf="authStep === 'request'">
+          <label for="emailId">Company Email</label>
+          <input id="emailId" type="email" [(ngModel)]="emailId" placeholder="name@company.com" />
+
+          <label>CAPTCHA</label>
+          <div class="captcha-compact">
+            <canvas id="captcahCanvas" class="captcha-box" width="325" height="64"></canvas>
+            <button class="icon-btn inline" type="button" (click)="regenerateCaptcha()">↻</button>
+          </div>
+          <input type="text" [(ngModel)]="enteredCaptcha" placeholder="Enter CAPTCHA" maxlength="6" />
+
+          <button class="primary-btn" type="button" (click)="sendOtp()" [disabled]="isSendingOtp">
+            <span *ngIf="!isSendingOtp">Send OTP</span>
+            <span *ngIf="isSendingOtp">Sending OTP...</span>
+          </button>
+
+          <div class="trust-list">
+            <div>✓ Secure OTP Login</div>
+            <div>✓ Enterprise-grade security</div>
+            <div>✓ Trusted employee access</div>
+          </div>
+        </div>
+
+        <div class="auth-form" *ngIf="authStep === 'verify'">
+          <p class="otp-note">OTP sent to <b>{{ emailId }}</b></p>
+          <label for="otp">6-digit OTP</label>
+          <input id="otp" type="text" maxlength="6" [(ngModel)]="enteredOtp" placeholder="Enter OTP" />
+
+          <button class="primary-btn" type="button" (click)="verifyOtp()" [disabled]="isVerifyingOtp">
+            <span *ngIf="!isVerifyingOtp">Verify OTP</span>
+            <span *ngIf="isVerifyingOtp">Verifying...</span>
+          </button>
+          <button class="text-link-btn" type="button" (click)="backToRequestStep()">Change email / Resend OTP</button>
+          <p class="demo-note">Demo OTP: <b>{{ demoOtp }}</b></p>
+        </div>
+
+        <p class="auth-error" *ngIf="authError">{{ authError }}</p>
+        <div class="login-footer-links">
+          <a href="javascript:void(0)">Need help?</a>
+          <a href="javascript:void(0)">Contact support</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="screen app-screen" *ngIf="isAuthenticated">
+    <aside class="left-nav" [class.collapsed]="!showSidebar">
+      <div class="nav-brand">
+        <img src="assets/images/navexwise.jpeg" alt="HiimPay" />
+        <div *ngIf="showSidebar">
+          <strong>HiimPay</strong>
+          <span>Coupon Portal</span>
+        </div>
+      </div>
+      <button
+        [class.active]="activeScreen === 'home'"
+        (click)="navigate('home')"
+        title="Dashboard"
+        data-short="DB"
+      >
+        <mat-icon>dashboard</mat-icon>
+        <span class="label">Dashboard</span>
+      </button>
+      <button
+        [class.active]="activeScreen === 'browse'"
+        (click)="navigate('browse')"
+        title="Browse Coupons"
+        data-short="BR"
+      >
+        <mat-icon>confirmation_number</mat-icon>
+        <span class="label">Browse Coupons</span>
+      </button>
+      <button
+        [class.active]="activeScreen === 'categories'"
+        (click)="navigate('categories')"
+        title="Categories"
+        data-short="CT"
+      >
+        <mat-icon>grid_view</mat-icon>
+        <span class="label">Categories</span>
+      </button>
+      <button
+        [class.active]="activeScreen === 'my-coupons'"
+        (click)="navigate('my-coupons')"
+        title="My Coupons"
+        data-short="MC"
+      >
+        <mat-icon>sell</mat-icon>
+        <span class="label">My Coupons</span>
+      </button>
+      <button
+        [class.active]="activeScreen === 'wallet'"
+        (click)="navigate('wallet')"
+        title="Wallet"
+        data-short="WL"
+      >
+        <mat-icon>account_balance_wallet</mat-icon>
+        <span class="label">Wallet</span>
+      </button>
+    </aside>
+
+    <main class="main-content">
+      <header class="screen-header">
+        <div class="header-actions">
+          <button class="icon-action" type="button" (click)="toggleSidebar()">☰</button>
+          <button class="icon-action" type="button" *ngIf="activeScreen !== 'home'" (click)="goBack()">← Back</button>
+        </div>
+        <h2 *ngIf="activeScreen === 'home'">Hello, Shital</h2>
+        <h2 *ngIf="activeScreen === 'browse'">Browse Coupons</h2>
+        <h2 *ngIf="activeScreen === 'categories'">Categories</h2>
+        <h2 *ngIf="activeScreen === 'details'">Coupon Details</h2>
+        <h2 *ngIf="activeScreen === 'my-coupons'">My Coupons</h2>
+        <h2 *ngIf="activeScreen === 'wallet'">Wallet & Savings</h2>
+        <div class="header-actions right">
+          <button class="icon-only" type="button" (click)="toggleFaqPanel()" title="FAQ" aria-label="FAQ">
+            <mat-icon>help_outline</mat-icon>
+          </button>
+          <button class="icon-only bell" type="button" (click)="toggleNotifications()" title="Notifications" aria-label="Notifications">
+            <mat-icon>notifications_none</mat-icon>
+            <span *ngIf="unreadCount > 0">{{ unreadCount }}</span>
+          </button>
+          <button class="avatar-btn" [matMenuTriggerFor]="profileMenu" type="button" title="Profile" aria-label="Profile">
+            <img src="assets/images/navexwise.jpeg" alt="profile" />
+          </button>
+        </div>
+      </header>
+      <mat-menu #profileMenu="matMenu">
+        <button mat-menu-item (click)="openProfile()">
+          <mat-icon>person</mat-icon>
+          <span>Profile</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+
+      <section class="hero-banner" *ngIf="activeScreen === 'home'">
+        <div class="hero-copy">
+          <p class="kicker">Employee Benefit Campaign</p>
+          <h3>Save more with curated lifestyle offers every week</h3>
+          <p>Track your redemptions, balances, and savings performance from one dashboard.</p>
+          <button class="hero-cta" (click)="navigate('browse')">Explore Offers</button>
+        </div>
+        <div class="hero-visual">
+          <div class="hero-icon">%</div>
+        </div>
+      </section>
+
+      <section class="floating-panel" *ngIf="showNotificationPanel">
+        <h4>Notifications</h4>
+        <div class="notification-item" *ngFor="let item of notifications">
+          <p>{{ item.message }}</p>
+          <small>{{ item.time }}</small>
+        </div>
+      </section>
+
+      <section class="floating-panel" *ngIf="showFaqPanel">
+        <h4>Frequently Asked Questions</h4>
+        <div class="faq-item" *ngFor="let faq of faqs; let i = index" [class.open]="faqOpenIndex === i">
+          <button class="faq-toggle" type="button" (click)="toggleFaqItem(i)">
+            <span class="q">{{ faq.question }}</span>
+            <span class="expand">{{ faqOpenIndex === i ? '−' : '+' }}</span>
+          </button>
+          <p class="a" *ngIf="faqOpenIndex === i">{{ faq.answer }}</p>
+        </div>
+      </section>
+
+      <div class="content-stack">
+        <ng-container *ngIf="activeScreen === 'home'">
+          <div class="metrics-grid">
+            <article class="metric-card wallet">
+              <div class="metric-top">
+                <span class="metric-icon"><mat-icon>account_balance_wallet</mat-icon></span>
+                <span class="metric-trend up">+8%</span>
+              </div>
+              <p>Wallet Balance</p>
+              <h3>₹{{ walletBalance }}</h3>
+            </article>
+            <article class="metric-card savings">
+              <div class="metric-top">
+                <span class="metric-icon"><mat-icon>savings</mat-icon></span>
+                <span class="metric-trend up">+14%</span>
+              </div>
+              <p>Total Savings</p>
+              <h3>₹{{ totalSavings }}</h3>
+            </article>
+          </div>
+
+          <div class="quick-actions">
+            <article class="qa-tile" *ngFor="let item of quickActions">
+              <mat-icon class="qa-icon">{{ item.icon }}</mat-icon>
+              <p>{{ item.title }}</p>
+              <small>{{ item.description }}</small>
+              <button (click)="onQuickAction(item.action)">Open</button>
+            </article>
+          </div>
+
+          <div class="carousel-title">Featured Offers</div>
+          <div class="featured-strip">
+            <article class="featured-card" *ngFor="let offer of featuredOffers">
+              <span class="badge">{{ offer.discountBadge }}</span>
+              <img [src]="offer.image" alt="{{ offer.brand }}" class="offer-img" />
+              <div class="featured-head">
+                <span class="featured-logo" [style.background]="offer.brandColor">{{ offer.brandLogo }}</span>
+                <h4>{{ offer.brand }}</h4>
+              </div>
+              <p>{{ offer.title }}</p>
+              <small>Valid till {{ offer.validTill | date: 'd MMM yyyy' }}</small>
+              <button class="text-btn" (click)="showDetails(offer.id)">View</button>
+            </article>
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="activeScreen === 'browse'">
+          <div class="search-bar-wrap">
+            <input type="text" [(ngModel)]="searchTerm" placeholder="Search by brand or offer" />
+          </div>
+          <div class="chips-wrap">
+            <select [(ngModel)]="selectedCategory">
+              <option value="All">Category</option>
+              <option value="Food & Dining">Food & Dining</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Travel">Travel</option>
+              <option value="Electronics">Electronics</option>
+            </select>
+            <select [(ngModel)]="selectedBrand">
+              <option value="All">Brand</option>
+              <option value="Swiggy">Swiggy</option>
+              <option value="Myntra">Myntra</option>
+              <option value="MakeMyTrip">MakeMyTrip</option>
+              <option value="Croma">Croma</option>
+            </select>
+            <select [(ngModel)]="selectedDiscountType">
+              <option value="All">Discount Type</option>
+              <option value="Flat">Flat</option>
+              <option value="Percentage">Percentage</option>
+              <option value="Cashback">Cashback</option>
+            </select>
+          </div>
+
+          <article class="coupon-card" *ngFor="let offer of filteredOffers">
+            <div class="coupon-top">
+              <div class="brand-logo" [style.background]="offer.brandColor">{{ offer.brandLogo }}</div>
+              <div>
+                <h4>{{ offer.brand }}</h4>
+                <p>{{ offer.title }}</p>
+              </div>
+              <span class="discount-pill">{{ offer.discountBadge }}</span>
+            </div>
+            <img [src]="offer.image" alt="{{ offer.brand }}" class="offer-img wide" />
+            <div class="coupon-bottom">
+              <small>Valid till {{ offer.validTill | date: 'd MMM yyyy' }}</small>
+              <span class="expiry-chip">{{ getDaysLeft(offer.validTill) }}d left</span>
+              <div class="coupon-actions">
+                <button class="text-btn" (click)="showDetails(offer.id)">Details</button>
+                <button class="primary-btn" (click)="grabCoupon(offer.id)">Grab Coupon</button>
+              </div>
+            </div>
+          </article>
+        </ng-container>
+
+        <ng-container *ngIf="activeScreen === 'categories'">
+          <div class="search-bar-wrap category-search-wrap">
+            <input type="text" [(ngModel)]="categorySearchTerm" placeholder="Search category" />
+          </div>
+          <div class="category-tab-strip">
+            <button
+              class="category-tab"
+              *ngFor="let category of filteredCategories"
+              [class.active]="selectedCategoryView === category.label"
+              (click)="selectCategoryCard(category.label)"
+            >
+              <mat-icon>{{ category.icon }}</mat-icon>
+              <span>{{ category.label }}</span>
+            </button>
+          </div>
+          <div class="carousel-title">Coupons in {{ selectedCategoryView }}</div>
+          <article class="coupon-card" *ngFor="let offer of categoryOffers">
+            <div class="coupon-top">
+              <div class="brand-logo" [style.background]="offer.brandColor">{{ offer.brandLogo }}</div>
+              <div>
+                <h4>{{ offer.brand }}</h4>
+                <p>{{ offer.title }}</p>
+              </div>
+              <span class="discount-pill">{{ offer.discountBadge }}</span>
+            </div>
+            <img [src]="offer.image" alt="{{ offer.brand }}" class="offer-img wide" />
+            <div class="coupon-bottom">
+              <small>Valid till {{ offer.validTill | date: 'd MMM yyyy' }}</small>
+              <span class="expiry-chip">{{ getDaysLeft(offer.validTill) }}d left</span>
+              <div class="coupon-actions">
+                <button class="text-btn" (click)="showDetails(offer.id)">Details</button>
+                <button class="primary-btn" (click)="grabCoupon(offer.id)">Grab Coupon</button>
+              </div>
+            </div>
+          </article>
+        </ng-container>
+
+        <ng-container *ngIf="activeScreen === 'details'">
+          <article class="detail-card">
+            <div class="detail-banner">
+              <h3>{{ selectedOffer.brand }}</h3>
+              <span>{{ selectedOffer.discountBadge }}</span>
+            </div>
+            <img [src]="selectedOffer.image" alt="{{ selectedOffer.brand }}" class="offer-img detail" />
+            <h4>{{ selectedOffer.title }}</h4>
+            <p>{{ selectedOffer.description }}</p>
+            <p><strong>Expiry:</strong> {{ selectedOffer.validTill | date: 'd MMM yyyy' }}</p>
+            <div class="detail-block">
+              <h5>Terms & Conditions</h5>
+              <p>{{ selectedOffer.terms }}</p>
+            </div>
+            <div class="detail-block">
+              <h5>Redeem Steps</h5>
+              <ul>
+                <li *ngFor="let step of selectedOffer.redeemSteps">{{ step }}</li>
+              </ul>
+            </div>
+            <button class="primary-btn" (click)="grabCoupon(selectedOffer.id)">Grab Coupon</button>
+          </article>
+        </ng-container>
+
+        <ng-container *ngIf="activeScreen === 'my-coupons'">
+          <div class="tab-row">
+            <button [class.active]="activeCouponTab === 'active'" (click)="selectCouponTab('active')">Active</button>
+            <button [class.active]="activeCouponTab === 'used'" (click)="selectCouponTab('used')">Used</button>
+            <button [class.active]="activeCouponTab === 'expired'" (click)="selectCouponTab('expired')">Expired</button>
+          </div>
+
+          <article class="owned-card" *ngFor="let coupon of filteredOwnedCoupons">
+            <div class="owned-header">
+              <h4>{{ coupon.brand }} - {{ coupon.title }}</h4>
+              <span
+                class="countdown"
+                [class.warn]="getDaysLeft(coupon.expiresOn) <= 3 && coupon.status === 'active'"
+                *ngIf="coupon.status === 'active'"
+              >
+                {{ getDaysLeft(coupon.expiresOn) }}d left
+              </span>
+            </div>
+            <img
+              [src]="coupon.brand === 'Swiggy' ? 'assets/images/servey1.jfif' : coupon.brand === 'Myntra' ? 'assets/images/servey2.png' : 'assets/images/servey5.png'"
+              alt="{{ coupon.brand }}"
+              class="offer-img mini"
+            />
+            <div class="code-row">
+              <code [class.copy-pulse]="copiedCouponCode === coupon.code">{{ coupon.code }}</code>
+              <button class="secondary-btn" (click)="copyCode(coupon.code)">Copy</button>
+            </div>
+            <p>{{ coupon.redeemInstruction }}</p>
+          </article>
+        </ng-container>
+        <ng-container *ngIf="activeScreen === 'wallet'">
+          <div class="wallet-toggle">
+            <button [class.active]="walletView === 'coupon'" (click)="selectWalletView('coupon')">Coupon</button>
+            <button [class.active]="walletView === 'amount'" (click)="selectWalletView('amount')">Amount</button>
+          </div>
+
+          <ng-container *ngIf="walletView === 'coupon'">
+            <div class="wallet-insight-grid">
+              <article class="finance-card balance">
+                <div class="finance-top">
+                  <span class="finance-icon"><mat-icon>account_balance_wallet</mat-icon></span>
+                  <span class="finance-trend">+10%</span>
+                </div>
+                <p>Purchased Coupons</p>
+                <h3>{{ purchasedCount }}</h3>
+              </article>
+              <article class="finance-card total">
+                <div class="finance-top">
+                  <span class="finance-icon"><mat-icon>savings</mat-icon></span>
+                  <span class="finance-trend">+9%</span>
+                </div>
+                <p>Assigned Coupons</p>
+                <h3>{{ assignedCount }}</h3>
+              </article>
+              <article class="finance-card month">
+                <div class="finance-top">
+                  <span class="finance-icon"><mat-icon>show_chart</mat-icon></span>
+                  <span class="finance-trend">+4%</span>
+                </div>
+                <p>Expired Coupons</p>
+                <h3>{{ expiredCount }}</h3>
+              </article>
+            </div>
+
+            <article class="ratio-card">
+              <div class="ratio-head">
+                <h4>Assigned vs Expired Ratio</h4>
+                <span>This month purchased: {{ thisMonthPurchasedCount }}</span>
+              </div>
+              <div class="ratio-content">
+                <div class="segmented-progress">
+                  <div class="seg savings" [style.width.%]="assignedPercentage"></div>
+                  <div class="seg spend" [style.width.%]="expiredPercentage"></div>
+                </div>
+                <div class="ratio-ring" [style.--ratio]="assignedPercentage">
+                  <div class="ring-label">{{ assignedPercentage }}%</div>
+                </div>
+              </div>
+              <div class="split-labels">
+                <span><mat-icon>check_circle</mat-icon> Assigned {{ assignedPercentage }}%</span>
+                <span><mat-icon>cancel</mat-icon> Expired {{ expiredPercentage }}%</span>
+              </div>
+            </article>
+
+            <article class="insight-card">
+              <div class="insight-head">
+                <h4>Monthly Coupon Report</h4>
+                <span>Total Redeemed: {{ redeemedCount }}</span>
+              </div>
+              <div class="coupon-report-legend">
+                <span><i class="dot purchased"></i>Purchased</span>
+                <span><i class="dot assigned"></i>Assigned</span>
+                <span><i class="dot expired"></i>Expired</span>
+              </div>
+              <div class="coupon-report-chart">
+                <div class="report-group" *ngFor="let stat of monthlyCouponStats">
+                  <div class="bars">
+                    <div class="metric-bar purchased" [style.height.px]="getCouponBarHeight(stat.purchased)">
+                      <span>{{ stat.purchased }}</span>
+                    </div>
+                    <div class="metric-bar assigned" [style.height.px]="getCouponBarHeight(stat.assigned)">
+                      <span>{{ stat.assigned }}</span>
+                    </div>
+                    <div class="metric-bar expired" [style.height.px]="getCouponBarHeight(stat.expired)">
+                      <span>{{ stat.expired }}</span>
+                    </div>
+                  </div>
+                  <small>{{ stat.month }}</small>
+                </div>
+              </div>
+            </article>
+
+            <div class="mini-insight-row">
+              <article class="mini-card">
+                <mat-icon>redeem</mat-icon>
+                <p>Coupons Redeemed</p>
+                <h5>{{ redeemedCount }}</h5>
+              </article>
+              <article class="mini-card">
+                <mat-icon>inventory_2</mat-icon>
+                <p>Active Coupons</p>
+                <h5>{{ activeCouponCount }}</h5>
+              </article>
+              <article class="mini-card">
+                <mat-icon>schedule</mat-icon>
+                <p>Expiring Soon</p>
+                <h5>{{ expiringSoonCouponCount }}</h5>
+              </article>
+            </div>
+          </ng-container>
+
+          <ng-container *ngIf="walletView === 'amount'">
+            <div class="amount-summary-grid">
+              <article class="mini-card">
+                <mat-icon>account_balance_wallet</mat-icon>
+                <p>Remaining Amount</p>
+                <h5>₹{{ remainingAmount }}</h5>
+              </article>
+              <article class="mini-card">
+                <mat-icon>payments</mat-icon>
+                <p>Total Used Amount</p>
+                <h5>₹{{ usedAmount }}</h5>
+              </article>
+            </div>
+            <article class="insight-card">
+              <div class="insight-head">
+                <h4>Transaction History</h4>
+                <span>{{ walletTransactions.length }} transactions</span>
+              </div>
+              <div class="amount-transaction-list">
+                <div class="amount-transaction-item" *ngFor="let tx of walletTransactions">
+                  <div>
+                    <p>{{ tx.description }}</p>
+                    <small>{{ tx.date | date: 'd MMM yyyy' }}</small>
+                  </div>
+                  <strong [class.credit]="tx.type === 'credit'" [class.debit]="tx.type === 'debit'">
+                    {{ tx.type === 'credit' ? '+' : '-' }}₹{{ tx.amount }}
+                  </strong>
+                </div>
+              </div>
+            </article>
+          </ng-container>
+        </ng-container>
+      </div>
+    </main>
+  </section>
+
+  <div class="toast" *ngIf="showToast">{{ toastMessage }}</div>
+</div>
+

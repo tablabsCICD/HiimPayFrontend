@@ -1,0 +1,63 @@
+<div class="row ">
+  <div class="col "></div>
+  <div class="col  d-flex justify-content-end align-self-center mb-2">
+    <button class="p-2 rounded button-color text-white border-0" (click)="openCreateCoupon()">Create Coupon</button>
+  </div>
+</div>
+
+<section style="height: 100%; padding-bottom: 5%; position: relative">
+  <div *ngIf="!isLoading">
+    <div class="row table-row row-head gx-0">
+      <div class="col">Product ID</div>
+      <div class="col">SKU</div>
+      <div class="col">provider_name</div>
+      <div class="col">product_name</div>
+      <div class="col">brand_name</div>
+      <div class="col">category</div>
+      <div class="col">value_range</div>
+      <div class="col">discount_percent</div>
+      <div class="col">expiry_date</div>
+      <div class="col">status</div>
+      <div class="col">Action</div>
+    </div>
+
+    <div class="tableCointainer" *ngIf="surveyList?.length > 0">
+      <div
+        class="row gx-0 table-row row-body px-0"
+        *ngFor="let item of surveyList | paginate: { itemsPerPage: itemPerPage, currentPage: page, totalItems: totalItems }"
+      >
+        <div class="col">{{ item?.external_product_id || '-' }}</div>
+        <div class="col">{{ item?.coupon_sku || '-' }}</div>
+        <div class="col">{{ item?.provider_name || '-' }}</div>
+        <div class="col">{{ item?.product_name || '-' }}</div>
+        <div class="col">{{ item?.brand_name || '-' }}</div>
+        <div class="col">{{ item?.category || '-' }}</div>
+        <div class="col">{{ (item?.min_value ?? '-') + ' / ' + (item?.max_value ?? '-') }}</div>
+        <div class="col">{{ (item?.discount_percent ?? '-') }}</div>
+        <div class="col">{{ item?.expiry_date || '-' }}</div>
+        <div class="col">{{ item?.is_active ? 'Active' : 'Inactive' }}</div>
+
+        <div class="col">
+          <button class="btn btn-sm button-color text-white me-2" (click)="openViewCoupon(item)">
+            View
+          </button>
+          <button class="btn btn-sm btn-outline-danger" (click)="deleteSurvey(item)">
+            Delete
+          </button>
+        </div>
+      </div>
+
+      <div class="text-end my-4" style="font-weight: 300 !important; font-size: 13px">
+        <pagination-controls (pageChange)="pageChangeEvent($event)" [maxSize]="5"></pagination-controls>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-center my-5">
+    <i *ngIf="isLoading" class="fa fa-spinner fa-spin" style="font-size:64px;color: #103a7f;"></i>
+  </div>
+
+  <div class="text-center unavailability" *ngIf="surveyList?.length <= 0">
+    No data available
+  </div>
+</section>

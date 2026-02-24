@@ -1,0 +1,19 @@
+.gradient-custom {
+    background: #2980b9;
+    background: -webkit-linear-gradient(to right bottom,  rgb(41, 128, 185) rgb(0, 189, 214));
+
+    background: linear-gradient(to right bottom,  rgb(41, 128, 185) rgb(0, 189, 214))
+    }
+
+
+    .bthnHover:hover{
+        background-color: gray;
+        border-radius: 50px;
+        
+          }
+          .bthnHover{
+            height: 25px;
+        width:25px;
+        background-color: gainsboro;
+        border-radius: 50px;
+          }

@@ -1,0 +1,52 @@
+<div class="voucher-detail-modal">
+  <div class="modal-header">
+    <h3>{{ data?.product_name || 'Voucher Details' }}</h3>
+    <button type="button" class="close-btn" (click)="close()">&times;</button>
+  </div>
+
+  <div class="modal-body">
+    <p class="desc">{{ data?.description || '-' }}</p>
+
+    <div class="summary-grid">
+      <div class="kv-card"><div class="label">Brand Type</div><div class="value">VOUCHER</div></div>
+      <div class="kv-card"><div class="label">Redemption Type</div><div class="value">{{ data?.redemption_type || '-' }}</div></div>
+      <div class="kv-card"><div class="label">Denomination</div><div class="value">{{ asArray(data?.denominations).length > 1 ? 'Variable' : 'Fixed' }}</div></div>
+      <div class="kv-card"><div class="label">Available Denomination</div><div class="value">{{ asArray(data?.denominations).join(', ') || '-' }}</div></div>
+      <div class="kv-card"><div class="label">Stock</div><div class="value">{{ data?.is_active ? 'In Stock' : 'Out of Stock' }}</div></div>
+    </div>
+
+    <h4 class="section-title">E-Pay Details</h4>
+    <div class="summary-grid epay">
+      <div class="kv-card"><div class="label">Min Value</div><div class="value">{{ data?.min_value ?? '-' }}</div></div>
+      <div class="kv-card"><div class="label">Max Value</div><div class="value">{{ data?.max_value ?? '-' }}</div></div>
+      <div class="kv-card"><div class="label">Service Type</div><div class="value">{{ data?.provider_name || '-' }}</div></div>
+      <div class="kv-card"><div class="label">Discount</div><div class="value">{{ (data?.discount_percent ?? '-') + '%' }}</div></div>
+    </div>
+
+    <details class="accordion" open>
+      <summary>Terms & Conditions</summary>
+      <ul *ngIf="asArray(data?.terms_conditions).length > 0; else noTerms">
+        <li *ngFor="let term of asArray(data?.terms_conditions)">{{ term }}</li>
+      </ul>
+    </details>
+    <ng-template #noTerms><p class="empty">-</p></ng-template>
+
+    <details class="accordion">
+      <summary>Important Instructions</summary>
+      <p>{{ data?.external_product_id || '-' }} | {{ data?.coupon_sku || '-' }} | {{ data?.expiry_date || '-' }}</p>
+    </details>
+
+    <details class="accordion">
+      <summary>Redemption Steps</summary>
+      <ol *ngIf="asArray(data?.redeem_steps).length > 0; else noSteps">
+        <li *ngFor="let step of asArray(data?.redeem_steps)">{{ step }}</li>
+      </ol>
+    </details>
+    <ng-template #noSteps><p class="empty">-</p></ng-template>
+
+    <div class="footer-actions">
+      <button class="btn primary" type="button">Pull Voucher</button>
+      <button class="btn light" type="button" (click)="close()">Back</button>
+    </div>
+  </div>
+</div>

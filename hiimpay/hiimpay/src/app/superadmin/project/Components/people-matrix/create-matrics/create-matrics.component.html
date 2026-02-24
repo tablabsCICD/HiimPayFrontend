@@ -1,0 +1,208 @@
+<div class="container">
+    <div class="row my-2">
+
+        <div class="col-12 ">
+            <!-- <h2 class="" style="display: inline; color: #103a7f; ">Create Matric</h2> -->
+            <button type="button" class="close bthnHover" aria-label="Close" (click)="onClose()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <form action="" [formGroup]="createForm">
+            <div class="col-sm-12 p-2">
+                <div class="row my-2">
+                    <div class="col-sm-6">
+                        <label for="" class="label-control">Metric name</label>
+                        <input type="text" class="form-control" formControlName="metricsName"
+                            placeholder="Enter metric name">
+                        <small class="p-0">
+                            <p *ngIf="createForm.get('metricsName')?.touched && createForm.get('metricsName')?.hasError('required')"
+                                class="text-danger">
+                                Matric name is required
+                            </p>
+                        </small>
+
+                        <label for="" class="label-control mt-2">Value</label>
+                        <input type="text" class="form-control" formControlName="value" placeholder="Enter value">
+                        <small class="p-0">
+                            <p *ngIf="createForm.get('value')?.touched && createForm.get('value')?.hasError('required')"
+                                class="text-danger">
+                                Value is required
+                            </p>
+                        </small>
+
+                        <label for="" class="label-control mt-2">Frequency of data collection</label>
+                        <select name="" id="" class="form-select" formControlName="frequencyOfDataCollection">
+                            <option [selected]="true" [disabled]="true">Please select</option>
+                            <option value="Weekly">Weekly</option>
+                            <option value="Monthly">Monthly</option>
+                            <option value="Yearly">Yearly</option>
+
+                        </select>
+
+
+                        <label for="" class="label-control mt-2">Calculations Or defination</label>
+                        <input type="text" class="form-control" formControlName="calculationsOrDefination"
+                            placeholder="Enter calculations">
+                    </div>
+                    <div class="col-sm-6 ">
+                        <label for="" class="label-control ">Due date</label>
+                        <input type="date" class="form-control " formControlName="nextDataDueDate">
+                        <small class="p-0">
+                            <p *ngIf="createForm.get('nextDataDueDate')?.touched && createForm.get('nextDataDueDate')?.hasError('required')"
+                                class="text-danger">
+                                Due Date is required
+                            </p>
+
+                        </small>
+                        <label for="" class="label-control mt-2 ">Additional information</label>
+                        <input type="text" class="form-control" formControlName="additionalInformation"
+                            placeholder="Enter additional information">
+                        <small class="p-0">
+                            <p *ngIf="createForm.get('additionalInformation')?.touched && createForm.get('additionalInformation')?.hasError('required')"
+                                class="text-danger">
+                                Additional Information is required
+                            </p>
+
+                        </small>
+
+                        <label for="" class="label-control mt-2">Data point</label>
+                        <select  id="" class="form-select" formControlName="dataPoint">
+                            <option [selected]="true" [disabled]="true">Please select</option>
+                            <option value="Absenteeism">Absenteeism</option>
+                            <option value="Attrition">Attrition</option>
+                            <option value="Conversion rates by stage">Conversion rates by stage</option>
+                            <option value="Cost per hire">Cost per hire</option>
+                            <option value="Engagement scores">Engagement scores</option>
+                            <option value="Internal vacancy movement">Internal vacancy movement</option>
+                            <option value="New hire no shows">New hire no shows</option>
+                            <option value="New hire time from offer to start">New hire time from offer to start</option>
+                            <option value="New hire time to fill position">New hire time to fill position</option>
+                            <option value="New hire time to productive">New hire time to productive</option>
+                            <option value="Non-mandatory learning rate">Non-mandatory learning rate</option>
+                            <option value="Offer acceptance rate">Offer acceptance rate</option>
+                            <option value="Performance levels">Performance levels</option>
+                            <option value="Percentage of underperformers">Percentage of underperformers</option>
+                            <option value="Satisfaction scores">Satisfaction scores</option>
+                            <option value="Other">Other</option>
+                        </select>
+
+
+                        <label for="" class="label-control mt-2">Select EX journey stage</label>
+                        <select  id="" class="form-select" formControlName="phaseId">
+                            <option [selected]="true" [disabled]="true">Please select</option>
+                            <option value="Attract">Attract</option>
+                            <option value="Onboard">Onboard</option>
+                            <option value="Develop">Develop</option>
+                            <option value="Retain">Retain</option>
+                            <option value="Retain">Retain</option>
+                        </select>
+
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <label for="">Add historic data</label>
+
+            <select class="form-select dropdown form-select-sm" formControlName="selectedOption">
+                <option value="" disabled selected>Please select</option>
+                <option value="manually">Manually add</option>
+                <option value="excel">Excel file</option>
+            </select>
+
+            <div *ngIf="createForm.get('selectedOption')?.value === 'manually'">
+
+                <div class="table-responsive ">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <button class="btn btn-primary border-0" (click)="addRow()">
+                                        <i class="fa fa-plus-circle"></i>
+                                    </button>
+                                </th>
+                                <!-- <th>
+                                    <label class="form-label">Data</label>
+                                </th> -->
+                            </tr>
+                        </thead>
+                        <tbody formArrayName="listOfData">
+                            <div *ngFor="let item of listOfData().controls; let i = index" [formGroupName]="i">
+                                <tr>
+                                    <td>
+                                        <h1>
+                                            <button class="btn text-white" style="background-color: #069de0;" (click)="deleteRow(i)">
+                                                <i class="fa fa-trash-o"></i>
+                                            </button>
+                                        </h1>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col">
+                                                <input type="text" formControlName="monthYear" placeholder="Add Month"
+                                                    class="form-control" />
+                                            </div>
+                                            <div class="col">
+                                                <input type="text" formControlName="value" placeholder="Add Value"
+                                                    class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <small>
+                                                <h6 class="text-danger" *ngIf="
+                                          item.get('listOfData')?.hasError('required') &&
+                                          item.get('listOfData')?.touched
+                                        ">
+                                                    Data {{ i + 1 }} is required
+                                                </h6>
+                                            </small>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </div>
+                            <!-- <div class="col  d-flex justify-content-center align-self-center">
+                                <button class="p-2 rounded button-color text-white shadow border-0">ADD
+                                    Data</button>
+                            </div> -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div *ngIf="createForm.get('selectedOption')?.value === 'excel'">
+
+                <div class="mt-2">
+
+                    <button class="btn button-color text-white addHoliday" type="button" (click)="holidayFile.click()">
+                        <i class="fa fa-file"></i>
+                        Browse File
+                    </button>
+                    <button class="btn button-color text-white addHoliday ms-2" type="button" (click)="downloadExcelFormat()">
+                        <span *ngIf="checkDownloadExcelSpinner" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                        <i class="fa fa-file"></i>
+                        Download template
+                      </button>
+                    <p></p>
+                    <ng-container>
+                        <!-- <p>Selected file: {{ file.name }}</p> -->
+                        <p *ngIf="!isSelectedFileValid" style="color: red">
+                            ( Error: Only .xlsx/.xls files permitted )
+                        </p>
+                        <button *ngIf="isSelectedFileValid" class="btn button-color text-white addHoliday" type="button"
+                            (click)="uploadFile()">
+                            <i class="fa-solid fa-upload fa-xl" style="margin-inline-end: 0.5em"></i>
+                            Upload selected file
+                        </button>
+                    </ng-container>
+                    <input #holidayFile style="display: none" type="file" (change)="onFileBrowse($event)"
+                        accept=".xls,.xlsx" />
+                </div>
+            </div>
+        </form>
+        <div class="text-center mt-5">
+            <button class="p-2 rounded button-color w-25 text-center text-white shadow border-0" (click)="createProject()">{{buttonName}}</button>
+        </div>
+
+    </div>
+</div>

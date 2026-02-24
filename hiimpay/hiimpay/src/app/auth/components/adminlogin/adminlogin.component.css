@@ -1,0 +1,230 @@
+/* .input-group-append {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+    z-index: 2;
+    background-color: transparent;
+    border-radius: 3px;
+  }
+  
+  .input-group-text {
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+  }
+  
+  .input-group-append {
+    z-index: 3;
+  }
+  
+  .bg-image {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+
+  }
+  
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .overlay-image {
+      position: absolute;
+    
+      width: 60%; 
+      height: auto;
+  }
+  
+  .overlay-text {
+    position: absolute;
+    bottom: 8%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+  }
+  
+  .exwise-logo {
+    width: 70%;
+    margin-top: 10%;
+  }
+  
+ 
+  
+  .heading-tag  {
+    color: rgb(33, 85, 163);
+
+    font-weight: bold;
+  }
+  
+  input {
+    height: 40px;
+  }
+  
+  .row {
+    padding-top: 5%;
+
+  }
+  
+  .button-style {
+    background-color: rgb(33, 85, 163);
+  }
+  
+  .button-style:hover {
+    background-color: rgb(19, 62, 126);
+  }
+  
+  .signup-style {
+    margin-top: 4em;
+    font-size: 14px;
+  }
+  
+  .signup-text {
+    color: rgb(33, 85, 163);
+    cursor: pointer;
+  }
+
+  .image-wrapper {
+    position: relative;
+    display: inline-block; 
+}
+
+input:focus {
+  outline: none;
+}
+
+input{
+  padding-inline-start: 10px;
+}
+
+.exwise-image {
+    width: 100%; 
+    display: block;
+    border-radius: 50%; 
+    background-color: white;
+}
+
+.login-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+}
+
+.login-image {
+    width: 400px; 
+}
+
+.circle {
+  width: 100%; 
+  height: 100%; 
+  background-color: white;
+  border: 20px solid #103a7f;
+  border-radius: 50%; 
+  display: flex;
+  justify-content: center;
+
+}
+
+.circle-img {
+  max-width: 100%;
+  max-height: 100%; 
+} */
+
+.addDots {
+  /* width: 100%; */
+  /* padding: 3px 3px; */
+  background-position: bottom 0px right 0px;
+  background-repeat: no-repeat;
+  background-size: 148px 148px;
+  background-image: url("../../../../assets/dots.png");
+}
+
+.dotted-square {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  background-color: white;
+}
+
+.horizontal-line {
+  width: 100%;
+  height: 1px;
+  background-color: #103a7f;
+  position: absolute;
+}
+
+.vertical-dot {
+  width: 5px;
+  height: 5px;
+  background-color: #103a7f;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.dot-grid-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  width: 35%;
+  height: 30%;
+  position: absolute;
+  left:16.5px;
+  bottom: 5px;
+  z-index: -100;
+
+  > div {
+    position: relative;
+    > div {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #103a7f;
+      position: absolute;
+      bottom: 0;
+    }
+  }
+}
+
+
+
+.captcha-actions input[type="text"] {
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 10px 0 0 10px;
+	outline: none;
+}
+.captcha-actions input[type="button"] {
+	outline: none;
+	padding: 6px;
+	border: none;
+	background: #ccc;
+	border-radius: 0 10px 10px 0;
+}
+.captcha-actions a {
+	padding: 10px;
+	cursor: pointer;
+	font-size: 15px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #222;
+}
+.recaptcha-input .captcha-actions {
+	width: 60%;
+	padding-right: 12px;
+}
+.recaptcha-input .captcha-actions input {
+	border-radius: 4px;
+}
+.recaptcha-input canvas {
+	width: 33%;
+}
+.recaptcha-input .cpt-btn {
+	width: 7%;
+	font-size: 25px;
+	text-align: center;
+}

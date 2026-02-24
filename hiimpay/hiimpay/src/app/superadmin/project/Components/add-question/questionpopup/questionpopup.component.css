@@ -1,0 +1,8 @@
+.blue-color{
+    background-color: #103a7f;
+}
+
+
+input:focus {
+    outline: none;
+  }

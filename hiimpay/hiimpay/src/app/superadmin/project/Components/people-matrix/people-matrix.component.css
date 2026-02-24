@@ -1,0 +1,143 @@
+/* tr,td{
+    vertical-align: middle;
+    font-style: poppins;
+    cursor: pointer;
+}
+thead,tr{
+    background: #000;
+} */
+
+/* table {
+    border-spacing: 0;
+  }
+  table thead tr,
+  table thead tr th{
+      background: #103a7f;
+      border: 1px ;
+      background-clip: content-box;
+     
+  }
+  
+  table thead tr th{
+      border: none;
+      background-clip: content-box;
+   
+  }
+
+  table tbody tr td {
+    vertical-align: middle;
+    pointer-events: stroke;
+  } */
+
+
+  
+  .col {
+    line-height: 22.5px;
+
+  }
+  .button-color{
+    background-color: #103a7f;
+
+}
+  .table-row {
+    background-color: #ffffff;
+    /* border-radius: 10px; */
+    padding: 5px;
+    margin-bottom: 5px;
+    align-items: center;
+    height: auto;
+ 
+    font-weight: 400;
+    font-size: 14px;
+    border: solid .3px rgb(148, 148, 148);
+  }
+  .table-row:hover{
+    border: 2px solid #103a7f;
+  }
+  .tableCointainer .table-row:hover{
+    border: 2px solid #103a7f;
+  }
+  .row-head {
+    height: 54px;
+    font-weight: 500;
+
+    font-size: 16px;
+    background-color: #103a7f;
+  }
+  
+  .row-body {
+    font-weight: 400;
+    height: auto;
+   
+    text-align: center;
+  }
+  
+  .row-head .col {
+    text-align: center;
+  }
+  
+  .material {
+    display: inline-block;
+    text-align: center;
+  }
+  
+
+
+  
+  button {
+    border: none;
+  }
+  
+ .blue-color{
+  color:#103a7f
+ }
+
+  
+  /* .tableCointainer {
+    height: 50%;
+    overflow-y: scroll !important;
+   
+ 
+  } */
+  
+
+  
+  
+
+  
+  .boldColmn {
+    font-weight: 400;
+    position: relative;
+    inset-inline: -1em;
+  }
+  
+  .no-style-button {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+  
+  tbody:nth-child(2) {
+    max-width: 4px;
+  }
+  
+  .disableDownloadIcon {
+    opacity: 0.4;
+  }
+  
+  .disableDownloadButton:hover {
+    cursor: not-allowed;
+  }
+  
+  .dropdownToggleButton {
+    height: 57px;
+    flex-grow: 1;
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+  }
+  

@@ -1,0 +1,76 @@
+<section class="assigned-shell">
+  <div class="assigned-root">
+    <div class="hero">
+      <div>
+        <p class="eyebrow">Reward History</p>
+        <h2>Assigned Rewards</h2>
+        <p class="sub">Track all coupon and amount assignments for this client in one place.</p>
+      </div>
+      <div class="metrics">
+        <div class="metric">
+          <span class="metric-label">Coupons</span>
+          <span class="metric-value">{{ couponRows.length }}</span>
+        </div>
+        <div class="metric">
+          <span class="metric-label">Amounts</span>
+          <span class="metric-value">{{ amountRows.length }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <button class="tab" [class.active]="activeTab==='coupons'" (click)="activeTab='coupons'">Assigned Coupons</button>
+      <button class="tab" [class.active]="activeTab==='amounts'" (click)="activeTab='amounts'">Assigned Amounts</button>
+    </div>
+
+    <div class="table-card" *ngIf="activeTab==='coupons' && couponRows.length > 0; else noCouponData">
+      <div class="row table-row row-head gx-0">
+        <div class="col">Assigned Date</div>
+        <div class="col">Brand Name</div>
+        <div class="col">Coupons</div>
+        <div class="col">Employees</div>
+        <div class="col">Action</div>
+      </div>
+
+      <div class="row table-row row-body gx-0" *ngFor="let item of couponRows">
+        <div class="col">{{ item.assignedDate | date:'medium' }}</div>
+        <div class="col">{{ item.brandName }}</div>
+        <div class="col">{{ item.coupons?.length }}</div>
+        <div class="col">{{ item.employees?.length }}</div>
+        <div class="col">
+          <button class="btn btn-sm action-btn" (click)="openDetails(item, 'coupon')">View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-card" *ngIf="activeTab==='amounts' && amountRows.length > 0; else noAmountData">
+      <div class="row table-row row-head gx-0">
+        <div class="col">Assigned Date</div>
+        <div class="col">Mode</div>
+        <div class="col">Amount</div>
+        <div class="col">Employees</div>
+        <div class="col">File</div>
+        <div class="col">Action</div>
+      </div>
+
+      <div class="row table-row row-body gx-0" *ngFor="let item of amountRows">
+        <div class="col">{{ item.assignedDate | date:'medium' }}</div>
+        <div class="col">{{ item.source }}</div>
+        <div class="col">{{ item.amount ? ('Rs ' + item.amount) : '-' }}</div>
+        <div class="col">{{ item.employees?.length }}</div>
+        <div class="col">{{ item.fileName }}</div>
+        <div class="col">
+          <button class="btn btn-sm action-btn" (click)="openDetails(item, 'amount')">View Details</button>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #noCouponData>
+      <div class="unavailability" *ngIf="activeTab==='coupons'">No coupon assignments found.</div>
+    </ng-template>
+
+    <ng-template #noAmountData>
+      <div class="unavailability" *ngIf="activeTab==='amounts'">No amount assignments found.</div>
+    </ng-template>
+  </div>
+</section>

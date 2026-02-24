@@ -1,0 +1,55 @@
+
+
+  /* Add application styles & imports to this file! */
+
+  .captcha-container {
+	width: 100%;
+	/* box-shadow: 1px 1px 1px 0px #CCC; */
+}
+
+.captcha-actions input[type="text"] {
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 10px 0 0 10px;
+	outline: none;
+}
+.captcha-actions input[type="button"] {
+	outline: none;
+	padding: 6px;
+	border: none;
+	background: #ccc;
+	border-radius: 0 10px 10px 0;
+}
+.captcha-actions a {
+	padding: 10px;
+	cursor: pointer;
+	font-size: 15px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #222;
+}
+.recaptcha-input .captcha-actions {
+	width: 60%;
+	padding-right: 12px;
+}
+.recaptcha-input .captcha-actions input {
+	border-radius: 4px;
+}
+.recaptcha-input canvas {
+	width: 33%;
+}
+.recaptcha-input .cpt-btn {
+	width: 7%;
+	font-size: 25px;
+	text-align: center;
+}
+.toast-top-center {
+	top: 12px;
+	margin: 0 auto;
+	left: 50%;
+	margin-left: -150px;
+}
+
+.no-resize {
+    resize: none;
+}

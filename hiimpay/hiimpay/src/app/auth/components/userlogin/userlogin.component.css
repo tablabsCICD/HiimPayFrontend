@@ -1,0 +1,136 @@
+
+.login-logo {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.addDots{
+  background-position:  bottom 0px right 0px;
+  background-repeat: no-repeat;
+  background-size: 148px 148px;
+    background-image: url('../../../../assets/dots.png');
+  }
+
+  .dot-grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    width: 35%;
+    height: 30%;
+    position: absolute;
+    left:16.5px;
+    bottom: 5px;
+    z-index: -100;
+  
+    > div {
+      position: relative;
+      > div {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #103a7f;
+        position: absolute;
+        bottom: 0;
+      }
+    }
+  }
+
+  @media (min-width: 700px) {
+    .otp-container {
+      margin-inline-start: 8rem; /* Apply margin only for screens larger than 500px */
+    }
+  }
+
+  .responsive-img {
+    width: 100%; 
+    border: solid 20px #103a7f;
+  }
+  
+  @media (max-width: 768px) { 
+    .responsive-img {
+      width: 75%; 
+      border: solid 15px #103a7f;
+    }
+
+    .dot-grid-container{
+      left:60.5px;
+    }
+  }
+  
+
+  /* @media (max-width: 1199.98px) {
+    .image-column,
+    .form-column {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  } */
+  
+  @media (max-width: 767.99px) {
+    .image-column {
+      display: flex;
+      justify-content: center;
+    }
+
+    .otp-container{
+      margin-inline-start: 0rem o !important;
+    }
+  }
+
+  .custom-checkbox {
+    width: 13px;
+    height: 13px;
+    transform: scale(1.5);
+    border: 2px solid transparent; 
+  }
+
+  .custom-checkbox.error {
+    outline: 2px solid #c00 !important; /* Red outline when error */
+    border-radius: 4px; /* Optional: Makes the outline rounded */
+  }
+
+  .clickable-text {
+    cursor: pointer;
+  }
+
+
+  
+.captcha-actions input[type="text"] {
+	padding: 5px;
+	border: 1px solid #ccc;
+	border-radius: 10px 0 0 10px;
+	outline: none;
+}
+.captcha-actions input[type="button"] {
+	outline: none;
+	padding: 6px;
+	border: none;
+	background: #ccc;
+	border-radius: 0 10px 10px 0;
+}
+.captcha-actions a {
+	padding: 10px;
+	cursor: pointer;
+	font-size: 15px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #222;
+}
+.recaptcha-input .captcha-actions {
+	width: 60%;
+	padding-right: 12px;
+}
+.recaptcha-input .captcha-actions input {
+	border-radius: 4px;
+}
+.recaptcha-input canvas {
+	width: 33%;
+}
+.recaptcha-input .cpt-btn {
+	width: 7%;
+	font-size: 25px;
+	text-align: center;
+}
+  

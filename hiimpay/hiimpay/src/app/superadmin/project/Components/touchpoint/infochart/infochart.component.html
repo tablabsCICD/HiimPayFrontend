@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="col-lg-12 mt-2">
+    <h3 style="display: inline; color: #103a7f; font-weight: 700;"></h3>
+    <button type="button" class="close bthnHover" aria-label="Close" (click)="onClose()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</div>
+
+
+
+<div class="row justify-content-center">
+
+  <div class="card border-0">
+    <div class="text-center">
+      EX Foundations Reality and Quality
+    </div>
+    <div class="card-body text-center">
+      <canvas id="barChartCanvas" class="w-100">{{ barChart }}</canvas>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="row justify-content-center">
+  <div class="col-md-2" *ngFor="let stage of survey">
+    <div class="card1" (click)="clickOnStage(stage)" [ngClass]="{'activeTab': stage?.clicked}">
+      <div class="card-body">
+            <h5 class="card-title fs-6 text-uppercase fw-normal mb-2 text-center p-4 px-5">
+              {{ stage?.stageName }}
+            </h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="row justify-content-center info-card mx-3">
+  <div class="col-2 flex-grow-1" *ngFor="let stage of survey">
+    <div class="card1" (click)="clickOnStage(stage)" [ngClass]="{'activeTab': stage?.clicked}">
+      <div class="card-body">
+        <div class="row">
+          <div class="col align-self-center">
+            <h5 class="card-title fs-6 text-uppercase fw-normal mb-2 text-center">
+              {{ stage?.stageName }}
+            </h5>
+          </div>
+          <div class="col-auto">
+            <circle-progress [percent]="stage?.stageScore" [radius]="35" [outerStrokeWidth]="10" [innerStrokeWidth]="10"
+              [outerStrokeColor]="'#103a7f'" [innerStrokeColor]="'#069DE0'" [animation]="true" [showSubtitle]="false"
+              [clockwise]="true" [showUnits]="true" [animationDuration]="300"></circle-progress>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="row justify-content-center mt-4">
+  <div class="col-md-11">
+    <div class="card border-0">
+      <div class="text-center">
+        {{stageName}} Touchpoints
+      </div>
+      <div class="card-body" style="height: 400px;">
+        <canvas class="w-100" baseChart [data]="efficiencyData2" [options]="efficiencyOptions"
+          [plugins]="efficiencyPlugins" [legend]="efficiencyLegend" [type]="'bar'">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-center mt-4">
+  <div class="col-md-11">
+    <div class="card">
+      <div class="text-center">
+        {{stageName}} Touchpoint Efficiency
+      </div>
+      <div class="card-body p-0" style="height: 400px;">
+        <!-- <div class="card-body"> -->
+          <canvas class="w-100" baseChart [data]="efficiencyData3" [options]="efficiencyOptions"
+            [plugins]="efficiencyPlugins" [legend]="efficiencyLegend" [type]="'bar'">
+          </canvas>
+        <!-- </div> -->
+      </div>
+      <hr style="border: 2px solid #000;">
+      <div class="card-body p-0" style="height: 400px;">
+        <!-- <div class="card-body"> -->
+          <canvas class="w-100" baseChart [data]="efficiencyData4" [options]="efficiencyOptions"
+            [plugins]="efficiencyPlugins" [legend]="efficiencyLegend" [type]="'bar'">
+          </canvas>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-center mt-4">
+  <div class="col-md-11">
+    <div class="card">
+      <div class="text-center">
+        {{stageName}} Touchpoint Stakeholder
+      </div>
+      <div class="card-body" style="height: 400px;">
+        <div class="card-body">
+
+          <canvas class="w-100" baseChart [data]="efficiencyData" [options]="efficiencyOptions"
+            [plugins]="efficiencyPlugins" [legend]="efficiencyLegend" [type]="'bar'">
+          </canvas>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+
+.col {
+  line-height: 22.5px;
+
+}
+
+.table-row {
+  background-color: #ffffff;
+  /* border-radius: 10px; */
+  padding: 5px;
+  margin-bottom: 5px;
+  align-items: center;
+  height: auto;
+  font-family: Times New Roman;
+  font-weight: 400;
+  font-size: 14px;
+  border: solid .3px rgb(148, 148, 148);
+}
+.table-row:hover{
+  border: 2px solid #103a7f;
+}
+.tableCointainer .table-row:hover{
+  border: 2px solid #103a7f;
+}
+.row-head {
+  height: 54px;
+  font-weight: 500;
+  font-family: Times New Roman;
+  font-size: 16px;
+  background-color: #103a7f;
+}
+
+.row-body {
+  font-weight: 400;
+  height: auto;
+  font-family: Times New Roman;
+  text-align: center;
+}
+
+.row-head .col {
+  text-align: center;
+}
+
+.material {
+  display: inline-block;
+  text-align: center;
+}
+
+
+
+
+button {
+  border: none;
+}
+
+
+
+
+.tableCointainer {
+  /* height: 50%;
+  overflow-y: scroll !important; */
+ 
+
+}
+.button-color{
+  background-color: #103a7f;
+  font-family: Times New Roman;
+}
+
+
+.blue-color{
+  color: #103a7f;
+}
+
+
+
+.boldColmn {
+  font-weight: 400;
+  position: relative;
+  inset-inline: -1em;
+}
+
+.no-style-button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+
+tbody:nth-child(2) {
+  max-width: 4px;
+}
+
+.disableDownloadIcon {
+  opacity: 0.4;
+}
+
+.disableDownloadButton:hover {
+  cursor: not-allowed;
+}
+
+.dropdownToggleButton {
+  height: 57px;
+  flex-grow: 1;
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}

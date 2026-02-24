@@ -1,0 +1,33 @@
+<section class="mt-4" style="height: 100vh;">
+    <div class="row table-row row-head gx-0">
+        <div class="col">Touchpoint name</div>
+        <div class="col">Status</div>
+        <div class="col">Created Date</div>
+        <div class="col">Start</div>
+        <div class="col">Action</div>
+    </div>
+    <div class="tableCointainer">
+        <div class="row gx-0 table-row row-body px-0 " *ngFor="let item of stakeholder">
+            <div class="col">
+                <div class="material">
+                    <div class="col"> {{item.touchpoints | titlecase }}</div>
+                </div>
+            </div>
+            <div class="col">
+                {{item?.status}}
+            </div>
+
+            <div class="col">{{item.created_date | date}}</div>
+            <div class="col"><button class="border-0 btn btn-light ellipsis-button3"
+                style="background-color: #2980b9;color: white;" (click)="openStakeholder()">
+                Start
+              </button></div>
+            <div class="col"> 
+                <button class="border-0 m-2 " style="font-size:20px" > <i class="fa fa-pencil"
+                    style="color: #103a7f;"></i></button>
+                <button class="border-0 m-2 " style="font-size:20px" > <i
+                    class="fa fa-trash" style="color: #103a7f;"></i></button>
+            </div>
+        </div>
+    </div>
+</section>

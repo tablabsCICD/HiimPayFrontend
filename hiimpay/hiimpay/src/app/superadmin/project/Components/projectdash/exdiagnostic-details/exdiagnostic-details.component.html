@@ -1,0 +1,32 @@
+<section class="popup-container">
+    <div class="col-12 my-2">
+      <h2 class="fw-normal" style="display: inline; color: #103a7f;font-style: poppins;">EX Diagnostic Report</h2>
+      <button type="button" class="close bthnHover" aria-label="Close" (click)="onClose()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="container py-3" style="position: relative;">
+      <div class="row table-row row-head gx-0">
+        <div class="col">Recommended next steps</div>
+        <div class="col">Survay name</div>
+        <div class="col">Shared with CPOC</div>
+      </div>
+      <!-- <div class="tableCointainer" *ngIf="exDiagnosticReport">
+        <div class="row gx-0 table-row row-body px-0" *ngFor="let item of exDiagnosticReport">
+        <div class="col"> {{ item?.recommendedNextSteps || '-' }} </div>
+        <div class="col"> {{item?.survayName || '-' }}</div>
+        <div class="col"> {{ item?.isSharedWithCPOC ? 'Yes' : 'No' }}</div>
+      </div>
+      </div> -->
+      <div class="tableContainer" *ngIf="exDiagnosticReport">
+        <div class="row gx-0 table-row row-body px-0">
+          <div class="col"> {{ exDiagnosticReport?.recommendedNextSteps || '-' }} </div>
+          <div class="col"> {{ exDiagnosticReport?.survayName || '-' }} </div>
+          <div class="col"> {{ exDiagnosticReport?.isSharedWithCPOC ? 'Yes' : 'No' }} </div>
+        </div>
+      </div>
+      <div class="text-center unavailability" *ngIf="!exDiagnosticReport">
+        No data available
+      </div>
+    </div>
+  </section>

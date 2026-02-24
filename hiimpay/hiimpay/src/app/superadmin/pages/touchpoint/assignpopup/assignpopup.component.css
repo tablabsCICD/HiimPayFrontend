@@ -1,0 +1,17 @@
+.bthnHover:hover {
+    background-color: gray;
+    border-radius: 50px;
+
+}
+
+.bthnHover {
+    height: 25px;
+    width: 25px;
+    background-color: gainsboro;
+    border-radius: 50px;
+}
+
+.button-color{
+    background-color: #103a7f;
+    color:white;
+}

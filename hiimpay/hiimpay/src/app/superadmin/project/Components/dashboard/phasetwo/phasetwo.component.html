@@ -1,0 +1,153 @@
+<div class="section">
+  <div class="content-wrapper">
+    <div class="row mx-1">
+      <div class="col-12 my-2">
+        <button type="button" class="close bthnHover" aria-label="Close" (click)="onClose()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    </div>
+    <div class="row mx-3">
+      <div class=" col-md col-sm">
+        <div class="d-flex align-items-center justify-content-between">
+          <h3 style="margin: 0;color: #103a7f;font-weight: bolder;">Assign Survey</h3>
+        </div>
+      </div>
+    </div>
+    <div class="row mx-3 my-3">
+      <div class="col-md col-sm">
+        <!-- <select class="form-select form-select-sm mb-3 p-3" aria-label=".form-select-sm example"
+          (change)="getsurveyId($event)">
+          <option selected>Select Survey</option>
+          <option value="" *ngFor="let item of surveyList?.data;" [value]="item?.id"
+            [attr.data-table-name]="item?.tableName">
+            {{item.survey_name}}</option>
+        </select> -->
+        <ng-multiselect-dropdown class="mb-3 p-2 survey-dropdown" [placeholder]="'Select surveys'"
+          [settings]="dropdownSettingsForSurveys" [data]="surveyList" (onSelect)="onSurveySelect($event)"
+          (onSelectAll)="onSelectAllSurveys($event)" (onDeSelect)="onSurveyDselect($event)"
+          (onDropDownClose)="onDropDownClose()" (onDeSelectAll)="onDselectAllSureys($event)" (click)="isDefaultOpen()"
+          [(ngModel)]="selectedSurveys">
+        </ng-multiselect-dropdown>
+        <small
+          *ngIf="assignSurveyForm.get('surveyId')?.hasError('required') && assignSurveyForm.get('surveyId')?.touched"
+          class="text-danger">
+          Survey name is required
+        </small>
+      </div>
+    </div>
+    <div *ngIf="isDropdownVisible">
+
+
+      <div class=""
+        *ngIf="stageList?.length>0 && stageList[0]?.name!=='default'  && surveyName!=='Feel, Use, Do and See survey '">
+        <div class="row mx-3">
+          <div class="col-md col-sm">
+            <!-- <select class="form-select form-select-sm mb-3 p-3" aria-label=".form-select-sm example"
+            (change)="getStageId($event)">
+            <option selected>Select stage</option>
+            <option value="" *ngFor="let item of stageList?.dto" [value]="item.stageId">{{item?.stageName}}</option>
+          </select> -->
+            <ng-multiselect-dropdown class="mt-2 mb-3 p-2" [placeholder]="'Select stage'" [settings]="dropdownSettings"
+              [data]="stageList" (onSelect)="onStageSelect($event)" (onSelectAll)="onSelectAllStages($event)"
+              (onDeSelect)="onStageDselect($event)" (onDeSelectAll)="onDselectAllStages($event)"
+              [(ngModel)]="selectedStage">
+            </ng-multiselect-dropdown>
+            <!-- <small
+            *ngIf="assignSurveyForm.get('stageId')?.hasError('required') && assignSurveyForm.get('stageId')?.touched"
+            class="text-danger">
+            Stage name is required
+          </small> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="" *ngIf="subphaseList?.length>0 && subphaseList[0]?.name!=='default'">
+      <div class="row mx-3">
+        <div class="col-md col-sm">
+          <!-- <select class="form-select form-select-sm mb-3 p-3" aria-label=".form-select-sm example"
+            (change)="getSubStageId($event)">
+            <option selected>Select employee experience phase</option>
+            <option value="" *ngFor="let item of subphaseList" [value]="item?.subphaseId">{{item?.subPhaseName}}
+            </option>
+          </select> -->
+          <ng-multiselect-dropdown class="mt-2 mb-3 p-2" [placeholder]="'Select employee experience phase'"
+            [settings]="dropdownSettings" [data]="subphaseList" (onSelect)="onSubphaseSelect($event)"
+            (onSelectAll)="onSelectAllSubphases($event)" [(ngModel)]="selectedSubphases">
+          </ng-multiselect-dropdown>
+
+          <!-- <small
+            *ngIf="assignSurveyForm.get('subPhaseId')?.hasError('required') && assignSurveyForm.get('subPhaseId')?.touched"
+            class="text-danger">
+            employee experience phase is required
+          </small> -->
+        </div>
+      </div>
+    </div>
+    <div *ngIf="showWhomeToAssign">
+      <div class="row mx-3" *ngIf="isDropdownVisible">
+        <div class="col-md col-sm p-3">
+          <select class="form-select form-select-md mb-3 p-2" aria-label="form-select-sm example"
+            (change)="onOptionChange($event)">
+            <option selected disabled>Please select employee</option>
+            <option value="all">All</option>
+            <option value="employee">Employee</option>
+          </select>
+          <small
+            *ngIf="assignSurveyForm.get('selectedOption')?.hasError('required') && assignSurveyForm.get('selectedOption')?.touched"
+            class="text-danger">
+            Please select a option
+          </small>
+        </div>
+      </div>
+
+      <div class="row mx-3" *ngIf="assignSurveyForm.get('selectedOption')?.value === 'employee'">
+        <div class="col-md col-sm p-3">
+          <!-- <select class="form-select form-select-sm mb-3" aria-label=".form-select-sm example"
+            (change)="onEmployeeChange($event)">
+            <option selected disabled>Select employee</option>
+            <option value="" *ngFor="let user of allUser" [value]="user.id">{{user.name}}</option>
+          </select> -->
+          <ng-multiselect-dropdown class="mt-2 mb-3 p-2" [placeholder]="'Select employees'" (click)="isHide()"
+            [settings]="dropdownSettings" [data]="employeeList" (onSelect)="onSelectEmployee($event)"
+            (onSelectAll)="onSelectAllEmployees($event)" [(ngModel)]="selectedEmployees">
+          </ng-multiselect-dropdown>
+          <small
+            *ngIf="assignSurveyForm.get('clientEmployeesWithSurveys')?.hasError('required') && assignSurveyForm.get('clientEmployeesWithSurveys')?.touched"
+            class="text-danger">
+            Please select a employee
+          </small>
+        </div>
+      </div>
+
+      <div class="row mx-3" *ngIf="isDropdownVisible && isEmployeeDropdownVisible">
+        <div class="col-md col-sm">
+          <input type="text" [(ngModel)]="whyThisIsImportant" placeholder="why this is important ?"
+            class="w-100 form-control">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="button-container text-center">
+    <button class="btn w-50" style="background-color: #103a7f; color: white;" (click)="AssignSuvreyTOclient()"
+      [disabled]="surveyAssignSpinner"> <span *ngIf="surveyAssignSpinner" class="spinner-border spinner-border-sm"
+        role="status" aria-hidden="true"></span> Assign</button>
+  </div>
+</div>
+
+<!-- <div class="card text-center mt-5 py-3 border-0">
+       <div class="card-header">
+   Assign Survey 
+       </div>
+       <div class="card-body">
+         
+       </div>
+       <div class="card-footer text-muted">
+           <button type="button" class="border-0 btn btn-light" style="background-color: #2980b9;color: white;" (click)="assignSurvey()">Assign</button>
+       </div>
+     </div> -->
+<!-- <div class="button-container text-right">
+       <button class="btn p-4 py-1 blue-color text-white fs-2 w-100" style="margin-top: 3em;">Create User</button>
+     </div>
+    -->

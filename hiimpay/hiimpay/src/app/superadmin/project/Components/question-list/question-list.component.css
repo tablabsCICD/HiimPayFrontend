@@ -1,0 +1,130 @@
+.blue-color{
+    color: #103a7f;
+  }
+  
+  .background-color{
+    background-color: #103a7f;
+    color: white;
+  }
+  table {
+    border-spacing: 0;
+  }
+  table thead tr,
+  table thead tr th{
+      background: #103a7f;
+      border: 1px ;
+      background-clip: content-box;
+     
+  }
+  
+  table thead tr th{
+      border: none;
+      background-clip: content-box;
+   
+  }
+
+  table tbody tr td {
+    vertical-align: middle;
+    pointer-events: stroke;
+  }
+
+
+  .card{
+    background-color: #103a7f;
+    color: black;
+    font-weight: bold;
+    pointer-events: stroke;
+  }
+   .card-container{
+    width: 230px;
+    height: 120px;
+    border: 1px  #103a7f;
+  }
+
+  tr,td{
+    vertical-align: middle;
+    font-style: poppins;
+    cursor: pointer;
+}
+
+.activeTab {
+  background-color: #2980b9 !important;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
+
+button {
+  flex: 1;
+  background-color: #103a7f;
+}
+
+button:hover {
+  color: #2980b9;
+}
+
+.activeTab:hover {
+  color: white;
+}
+.circle-wrap {
+  margin: 150px auto;
+  width: 150px;
+  height: 150px;
+  background: #fefcff;
+  border-radius: 50%;
+  border: 1px  #cdcbd0;
+}
+
+.circle-wrap .circle .mask,
+.circle-wrap .circle .fill {
+  width: 115px;
+  height: 115px;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.circle-wrap .circle .mask {
+  clip: rect(0px, 150px, 150px, 75px);
+}
+
+.circle-wrap .inside-circle {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: #d2eaf1;
+  line-height: 120px;
+  text-align: center;
+  margin-top: 14px;
+  margin-left: 14px;
+  color: #1e51dc;
+  position: absolute;
+  z-index: 100;
+  font-weight: 700;
+  font-size: 2em;
+}
+
+
+.mask .fill {
+  clip: rect(0px, 75px, 150px, 0px);
+  background-color: #227ded;
+}
+
+.mask.full,
+.circle .fill {
+  animation: fill ease-in-out 3s;
+  transform: rotate(135deg);
+}
+
+@keyframes fill{
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(135deg);
+  }
+}
+
+.button-color{
+    background-color: #103a7f;
+  }
+

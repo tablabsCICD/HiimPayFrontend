@@ -1,0 +1,33 @@
+<section class="h-100 d-flex justify-content-center mainSection">
+    <div class="container d-flex justify-content-center">
+        <div class="row justify-content-center" style="width: inherit;">
+            <div class="col-lg-10 col-sm-12 col-md-12 col-xl-10">
+                <div class="mb-4">
+                    <div class="row" style="height: auto;">
+                        <div class="col-md-12 col-sm-12 col-lg-4 col-xl-4 gradient-custom text-center text-white imageSection card">
+                            <img src="assets\default_avatar.png" alt="Avatar" class="img-fluid m-4 rounded-circle"
+                                style="width: 50%;" />
+                            <h2 style="font-weight: 300;">{{profileInfo.name}}</h2>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-lg-8 col-xl-8 card profileSection">
+                            <div class="card-body p-4">
+                                <h2>My Profile</h2>
+                                <hr class="mt-0 mb-4">
+                                <div class="row pt-1">
+                                    <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 mb-3">
+                                        <h4>Email</h4>
+                                        <h4 class="text-muted">{{profileInfo?.email}}</h4>
+                                    </div>
+                                    <div class="col-lg-6 col-xl-6 col-md-6 col-sm-12 mb-3">
+                                        <h4>Contact number</h4>
+                                        <h4 class="text-muted">{{profileInfo?.contactNumber}}</h4>
+                                    </div>
+                                </div>
+                                                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

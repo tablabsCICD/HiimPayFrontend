@@ -1,0 +1,132 @@
+<div class="container my-2">
+  <div class="row">
+    <div class="col-lg col-md col-sm-12">
+      <div class="d-flex align-items-center justify-content-between">
+        <h3 style="margin: 0; color: #103a7f; font-weight: bolder">
+          Question bank
+        </h3>
+        <!-- <span class="blue-color font-weight-bold"style="font-family: poppins;font-weight: 700;"> Project Name : ABC</span>
+            <span class="blue-color font-weight-bold ms-4"style="font-family: poppins;font-weight: 700;">
+              EXwise Consultant : name</span> -->
+      </div>
+    </div>
+  </div>
+  <!-- <div class="row row-cols-1 row-cols-sm-4  justify-content-center info-card ">
+  
+            <div class="col">
+              <div class="card" (click)="getQuestionByStatus('mcq')">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col align-self-center">
+                      <h5 class="card-title fs-6 text-uppercase fw-bold " >MCQ</h5>
+                      <h5 class="card-title fs-6 fw-bold">{{mcq}}</h5>
+                    </div>
+                    <div class="col-auto">
+                        <circle-progress [percent]="mcq" [radius]="35" [outerStrokeWidth]="10" [innerStrokeWidth]="10" 
+                        [outerStrokeColor]="'#103a7f'" [innerStrokeColor]="'#069DE0'" [animation]="true" [showSubtitle]="false"
+                        [clockwise]="true" [showUnits]="true" [animationDuration]="300"></circle-progress>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card" (click)="getQuestionByStatus('descriptive')">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col align-self-center">
+                      <h5 class="card-title fs-6 text-uppercase fw-bold ">Descriptive</h5>
+                      <h5 class="card-title fs-6 fw-bold">{{descriptive}}</h5>
+                    </div>
+                    <div class="col-auto">
+                        <circle-progress [percent]="descriptive" [radius]="35" [outerStrokeWidth]="10" [innerStrokeWidth]="10" 
+                        [outerStrokeColor]="'#103a7f'" [innerStrokeColor]="'#069DE0'" [animation]="true" [showSubtitle]="false"
+                        [clockwise]="true" [showUnits]="true" [animationDuration]="300"></circle-progress>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card" (click)="getQuestionByStatus('mcqdescriptive')">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col align-self-center">
+                      <h5 class="card-title fs-6 text-uppercase fw-bold ">MCQ Descriptive</h5>
+                      <h5 class="card-title fs-6 fw-bold">{{mcqdescriptive}}</h5>
+                    </div>
+                    <div class="col-auto">
+                        <circle-progress [percent]="mcqdescriptive" [radius]="35" [outerStrokeWidth]="10" [innerStrokeWidth]="10" 
+                        [outerStrokeColor]="'#103a7f'" [innerStrokeColor]="'#069DE0'" [animation]="true" [showSubtitle]="false"
+                        [clockwise]="true" [showUnits]="true" [animationDuration]="300"></circle-progress>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+          </div> -->
+
+  <div class="row">
+    <div class="col align-self-center">
+      <!-- <h3 class="font-weight-bold align-self-center" style="color: #103a7f;">All questions</h3> -->
+    </div>
+    <div class="col d-flex justify-content-end align-self-center">
+      <button class="p-2 rounded text-white button-color shadow border-0" (click)="addQuestion()">
+        Create question
+      </button>
+    </div>
+  </div>
+  <section class="mt-2" style="height: 100%; padding-bottom: 5%; position: relative">
+    <div class="row table-row row-head gx-0">
+      <div class="col">Questions</div>
+      <div class="col">Max weightage</div>
+      <!-- <div class="col">Date of creation</div> -->
+      <div class="col">Question type</div>
+      <div class="col">Action</div>
+    </div>
+    <div class="tableCointainer" *ngIf="data?.length > 0">
+      <div class="row gx-0 table-row row-body px-0"
+        *ngFor="let data of data | paginate: { itemsPerPage: itemPerPage, currentPage: page, totalItems: totalItems } ">
+        <div class="col">{{ data.question | titlecase }}</div>
+        <div class="col">
+          <div class="material">
+            <div class="col">{{ data.maxWeightage | number }}</div>
+          </div>
+        </div>
+
+        <div class="col">
+          <ng-container *ngIf="data?.questionType?.toUpperCase() === 'MCQ' || data?.questionType?.toUpperCase() === 'ENPS'; else titleCase">
+            {{ data.questionType | uppercase }}
+          </ng-container>
+          <ng-template #titleCase>
+            {{ data.questionType | titlecase }}
+          </ng-template>
+        </div>
+        
+        <div class="col">
+          <button mat-icon-button [matMenuTriggerFor]="menu" class="ellipsis-button">
+            <mat-icon class="ellipsis-icon">more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu" class="custom-menu rounded-lg">
+            <button mat-menu-item (click)="editQuestion(data?.questionId)">
+              <mat-icon>edit</mat-icon>
+              <span>Edit</span>
+            </button>
+            <button mat-menu-item (click)="deleteQuestion(data?.questionId)">
+              <mat-icon>delete</mat-icon>
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+      <div class="text-end my-4" style="font-weight: 300 !important; font-size: 13px">
+        <pagination-controls (pageChange)="pageChangeEvent($event)" [maxSize]="5"></pagination-controls>
+      </div>
+    </div>
+
+    <div class="text-center unavailability" *ngIf="data?.length <= 0">
+      No data available
+    </div>
+  </section>
+</div>

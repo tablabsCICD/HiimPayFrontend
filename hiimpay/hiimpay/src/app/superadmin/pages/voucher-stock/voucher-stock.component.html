@@ -1,0 +1,80 @@
+<div class="stock-root">
+  <div class="page-header">
+    <h1>Voucher Stock Availability</h1>
+    <div class="subtitle">Check real-time availability before issuing vouchers</div>
+  </div>
+
+  <div class="card selection-card">
+    <form [formGroup]="form" class="selection-form">
+      <div class="compact">
+        <div class="brand-compact">
+          <label>Brand</label>
+          <div class="brand-row">
+            <img *ngIf="selectedBrand?.logo" [src]="selectedBrand.logo" alt="logo" class="brand-logo" />
+            <div class="brand-info">
+              <select formControlName="brand" [disabled]="loading || brands.length===0">
+                <option [ngValue]="null">-- Select brand --</option>
+                <option *ngFor="let b of filteredBrands" [value]="b.id">{{b.name}} ({{b.code}})</option>
+              </select>
+              <div class="brand-code" *ngIf="selectedBrand">Code: <span class="mono">{{selectedBrand.code}}</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="denom-compact">
+          <label>Denomination</label>
+          <ng-container *ngIf="!loading">
+            <select *ngIf="selectedBrand?.denomination==='Fixed'" formControlName="denomination">
+              <option *ngFor="let d of denominationOptions" [value]="d">{{d}}</option>
+            </select>
+            <input *ngIf="selectedBrand?.denomination==='Dynamic'" type="number" formControlName="denomination" [min]="selectedBrand?.min" [max]="selectedBrand?.max" />
+            <div class="hint" *ngIf="selectedBrand">{{ selectedBrand?.denomination === 'Fixed' ? 'Fixed values' : ('Allowed: ' + (selectedBrand?.min ?? '') + ' - ' + (selectedBrand?.max ?? '')) }}</div>
+          </ng-container>
+          <div class="skeleton" *ngIf="loading">Loading...</div>
+        </div>
+
+        <div class="cta-compact">
+          <div class="status-row">
+            <div class="status-badge" [ngClass]="getStockLevel()" *ngIf="available>=0">{{ getStockLevel() === 'healthy' ? 'Healthy' : ( getStockLevel() === 'low' ? 'Low' : ( getStockLevel() === 'critical' ? 'Critical' : ( getStockLevel()==='empty' ? 'Empty' : 'Unknown')) ) }}</div>
+          </div>
+          <div class="buttons-row">
+            <button class="primary" type="button" (click)="checkStock()" [disabled]="checking || form.invalid">Refresh Stock</button>
+            <button class="secondary" type="button" (click)="proceedToPull()" [disabled]="available<=0">Proceed to Pull Voucher</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="card result-card" *ngIf="available>=0 || checking || error">
+    <div *ngIf="checking" class="loading-state">
+      <div class="skeleton-counter"></div>
+      <div class="skeleton-bar"></div>
+    </div>
+
+    <div *ngIf="!checking && error" class="error">{{error}}</div>
+
+    <div *ngIf="!checking && available>=0" class="result">
+      <div class="available big-counter" [ngClass]="getStockLevel()">
+        <div class="label">Available</div>
+        <div class="count">{{available}}</div>
+        <div class="unit">vouchers</div>
+        <div class="percent-badge">{{ percentAvailable }}%</div>
+      </div>
+
+      <div class="progress">
+        <div class="bar">
+          <div class="fill" [ngClass]="getStockLevel()" [style.width.%]="percentAvailable"></div>
+        </div>
+        <div class="meta">{{ percentAvailable }}% remaining</div>
+      </div>
+
+      <div class="warning" *ngIf="getStockLevel() === 'low' || getStockLevel() === 'critical'">
+        <div class="icon">⚠️</div>
+        <div class="text">{{ getStockLevel() === 'critical' ? ('Critical stock: only ' + available + ' vouchers remaining') : ('Low stock: ' + available + ' remaining') }}</div>
+      </div>
+
+      <div class="no-stock" *ngIf="available===0">No vouchers currently available for this selection</div>
+    </div>
+  </div>
+</div>

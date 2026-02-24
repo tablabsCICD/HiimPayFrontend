@@ -1,0 +1,28 @@
+.blue-color,label{
+    color:#103a7f;  
+}
+
+.button-color{
+    background-color: #103a7f;
+}
+
+.button-sky-color{
+    background-color: #069DE0;
+}
+
+
+input{
+   
+    border-color: gray;
+}
+.bthnHover:hover{
+    background-color: gray;
+    border-radius: 50px;
+    
+      }
+      .bthnHover{
+        height: 25px;
+    width:25px;
+    background-color: gainsboro;
+    border-radius: 50px;
+      }

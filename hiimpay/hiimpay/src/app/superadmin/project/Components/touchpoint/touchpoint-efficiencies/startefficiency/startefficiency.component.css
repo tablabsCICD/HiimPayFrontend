@@ -1,0 +1,36 @@
+.bthnHover:hover {
+    background-color: gray;
+    border-radius: 50px;
+
+}
+
+.bthnHover {
+    height: 25px;
+    width: 25px;
+    background-color: gainsboro;
+    border-radius: 50px;
+}
+
+/* Adjust column width for options */
+.survey-container .card-body .row .col-md-4 {
+    width: 16%;
+}
+
+.button-color{
+    background-color: #103a7f;
+}
+
+.form-control:focus{
+    outline: none!important;
+    box-shadow: none!important;
+}
+
+.survey-container{
+    height: 82vh;
+    overflow-y: scroll;
+}
+
+.survey-container::-webkit-scrollbar{
+    width: 0;
+}
+

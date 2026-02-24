@@ -1,0 +1,62 @@
+<div class="row bg-light">
+    <div class="col-9 mt-3">
+        <h2 class="ms-4 blue-color font-weight-bold" style="font-family: Times New Roman;">Survey list by client</h2>
+    </div>
+    <div class="col-3 mt-4">
+        <span class="blue-color font-weight-bold"style=" font-family: Times New Roman;"> Project name : ABC</span>
+        <span class="blue-color font-weight-bold ms-4"style=" font-family: Times New Roman;"> EXwise consultant : name</span>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="d-flex">
+            <h3 class="mt-4 ms-3 font-weight-bold blue-color">
+                Select client
+            </h3>
+            <div style="width: 30em ;font-family: Times New Roman;">
+                <select name="" id="" class="form-control ms-4 mt-4">
+                    <option value="" selected disabled>Select client</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="row p-4 pt-2">
+        <h3 class="mt-2 font-weight-bold blue-color">
+            Survey List
+        </h3>
+
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
+                  <tr style="background-color: #103a7f;">
+                    <th scope="col">Survey name</th>
+                    <th scope="col">Survey type</th>
+                    <th scope="col">Date created</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Created by</th>
+                    <th scope="col">Completion status</th>
+                    <th scope="col">Survey status by participants</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of items">
+                    <td>{{item.surveyName}}</td>
+                    <td>{{item.surveyType}}</td>
+                    <td>{{item.dateCreated}}</td>
+                    <td>{{item.description}}</td>
+                    <td>{{item.createdBy}}</td>
+                    <td>{{item.completionstatus}}</td>
+                    <td>
+                        <button class="py-1 px-4 px-sm-3 border-0 rounded button-color text-white me-4" (click)="openPopup('attempted')">Attempted</button>
+                        <button class="py-1 px-3 border-0 rounded button-sky-color text-white mt-sm-2" (click)="openPopup('notattempted')">Not attempted</button>
+                    </td>
+                    
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,12 @@
+
+.background-message {
+    position: fixed;
+    top: 8%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #103a7f;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    z-index: 1000;
+  }

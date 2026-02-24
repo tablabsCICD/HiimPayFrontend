@@ -1,0 +1,55 @@
+<div class="row">
+  <div class="col d-flex justify-content-between align-items-center mb-2">
+    <h3 class="font-weight-bold" style="color:#103a7f;">Coupons for Brand {{ brandId }} (Client {{ clientId }})</h3>
+  </div>
+</div>
+
+<section style="height:100%; padding-bottom:5%; position:relative;">
+  <div class="row table-row row-head gx-0">
+    <div class="col">external_product_id</div>
+    <div class="col">provider_name</div>
+    <div class="col">product_name</div>
+    <div class="col">brand_name</div>
+    <div class="col">brand_sku</div>
+    <div class="col">coupon_sku</div>
+    <div class="col">description</div>
+    <div class="col">Category</div>
+    <div class="col">image_url</div>
+    <div class="col">redemption_type</div>
+    <div class="col">denominations</div>
+    <div class="col">min / max</div>
+    <div class="col">discount_percent</div>
+    <div class="col">currency_code</div>
+    <div class="col">country_code</div>
+    <div class="col">expiry_date</div>
+    <div class="col">is_active</div>
+    <div class="col">Action</div>
+  </div>
+  <div class="tableCointainer" *ngIf="coupons.length > 0">
+    <div class="row gx-0 table-row row-body px-0" *ngFor="let item of coupons">
+      <div class="col">{{ item.external_product_id || '-' }}</div>
+      <div class="col">{{ item.provider_name || '-' }}</div>
+      <div class="col">{{ item.product_name || '-' }}</div>
+      <div class="col">{{ item.brand_name || '-' }}</div>
+      <div class="col">{{ item.brand_sku || '-' }}</div>
+      <div class="col">{{ item.coupon_sku || '-' }}</div>
+      <div class="col">{{ item.description || '-' }}</div>
+      <div class="col">{{ item.category }}</div>
+      <div class="col">{{ item.image_url || '-' }}</div>
+      <div class="col">{{ item.redemption_type || '-' }}</div>
+      <div class="col">{{ (item.denominations || []).join(', ') || '-' }}</div>
+      <div class="col">{{ (item.min_value ?? '-') + ' / ' + (item.max_value ?? '-') }}</div>
+      <div class="col">{{ item.discount_percent ?? '-' }}</div>
+      <div class="col">{{ item.currency_code || '-' }}</div>
+      <div class="col">{{ item.country_code || '-' }}</div>
+      <div class="col">{{ item.expiry_date || '-' }}</div>
+      <div class="col">{{ item.is_active ? 'Yes' : 'No' }}</div>
+      <div class="col">
+        <button class="btn btn-sm button-color text-white" (click)="editCoupon(item)">Edit</button>
+      </div>
+    </div>
+  </div>
+  <div class="text-center unavailability" *ngIf="coupons.length <= 0">
+    No coupons available
+  </div>
+</section>

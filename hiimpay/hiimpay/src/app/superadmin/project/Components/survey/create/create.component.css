@@ -1,0 +1,17 @@
+.blue-color,label{
+    color:#103a7f;  
+}
+
+.button-color{
+    background-color: #103a7f;
+}
+
+.button-sky-color{
+    background-color: #069DE0;
+}
+
+
+input{
+   
+    border-color: gray;
+}

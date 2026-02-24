@@ -1,0 +1,67 @@
+<div class="container">
+    <div class="row">
+        <ng-container *ngIf="showContainer==1">
+            <div class="col-12 mt-2">
+                <h2 class="font-weight-bold" style="display: inline; color: #103a7f;">{{stageButton}}</h2>
+                <button type="button" class="close" aria-label="Close" (click)="onClose()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="col-md-10 mx-auto mt-5">
+                <form [formGroup]="createStageForm" (ngSubmit)="onStageSubmit()">
+                    <div class="mt-4">
+                        <label for="">Stage name</label>
+                        <input type="text" class="form-control bg-light w-100" placeholder="Stage name"
+                            formControlName="stageName">
+                            <small class="p-0">
+                                <p *ngIf="createStageForm.get('stageName')?.touched && createStageForm.get('stageName')?.hasError('required')" class="text-danger">
+                                    Stage name is required
+                                </p>
+                            </small>
+                    </div>
+                    <div class="mt-4">
+                        <label for="">Stage description</label>
+                        <input type="text" class="form-control bg-light w-100" placeholder="Stage description"
+                            formControlName="description">
+                    </div>
+
+                    <div class="mt-5 text-right">
+                        <button type="submit" class="py-2 px-4 border-0 rounded button-color text-white">{{stageButton}}</button>
+                    </div>
+                </form>
+            </div>
+        </ng-container>
+
+
+
+        <ng-container *ngIf="showContainer==2">
+            <div class="col-12 mt-2">
+                <h2 class="font-weight-bold" style="display: inline; color: #103a7f;">{{subPhaseButton}}</h2>
+                <button type="button" class="close" aria-label="Close" (click)="onClose()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="col-md-10 mx-auto mt-5">
+                <form [formGroup]="createSubPhaseForm" (ngSubmit)="onSubphaseSubmit()">
+                    <div class="mt-4">
+                        <label for="">Subphase name</label>
+                        <input type="text" class="form-control bg-light w-100" placeholder="Subphase name" formControlName="subPhaseName">
+                        <small class="p-0">
+                            <p *ngIf="createSubPhaseForm.get('subPhaseName')?.touched && createSubPhaseForm.get('subPhaseName')?.hasError('required')" class="text-danger">
+                                Stage name is required
+                            </p>
+                        </small>
+                    </div>
+                    <div class="mt-4">
+                        <label for="">Subphase description</label>
+                        <input type="text" class="form-control bg-light w-100" placeholder="Subphase description" formControlName="description">
+                    </div>
+
+                    <div class="mt-5 text-right">
+                        <button class="py-2 px-4 border-0 rounded button-color text-white">{{subPhaseButton}}</button>
+                    </div>
+                </form>
+            </div>
+        </ng-container>
+    </div>
+</div>

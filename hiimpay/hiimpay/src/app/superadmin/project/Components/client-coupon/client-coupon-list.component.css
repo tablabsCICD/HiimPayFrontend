@@ -1,0 +1,19 @@
+.button-color { background-color: #103a7f; }
+.table-row {
+  background-color: #ffffff;
+  padding: 5px;
+  margin-bottom: 5px;
+  align-items: center;
+  font-size: 14px;
+  border: solid .3px rgb(148, 148, 148);
+}
+.row-head {
+  height: 54px;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: #103a7f;
+  color: #fff;
+}
+.row-body { text-align: center; }
+.unavailability { font-size: 16px; width: 100%; }
+

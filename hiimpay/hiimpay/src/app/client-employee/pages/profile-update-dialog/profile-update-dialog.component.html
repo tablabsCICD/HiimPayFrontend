@@ -1,0 +1,98 @@
+<section>
+  <div class="card">
+    <div class="card-body">
+      <div class="enclosingDiv">
+
+        <h2>Update Profile</h2>
+
+        <form [formGroup]="updateRecordsForm">
+
+          <div class="row">
+
+            <!-- Name -->
+            <div class="col-md-6 mt-3">
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="bi bi-file-person-fill"></i>
+                </span>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="name"
+                  placeholder="Enter name">
+              </div>
+              <small
+                class="text-danger d-block text-end"
+                *ngIf="updateRecordsForm.get('name')?.touched &&
+                       updateRecordsForm.get('name')?.hasError('required')">
+                Name is required
+              </small>
+            </div>
+
+            <!-- Contact Number -->
+            <div class="col-md-6 mt-3">
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="bi bi-telephone-fill"></i>
+                </span>
+                <input
+                  type="text"
+                  class="form-control"
+                  formControlName="contactNumber"
+                  placeholder="Enter contact number">
+              </div>
+              <small
+                class="text-danger d-block text-end"
+                *ngIf="updateRecordsForm.get('contactNumber')?.touched &&
+                       updateRecordsForm.get('contactNumber')?.hasError('required')">
+                Contact number is required
+              </small>
+            </div>
+
+            <!-- Email -->
+            <div class="col-md-6 mt-3">
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="bi bi-envelope-at-fill"></i>
+                </span>
+                <input
+                  type="email"
+                  class="form-control"
+                  formControlName="email"
+                  placeholder="Enter email id">
+              </div>
+              <small
+                class="text-danger d-block text-end"
+                *ngIf="updateRecordsForm.get('email')?.touched &&
+                       updateRecordsForm.get('email')?.hasError('required')">
+                Email is required
+              </small>
+            </div>
+
+          </div>
+
+          <!-- Buttons -->
+          <mat-dialog-actions class="mt-4 d-flex justify-content-end">
+            <button mat-button type="button" (click)="onNoClick()">
+              No thanks
+            </button>
+
+            <button
+              mat-button
+              type="button"
+              class="updateButton"
+              (click)="onSubmit()"
+              [disabled]="formDataMatched || updateRecordsForm.invalid"
+              [ngStyle]="{
+                opacity: (formDataMatched || updateRecordsForm.invalid) ? '0.5' : '1'
+              }">
+              Update
+            </button>
+          </mat-dialog-actions>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+</section>

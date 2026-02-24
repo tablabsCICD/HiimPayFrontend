@@ -1,0 +1,91 @@
+.brand-list-root { display:flex; flex-direction:column; gap:16px; }
+.page-header { display:flex; justify-content:space-between; align-items:center; }
+.page-header h2 { margin:0; color: #053067; font-weight:600; }
+.subtitle { color:#64748b; font-size:13px; }
+.header-actions button { height:36px; }
+
+.filters { display:flex; gap:12px; flex-wrap:wrap; align-items:center; }
+.search { padding:8px 12px; border:1px solid #e6eef6; border-radius:8px; min-width:260px; }
+.multi-cats { display:flex; gap:8px; flex-wrap:wrap; }
+.multi-cats-dropdown{position:relative}
+.dropdown-label{padding:6px 10px;border-radius:8px;border:1px solid #e6eef6;background:#fff;cursor:pointer}
+.dropdown-panel{position:absolute;left:0;top:44px;background:#fff;border:1px solid #e6eef6;padding:8px;border-radius:8px;box-shadow:0 6px 18px rgba(12,16,32,0.06);z-index:40;min-width:240px}
+.cat-dropdown-item{display:flex;align-items:center;gap:8px;padding:6px;border-radius:6px}
+.cat-name{font-size:13px;color:#0f172a}
+.cat { background:#f8fafc; padding:6px 10px; border-radius:999px; font-size:13px; border:1px solid #e6eef6; }
+.simple-filters { display:flex; gap:8px; align-items:center; }
+.simple-filters select { padding:8px; border-radius:6px; border:1px solid #e2e8f0; }
+.in-stock { font-size:13px; color:#334155; display:flex; align-items:center; gap:6px; }
+
+.table-wrap { overflow:auto; }
+.table-scroller { overflow:auto; }
+.brand-table { width:100%; border-collapse:collapse; background:#fff; box-shadow: 0 6px 18px rgba(12,16,32,0.06); border-radius:8px; min-width:1000px; }
+.brand-table thead th { text-align:left; padding:12px 16px; color:#fff; font-weight:600; position:sticky; top:0; background:#053067; z-index:3; }
+.brand-table thead th.col-logo { width:76px; }
+.brand-table thead th.col-actions { width:80px; text-align:center; }
+.brand-table tbody td { padding:14px 16px; border-top:1px solid #f1f5f9; vertical-align:middle; background:#ffffff; }
+.logo-td img { width:48px; height:48px; object-fit:cover; border-radius:6px; display:block; margin:0 auto; }
+.logo-placeholder { width:48px; height:48px; background:#f1f5f9; border-radius:6px; margin:0 auto; }
+.brand-name { font-weight:700; color:#0f172a; }
+.monospace { font-family: monospace; color:#334155; }
+.code-wrap { display:flex; align-items:center; gap:8px; }
+.copy-btn { width:28px; height:28px; }
+.cats { display:flex; gap:6px; align-items:center; }
+.tag { display:inline-block; background:#eef2ff; color:#053067; padding:6px 10px; border-radius:999px; margin-right:6px; font-size:12px; }
+.badge { padding:6px 8px; border-radius:6px; color:#fff; font-weight:600; display:inline-flex; align-items:center; height:32px; }
+.badge.online { background:#053067; }
+.badge.offline { background:#f97316; }
+.badge.both { background:#10b981; }
+.denom { font-size:12px; background:#f8fafc; padding:6px 8px; border-radius:6px; }
+.stock-badge { padding:6px 10px; border-radius:999px; font-weight:600; display:inline-flex; align-items:center; height:32px; }
+.stock-badge.in { background:#ecfdf5; color:#065f46; }
+.stock-badge.out { background:#fff1f2; color:#be123c; }
+.data-row:hover { background: #e9f5ff; }
+.clickable { cursor:pointer; }
+.empty { text-align:center; padding:24px; color:#64748b; }
+
+.skeleton { background: linear-gradient(90deg,#f3f4f6,#eceff4,#f3f4f6); border-radius:4px; }
+.skeleton.logo-skel { width:48px; height:48px; margin:0 auto; }
+.skeleton.text-skel { height:12px; width:80%; margin:6px 0; }
+.skeleton.text-skel.tiny { height:10px; width:40%; }
+.skeleton.tag-skel { width:80px; height:24px; }
+.skeleton.icon-skel { width:28px; height:28px; margin:0 auto; }
+.skeleton.badge-skel { width:60px; height:28px; }
+
+.pager { display:flex; justify-content:flex-end; align-items:center; padding-top:12px; }
+.page-controls select { padding:6px; }
+
+@media (max-width:900px) {
+  .brand-table { min-width:900px; }
+}
+
+@media (max-width:700px) {
+  .filters { flex-direction:column; align-items:flex-start; }
+  .brand-table thead { display:none; }
+  .brand-table tbody td { display:block; width:100%; }
+  .brand-table tbody tr { margin-bottom: 12px; display:block; border-radius:8px; overflow:hidden; }
+  .pager { flex-direction:column; align-items:flex-start; gap:8px; }
+}
+
+.badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge.api {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.badge.excel {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.badge.manual {
+  background: #fff3e0;
+  color: #ef6c00;
+}

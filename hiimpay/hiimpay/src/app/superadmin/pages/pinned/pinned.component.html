@@ -1,0 +1,72 @@
+    <!-- Onboard button moved to Home page -->
+  
+  <section class="mt-3" style="height: 100%; padding-bottom:5%; position: relative;">
+    <div class="row table-row row-head gx-0">
+      <div class="col">Brand name</div>
+      <div class="col">Mobile number 1</div>
+      <div class="col">Mobile number 2</div>
+      <div class="col">Landline number</div>
+      <div class="col">Brand email</div>
+      <div class="col">Second email</div>
+      <!-- <div class="col">Phase</div> -->
+      <div class="col">Action</div>
+    </div>
+  
+ 
+    <div class="tableCointainer" style="position: relative;">
+      <ng-container *ngIf="pinClients.length > 0">
+      <div class="row gx-0 table-row row-body px-0" 
+        *ngFor="let item of pinClients | paginate: { itemsPerPage: itemPerPage, currentPage: page, totalItems: totalElements }"
+        (click)="setClientId($event, item.id)" style="cursor: pointer;">
+      <div class="col">{{ item.clientName }} </div>
+      <div class="col">{{ item.mobileNumber1 || item.mobile_Number1 || item.contactPhone || '-' }}</div>
+      <div class="col">{{ item.mobileNumber2 || item.mobile_Number2 || '-' }}</div>
+      <div class="col">{{ item.landlineNumber || item.landline_Number || '-' }}</div>
+      <div class="col">
+        {{ item.contactEmail }}
+      </div>
+      <div class="col">
+        {{ item.secondContactEmail || item.second_Contact_Email || item.contactEmail2 || item.secondaryEmail || '-' }}
+      </div>
+      <!-- <div class="col">{{ item.consultinghaseName }}</div> -->
+      <div class="col"><button mat-icon-button [matMenuTriggerFor]="menu" class="ellipsis-button" 
+        (click)="openMenu($event)">
+        <mat-icon class="ellipsis-icon">more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu" class="custom-menu rounded-lg">
+        <button mat-menu-item (click)="pinClient(item.id)" [matMenuTriggerFor]="phases">
+          <mat-icon>compare_arrows</mat-icon>
+          <span>Change phase</span>
+        </button>
+        <button mat-menu-item (click)="editClient(item.id)">
+          <mat-icon>edit</mat-icon>
+          <span>Edit</span>
+        </button>
+        <button mat-menu-item (click)="deleteClient(item)">
+          <mat-icon>delete</mat-icon>
+          <span>Delete</span>
+        </button>
+        <button mat-menu-item (click)="unpinClient(item.id)">
+          <mat-icon>push_pin</mat-icon>
+          <span>Unpin</span>
+        </button>
+      </mat-menu>
+      <mat-menu #phases="matMenu">
+        <button mat-menu-item *ngFor="let phase of changeablePhases(item?.consultinghaseName)" 
+        (click)="changePhase(item, phase)">
+            {{phase}}
+        </button>
+      </mat-menu>
+    </div>
+      </div>
+      <div class="text-end my-4" style="font-weight: 300 !important; font-size: 13px">
+        <pagination-controls (pageChange)="pageChangeEvent($event)" [maxSize]="5"></pagination-controls>
+      </div>
+    </ng-container>
+
+    <!-- CreateBrand dialog moved to CreateBrandComponent and opened via MatDialog -->
+    <div class="text-center unavailability" *ngIf="pinClients.length <= 0">
+      No data available for selected state
+    </div>
+    </div>
+  </section>

@@ -1,0 +1,60 @@
+<div class="brand-details-root" *ngIf="!loading">
+  <button class="back-btn" (click)="back()">Back to Brands</button>
+
+  <div class="brand-header">
+    <div class="brand-media">
+      <img
+        *ngIf="brand?.BrandImage"
+        [src]="brand.BrandImage"
+        alt="Brand Logo"
+      />
+      <div *ngIf="!brand?.BrandImage" class="brand-fallback">
+        {{ brand.BrandName.charAt(0) }}
+      </div>
+    </div>
+
+    <div class="brand-meta">
+      <h1>{{ brand.BrandName }}</h1>
+
+      <div class="brand-cats">
+        <span class="chip" *ngFor="let c of brand.categories">
+          {{ c }}
+        </span>
+      </div>
+
+      <a
+        *ngIf="brand.OnlineRedemptionUrl"
+        [href]="brand.OnlineRedemptionUrl"
+        target="_blank"
+        class="brand-link"
+      >
+        Visit Brand Website
+      </a>
+    </div>
+  </div>
+
+  <div class="brand-summary">
+    <p class="desc">{{ brand.Descriptions }}</p>
+
+    <div class="key-cards">
+      <div class="card">
+        <div class="label">Status</div>
+        <div class="value">
+          {{ brand.stockAvailable ? 'In Stock' : 'Out of Stock' }}
+        </div>
+      </div>
+      <div class="card">
+        <div class="label">Last Updated</div>
+        <div class="value">{{ brand.updated_at | date:'medium' }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-row">
+    <button class="secondary-cta" (click)="back()">Back</button>
+  </div>
+</div>
+
+<div *ngIf="loading" class="loading-placeholder">
+  Loading brand details...
+</div>
